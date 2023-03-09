@@ -1,5 +1,6 @@
 'use client'
 import { Noto_Sans } from '@next/font/google'
+import { Footer } from './components/Footer/Footer'
 import { Header } from './components/Header/Header'
 import { BannerSection } from './sections/BannerSection/BannerSection'
 
@@ -10,6 +11,7 @@ export default function Home() {
 		<main className={`${font.variable} font-sans`}>
 			<Header />
 			<BannerSection />
+			<Footer />
 		</main>
 	)
 }
