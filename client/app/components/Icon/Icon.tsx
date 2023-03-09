@@ -9,17 +9,11 @@ interface Props extends SVGProps<SVGSVGElement> {
 }
 
 export function Icon(props: Props): JSX.Element {
-	const { children, className, size, viewBox, fill, stroke, ...otherProps } = props
+	const { children, className, size = 24, viewBox, fill = 'currentColor', stroke = 'currentColor', ...otherProps } = props
 
 	return (
 		<svg {...otherProps} fill={fill} stroke={stroke} className={clsx(`w-[${size}px]`, className)} viewBox={viewBox}>
 			{children}
 		</svg>
 	)
-}
-
-Icon.defaultProps = {
-	size: 24,
-	fill: 'currentColor',
-	stroke: 'currentColor',
 }

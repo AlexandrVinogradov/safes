@@ -14,9 +14,10 @@ module.exports = {
         mono: ['var(--font-tenor-sans)'],
       },
       colors: {
-        'dark': '#424242',
         'white': '#ffff',
         'branded': '#40A3D2',
+
+        'dark': '#424242',
         'dimText': '#8F8F8F'
       },
     },

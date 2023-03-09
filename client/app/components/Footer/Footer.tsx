@@ -1,4 +1,4 @@
-import { container } from '@/app/styles/styles'
+import { container } from '@/app/styles/container'
 import Image from 'next/image'
 import Link from 'next/link'
 import clsx from 'clsx'

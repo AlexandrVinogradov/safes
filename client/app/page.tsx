@@ -4,6 +4,7 @@ import { Footer } from './components/Footer/Footer'
 import { Header } from './components/Header/Header'
 import { ArticlesSection } from './sections/ArticlesSection/ArticlesSection'
 import { BannerSection } from './sections/BannerSection/BannerSection'
+import { BrandsSection } from './sections/BrandsSection/BrandsSection'
 
 const noto_sans = Noto_Sans({
 	weight: '400',
@@ -22,6 +23,7 @@ export default function Home() {
 		<main className={`${noto_sans.variable} ${tenor_sans.variable}`}>
 			<Header />
 			<BannerSection />
+			<BrandsSection />
 			<ArticlesSection />
 			<Footer />
 		</main>

@@ -3,7 +3,7 @@ import { Button } from '@/app/components/Button/Button'
 import { BannerSlideType } from './IBannerSlide'
 import { s } from './styles'
 import clsx from 'clsx'
-import { container } from '@/app/styles/styles'
+import { container } from '@/app/styles/container'
 
 type PropsType = {
 	slide: BannerSlideType

@@ -15,6 +15,7 @@ type PropsType = {
 	slidesPerView?: number
 	spaceBetween?: number
 	isArrows?: boolean
+	navigationStyles?: string
 }
 
 const s = {
@@ -29,7 +30,7 @@ const s = {
 }
 
 export const Slider = (props: PropsType) => {
-	const { children, isPagination, slidesPerView = 1, spaceBetween = 0, isArrows = false } = props
+	const { children, isPagination, slidesPerView = 1, spaceBetween = 0, isArrows = false, navigationStyles } = props
 
 	const getModules = () => {
 		const modules: SwiperModule[] = []
@@ -53,7 +54,7 @@ export const Slider = (props: PropsType) => {
 			}}
 		>
 			{isArrows && (
-				<div className={s.navigation}>
+				<div className={clsx(s.navigation, navigationStyles)}>
 					<button className={clsx('prev', s.arrowButton)}>
 						<ArrowLeftIcon />
 					</button>

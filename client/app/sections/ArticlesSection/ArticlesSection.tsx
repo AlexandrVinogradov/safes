@@ -1,4 +1,4 @@
-import { container } from '@/app/styles/styles'
+import { container } from '@/app/styles/container'
 import { ArticlesSliderContainer } from './ArticlesSlider/ArticlesSliderContainer'
 import { s } from './styles'
 

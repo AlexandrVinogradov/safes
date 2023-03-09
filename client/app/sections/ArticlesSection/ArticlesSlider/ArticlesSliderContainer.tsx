@@ -1,5 +1,4 @@
 import { Slider } from '@/app/components/Slider/Slider'
-import clsx from 'clsx'
 import { SwiperSlide } from 'swiper/react'
 import { ArticleSlide } from './ArticleSlide/ArticleSlide'
 
