@@ -1,18 +1,20 @@
 import Image from 'next/image'
 import { Button } from '@/app/components/Button/Button'
-import { SlideType } from './ISlide'
+import { BannerSlideType } from './IBannerSlide'
 import { s } from './styles'
+import clsx from 'clsx'
+import { container } from '@/app/styles/styles'
 
 type PropsType = {
-	slide: SlideType
+	slide: BannerSlideType
 }
 
-export const Slide = (props: PropsType) => {
+export const BannerSlide = (props: PropsType) => {
 	const { slide } = props
 
 	return (
 		<>
-			<div className={s.slide}>
+			<div className={clsx(container, s.slide)}>
 				<div className={s.info}>
 					<p className={s.tag}>{slide.tag}</p>
 					<h1 className={s.title}>{slide.title}</h1>

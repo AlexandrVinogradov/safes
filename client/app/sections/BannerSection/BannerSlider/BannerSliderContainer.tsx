@@ -1,8 +1,6 @@
 import { Slider } from '@/app/components/Slider/Slider'
-import clsx from 'clsx'
 import { SwiperSlide } from 'swiper/react'
-import { Slide } from './Slide/Slide'
-import { s } from './styles'
+import { BannerSlide } from './BannerSlide/BannerSlide'
 
 export const BannerSliderContainer = () => {
 	const slides = [
@@ -23,10 +21,10 @@ export const BannerSliderContainer = () => {
 	]
 
 	return (
-		<Slider>
+		<Slider isPagination>
 			{slides.map((slide) => (
-				<SwiperSlide key={slide.id} className={clsx(s.container, s.slide)}>
-					<Slide slide={slide} />
+				<SwiperSlide key={slide.id}>
+					<BannerSlide slide={slide} />
 				</SwiperSlide>
 			))}
 		</Slider>

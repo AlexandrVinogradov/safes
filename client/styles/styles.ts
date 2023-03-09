@@ -1,1 +1,0 @@
-export const container = /*tw*/ 'px-[260px]'

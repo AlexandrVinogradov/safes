@@ -1,4 +1,4 @@
-import { container } from '@/styles/styles'
+import { container } from '@/app/styles/styles'
 import Image from 'next/image'
 import Link from 'next/link'
 import clsx from 'clsx'
@@ -23,8 +23,8 @@ export const Footer = () => {
 	]
 
 	return (
-		<footer className={clsx(container, s.footer)}>
-			<div className={s.mainFooter}>
+		<footer className={s.footer}>
+			<div className={clsx(container, s.mainFooter)}>
 				<div>
 					<Image className={s.logo} src="/logoIcon.svg" alt="Промметсейф Logo" width={318} height={77} priority />
 					<Contacts />

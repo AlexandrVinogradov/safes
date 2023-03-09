@@ -1,4 +1,4 @@
-export type SlideType = {
+export type BannerSlideType = {
 	tag: string
 	title: string
 	desc: string
