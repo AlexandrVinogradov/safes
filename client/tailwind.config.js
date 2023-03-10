@@ -16,6 +16,7 @@ module.exports = {
       colors: {
         'white': '#ffff',
         'branded': '#40A3D2',
+        'dimBranded': '#C5EBFD',
 
         'dark': '#424242',
         'dimText': '#8F8F8F'

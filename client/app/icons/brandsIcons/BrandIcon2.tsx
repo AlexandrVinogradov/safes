@@ -2,14 +2,14 @@ import { Icon } from '../../components/Icon/Icon'
 
 interface IconPropsTypes {
 	className?: string
-	size?: number
+	width?: string
 }
 
 export function BrandIcon2(props: IconPropsTypes) {
-	const { className, size } = props
+	const { className, width = 'w-[334px]' } = props
 
 	return (
-		<Icon className={className} size={size} fill="none" viewBox="0 0 343 60">
+		<Icon className={className} width={width} fill="none" viewBox="0 0 343 60">
 			<mask
 				id="mask0_61_1475"
 				// style="mask-type:alpha"

@@ -5,6 +5,7 @@ import { Header } from './components/Header/Header'
 import { ArticlesSection } from './sections/ArticlesSection/ArticlesSection'
 import { BannerSection } from './sections/BannerSection/BannerSection'
 import { BrandsSection } from './sections/BrandsSection/BrandsSection'
+import { NoveltiesSection } from './sections/NoveltiesSection/NoveltiesSection'
 
 const noto_sans = Noto_Sans({
 	weight: '400',
@@ -18,11 +19,17 @@ const tenor_sans = Tenor_Sans({
 	display: 'swap',
 })
 
+// svg via Icon
+// Logo link
+// Brands container
+// Card center img
+
 export default function Home() {
 	return (
 		<main className={`${noto_sans.variable} ${tenor_sans.variable}`}>
 			<Header />
 			<BannerSection />
+			<NoveltiesSection />
 			<BrandsSection />
 			<ArticlesSection />
 			<Footer />
