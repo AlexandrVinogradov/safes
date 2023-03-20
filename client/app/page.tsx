@@ -1,5 +1,6 @@
 'use client'
 import { Tenor_Sans, Noto_Sans } from '@next/font/google'
+import { Cookies } from './components/Cookies/Cookies'
 import { Footer } from './components/Footer/Footer'
 import { Header } from './components/Header/Header'
 import { ArticlesSection } from './sections/ArticlesSection/ArticlesSection'
@@ -38,6 +39,7 @@ export default function Home() {
 			<BrandsSection />
 			<ArticlesSection />
 			<Footer />
+			<Cookies />
 		</main>
 	)
 }
