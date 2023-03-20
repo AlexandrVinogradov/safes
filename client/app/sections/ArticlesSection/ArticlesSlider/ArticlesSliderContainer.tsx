@@ -37,7 +37,7 @@ export const ArticlesSliderContainer = () => {
 	]
 
 	return (
-		<Slider slidesPerView={2} spaceBetween={20} isArrows isProgress>
+		<Slider slidesPerView={2} spaceBetween={20} isSmallArrows isProgress>
 			{slides.map((slide) => (
 				<SwiperSlide key={slide.id}>
 					<ArticleSlide slide={slide} />

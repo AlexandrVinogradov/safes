@@ -5,7 +5,7 @@ interface PropsTypes {
 	width?: string
 }
 
-export function ArrowLeftIcon(props: PropsTypes) {
+export function SmallArrowLeftIcon(props: PropsTypes) {
 	const { className, width = 'w-[24px]' } = props
 
 	return (

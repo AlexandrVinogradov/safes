@@ -26,7 +26,7 @@ export const BannerSlide = (props: PropsType) => {
 					{/* <Image src={slide.imgSrc} alt={slide.desc} width={566} height={727} className={s.bannerImg} /> */}
 				</div>
 			</div>
-			<Image src="/bannerWithSafe.jpg" alt="Карусель фон" layout="fill" />
+			<Image src="/bannerWithSafe.jpg" alt="Карусель фон" layout="fill" quality={100} />
 		</>
 	)
 }

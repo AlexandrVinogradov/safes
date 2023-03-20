@@ -33,7 +33,7 @@ export const BrandsSliderContainer = () => {
 		},
 	]
 	return (
-		<Slider slidesPerView={4} spaceBetween={20} isArrows>
+		<Slider slidesPerView={4} spaceBetween={20} isSmallArrows>
 			{slides.map((slide) => (
 				<SwiperSlide key={slide.id}>
 					<BrandSlide slide={slide} />

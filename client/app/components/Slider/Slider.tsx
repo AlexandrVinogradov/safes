@@ -5,17 +5,21 @@ import 'swiper/css/pagination'
 import 'swiper/css/navigation'
 import { Pagination, Navigation } from 'swiper'
 import { SwiperModule } from 'swiper/types'
-import { ArrowLeftIcon } from '@/app/icons/ArrowLeftIcon'
+import { SmallArrowLeftIcon } from '@/app/icons/SmallArrowLeftIcon'
 import clsx from 'clsx'
-import { ArrowRightIcon } from '@/app/icons/ArrowRightIcon'
+import { SmallArrowRightIcon } from '@/app/icons/SmallArrowRightIcon'
+import { BigArrowLeftIcon } from '@/app/icons/BigArrowLeftIcon'
+import { BigArrowRightIcon } from '@/app/icons/BigArrowRightIcon'
 
 type PropsType = {
 	children: ReactNode
 	isPagination?: boolean
 	slidesPerView?: number
 	spaceBetween?: number
-	isArrows?: boolean
+	isSmallArrows?: boolean
+	isBigArrows?: boolean
 	isProgress?: boolean
+	styles?: string
 }
 
 // FIXME:
@@ -30,26 +34,41 @@ const s = {
 	[&>.swiper-pagination-progressbar]:!bg-dimBranded
 	[&>.swiper-pagination-progressbar>.swiper-pagination-progressbar-fill]:!bg-branded
 	`,
-	withArrows: '!pt-[74px] !pb-[24px]',
+	withSmallArrows: '!pt-[74px] !pb-[24px]',
+	withBigArrows: `!pb-[24px] !px-[40px] 
+		[&>.swiper-pagination-horizontal]:!bottom-[0px]`,
 	navigation: 'absolute top-0 right-0 z-10 flex justify-between max-w-[78px] w-full swiper-navigation',
-	arrowButton: 'w-6 h-[14px] text-branded disabled:text-[#8F8F8F]',
+
+	arrowButton: 'text-branded disabled:text-[#8F8F8F]',
+	smallArrowButton: 'w-6 h-[14px]',
+	bigArrowLiftButton: 'z-10 absolute left-0 top-[40%]',
+	bigArrowRightButton: 'z-10 absolute right-0 top-[40%]',
 }
 
 export const Slider = (props: PropsType) => {
-	const { children, isPagination, slidesPerView = 1, spaceBetween = 0, isArrows = false, isProgress } = props
+	const {
+		children,
+		isPagination,
+		slidesPerView = 1,
+		spaceBetween = 0,
+		isSmallArrows = false,
+		isBigArrows = false,
+		isProgress,
+		styles,
+	} = props
 
 	const getModules = () => {
 		const modules: SwiperModule[] = []
 
 		if (isPagination || isProgress) modules.push(Pagination)
-		if (isArrows) modules.push(Navigation)
+		if (isSmallArrows || isBigArrows) modules.push(Navigation)
 
 		return modules
 	}
 
 	return (
 		<Swiper
-			className={clsx(s.swiper, isArrows && s.withArrows)}
+			className={clsx(s.swiper, isSmallArrows && s.withSmallArrows, isBigArrows && s.withBigArrows, styles)}
 			pagination={{
 				clickable: true,
 				type: isProgress ? 'progressbar' : 'bullets',
@@ -62,15 +81,26 @@ export const Slider = (props: PropsType) => {
 				nextEl: '.next',
 			}}
 		>
-			{isArrows && (
+			{isSmallArrows && (
 				<div className={s.navigation}>
-					<button className={clsx('prev', s.arrowButton)}>
-						<ArrowLeftIcon />
+					<button className={clsx('prev', s.arrowButton, s.smallArrowButton)}>
+						<SmallArrowLeftIcon />
 					</button>
-					<button className={clsx('next', s.arrowButton)}>
-						<ArrowRightIcon />
+					<button className={clsx('next', s.arrowButton, s.smallArrowButton)}>
+						<SmallArrowRightIcon />
 					</button>
 				</div>
+			)}
+
+			{isBigArrows && (
+				<>
+					<button className={clsx('prev', s.arrowButton, s.bigArrowLiftButton)}>
+						<BigArrowLeftIcon />
+					</button>
+					<button className={clsx('next', s.arrowButton, s.bigArrowRightButton)}>
+						<BigArrowRightIcon />
+					</button>
+				</>
 			)}
 
 			{children}

@@ -5,6 +5,7 @@ import { Header } from './components/Header/Header'
 import { ArticlesSection } from './sections/ArticlesSection/ArticlesSection'
 import { BannerSection } from './sections/BannerSection/BannerSection'
 import { BrandsSection } from './sections/BrandsSection/BrandsSection'
+import { CategoriesSliderSection } from './sections/CategoriesSliderSection/CategoriesSliderSection'
 import { HowToChoose } from './sections/HowToChoose/HowToChoose'
 import { NoveltiesSection } from './sections/NoveltiesSection/NoveltiesSection'
 import { ProductsSection } from './sections/ProductsSection/ProductsSection'
@@ -30,6 +31,7 @@ export default function Home() {
 		<main className={`${noto_sans.variable} ${tenor_sans.variable}`}>
 			<Header />
 			<BannerSection />
+			<CategoriesSliderSection />
 			<ProductsSection />
 			<HowToChoose />
 			<NoveltiesSection />
