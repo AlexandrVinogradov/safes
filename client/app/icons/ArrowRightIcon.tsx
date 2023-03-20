@@ -1,11 +1,11 @@
 import { Icon } from '../components/Icon/Icon'
 
-interface IconPropsTypes {
+interface PropsTypes {
 	className?: string
 	width?: string
 }
 
-export function ArrowRightIcon(props: IconPropsTypes) {
+export function ArrowRightIcon(props: PropsTypes) {
 	const { className, width = 'w-[24px]' } = props
 
 	return (

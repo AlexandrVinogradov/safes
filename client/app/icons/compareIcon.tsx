@@ -1,11 +1,11 @@
 import { Icon } from '../components/Icon/Icon'
 
-interface IconPropsTypes {
+interface PropsTypes {
 	className?: string
 	width?: string
 }
 
-export function CompareIcon(props: IconPropsTypes) {
+export function CompareIcon(props: PropsTypes) {
 	const { className, width = 'w-[19px]' } = props
 
 	return (

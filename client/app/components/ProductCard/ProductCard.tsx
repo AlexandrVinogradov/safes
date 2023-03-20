@@ -1,22 +1,24 @@
 import Image from 'next/image'
 import { BasketIcon } from '@/app/icons/BasketIcon'
-import { CompareIcon } from '@/app/icons/compareIcon'
+import { CompareIcon } from '@/app/icons/CompareIcon'
 import { Button } from '../Button/Button'
 import { IconButton } from '../IconButton/IconButton'
 import { DescItem } from './DescItem/DescItem'
 import { ProductCardType } from './IProductCard'
 import { s } from './styles'
+import clsx from 'clsx'
 
 type PropsType = {
 	card: ProductCardType
+	className?: string
 }
 
 export const ProductCard = (props: PropsType) => {
-	const { card } = props
+	const { card, className } = props
 
 	return (
-		<article className={s.cardWrapper}>
-			<header className={s.header}>
+		<article className={clsx(s.cardWrapper, className)}>
+			<header>
 				<div className={s.nameBlock}>
 					<h3 className={s.name}>{card.name}</h3>
 					<IconButton className={s.iconButton} icon={<CompareIcon />} />
@@ -24,7 +26,9 @@ export const ProductCard = (props: PropsType) => {
 				<p className={s.code}>Код: {card.code}</p>
 			</header>
 
-			<Image className={s.img} src={card.srcImg} alt={card.name} width={303} height={172} />
+			<div className={s.imgWrapper}>
+				<Image src={card.srcImg} alt={card.name} width={303} height={172} />
+			</div>
 
 			<ul className={s.desc}>
 				<DescItem name="Производитель" data={card.manufacturer} />
