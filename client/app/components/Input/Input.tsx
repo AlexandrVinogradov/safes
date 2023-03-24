@@ -1,22 +1,24 @@
 import clsx from 'clsx'
-import { InputHTMLAttributes } from 'react'
+import { InputHTMLAttributes, LegacyRef } from 'react'
 import { s } from './styles'
 
 type PropsType = {
 	type?: string
 	placeholder?: string
 	className?: string
-
-	inputType?: 'primary' | 'form'
+	styleType?: 'primary' | 'form'
+	isError?: boolean
+	inputRef?: LegacyRef<HTMLInputElement>
 }
 
 export const Input = (props: PropsType & InputHTMLAttributes<HTMLInputElement>) => {
-	const { type, inputType = 'primary', className, ...otherProps } = props
+	const { type, styleType = 'primary', className, isError, inputRef, ...otherProps } = props
 
 	return (
 		<input
-			className={clsx(inputType === 'primary' && s.primaryInput, inputType === 'form' && s.formInput, className)}
+			className={clsx(styleType === 'primary' && s.primaryInput, styleType === 'form' && s.formInput, isError && s.error, className)}
 			type={type || 'text'}
+			ref={inputRef}
 			{...otherProps}
 		/>
 	)

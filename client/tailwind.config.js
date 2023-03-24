@@ -17,6 +17,7 @@ module.exports = {
         'white': '#ffff',
         'branded': '#40A3D2',
         'dimBranded': '#C5EBFD',
+        'error': '#ef4444',
 
         'dark': '#424242',
         'dimText': '#8F8F8F'

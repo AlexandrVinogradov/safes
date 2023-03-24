@@ -10,7 +10,7 @@ export const Cookies = () => {
 	return (
 		<div className={clsx(!isShowCookies && 'hidden', s.cookies)}>
 			<p className={s.message}>Мы используем файлы cookie для обработки ваших персональных данных</p>
-			<Button onClick={handleApply} type="filled">
+			<Button onClick={handleApply} styleType="filled">
 				Принять
 			</Button>
 		</div>

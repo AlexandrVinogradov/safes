@@ -1,23 +1,20 @@
 import { Checkbox } from 'antd'
-import type { CheckboxChangeEvent } from 'antd/es/checkbox'
 import clsx from 'clsx'
-import { ReactNode } from 'react'
+import { HTMLAttributes, ReactNode } from 'react'
 import { s } from './styles'
 
 type PropsType = {
 	children: ReactNode
 	className?: string
+	onChange: () => void
+	isError: boolean
 }
 
-const CustomCheckbox = (props: PropsType) => {
-	const { children, className } = props
-
-	const onChange = (e: CheckboxChangeEvent) => {
-		console.log(`checked = ${e.target.checked}`)
-	}
+const CustomCheckbox = (props: PropsType & HTMLAttributes<HTMLInputElement>) => {
+	const { children, className, onChange, isError } = props
 
 	return (
-		<Checkbox className={clsx(s.checkbox, className)} onChange={onChange}>
+		<Checkbox className={clsx(s.checkbox, isError && s.error, className)} onChange={onChange}>
 			{children}
 		</Checkbox>
 	)
