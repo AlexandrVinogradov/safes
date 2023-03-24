@@ -26,7 +26,7 @@ export const Footer = () => {
 		<footer className={s.footer}>
 			<div className={clsx(container, s.mainFooter)}>
 				<div>
-					<Image className={s.logo} src="/logoIcon.svg" alt="Промметсейф Logo" width={318} height={77} priority />
+					<Image className={s.logo} src="/logoIcon.svg" alt="Прометсейф Logo" width={318} height={77} priority />
 					<Contacts />
 				</div>
 

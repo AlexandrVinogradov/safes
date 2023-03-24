@@ -1,9 +1,16 @@
+import { ButtonHTMLAttributes } from 'react'
+
 type PropsType = {
 	icon: JSX.Element
-	className: string
+	className?: string
 }
-export const IconButton = (props: PropsType) => {
+
+export const IconButton = (props: PropsType & ButtonHTMLAttributes<HTMLButtonElement>) => {
 	const { icon, ...otherProps } = props
 
-	return <button {...otherProps}>{icon}</button>
+	return (
+		<button type="button" {...otherProps}>
+			{icon}
+		</button>
+	)
 }
