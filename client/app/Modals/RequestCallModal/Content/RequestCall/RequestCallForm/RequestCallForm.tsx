@@ -14,7 +14,7 @@ type FormType = {
 }
 
 export const RequestCallForm = () => {
-	const { isRequestCallModal: isOpen } = useAppStore()
+	const { isRequestCallModal: isOpen, setIsCallRequested } = useAppStore()
 
 	const { handleSubmit, control, setFocus } = useForm<FormType>()
 
@@ -40,7 +40,7 @@ export const RequestCallForm = () => {
 		setFocus('name')
 	}, [isOpen])
 
-	const onSubmit = (data: FormType) => console.log(data)
+	const onSubmit = (data: FormType) => setIsCallRequested(true)
 
 	return (
 		<form className={s.form} onSubmit={handleSubmit(onSubmit)}>
