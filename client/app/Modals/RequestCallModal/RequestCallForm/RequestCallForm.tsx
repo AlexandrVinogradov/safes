@@ -2,6 +2,7 @@ import { Button } from '@/app/components/Button/Button'
 import Checkbox from '@/app/components/Checkbox/Checkbox'
 import { Input } from '@/app/components/Input/Input'
 import Select from '@/app/components/Select/Select'
+import { useAppStore } from '@/app/store/store'
 import { useEffect } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { s } from './styles'
@@ -11,12 +12,10 @@ type FormType = {
 	phone: string
 	isAgree: boolean
 }
-type PropsType = {
-	isOpen: boolean
-}
 
-export const RequestCallForm = (props: PropsType) => {
-	const { isOpen } = props
+export const RequestCallForm = () => {
+	const { isRequestCallModal: isOpen } = useAppStore()
+
 	const { handleSubmit, control, setFocus } = useForm<FormType>()
 
 	const callTimes = [

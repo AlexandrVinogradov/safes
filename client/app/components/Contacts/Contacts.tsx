@@ -1,9 +1,12 @@
+import { useAppStore } from '@/app/store/store'
 import Image from 'next/image'
 import { s } from './styles'
 
 type PropsType = { handleOpenRequestCallModal?: () => void }
 
 export const Contacts = (props: PropsType) => {
+	const { setIsRequestCallModal } = useAppStore()
+
 	return (
 		<div className={s.contactsWrapper}>
 			<div className={s.contacts}>
@@ -32,7 +35,7 @@ export const Contacts = (props: PropsType) => {
 				</a> */}
 
 				{/* @ts-ignore */}
-				<button onClick={() => props.handleOpenRequestCallModal()}>
+				<button onClick={() => setIsRequestCallModal(true)}>
 					<Image src="/mailIcon.svg" alt="Напишите нам" width={27} height={20} priority />
 				</button>
 			</div>

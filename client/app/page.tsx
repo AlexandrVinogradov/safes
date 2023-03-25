@@ -1,8 +1,10 @@
 'use client'
 import { Tenor_Sans, Noto_Sans } from '@next/font/google'
+import { useState } from 'react'
 import { Cookies } from './components/Cookies/Cookies'
 import { Footer } from './components/Footer/Footer'
 import { Header } from './components/Header/Header'
+import { RequestCallModal } from './Modals/RequestCallModal/RequestCallModal'
 import { ArticlesSection } from './sections/ArticlesSection/ArticlesSection'
 import { BannerSection } from './sections/BannerSection/BannerSection'
 import { BrandsSection } from './sections/BrandsSection/BrandsSection'
@@ -30,6 +32,8 @@ const tenor_sans = Tenor_Sans({
 export default function Home() {
 	return (
 		<main className={`${noto_sans.variable} ${tenor_sans.variable}`}>
+			<RequestCallModal />
+
 			<Header />
 			<BannerSection />
 			<CategoriesSliderSection />
@@ -40,6 +44,7 @@ export default function Home() {
 			<ArticlesSection />
 			<Footer />
 			<Cookies />
+			<div id="portal" />
 		</main>
 	)
 }

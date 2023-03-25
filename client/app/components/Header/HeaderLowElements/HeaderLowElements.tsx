@@ -7,7 +7,7 @@ export const HeaderLowElements = () => {
 	return (
 		<div className={s.mainWrapper}>
 			<div className={s.navWithCatalog}>
-				<Button type="filled" className={s.catalogButton}>
+				<Button styleType="filled" className={s.catalogButton}>
 					<Image className={s.catalogButtonIcon} src="/menuIcon.svg" alt="Каталог" width={18} height={16} priority />
 					Каталог
 				</Button>
