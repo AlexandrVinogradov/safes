@@ -15,9 +15,12 @@ module.exports = {
       },
       colors: {
         'white': '#ffff',
+        'error': '#ef4444',
+        
         'branded': '#40A3D2',
         'dimBranded': '#C5EBFD',
-        'error': '#ef4444',
+        
+        'dimButton': '#477D9D',
 
         'dark': '#424242',
         'dimText': '#8F8F8F'

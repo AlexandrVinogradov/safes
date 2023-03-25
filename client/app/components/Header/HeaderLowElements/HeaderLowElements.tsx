@@ -1,16 +1,13 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { Button } from '../../Button/Button'
+import { CatalogPopover } from './CatalogPopover/CatalogPopover'
 import { s } from './styles'
 
 export const HeaderLowElements = () => {
 	return (
 		<div className={s.mainWrapper}>
 			<div className={s.navWithCatalog}>
-				<Button styleType="filled" className={s.catalogButton}>
-					<Image className={s.catalogButtonIcon} src="/menuIcon.svg" alt="Каталог" width={18} height={16} priority />
-					Каталог
-				</Button>
+				<CatalogPopover />
 
 				<nav className={s.nav}>
 					<ul className={s.navList}>
