@@ -1,25 +1,35 @@
+import { useEffect } from 'react'
+import { useAppStore } from '@/app/store/store'
 import { Button } from '@/app/components/Button/Button'
 import { ProductCard } from '@/app/components/ProductCard/ProductCard'
-import { products } from '@/app/components/ProductCard/products'
 import { container } from '@/app/styles/container'
 import clsx from 'clsx'
 import { ProductsMenu } from './ProductsMenu/ProductsMenu'
 import { s } from './styles'
 
 export const ProductsSection = () => {
-	const newProducts = [...products, ...products, ...products, products[0]]
+	const { products, fetchProducts } = useAppStore()
+
+	useEffect(() => {
+		fetchProducts()
+	}, [])
+
 	return (
 		<section className={clsx(s.section, container)}>
 			<ProductsMenu />
-			
+
 			<div className={s.productsWrapper}>
-				{newProducts.map((card) => (
-					<ProductCard key={card.id} card={card} className={s.productCard} />
+				{products.map((card) => (
+					<ProductCard key={card.product_id} card={card} className={s.productCard} />
 				))}
 			</div>
 			<Button href="/catalog" type="filled">
 				В каталог
 			</Button>
+
+			<pre>{JSON.stringify(products[0]?.['description_ru-RU'], undefined, 2)}</pre>
+
+			<pre>{JSON.stringify(products, undefined, 2)}</pre>
 		</section>
 	)
 }

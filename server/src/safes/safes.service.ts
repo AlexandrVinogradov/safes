@@ -13,7 +13,13 @@ export class SafesService {
 	}
 
 	async getAllSafes() {
-		const safes = await this.safeRepository.findAll()
+		// all logic here
+
+		const safes = await this.safeRepository.findAll({ limit: 16 })
+
+		// this.safeRepository.hasMany(Player)
+		// Player.belongsTo(Team)
+
 		return safes
 	}
 }

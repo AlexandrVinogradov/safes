@@ -7,6 +7,7 @@ import { SafesService } from './safes.service'
 @ApiTags('Сейфы')
 @Controller('safes')
 export class SafesController {
+	// must be light 
 	constructor(private safeService: SafesService) {}
 
 	@ApiOperation({ summary: 'Создание сейфа' })
