@@ -1,5 +1,7 @@
 import { Injectable } from '@nestjs/common'
 import { InjectModel } from '@nestjs/sequelize'
+import { Op } from 'sequelize'
+import { Manufacturer } from 'src/manufacturers/manufacturers.model'
 import { CreateSafeDto } from './dto/create-safe.dto'
 import { Safe } from './safes.model'
 
@@ -12,13 +14,22 @@ export class SafesService {
 		return safe
 	}
 
-	async getAllSafes() {
-		// all logic here
+	async getAllSafes(weight: string) {
+		const where = weight
+			? {
+					product_weight: {
+						[Op.gte]: weight,
+					},
+			  }
+			: {}
 
-		const safes = await this.safeRepository.findAll({ limit: 16 })
+		console.log(where)
 
-		// this.safeRepository.hasMany(Player)
-		// Player.belongsTo(Team)
+		const safes = await this.safeRepository.findAll({
+			limit: 16,
+			include: [{ model: Manufacturer, as: 'manufacturer' }],
+			where,
+		})
 
 		return safes
 	}

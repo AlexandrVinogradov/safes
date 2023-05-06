@@ -1,10 +1,12 @@
 import { Module } from '@nestjs/common'
 import { ConfigModule } from '@nestjs/config'
 import { SequelizeModule } from '@nestjs/sequelize'
-import { User } from './users/users.model'
 import { Safe } from './safes/safes.model'
-import { UsersModule } from './users/users.module'
 import { SafesModule } from './safes/safes.module'
+import { User } from './users/users.model'
+import { UsersModule } from './users/users.module'
+import { Manufacturer } from './manufacturers/manufacturers.model'
+import { ManufacturersModule } from './manufacturers/manufacturers.module'
 
 @Module({
 	controllers: [],
@@ -20,11 +22,12 @@ import { SafesModule } from './safes/safes.module'
 			username: process.env.POSTGRES_USER,
 			password: process.env.POSTGRES_PASSWORD,
 			database: process.env.POSTGRES_DB,
-			models: [User, Safe],
+			models: [User, Safe, Manufacturer],
 			autoLoadModels: true,
 		}),
 		UsersModule,
 		SafesModule,
+		ManufacturersModule,
 	],
 })
 export class AppModule {}
