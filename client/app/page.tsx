@@ -12,7 +12,7 @@ import { CategoriesSliderSection } from './sections/CategoriesSliderSection/Cate
 import { HowToChoose } from './sections/HowToChoose/HowToChoose'
 import { NoveltiesSection } from './sections/NoveltiesSection/NoveltiesSection'
 import { ProductsSection } from './sections/ProductsSection/ProductsSection'
-import { useAppStore } from './store/store'
+import { useAppStore } from '@/app/store/store'
 
 const noto_sans = Noto_Sans({
 	weight: '400',
@@ -30,12 +30,20 @@ const tenor_sans = Tenor_Sans({
 // Logo link
 // Brands container
 
-export default function Home() {
+export default function Home({ searchParams }: { searchParams: { [key: string]: string | string[] | undefined } }) {
+	const { setFilterQueries } = useAppStore()
+
+	useEffect(() => {
+		// console.log(searchParams);
+		
+		setFilterQueries(searchParams)
+	}, [searchParams])
+
 	return (
 		<main className={`${noto_sans.variable} ${tenor_sans.variable}`}>
-			{/* <RequestCallModal /> */}
-
+			<RequestCallModal />
 			<Header />
+
 			{/* <BannerSection /> */}
 			{/* <CategoriesSliderSection /> */}
 			<ProductsSection />
@@ -43,7 +51,7 @@ export default function Home() {
 			{/* <NoveltiesSection /> */}
 			{/* <BrandsSection /> */}
 			{/* <ArticlesSection /> */}
-			<Footer />
+			{/* <Footer /> */}
 			{/* <Cookies /> */}
 			<div id="portal" />
 		</main>

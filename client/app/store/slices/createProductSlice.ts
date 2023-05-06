@@ -3,15 +3,20 @@ import { StateCreator } from 'zustand'
 
 export interface ProductSlice {
 	products: ServerProductCardType[]
+	filterQueries: { weight?: string } | null
+	setFilterQueries: (filterQueries: { weight?: string }) => void
 	fetchProducts: () => void
 }
 
-export const createProductSlice: StateCreator<ProductSlice> = (set) => ({
+export const createProductSlice: StateCreator<ProductSlice> = (set, get) => ({
 	products: [],
+	filterQueries: null,
+	setFilterQueries: (filterQueries: { weight?: string }) => {
+		set({ filterQueries })
+	},
 	fetchProducts: async () => {
-		// const res = await fetch('https://api.escuelajs.co/api/v1/products?offset=0&limit=20')
-		const res = await fetch('http://localhost:5000/safes')
-		// const res = await fetch('http://localhost:5000/users')
+		// const res = await fetch(`http://localhost:5000/safes?weight=${get().filterQueries.weight}`)
+		const res = await fetch(`http://localhost:5000/safes`)
 
 		set({ products: await res.json() })
 	},
