@@ -2,11 +2,12 @@ export const s = {
 	cardWrapper: /*tw*/ 'relative w-[335px] py-5 px-2.5 shadow-[0px_1px_4px_rgba(99,99,99,0.15)] h-[613px]',
 
 	nameBlock: /*tw*/ 'flex justify-between pb-2.5',
-	name: /*tw*/ 'text-[18px] font-sans',
+	name: /*tw*/ 'text-[18px]  text-red-800 font-sans',
 	iconButton: /*tw*/ 'mr-2.5',
 	code: /*tw*/ 'text-branded text-[14px]',
 
 	imgWrapper: /*tw*/ 'h-[289px] w-full flex flex-col justify-center items-center',
+	image: /*tw*/ 'w-full h-full',
 
 	desc: /*tw*/ 'pb-[18px]',
 

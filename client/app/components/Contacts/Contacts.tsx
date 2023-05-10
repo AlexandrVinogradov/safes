@@ -1,10 +1,9 @@
+'use client'
 import { useAppStore } from '@/app/store/store'
 import Image from 'next/image'
 import { s } from './styles'
 
-type PropsType = { handleOpenRequestCallModal?: () => void }
-
-export const Contacts = (props: PropsType) => {
+export const Contacts = () => {
 	const { setIsRequestCallModal } = useAppStore()
 
 	return (

@@ -10,8 +10,8 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['var(--font-noto-sans)'],
-        mono: ['var(--font-tenor-sans)'],
+        "sans": "var(--font-noto-sans)",
+        "mono": "var(--font-tenor-sans)",
       },
       colors: {
         'white': '#ffff',

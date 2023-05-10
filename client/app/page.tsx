@@ -1,9 +1,6 @@
 'use client'
-import { Tenor_Sans, Noto_Sans } from '@next/font/google'
 import { useEffect } from 'react'
-import { Cookies } from './components/Cookies/Cookies'
-import { Footer } from './components/Footer/Footer'
-import { Header } from './components/Header/Header'
+import { Tenor_Sans, Noto_Sans } from '@next/font/google'
 import { RequestCallModal } from './Modals/RequestCallModal/RequestCallModal'
 import { ArticlesSection } from './sections/ArticlesSection/ArticlesSection'
 import { BannerSection } from './sections/BannerSection/BannerSection'
@@ -13,6 +10,11 @@ import { HowToChoose } from './sections/HowToChoose/HowToChoose'
 import { NoveltiesSection } from './sections/NoveltiesSection/NoveltiesSection'
 import { ProductsSection } from './sections/ProductsSection/ProductsSection'
 import { useAppStore } from '@/app/store/store'
+
+// svg via Icon
+// Logo link
+// Brands container
+// double fonts
 
 const noto_sans = Noto_Sans({
 	weight: '400',
@@ -26,33 +28,25 @@ const tenor_sans = Tenor_Sans({
 	display: 'swap',
 })
 
-// svg via Icon
-// Logo link
-// Brands container
-
 export default function Home({ searchParams }: { searchParams: { [key: string]: string | string[] | undefined } }) {
 	const { setFilterQueries } = useAppStore()
 
 	useEffect(() => {
-		// console.log(searchParams);
-		
 		setFilterQueries(searchParams)
 	}, [searchParams])
 
 	return (
 		<main className={`${noto_sans.variable} ${tenor_sans.variable}`}>
 			<RequestCallModal />
-			<Header />
 
-			{/* <BannerSection /> */}
-			{/* <CategoriesSliderSection /> */}
+			<BannerSection />
+			<CategoriesSliderSection />
 			<ProductsSection />
-			{/* <HowToChoose /> */}
-			{/* <NoveltiesSection /> */}
-			{/* <BrandsSection /> */}
-			{/* <ArticlesSection /> */}
-			{/* <Footer /> */}
-			{/* <Cookies /> */}
+			<HowToChoose />
+			<NoveltiesSection />
+			<BrandsSection />
+			<ArticlesSection />
+
 			<div id="portal" />
 		</main>
 	)

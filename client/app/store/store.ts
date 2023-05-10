@@ -1,4 +1,4 @@
-import create from 'zustand'
+import { create } from 'zustand'
 import { createProductSlice, ProductSlice } from './slices/createProductSlice'
 import { modalSlice, ModalSliceType } from './slices/modalSlice'
 
