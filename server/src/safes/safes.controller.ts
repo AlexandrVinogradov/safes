@@ -19,7 +19,7 @@ export class SafesController {
 	@ApiOperation({ summary: 'Получить все сейфы' })
 	@ApiResponse({ status: 200, type: [Safe] })
 	@Get()
-	getAll(@Query('weight') weight) {
-		return this.safeService.getAllSafes(weight)
+	getAll(@Query() queryParams) {
+		return this.safeService.getAllSafes(queryParams)
 	}
 }

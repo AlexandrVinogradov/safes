@@ -1,11 +1,11 @@
 import { Slider } from '@/app/components/Slider/Slider'
-import { useAppStore } from '@/app/store/store'
+import { useProductStore } from '@/app/store/createProductStore'
 import { SwiperSlide } from 'swiper/react'
 import { NoveltiesSlide } from './NoveltiesSlide/NoveltiesSlide'
 import { s } from './styles'
 
 export const NoveltiesSliderContainer = () => {
-	const { products } = useAppStore()
+	const products = useProductStore((state) => state.products)
 
 	return (
 		<Slider slidesPerView={4} spaceBetween={20} isSmallArrows isProgress>

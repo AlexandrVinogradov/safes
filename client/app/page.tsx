@@ -9,12 +9,12 @@ import { CategoriesSliderSection } from './sections/CategoriesSliderSection/Cate
 import { HowToChoose } from './sections/HowToChoose/HowToChoose'
 import { NoveltiesSection } from './sections/NoveltiesSection/NoveltiesSection'
 import { ProductsSection } from './sections/ProductsSection/ProductsSection'
-import { useAppStore } from '@/app/store/store'
 
 // svg via Icon
 // Logo link
 // Brands container
 // double fonts
+// add selectors
 
 const noto_sans = Noto_Sans({
 	weight: '400',
@@ -28,13 +28,7 @@ const tenor_sans = Tenor_Sans({
 	display: 'swap',
 })
 
-export default function Home({ searchParams }: { searchParams: { [key: string]: string | string[] | undefined } }) {
-	const { setFilterQueries } = useAppStore()
-
-	useEffect(() => {
-		setFilterQueries(searchParams)
-	}, [searchParams])
-
+export default function Home() {
 	return (
 		<main className={`${noto_sans.variable} ${tenor_sans.variable}`}>
 			<RequestCallModal />

@@ -1,10 +1,11 @@
 import { create } from 'zustand'
-import { createProductSlice, ProductSlice } from './slices/createProductSlice'
+// import { createProductSlice, ProductSlice } from './slices/createProductSlice'
 import { modalSlice, ModalSliceType } from './slices/modalSlice'
 
-type StoreState = ProductSlice & ModalSliceType
+type StoreState = ModalSliceType
 
 export const useAppStore = create<StoreState>()((...a) => ({
-	...createProductSlice(...a),
+	// FIXME: remove this file?
+	// ...createProductSlice(...a),
 	...modalSlice(...a),
 }))

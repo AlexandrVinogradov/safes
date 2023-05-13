@@ -33,7 +33,7 @@ export const ProductCard = (props: PropsType) => {
 			</div>
 
 			<ul className={s.desc}>
-				<DescItem name="Производитель" data={card.manufacturer['name_ru-RU']} />
+				<DescItem name="Производитель" data={card.manufacturer?.['name_ru-RU']} />
 				<DescItem name="Габариты (мм)" data={card.extra_field_15} />
 				<DescItem name="Вес (кг)" data={card.product_weight} />
 				<DescItem name="Взломостойкость" data={card.burglaryResistance} />
@@ -41,8 +41,8 @@ export const ProductCard = (props: PropsType) => {
 				<DescItem name="Вид замка" data={card.castleType} />
 			</ul>
 			<div className={s.priceBlock}>
-				<p className={s.price}>{card.product_price} ₽</p>
-				<p className={s.priceBeforeDiscount}>{card.product_old_price} ₽</p>
+				<p className={s.price}>{card.product_price.toLocaleString()} ₽</p>
+				<p className={s.priceBeforeDiscount}>{card.product_old_price.toLocaleString()} ₽</p>
 			</div>
 			<footer className={s.footer}>
 				<Button>Подробнее</Button>

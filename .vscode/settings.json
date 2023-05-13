@@ -5,7 +5,9 @@
     "Промет",
     "Прометсейф",
     "clsx",
-    "Swiper"
+    "immer",
+    "Swiper",
+    "zustand"
   ],
   "tailwindCSS.experimental.classRegex": [
     "/\\*\\s*tw\\s*\\*/\\s*'([^']*)'",

@@ -14,16 +14,32 @@ export class SafesService {
 		return safe
 	}
 
-	async getAllSafes(weight: string) {
-		const where = weight
-			? {
-					product_weight: {
-						[Op.gte]: weight,
-					},
-			  }
-			: {}
+	async getAllSafes(queryParams: { price?: string; weight?: string }) {
+		let where = {}
 
-		console.log(where)
+		for (const key in queryParams) {
+			switch (key) {
+				case 'price':
+					where = {
+						...where,
+						product_price: {
+							[Op.between]: queryParams.price.split('-').map((el) => Number(el) || 0),
+						},
+					}
+					break
+				case 'weight':
+					where = {
+						...where,
+						product_weight: {
+							[Op.between]: queryParams.weight.split('-').map((el) => Number(el) || 0),
+						},
+					}
+					break
+
+				default:
+					break
+			}
+		}
 
 		const safes = await this.safeRepository.findAll({
 			limit: 16,

@@ -1,27 +1,19 @@
 import { useEffect } from 'react'
-import { useAppStore } from '@/app/store/store'
 import { Button } from '@/app/components/Button/Button'
 import { ProductCard } from '@/app/components/ProductCard/ProductCard'
 import { container } from '@/app/styles/container'
 import clsx from 'clsx'
 import { ProductsMenu } from './ProductsMenu/ProductsMenu'
 import { s } from './styles'
+import { useProductStore } from '@/app/store/createProductStore'
 
 export const ProductsSection = () => {
-	const { products, fetchProducts, filterQueries } = useAppStore()
+	const products = useProductStore((state) => state.products)
+	const fetchProducts = useProductStore((state) => state.fetchProducts)
 
 	useEffect(() => {
-		if (filterQueries !== null) {
-			let url = 'http://localhost:3000'
-			// @ts-ignore
-			Object.keys(filterQueries).forEach((param) => (url = `${url}/?${param}=${filterQueries[param]}`))
-
-			console.log(url)
-
-			// console.log(Object.keys(filterQueries))
-			fetchProducts()
-		}
-	}, [filterQueries])
+		fetchProducts('http://localhost:5000/safes?')
+	}, [])
 
 	return (
 		<section className={clsx(s.section, container)}>
@@ -35,8 +27,6 @@ export const ProductsSection = () => {
 			<Button href="/catalog" type="filled">
 				В каталог
 			</Button>
-
-			{/* <pre>{JSON.stringify(products[0]?.['description_ru-RU'], undefined, 2)}</pre> */}
 
 			{/* <pre>{JSON.stringify(products, undefined, 2)}</pre> */}
 		</section>
