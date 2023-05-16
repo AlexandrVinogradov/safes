@@ -7,6 +7,8 @@ import { User } from './users/users.model'
 import { UsersModule } from './users/users.module'
 import { Manufacturer } from './manufacturers/manufacturers.model'
 import { ManufacturersModule } from './manufacturers/manufacturers.module'
+import { ExtraValue } from './extraValues/extraValues.model'
+import { ExtraValuesModule } from './extraValues/extraValues.module'
 
 @Module({
 	controllers: [],
@@ -22,12 +24,13 @@ import { ManufacturersModule } from './manufacturers/manufacturers.module'
 			username: process.env.POSTGRES_USER,
 			password: process.env.POSTGRES_PASSWORD,
 			database: process.env.POSTGRES_DB,
-			models: [User, Safe, Manufacturer],
+			models: [User, Safe, Manufacturer, ExtraValue],
 			autoLoadModels: true,
 		}),
 		UsersModule,
 		SafesModule,
 		ManufacturersModule,
+		ExtraValuesModule,
 	],
 })
 export class AppModule {}

@@ -82,7 +82,7 @@ export class Safe extends Model<Safe, SafeCreationAttrs> {
 	@Column({ type: DataType.STRING, allowNull: true })
 	'meta_keyword_ru-RU': string
 
-	@ApiProperty({ example: '1', description: 'связка с таблицей?' })
+	@ApiProperty({ example: '1', description: 'Взломостойкость' })
 	@Column({ type: DataType.STRING, allowNull: true })
 	extra_field_3: string
 
