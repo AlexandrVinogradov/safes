@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { ProductCard } from '@/app/components/ProductCard/ProductCard'
-import { useProductStore } from '@/app/store/createProductStore'
+import { useProductStore } from '@/app/store/useProductStore'
 import { s } from './styles'
 
 type PropsType = {

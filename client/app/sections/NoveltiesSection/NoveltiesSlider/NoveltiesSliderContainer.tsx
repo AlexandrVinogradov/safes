@@ -1,5 +1,5 @@
 import { Slider } from '@/app/components/Slider/Slider'
-import { useProductStore } from '@/app/store/createProductStore'
+import { useProductStore } from '@/app/store/useProductStore'
 import { SwiperSlide } from 'swiper/react'
 import { NoveltiesSlide } from './NoveltiesSlide/NoveltiesSlide'
 import { s } from './styles'

@@ -5,7 +5,7 @@ import { container } from '@/app/styles/container'
 import clsx from 'clsx'
 import { ProductsMenu } from './ProductsMenu/ProductsMenu'
 import { s } from './styles'
-import { useProductStore } from '@/app/store/createProductStore'
+import { useProductStore } from '@/app/store/useProductStore'
 
 export const ProductsSection = () => {
 	const products = useProductStore((state) => state.products)

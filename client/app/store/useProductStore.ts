@@ -13,16 +13,33 @@ type FilterDataType = {
 	}
 }
 
+type CategoriesType = {
+	category_id: number
+	category_image: string
+	category_parent_id: number
+	category_add_date: string
+	'name_ru-RU': string
+	'alias_ru-RU': string
+	'short_description_ru-RU': string
+	'description_ru-RU': string
+	'meta_title_ru-RU': string
+	'meta_description_ru-RU': string
+	'meta_keyword_ru-RU': string
+}
+
 type State = {
 	products: ServerProductCardType[]
 	filterData: FilterDataType
+	categories: CategoriesType[]
 }
 
 type Actions = {
 	fetchProducts: (url: string) => void
 	setFilterData: (paramId: 'price' | 'weight', value: [number, number]) => void
 	resetFilter: () => void
+	fetchCategories: (url: string) => void
 }
+
 const initialFilterData: FilterDataType = {
 	price: {
 		selectedDiapason: [40000, 1850000],
@@ -55,6 +72,13 @@ export const useProductStore = create(
 			set((state) => {
 				state.filterData = initialFilterData
 			})
+		},
+
+		categories: [],
+		fetchCategories: async (url: string) => {
+			const res = await fetch(url)
+
+			set({ categories: await res.json() })
 		},
 	})),
 )

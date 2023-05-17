@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { Button } from '@/app/components/Button/Button'
 import { FilterSlider } from './FilterSlider/FilterSlider'
-import { useProductStore } from '@/app/store/createProductStore'
+import { useProductStore } from '@/app/store/useProductStore'
 import { isObjectEmpty } from '@/app/helpers/isObjectEmpty'
 import useQueryParams from '@/app/hooks/useQueryParams'
 
