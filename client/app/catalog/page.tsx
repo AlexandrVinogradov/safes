@@ -21,6 +21,7 @@ export default function CatalogPage(props: PropsType) {
 
 	return (
 		<main>
+			<pre>{JSON.stringify(categories, undefined, 2)}</pre>
 			<CatalogSection searchParams={searchParams} />
 		</main>
 	)

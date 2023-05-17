@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common'
 import { InjectModel } from '@nestjs/sequelize'
 import { Op } from 'sequelize'
 import { Manufacturer } from 'src/manufacturers/manufacturers.model'
+import { ProductImage } from 'src/productImages/productImages.model'
 import { CreateSafeDto } from './dto/create-safe.dto'
 import { Safe } from './safes.model'
 
@@ -43,7 +44,10 @@ export class SafesService {
 
 		const safes = await this.safeRepository.findAll({
 			limit: 16,
-			include: [{ model: Manufacturer, as: 'manufacturer' }],
+			include: [
+				{ model: Manufacturer, as: 'manufacturer' },
+				// { model: ProductImage, as: 'MyImages' },
+			],
 			where,
 		})
 

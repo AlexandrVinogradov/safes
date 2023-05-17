@@ -1,6 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger'
 import { Column, DataType, Model, Table, ForeignKey, BelongsTo } from 'sequelize-typescript'
 import { Manufacturer } from 'src/manufacturers/manufacturers.model'
+import { ProductImage } from 'src/productImages/productImages.model'
 
 interface SafeCreationAttrs {
 	// product_id: number
@@ -49,6 +50,10 @@ export class Safe extends Model<Safe, SafeCreationAttrs> {
 	@ApiProperty({ example: 'ManufacturerTYPE', description: 'id производителя' })
 	@BelongsTo(() => Manufacturer)
 	manufacturer: Manufacturer
+
+	// @ApiProperty({ example: 'ProductImages', description: 'images' })
+	// @BelongsTo(() => ProductImage)
+	// productImage: ProductImage
 
 	@ApiProperty({ example: 'Сейф ALPHA 1475', description: 'Имя сейфа' })
 	@Column({ type: DataType.STRING, allowNull: true })
