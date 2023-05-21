@@ -45,7 +45,7 @@ export const ProductCard = (props: PropsType) => {
 				<p className={s.priceBeforeDiscount}>{card.product_old_price.toLocaleString()} ₽</p>
 			</div>
 			<footer className={s.footer}>
-				<Button>Подробнее</Button>
+				<Button href={`/${card['alias_ru-RU']}`}>Подробнее</Button>
 				<IconButton className={s.iconButton} icon={<BasketIcon />} />
 			</footer>
 		</article>
