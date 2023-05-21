@@ -11,6 +11,7 @@ interface SafeCreationAttrs {
 @Table({ tableName: '2', timestamps: false })
 export class Safe extends Model<Safe, SafeCreationAttrs> {
 	@ApiProperty({ example: 675, description: 'Уникальный идентификатор' })
+	@ForeignKey(() => ProductImage)
 	@Column({ type: DataType.INTEGER, unique: true, autoIncrement: true, primaryKey: true })
 	product_id: number
 
@@ -49,8 +50,11 @@ export class Safe extends Model<Safe, SafeCreationAttrs> {
 
 	@ApiProperty({ example: 'ManufacturerTYPE', description: 'id производителя' })
 	@BelongsTo(() => Manufacturer)
-	manufacturer: Manufacturer
+	manufacturers: Manufacturer
 
+	@ApiProperty({ example: 'ProductImages', description: 'images' })
+	@BelongsTo(() => ProductImage)
+	productImage: ProductImage
 	// @ApiProperty({ example: 'ProductImages', description: 'images' })
 	// @BelongsTo(() => ProductImage)
 	// productImage: ProductImage

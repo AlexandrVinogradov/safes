@@ -17,11 +17,9 @@ export default function CatalogPage(props: PropsType) {
 		fetchCategories('http://localhost:5000/categories')
 	}, [])
 
-	console.log(categories)
-
 	return (
 		<main>
-			<pre>{JSON.stringify(categories, undefined, 2)}</pre>
+			{/* <pre>{JSON.stringify(categories, undefined, 2)}</pre> */}
 			<CatalogSection searchParams={searchParams} />
 		</main>
 	)

@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger'
-import { Column, DataType, Model, Table, ForeignKey, BelongsTo, HasMany } from 'sequelize-typescript'
+import { Column, DataType, Model, Table, HasMany, HasOne } from 'sequelize-typescript'
 import { Safe } from 'src/safes/safes.model'
 
 interface ProductImageCreationAttrs {
@@ -26,5 +26,5 @@ export class ProductImage extends Model<ProductImage, ProductImageCreationAttrs>
 	ordering: number
 
 	// @HasMany(() => Safe)
-    // safe: Safe[]
+	// safe: Safe[]
 }
