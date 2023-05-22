@@ -62,4 +62,15 @@ export class SafesService {
 		// const safes = await this.safeRepository.query("SELECT * FROM `users`", { type: QueryTypes.SELECT })
 		return safes
 	}
+
+	async getSelectedSafe(queryParam: { safeAlias: string }) {
+		const selectedSafe = await this.safeRepository.findOne({
+			where: {
+				'alias_ru-RU': queryParam.safeAlias,
+			},
+			include: { model: ProductImage, as: 'productImage' },
+		})
+
+		return selectedSafe
+	}
 }

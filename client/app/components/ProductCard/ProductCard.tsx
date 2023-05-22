@@ -1,10 +1,10 @@
 import Image from 'next/image'
 import { BasketIcon } from '@/app/icons/BasketIcon'
+import { ServerProductCardType } from '@/app/models/IProductStore'
 import { CompareIcon } from '@/app/icons/CompareIcon'
 import { Button } from '../Button/Button'
 import { IconButton } from '../IconButton/IconButton'
 import { DescItem } from './DescItem/DescItem'
-import { ServerProductCardType } from './IProductCard'
 import { s } from './styles'
 import clsx from 'clsx'
 

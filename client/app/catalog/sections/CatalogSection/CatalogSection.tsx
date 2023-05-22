@@ -1,3 +1,4 @@
+import { useProductStore } from '@/app/store/useProductStore'
 import { container } from '@/app/styles/container'
 import { SearchParamsType } from '@/app/types/SearchParamsType'
 import clsx from 'clsx'
@@ -11,12 +12,13 @@ type PropsType = {
 
 export const CatalogSection = (props: PropsType) => {
 	const { searchParams } = props
+	const baseUrl = useProductStore((state) => state.baseUrl)
 
 	const [url, setUrl] = useState('')
 	useEffect(() => {
 		// FIXME:
 		const queryParameters = ['price', 'weight']
-		let str = 'http://localhost:5000/safes?'
+		let str = `${baseUrl}?`
 
 		for (const key in searchParams) {
 			const value = searchParams[key]

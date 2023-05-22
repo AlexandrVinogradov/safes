@@ -22,4 +22,11 @@ export class SafesController {
 	getAll(@Query() queryParams) {
 		return this.safeService.getAllSafes(queryParams)
 	}
+
+	@ApiOperation({ summary: 'Получить выбранный сейф' })
+	@ApiResponse({ status: 200, type: Safe })
+	@Get('selected')
+	getSelected(@Query() queryParams) {
+		return this.safeService.getSelectedSafe(queryParams)
+	}
 }

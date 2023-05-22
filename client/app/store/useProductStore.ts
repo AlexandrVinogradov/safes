@@ -1,34 +1,11 @@
-import { ServerProductCardType } from '@/app/components/ProductCard/IProductCard'
 import { immer } from 'zustand/middleware/immer'
 import { create } from 'zustand'
-
-type FilterDataType = {
-	price: {
-		selectedDiapason: [number, number]
-		fullDiapason: [number, number]
-	}
-	weight: {
-		selectedDiapason: [number, number]
-		fullDiapason: [number, number]
-	}
-}
-
-type CategoriesType = {
-	category_id: number
-	category_image: string
-	category_parent_id: number
-	category_add_date: string
-	'name_ru-RU': string
-	'alias_ru-RU': string
-	'short_description_ru-RU': string
-	'description_ru-RU': string
-	'meta_title_ru-RU': string
-	'meta_description_ru-RU': string
-	'meta_keyword_ru-RU': string
-}
+import { ServerProductCardType, CategoriesType, FilterDataType } from '../models/IProductStore'
 
 type State = {
+	baseUrl: string
 	products: ServerProductCardType[]
+	selectedProduct: ServerProductCardType | null
 	filterData: FilterDataType
 	categories: CategoriesType[]
 }
@@ -53,13 +30,19 @@ const initialFilterData: FilterDataType = {
 
 export const useProductStore = create(
 	immer<State & Actions>((set) => ({
+		baseUrl: 'http://localhost:5000/safes',
 		products: [],
+		selectedProduct: null,
 		fetchProducts: async (url: string) => {
 			// const res = await fetch(`http://localhost:5000/safes?weight=${get().filterQueries.weight}`)
 			// const res = await fetch(`http://localhost:5000/safes`)
 			const res = await fetch(url)
 
-			set({ products: await res.json() })
+			if (url.includes('selected?safeAlias=')) {
+				set({ selectedProduct: await res.json() })
+			} else {
+				set({ products: await res.json() })
+			}
 		},
 
 		filterData: initialFilterData,

@@ -10,9 +10,10 @@ import { useProductStore } from '@/app/store/useProductStore'
 export const ProductsSection = () => {
 	const products = useProductStore((state) => state.products)
 	const fetchProducts = useProductStore((state) => state.fetchProducts)
+	const baseUrl = useProductStore((state) => state.baseUrl)
 
 	useEffect(() => {
-		fetchProducts('http://localhost:5000/safes?')
+		fetchProducts(baseUrl)
 	}, [])
 
 	return (
