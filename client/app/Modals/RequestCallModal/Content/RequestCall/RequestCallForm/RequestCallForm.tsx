@@ -2,7 +2,7 @@ import { Button } from '@/app/components/Button/Button'
 import Checkbox from '@/app/components/Checkbox/Checkbox'
 import { Input } from '@/app/components/Input/Input'
 import Select from '@/app/components/Select/Select'
-import { useAppStore } from '@/app/store/store'
+import { useModalStore } from '@/app/store/useModalStore'
 import { useEffect } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { s } from './styles'
@@ -14,7 +14,8 @@ type FormType = {
 }
 
 export const RequestCallForm = () => {
-	const { isRequestCallModal: isOpen, setIsCallRequested } = useAppStore()
+	const isOpen = useModalStore((state) => state.isRequestCallModal)
+	const setIsCallRequested = useModalStore((state) => state.setIsCallRequested)
 
 	const { handleSubmit, control, setFocus } = useForm<FormType>()
 

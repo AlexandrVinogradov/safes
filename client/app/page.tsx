@@ -10,7 +10,6 @@ import { ProductsSection } from './sections/ProductsSection/ProductsSection'
 
 // Brands container
 // double fonts
-// add selectors
 
 const noto_sans = Noto_Sans({
 	weight: '400',

@@ -1,11 +1,11 @@
 import { Button } from '@/app/components/Button/Button'
-import { useAppStore } from '@/app/store/store'
+import { useModalStore } from '@/app/store/useModalStore'
 import clsx from 'clsx'
 import { commonStyles } from '../commonStyles'
 import { s } from './styles'
 
 export const CallRequested = () => {
-	const { setIsRequestCallModal } = useAppStore()
+	const setIsRequestCallModal = useModalStore((state) => state.setIsRequestCallModal)
 
 	const handleClose = () => setIsRequestCallModal(false)
 

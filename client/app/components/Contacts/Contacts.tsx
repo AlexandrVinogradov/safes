@@ -1,11 +1,11 @@
 'use client'
 import { MailIcon } from '@/app/icons/MailIcon'
 import { PhoneIcon } from '@/app/icons/PhoneIcon'
-import { useAppStore } from '@/app/store/store'
+import { useModalStore } from '@/app/store/useModalStore'
 import { s } from './styles'
 
 export const Contacts = () => {
-	const { setIsRequestCallModal } = useAppStore()
+	const setIsRequestCallModal = useModalStore((state) => state.setIsRequestCallModal)
 
 	const handleOpenRequestCallModal = () => setIsRequestCallModal(true)
 
