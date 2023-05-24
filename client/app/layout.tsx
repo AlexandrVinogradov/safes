@@ -7,18 +7,20 @@ import './globals.css'
 const noto_sans = Noto_Sans({
 	weight: '400',
 	variable: '--font-noto-sans',
-	display: 'swap',
+	display: 'auto',
 })
 
 const tenor_sans = Tenor_Sans({
 	weight: '400',
 	variable: '--font-tenor-sans',
-	display: 'swap',
+	display: 'auto',
 })
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
 	return (
-		<html lang="ru" className={`${noto_sans.variable} ${tenor_sans.variable}`}>
+		<html lang="ru" 
+		className={`${noto_sans.variable} ${tenor_sans.variable}`}
+		>
 			{/*
         <head /> will contain the components returned by the nearest parent
         head.tsx. Find out more at https://beta.nextjs.org/docs/api-reference/file-conventions/head

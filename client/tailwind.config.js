@@ -23,7 +23,8 @@ module.exports = {
         'dimButton': '#477D9D',
 
         'dark': '#424242',
-        'dimText': '#8F8F8F'
+        'dimText': '#8F8F8F',
+        'dimmerText': '#DDDDDD',
       },
     },
   },
