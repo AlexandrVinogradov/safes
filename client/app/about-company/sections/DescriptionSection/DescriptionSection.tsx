@@ -1,6 +1,7 @@
 import { container } from '@/app/styles/container'
 import { listDot } from '@/app/styles/listDot'
 import clsx from 'clsx'
+import Link from 'next/link'
 import { s } from './styles'
 
 export const DescriptionSection = () => {
@@ -14,12 +15,18 @@ export const DescriptionSection = () => {
 	return (
 		<section className={clsx(s.section, container)}>
 			<h1 className={s.title}>Интернет-магазин сейфов и металлической мебели ПРОММЕТСЕЙФ</h1>
-			<p className={clsx('pb-[30px]')}>Мы рады приветствовать Вас в нашем интернет-магазине сейфов Prommetsafe.ru</p>
+			<p className={clsx('pb-[30px]')}>
+				Мы рады приветствовать Вас в нашем интернет-магазине сейфов{' '}
+				<Link className={s.textTag} href="/">
+					Prommetsafe.ru
+				</Link>
+			</p>
 			<p className={clsx('pb-[30px]')}>
 				Здесь вы можете купить сейф любого типа и размера, у нас удобно выбирать и выгодно покупать!
 			</p>
 			<p className={clsx('pb-[15px]')}>
-				Для своих клиентов, компания Промметсейф готова предложить огромный выбор сейфов в наличии, низкие цены за счет:
+				Для своих клиентов, компания <span className={s.textTag}>Промметсейф</span> готова предложить огромный выбор сейфов в
+				наличии, низкие цены за счет:
 			</p>
 			<ul className={s.list}>
 				{list.map((el) => (
