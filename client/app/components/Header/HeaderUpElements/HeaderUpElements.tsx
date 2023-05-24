@@ -1,4 +1,4 @@
-import Image from 'next/image'
+import { LogoIcon } from '@/app/icons/LogoIcon'
 import Link from 'next/link'
 import { Contacts } from '../../Contacts/Contacts'
 import { Input } from '../../Input/Input'
@@ -8,7 +8,7 @@ export const HeaderUpElements = () => {
 	return (
 		<div className={s.mainWrapper}>
 			<Link href="/">
-				<Image src="/logoIcon.svg" alt="Прометсейф Logo" width={318} height={77} priority />
+				<LogoIcon />
 			</Link>
 
 			<div className={s.search}>

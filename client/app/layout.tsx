@@ -18,9 +18,7 @@ const tenor_sans = Tenor_Sans({
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
 	return (
-		<html lang="ru" 
-		className={`${noto_sans.variable} ${tenor_sans.variable}`}
-		>
+		<html lang="ru" className={`${noto_sans.variable} ${tenor_sans.variable}`}>
 			{/*
         <head /> will contain the components returned by the nearest parent
         head.tsx. Find out more at https://beta.nextjs.org/docs/api-reference/file-conventions/head
@@ -30,8 +28,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 			<body>
 				<Header />
 				{children}
-				{/* <Footer /> */}
+				<Footer />
 				{/* <Cookies /> */}
+
+				<div id="portal" />
 			</body>
 		</html>
 	)

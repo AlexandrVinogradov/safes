@@ -1,10 +1,13 @@
 'use client'
+import { MailIcon } from '@/app/icons/MailIcon'
+import { PhoneIcon } from '@/app/icons/PhoneIcon'
 import { useAppStore } from '@/app/store/store'
-import Image from 'next/image'
 import { s } from './styles'
 
 export const Contacts = () => {
 	const { setIsRequestCallModal } = useAppStore()
+
+	const handleOpenRequestCallModal = () => setIsRequestCallModal(true)
 
 	return (
 		<div className={s.contactsWrapper}>
@@ -25,18 +28,13 @@ export const Contacts = () => {
 			</div>
 
 			<div className={s.contactIcons}>
-				<a href="tel:89265878650">
-					<Image src="/phoneIcon.svg" alt="Позвоните нам" width={22} height={22} priority />
-				</a>
-
-				{/* <a className="block" href="tel:89265878650">
-					<Image src="/mailIcon.svg" alt="Напишите нам" width={27} height={20} priority />
-				</a> */}
-
-				{/* @ts-ignore */}
-				<button onClick={() => setIsRequestCallModal(true)}>
-					<Image src="/mailIcon.svg" alt="Напишите нам" width={27} height={20} priority />
+				<button onClick={handleOpenRequestCallModal}>
+					<PhoneIcon />
 				</button>
+
+				<a className="block" href="mailto:prommetsafe@yandex.ru">
+					<MailIcon />
+				</a>
 			</div>
 		</div>
 	)

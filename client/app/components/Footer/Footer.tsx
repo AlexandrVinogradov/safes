@@ -1,9 +1,12 @@
 import { container } from '@/app/styles/container'
-import Image from 'next/image'
 import Link from 'next/link'
 import clsx from 'clsx'
 import { s } from './styles'
 import { Contacts } from '../Contacts/Contacts'
+import { LogoIcon } from '@/app/icons/LogoIcon'
+import { TelegramIcon } from '@/app/icons/TelegramIcon'
+import { YouTubeIcon } from '@/app/icons/YouTubeIcon'
+import { VkIcon } from '@/app/icons/VkIcon'
 
 export const Footer = () => {
 	const nav = [
@@ -17,16 +20,18 @@ export const Footer = () => {
 	]
 
 	const iconLinks = [
-		{ name: 'vk', to: '/', alt: 'Наш ВК', iconSrc: '/vkIcon.svg' },
-		{ name: 'yt', to: '/', alt: 'Наш Youtube', iconSrc: '/youtubeIcon.svg' },
-		{ name: 'tg', to: '/', alt: 'Наш Telegram', iconSrc: '/telegramIcon.svg' },
+		{ name: 'vk', to: 'https://www.vk.com', icon: <VkIcon /> },
+		{ name: 'yt', to: 'https://www.youtube.com/', icon: <YouTubeIcon /> },
+		{ name: 'tg', to: 'https://web.telegram.org/k/', icon: <TelegramIcon /> },
 	]
+
+	console.log(iconLinks.map((el) => el.icon))
 
 	return (
 		<footer className={s.footer}>
 			<div className={clsx(container, s.mainFooter)}>
 				<div>
-					<Image className={s.logo} src="/logoIcon.svg" alt="Прометсейф Logo" width={318} height={77} priority />
+					<LogoIcon className={s.logo} />
 					<Contacts />
 				</div>
 
@@ -47,9 +52,9 @@ export const Footer = () => {
 
 				<div className={s.icons}>
 					{iconLinks.map((link) => (
-						<Link key={link.name} href={link.to}>
-							<Image src={link.iconSrc} alt={link.alt} width={26.31} height={26.31} priority />
-						</Link>
+						<a target="_blank" key={link.name} href={link.to}>
+							{link.icon}
+						</a>
 					))}
 				</div>
 			</div>

@@ -1,4 +1,6 @@
 'use client'
+import { ArrowDownIcon } from '@/app/icons/arrowDownIcon'
+import { BasketIcon } from '@/app/icons/BasketIcon'
 import Image from 'next/image'
 import Link from 'next/link'
 import { CatalogPopover } from './CatalogPopover/CatalogPopover'
@@ -24,14 +26,7 @@ export const HeaderLowElements = () => {
 						<li>
 							<button className={s.manufacturers}>
 								Производители
-								<Image
-									className={s.manufacturersIcon}
-									src="/arrowDownIcon.svg"
-									alt="Производители"
-									width={11}
-									height={9}
-									priority
-								/>
+								<ArrowDownIcon className={s.manufacturersIcon} />
 							</button>
 						</li>
 						<li>
@@ -45,7 +40,7 @@ export const HeaderLowElements = () => {
 			</div>
 
 			<button className={s.basket}>
-				<Image className={s.basketIcon} src="/basketIcon.svg" alt="Корзина" width={30} height={30} priority />
+				<BasketIcon className={s.basketIcon} />
 				<p className="">250 000 руб.</p>
 			</button>
 		</div>

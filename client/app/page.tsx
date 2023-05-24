@@ -1,7 +1,5 @@
 'use client'
-import { useEffect } from 'react'
 import { Tenor_Sans, Noto_Sans } from '@next/font/google'
-import { RequestCallModal } from './Modals/RequestCallModal/RequestCallModal'
 import { ArticlesSection } from './sections/ArticlesSection/ArticlesSection'
 import { BannerSection } from './sections/BannerSection/BannerSection'
 import { BrandsSection } from './sections/BrandsSection/BrandsSection'
@@ -10,8 +8,6 @@ import { HowToChoose } from './sections/HowToChoose/HowToChoose'
 import { NoveltiesSection } from './sections/NoveltiesSection/NoveltiesSection'
 import { ProductsSection } from './sections/ProductsSection/ProductsSection'
 
-// svg via Icon
-// Logo link
 // Brands container
 // double fonts
 // add selectors
@@ -31,8 +27,6 @@ const tenor_sans = Tenor_Sans({
 export default function Home() {
 	return (
 		<main className={`${noto_sans.variable} ${tenor_sans.variable}`}>
-			<RequestCallModal />
-
 			<BannerSection />
 			<CategoriesSliderSection />
 			<ProductsSection />
@@ -40,8 +34,6 @@ export default function Home() {
 			<NoveltiesSection />
 			<BrandsSection />
 			<ArticlesSection />
-
-			<div id="portal" />
 		</main>
 	)
 }
