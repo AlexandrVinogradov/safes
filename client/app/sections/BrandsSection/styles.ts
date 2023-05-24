@@ -1,4 +1,6 @@
 export const s = {
-	section: /*tw*/ 'bg-dark text-white py-[150px]',
-    title: /*tw*/ '-mb-[44px]'
+	section: /*tw*/ 'relative text-white py-[150px]',
+	bgImg: /*tw*/ 'absolute top-0 right-0 z-0',
+	content: /*tw*/ 'relative z-10',
+	title: /*tw*/ '-mb-[44px]',
 }
