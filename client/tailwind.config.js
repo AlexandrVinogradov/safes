@@ -25,6 +25,7 @@ module.exports = {
         'dark': '#424242',
         'dimText': '#8F8F8F',
         'dimmerText': '#DDDDDD',
+        'dimmerText2': '#ABB2BF',
       },
     },
   },

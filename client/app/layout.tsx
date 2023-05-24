@@ -5,15 +5,15 @@ import { Header } from '@/app/components/Header/Header'
 import './globals.css'
 
 const noto_sans = Noto_Sans({
-	weight: '400',
+	weight: ['400', '700'],
 	variable: '--font-noto-sans',
-	display: 'auto',
+	display: 'swap',
 })
 
 const tenor_sans = Tenor_Sans({
 	weight: '400',
 	variable: '--font-tenor-sans',
-	display: 'auto',
+	display: 'swap',
 })
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

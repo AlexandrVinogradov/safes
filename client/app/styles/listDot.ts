@@ -1,0 +1,1 @@
+export const listDot = 'relative after:absolute after:w-2.5 after:h-2.5 after:bg-dark after:rounded-full after:-left-[25px] after:top-1/2 after:translate-y-[-50%]'

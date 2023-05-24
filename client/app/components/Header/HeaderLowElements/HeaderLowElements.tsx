@@ -13,7 +13,7 @@ export const HeaderLowElements = () => {
 				<nav className={s.nav}>
 					<ul className={s.navList}>
 						<li>
-							<Link href="/company">О компании</Link>
+							<Link href="/about-company">О компании</Link>
 						</li>
 						<li>
 							<Link href="/info">Информация</Link>
