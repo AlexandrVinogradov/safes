@@ -1,10 +1,18 @@
 import Link from 'next/link'
+import { WatchRecentlySection } from './commonSections/WatchRecentlySection/WatchRecentlySection'
+import { Main } from './components/Main/Main'
+import { NotFoundContentSection } from './NotFoundSections/NotFoundContentSection/NotFoundContentSection'
 
 export default function NotFound() {
-  return <div>
-      <h1>Not found – 404!</h1>
-      <div>
-        <Link href="/">Go back to Home</Link>
-      </div>
-  </div>
+	const breadCrumbs = [
+		{ name: 'Главная', isActive: false, to: '/' },
+		{ name: '404', isActive: true },
+	]
+
+	return (
+		<Main breadCrumbs={breadCrumbs}>
+			<NotFoundContentSection />
+			<WatchRecentlySection />
+		</Main>
+	)
 }

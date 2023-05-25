@@ -1,12 +1,12 @@
 'use client'
 // import { Tenor_Sans, Noto_Sans } from '@next/font/google'
-import { ArticlesSection } from './sections/ArticlesSection/ArticlesSection'
-import { BannerSection } from './sections/BannerSection/BannerSection'
-import { BrandsSection } from './sections/BrandsSection/BrandsSection'
-import { CategoriesSliderSection } from './sections/CategoriesSliderSection/CategoriesSliderSection'
-import { HowToChoose } from './sections/HowToChoose/HowToChoose'
-import { NoveltiesSection } from './sections/NoveltiesSection/NoveltiesSection'
-import { ProductsSection } from './sections/ProductsSection/ProductsSection'
+import { ArticlesSection } from './mainPageSections/ArticlesSection/ArticlesSection'
+import { BannerSection } from './mainPageSections/BannerSection/BannerSection'
+import { BrandsSection } from './mainPageSections/BrandsSection/BrandsSection'
+import { CategoriesSliderSection } from './mainPageSections/CategoriesSliderSection/CategoriesSliderSection'
+import { HowToChoose } from './mainPageSections/HowToChoose/HowToChoose'
+import { NoveltiesSection } from './mainPageSections/NoveltiesSection/NoveltiesSection'
+import { ProductsSection } from './mainPageSections/ProductsSection/ProductsSection'
 
 // Brands container
 // double fonts
