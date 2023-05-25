@@ -1,4 +1,3 @@
-import Link from 'next/link'
 import { WatchRecentlySection } from '../commonSections/WatchRecentlySection/WatchRecentlySection'
 import { Main } from '../components/Main/Main'
 import { CartContentSection } from './sections/CartContentSection/CartContentSection'
