@@ -6,12 +6,13 @@ type State = {
 	baseUrl: string
 	products: ServerProductCardType[]
 	selectedProduct: ServerProductCardType | null
+	fetchProductsError: string | null
 	filterData: FilterDataType
 	categories: CategoriesType[]
 }
 
 type Actions = {
-	fetchProducts: (url: string) => void
+	fetchProducts: (url: string) => Promise<void>
 	setFilterData: (paramId: 'price' | 'weight', value: [number, number]) => void
 	resetFilter: () => void
 	fetchCategories: (url: string) => void
@@ -33,15 +34,21 @@ export const useProductStore = create(
 		baseUrl: 'http://localhost:5000/safes',
 		products: [],
 		selectedProduct: null,
-		fetchProducts: async (url: string) => {
-			// const res = await fetch(`http://localhost:5000/safes?weight=${get().filterQueries.weight}`)
-			// const res = await fetch(`http://localhost:5000/safes`)
-			const res = await fetch(url)
+		fetchProductsError: null,
+		fetchProducts: async (url) => {
+			try {
+				const response = await fetch(url)
+				const data = await response.json()
 
-			if (url.includes('selected?safeAlias=')) {
-				set({ selectedProduct: await res.json() })
-			} else {
-				set({ products: await res.json() })
+				if (!response.ok) throw new Error(data.message)
+
+				if (url.includes('selected?safeAlias=')) {
+					set({ selectedProduct: data })
+				} else {
+					set({ products: data })
+				}
+			} catch (error: any) {
+				set({ fetchProductsError: error.message ?? '' })
 			}
 		},
 
@@ -60,6 +67,7 @@ export const useProductStore = create(
 		categories: [],
 		fetchCategories: async (url: string) => {
 			const res = await fetch(url)
+			console.log(res)
 
 			set({ categories: await res.json() })
 		},

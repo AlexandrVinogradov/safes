@@ -1,4 +1,5 @@
 'use client'
+import { notFound } from 'next/navigation'
 import { useEffect } from 'react'
 import { useProductStore } from '../store/useProductStore'
 import { DescriptionSection } from './sections/DescriptionSection/DescriptionSection'
@@ -14,9 +15,12 @@ export default function ProductPage(props: PropsType) {
 	const fetchProducts = useProductStore((state) => state.fetchProducts)
 	const baseUrl = useProductStore((state) => state.baseUrl)
 	const selectedProduct = useProductStore((state) => state.selectedProduct)
+	const error = useProductStore((state) => state.fetchProductsError)
 
+	if (error === 'product does not exist') notFound()
 	useEffect(() => {
-		fetchProducts(`${baseUrl}/selected?safeAlias=${params.productName}`)
+		const url = `${baseUrl}/selected?safeAlias=${params.productName}`
+		fetchProducts(url)
 	}, [])
 
 	return (

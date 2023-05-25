@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common'
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common'
 import { InjectModel } from '@nestjs/sequelize'
 import { Op } from 'sequelize'
 // import { ExtraValue } from 'src/extraValues/extraValues.model'
@@ -70,6 +70,10 @@ export class SafesService {
 			},
 			include: { model: ProductImage, as: 'productImage' },
 		})
+
+		if (!selectedSafe) {
+			throw new HttpException('product does not exist', HttpStatus.NOT_FOUND)
+		}
 
 		return selectedSafe
 	}

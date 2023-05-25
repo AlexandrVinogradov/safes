@@ -4,6 +4,7 @@ import { s } from './styles'
 import { Button } from '../Button/Button'
 import clsx from 'clsx'
 
+// FIXME: add local storage
 export const Cookies = () => {
 	const [isShowCookies, setIsShowCookies] = useState(true)
 

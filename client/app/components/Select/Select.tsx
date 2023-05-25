@@ -9,7 +9,7 @@ const CustomSelect = (props: PropsType) => {
 	const { options, ...otherProps } = props
 
 	const handleChange = (value: string) => {
-		console.log(`selected ${value}`)
+		// console.log(`selected ${value}`)
 	}
 
 	return <Select style={{ width: 120 }} onChange={handleChange} options={options} {...otherProps} />

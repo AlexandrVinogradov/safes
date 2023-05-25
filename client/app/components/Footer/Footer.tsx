@@ -25,8 +25,6 @@ export const Footer = () => {
 		{ name: 'tg', to: 'https://web.telegram.org/k/', icon: <TelegramIcon /> },
 	]
 
-	console.log(iconLinks.map((el) => el.icon))
-
 	return (
 		<footer className={s.footer}>
 			<div className={clsx(container, s.mainFooter)}>
