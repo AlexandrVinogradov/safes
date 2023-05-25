@@ -4,11 +4,11 @@ import clsx from 'clsx'
 import Image from 'next/image'
 import { s } from './styles'
 
-export const NotFoundContentSection = () => {
+export const CartContentSection = () => {
 	return (
 		<section className={clsx(container, s.section)}>
-			<h1 className={s.title}>К сожалению такой страницы не существует</h1>
-			<Image src="/404.png" alt="Страница не найдена" width="1110" height="380" className={s.image} quality={100} />
+			<h1 className={s.title}>Ваша корзина пуста</h1>
+			<Image src="/emptyCart.png" alt="Корзина пуста" width="432" height="455" className={s.image} quality={100} />
 			<CatalogRedirectMessage />
 		</section>
 	)

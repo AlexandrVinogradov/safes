@@ -15,10 +15,12 @@ export const BreadCrumbs = (props: PropsType) => {
 			{breadCrumbs.map((el, id) => (
 				<Fragment key={id}>
 					{!el.isActive ? (
-						<Link href={el.to ?? '/'}>
-							{el.name}
+						<>
+							<Link className={s.link} href={el.to ?? '/'}>
+								{el.name}
+							</Link>
 							<span className={s.slash}>/</span>
-						</Link>
+						</>
 					) : (
 						<span className={s.activeCrumb}>{el.name}</span>
 					)}
