@@ -53,7 +53,7 @@ export class SafesService {
 		const safes = await this.safeRepository.findAll({
 			limit: 16,
 			include: [
-				{ model: Manufacturer, as: 'manufacturers' },
+				{ model: Manufacturer, as: 'manufacturer' },
 				{ model: ProductImage, as: 'productImage' },
 			],
 			where,

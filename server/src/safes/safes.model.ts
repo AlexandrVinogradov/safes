@@ -50,7 +50,7 @@ export class Safe extends Model<Safe, SafeCreationAttrs> {
 
 	@ApiProperty({ example: 'ManufacturerTYPE', description: 'id производителя' })
 	@BelongsTo(() => Manufacturer)
-	manufacturers: Manufacturer
+	manufacturer: Manufacturer
 
 	@ApiProperty({ example: 'ProductImages', description: 'images' })
 	@BelongsTo(() => ProductImage)

@@ -1,6 +1,4 @@
-'use client'
 import { notFound } from 'next/navigation'
-import { useEffect } from 'react'
 import { useProductStore } from '../store/useProductStore'
 import { DescriptionSection } from './sections/DescriptionSection/DescriptionSection'
 import { ProductNameSection } from './sections/ProductNameSection/ProductNameSection'
@@ -10,18 +8,14 @@ type PropsType = {
 }
 
 // FIXME: finish this page
-export default function ProductPage(props: PropsType) {
+export default async function ProductPage(props: PropsType) {
 	const { params } = props
-	const fetchProducts = useProductStore((state) => state.fetchProducts)
-	const baseUrl = useProductStore((state) => state.baseUrl)
-	const selectedProduct = useProductStore((state) => state.selectedProduct)
-	const error = useProductStore((state) => state.fetchProductsError)
+	const { selectedProduct, fetchProducts, baseUrl, fetchProductsError } = useProductStore.getState()
 
-	if (error === 'product does not exist') notFound()
-	useEffect(() => {
-		const url = `${baseUrl}/selected?safeAlias=${params.productName}`
-		fetchProducts(url)
-	}, [])
+	const url = `${baseUrl}/selected?safeAlias=${params.productName}`
+	if (!selectedProduct) fetchProducts(url)
+
+	if (fetchProductsError === 'product does not exist') notFound()
 
 	return (
 		<main>
@@ -35,7 +29,7 @@ export default function ProductPage(props: PropsType) {
 
 			<DescriptionSection description={selectedProduct?.['description_ru-RU']} />
 
-			<pre>{JSON.stringify(selectedProduct, undefined, 2)}</pre>
+			{/* <pre>{JSON.stringify(selectedProduct, undefined, 2)}</pre> */}
 		</main>
 	)
 }
