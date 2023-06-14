@@ -16,10 +16,17 @@ export class CategoriesController {
 		return this.categoryService.createCategory(categoryDto)
 	}
 
-	@ApiOperation({ summary: 'Получить всех пользователей' })
+	// @ApiOperation({ summary: 'Получить всех пользователей' })
+	// @ApiResponse({ status: 200, type: [Category] })
+	// @Get()
+	// getAll() {
+	// 	return this.categoryService.getAllCategories()
+	// }
+
+	@ApiOperation({ summary: 'Получить структуру' })
 	@ApiResponse({ status: 200, type: [Category] })
 	@Get()
-	getAll() {
+	getCategory() {
 		return this.categoryService.getAllCategories()
 	}
 }

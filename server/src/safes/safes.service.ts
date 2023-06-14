@@ -1,6 +1,7 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common'
 import { InjectModel } from '@nestjs/sequelize'
 import { Op } from 'sequelize'
+import { Category } from 'src/categories/categories.model'
 // import { ExtraValue } from 'src/extraValues/extraValues.model'
 import { Manufacturer } from 'src/manufacturers/manufacturers.model'
 import { ProductImage } from 'src/productImages/productImages.model'
@@ -10,8 +11,9 @@ import { Safe } from './safes.model'
 @Injectable()
 export class SafesService {
 	constructor(
-		@InjectModel(Safe) private safeRepository: typeof Safe, // @InjectModel(Safe) private extraValuesRepository: typeof ExtraValue,
-	) {}
+		@InjectModel(Safe) private safeRepository: typeof Safe,
+	) // @InjectModel(Category) private categoryRepository: typeof Category,
+	{}
 
 	async createSafe(dto: CreateSafeDto) {
 		const safe = await this.safeRepository.create(dto)
@@ -54,7 +56,7 @@ export class SafesService {
 			limit: 16,
 			include: [
 				{ model: Manufacturer, as: 'manufacturer' },
-				{ model: ProductImage, as: 'productImage' },
+				// { model: ProductImage, as: 'productImage' },
 			],
 			where,
 		})
@@ -75,6 +77,63 @@ export class SafesService {
 			throw new HttpException('product does not exist', HttpStatus.NOT_FOUND)
 		}
 
+		console.log(selectedSafe['name_ru-RU'], '-------------------------')
+
 		return selectedSafe
 	}
+
+	// // более менее ===================
+	// async getSelectedSafe(queryParam: { safeAlias: string }) {
+	// 	let selectedBox: any = null
+
+	// 	if (selectedBox === null) {
+	// 		selectedBox = await this.categoryRepository.findOne({
+	// 			where: {
+	// 				'alias_ru-RU': queryParam.safeAlias,
+	// 			},
+	// 		})
+	// 		if (selectedBox !== null) return { box: 'cat', ...selectedBox }
+	// 	}
+
+	// 	if (selectedBox === null) {
+	// 		selectedBox = await this.safeRepository.findOne({
+	// 			where: {
+	// 				'alias_ru-RU': queryParam.safeAlias,
+	// 			},
+	// 			// include: { model: ProductImage, as: 'productImage' },
+	// 		})
+	// 		if (selectedBox !== null) return { box: 'safe', ...selectedBox }
+	// 	}
+	// }
+	// // более менее ===================
+
+	// async getSelectedSafe(queryParam: { safeAlias: string }) {
+	// let selectedBox: any = null
+
+	// selectedBox = await this.safeRepository.findOne({
+	// 	where: {
+	// 		'alias_ru-RU': queryParam.safeAlias,
+	// 	},
+	// 	include: { model: ProductImage, as: 'productImage', attributes: { exclude: ['safeId'] } },
+	// 	attributes: { exclude: ['productImageId'] },
+	// })
+
+	// if (selectedBox !== null) {
+	// 	// Если запись найдена в таблице safe, добавляем значение "box: 'safe'"
+	// 	return { box: 'safe', ...selectedBox.toJSON() }
+	// }
+
+	// selectedBox = await this.categoryRepository.findOne({
+	// 	where: {
+	// 		'alias_ru-RU': queryParam.safeAlias,
+	// 	},
+	// })
+
+	// if (selectedBox !== null) {
+	// 	// Если запись найдена в таблице category, добавляем значение "box: 'cat'"
+	// 	return { box: 'cat', ...selectedBox.toJSON() }
+	// }
+
+	// throw new Error(`Элемент с алиасом "${queryParam.safeAlias}" не найден`)
+	// }
 }
