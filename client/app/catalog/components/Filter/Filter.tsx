@@ -1,11 +1,17 @@
+'use client'
 import { useEffect } from 'react'
 import { Button } from '@/app/components/Button/Button'
 import { FilterSlider } from './FilterSlider/FilterSlider'
 import { useProductStore } from '@/app/store/useProductStore'
 import { isObjectEmpty } from '@/app/helpers/isObjectEmpty'
 import useQueryParams from '@/app/hooks/useQueryParams'
+import { SearchParamsType } from '@/app/types/SearchParamsType'
 
-export const Filter = ({ searchParams }: { searchParams: { [key: string]: string | undefined } }) => {
+type PropsType = {
+	searchParams: SearchParamsType
+}
+export const Filter = (props: PropsType) => {
+	const { searchParams } = props
 	const filterData = useProductStore((state) => state.filterData)
 	const setFilterData = useProductStore((state) => state.setFilterData)
 	const resetFilter = useProductStore((state) => state.resetFilter)

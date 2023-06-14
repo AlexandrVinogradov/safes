@@ -1,4 +1,3 @@
-
 import { container } from '@/app/styles/container'
 import Image from 'next/image'
 import clsx from 'clsx'
@@ -22,15 +21,16 @@ export const ProductNameSection = (props: PropsType) => {
 		<section className={clsx(s.section, container)}>
 			<div className={s.wrapper}>
 				<div className=" max-w-[690px] w-full">
-					{/* <Image
+					<Image
 						unoptimized={true}
-						loader={() => src}
-						src={src}
+						// loader={() => src}
+						// src={src}
+						src={`https://prommetsafe.ru/components/com_jshopping/files/img_products/${image}`}
 						alt={name || 'Фото сейфа'}
 						width="0"
 						height="0"
 						className={s.image}
-					/> */}
+					/>
 				</div>
 
 				<div className="w-full">

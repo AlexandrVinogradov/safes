@@ -9,10 +9,9 @@ import { WatchRecentlySlide } from './WatchRecentlySlide/WatchRecentlySlide'
 export const WatchRecentlySliderContainer = () => {
 	const products = useProductStore((state) => state.products)
 	const fetchProducts = useProductStore((state) => state.fetchProducts)
-	const baseUrl = useProductStore((state) => state.baseUrl)
 
 	useEffect(() => {
-		fetchProducts(baseUrl)
+		fetchProducts(process.env.API_URL_PRODUCTS || '')
 	}, [])
 
 	return (

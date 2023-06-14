@@ -1,43 +1,44 @@
 import { immer } from 'zustand/middleware/immer'
 import { create } from 'zustand'
-import { ServerProductCardType, CategoriesType, FilterDataType } from '../models/IProductStore'
+import { ServerProductCardType, FilterDataType } from '../models/IProductStore'
+
+// export const fetchCache = 'only-no-store'
 
 type State = {
-	baseUrl: string
-	products: ServerProductCardType[]
+	products: ServerProductCardType[] | null
 	selectedProduct: ServerProductCardType | null
 	fetchProductsError: string | null
 	filterData: FilterDataType
-	categories: CategoriesType[]
 }
 
 type Actions = {
 	fetchProducts: (url: string) => Promise<void>
 	setFilterData: (paramId: 'price' | 'weight', value: [number, number]) => void
 	resetFilter: () => void
-	fetchCategories: (url: string) => void
 }
 
 const initialFilterData: FilterDataType = {
 	price: {
-		selectedDiapason: [40000, 1850000],
+		selectedDiapason: [0, 1850000],
 		fullDiapason: [0, 1850000],
 	},
 	weight: {
-		selectedDiapason: [10, 500],
+		selectedDiapason: [0, 500],
 		fullDiapason: [0, 500],
 	},
 }
 
 export const useProductStore = create(
 	immer<State & Actions>((set) => ({
-		baseUrl: 'http://localhost:5000/safes',
-		products: [],
+		products: null,
 		selectedProduct: null,
 		fetchProductsError: null,
 		fetchProducts: async (url) => {
 			try {
-				const response = await fetch(url)
+				const response = await fetch(url, {
+					// cache: 'no-store',
+					// next: { revalidate: 0 },
+				})
 				const data = await response.json()
 
 				if (!response.ok) throw new Error(data.message)
@@ -60,16 +61,18 @@ export const useProductStore = create(
 		},
 		resetFilter: () => {
 			set((state) => {
-				state.filterData = initialFilterData
+				// state.filterData = initialFilterData
+				state.filterData = {
+					price: {
+						selectedDiapason: [0, 1850000],
+						fullDiapason: [0, 1850000],
+					},
+					weight: {
+						selectedDiapason: [0, 500],
+						fullDiapason: [0, 500],
+					},
+				}
 			})
-		},
-
-		categories: [],
-		fetchCategories: async (url: string) => {
-			const res = await fetch(url)
-			console.log(res)
-
-			set({ categories: await res.json() })
 		},
 	})),
 )

@@ -1,11 +1,15 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  env: {
+    API_URL_PRODUCTS: 'http://localhost:5000/safes',
+    API_URL_CATEGORIES: 'http://localhost:5000/categories',
+  },
+  // fontLoaders: [
+  //   // { loader: '@next/font/google', options: { subsets: ['cyrillic'] } },
+  //   { loader: '@next/font/google', options: { subsets: ['latin'] } },
+  // ],
   experimental: {
     appDir: true,
-    fontLoaders: [
-      // { loader: '@next/font/google', options: { subsets: ['cyrillic'] } },
-      { loader: '@next/font/google', options: { subsets: ['latin'] } },
-    ],
   },
 }
 

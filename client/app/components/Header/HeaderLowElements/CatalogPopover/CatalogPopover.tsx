@@ -1,3 +1,4 @@
+'use client'
 import { Button } from '@/app/components/Button/Button'
 import { CatalogMenuIcon } from '@/app/icons/CatalogMenuIcon'
 import { CrossIcon } from '@/app/icons/CrossIcon'

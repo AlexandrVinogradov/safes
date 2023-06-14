@@ -1,43 +1,43 @@
+'use client'
+import { useEffect, useState } from 'react'
 import { useProductStore } from '@/app/store/useProductStore'
 import { container } from '@/app/styles/container'
 import { SearchParamsType } from '@/app/types/SearchParamsType'
-import clsx from 'clsx'
-import { useEffect, useState } from 'react'
 import { Filter } from '../../components/Filter/Filter'
 import { CatalogProducts } from './CatalogProducts/CatalogProducts'
+import { ServerProductCardType } from '@/app/models/IProductStore'
+import { s } from './styles'
+import clsx from 'clsx'
+import { getApiProductURL } from '../../helpers/getApiProductURL'
 
 type PropsType = {
 	searchParams: SearchParamsType
+	products: ServerProductCardType[] | null
 }
 
 export const CatalogSection = (props: PropsType) => {
-	const { searchParams } = props
-	const baseUrl = useProductStore((state) => state.baseUrl)
+	const { searchParams, products } = props
 
-	const [url, setUrl] = useState('')
+	const [isFirstRender, setIsFirstRender] = useState(true)
+	const products2 = useProductStore((state) => state.products)
+	const fetchProducts = useProductStore((state) => state.fetchProducts)
+
 	useEffect(() => {
-		// FIXME:
-		const queryParameters = ['price', 'weight']
-		let str = `${baseUrl}?`
+		setIsFirstRender(false)
+	}, [])
 
-		for (const key in searchParams) {
-			const value = searchParams[key]
-
-			if (queryParameters.includes(key) && value) {
-				str = str + `${key}=${value}&`
-			}
+	useEffect(() => {
+		if (!isFirstRender) {
+			fetchProducts(getApiProductURL(searchParams))
 		}
-
-		setUrl(str)
 	}, [searchParams])
 
 	return (
-		// {/* // FIXME: */}
-		<section className={clsx('pt-10', container)}>
-			<div className="flex">
+		<section className={clsx(s.section, container)}>
+			<div className={s.wrapper}>
 				<Filter searchParams={searchParams} />
 
-				<CatalogProducts url={url} />
+				<CatalogProducts products={products2 ? products2 : products} />
 			</div>
 		</section>
 	)

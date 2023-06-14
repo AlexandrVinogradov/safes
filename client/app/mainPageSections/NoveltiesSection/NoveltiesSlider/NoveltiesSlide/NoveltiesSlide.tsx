@@ -1,6 +1,7 @@
 import { ProductCardType } from '@/app/components/ProductCard/IProductCard'
 import { ProductCard } from '@/app/components/ProductCard/ProductCard'
 
+// FIXME:
 type PropsType = {
 	card: ProductCardType
 }

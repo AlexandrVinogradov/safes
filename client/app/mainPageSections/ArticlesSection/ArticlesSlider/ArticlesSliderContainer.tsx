@@ -1,3 +1,4 @@
+'use client'
 import { Slider } from '@/app/components/Slider/Slider'
 import { SwiperSlide } from 'swiper/react'
 import { ArticleSlide } from './ArticleSlide/ArticleSlide'

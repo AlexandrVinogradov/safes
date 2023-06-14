@@ -1,4 +1,4 @@
-import { Tenor_Sans, Noto_Sans } from '@next/font/google'
+import { Tenor_Sans, Noto_Sans } from 'next/font/google'
 import { Cookies } from '@/app/components/Cookies/Cookies'
 import { Footer } from '@/app/components/Footer/Footer'
 import { Header } from '@/app/components/Header/Header'

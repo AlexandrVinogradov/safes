@@ -1,4 +1,4 @@
-import { notFound } from 'next/navigation'
+// import { notFound } from 'next/navigation'
 import { useProductStore } from '../store/useProductStore'
 import { DescriptionSection } from './sections/DescriptionSection/DescriptionSection'
 import { ProductNameSection } from './sections/ProductNameSection/ProductNameSection'
@@ -10,12 +10,13 @@ type PropsType = {
 // FIXME: finish this page
 export default async function ProductPage(props: PropsType) {
 	const { params } = props
-	const { selectedProduct, fetchProducts, baseUrl, fetchProductsError } = useProductStore.getState()
+	const { selectedProduct, fetchProducts, fetchProductsError } = useProductStore.getState()
 
+	const baseUrl = process.env.API_URL_PRODUCTS
 	const url = `${baseUrl}/selected?safeAlias=${params.productName}`
 	if (!selectedProduct) fetchProducts(url)
 
-	if (fetchProductsError === 'product does not exist') notFound()
+	// if (fetchProductsError === 'product does not exist') notFound()
 
 	return (
 		<main>

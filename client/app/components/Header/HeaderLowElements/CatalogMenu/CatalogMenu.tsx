@@ -1,7 +1,10 @@
+'use client'
 import { Button } from '@/app/components/Button/Button'
 import { container } from '@/app/styles/container'
-import { MenuCategoryList } from './MenuCategoryList/MenuCategoryList'
+import Link from 'next/link'
+import { useEffect } from 'react'
 import { s } from './styles'
+import { useCategoriesStore } from '@/app/store/useCategoriesStore'
 
 type PropsType = {
 	isHovering: boolean
@@ -11,6 +14,13 @@ type PropsType = {
 
 export const CatalogMenu = (props: PropsType) => {
 	const { isHovering, handleMouseOver, handleMouseOut } = props
+
+	const categories = useCategoriesStore((state) => state.categories)
+	const fetchCategories = useCategoriesStore((state) => state.fetchCategories)
+
+	useEffect(() => {
+		fetchCategories(process.env.API_URL_CATEGORIES || '')
+	}, [])
 
 	const tags = [
 		{ id: 'forHouse', name: 'Сейфы для дома' },
@@ -22,54 +32,6 @@ export const CatalogMenu = (props: PropsType) => {
 		{ id: 'policeCabinets', name: 'Полицейские шкафы' },
 		{ id: 'forHouse2', name: 'Сейфы для дома' },
 	]
-
-	const lists = [
-		{
-			id: '1',
-			list: {
-				title: 'Взломостойкие сейфы',
-				items: ['1 класс (описание)', '2 класс (описание)', '3 класс (описание)', '4 класс (описание)', '5 класс (описание)'],
-			},
-		},
-		{
-			id: '2',
-			list: {
-				title: 'Взломостойкие сейфы',
-				items: ['1 класс (описание)', '2 класс (описание)', '3 класс (описание)', '4 класс (описание)', '5 класс (описание)'],
-			},
-		},
-		{
-			id: '3',
-			list: {
-				title: 'Взломостойкие сейфы',
-				items: ['1 класс (описание)', '2 класс (описание)', '3 класс (описание)', '4 класс (описание)', '5 класс (описание)'],
-			},
-		},
-		{
-			id: '4',
-			list: {
-				title: 'Взломостойкие сейфы',
-				items: ['1 класс (описание)', '2 класс (описание)', '3 класс (описание)', '4 класс (описание)', '5 класс (описание)'],
-			},
-		},
-		{
-			id: '5',
-			list: {
-				title: 'Взломостойкие сейфы',
-				items: ['1 класс (описание)', '2 класс (описание)', '3 класс (описание)', '4 класс (описание)', '5 класс (описание)'],
-			},
-		},
-	]
-
-	const getLongList = (count: number) => {
-		const newArr = []
-		for (let i = 0; i < count; i++) {
-			newArr.push(...lists)
-		}
-
-		return newArr
-	}
-
 	return (
 		<>
 			{isHovering && (
@@ -85,8 +47,17 @@ export const CatalogMenu = (props: PropsType) => {
 						</div>
 
 						<div className={s.content}>
-							{getLongList(4).map((el) => (
-								<MenuCategoryList key={el.id} list={el.list} />
+							{categories?.map((el) => (
+								<div key={el['alias_ru-RU']}>
+									<Link className="text-branded" href={el['alias_ru-RU']}>
+										{el.name}
+									</Link>
+									{el.child?.map((ell: any) => (
+										<div key={ell['alias_ru-RU']}>
+											<Link href={ell['alias_ru-RU']}>{ell['name_ru-RU']}</Link>
+										</div>
+									))}
+								</div>
 							))}
 						</div>
 

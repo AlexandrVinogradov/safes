@@ -7,7 +7,7 @@ import clsx from 'clsx'
 export const HowToChoose = () => {
 	return (
 		<section className={s.section}>
-			<Image className={s.bgImg} src="/bgGear.jpg" alt="Как выбрать сейф?" fill quality={100} />
+			<Image src="/bgGear.jpg" alt="Как выбрать сейф?" fill quality={100} />
 			<div className={clsx(container, s.content)}>
 				<h2 className={s.title}>Как выбрать сейф?</h2>
 				<p className={s.desc}>

@@ -1,3 +1,4 @@
+'use client'
 import { useModalStore } from '@/app/store/useModalStore'
 import { MainModal } from '../../components/Modal/MainModal/MainModal'
 import { CallRequested } from './Content/CallRequested/CallRequested'

@@ -1,3 +1,4 @@
+'use client'
 import { Slider } from '@/app/components/Slider/Slider'
 import { BrandIcon1 } from '@/app/icons/brandsIcons/BrandIcon1'
 import { BrandIcon2 } from '@/app/icons/brandsIcons/BrandIcon2'

@@ -1,7 +1,5 @@
-'use client'
-import { ArrowDownIcon } from '@/app/icons/arrowDownIcon'
+import { ArrowDownIcon } from '@/app/icons/ArrowDownIcon'
 import { BasketIcon } from '@/app/icons/BasketIcon'
-import Image from 'next/image'
 import Link from 'next/link'
 import { CatalogPopover } from './CatalogPopover/CatalogPopover'
 import { s } from './styles'

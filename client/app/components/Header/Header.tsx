@@ -1,4 +1,3 @@
-'use client'
 import { RequestCallModal } from '@/app/Modals/RequestCallModal/RequestCallModal'
 import { HeaderLowElements } from './HeaderLowElements/HeaderLowElements'
 import { HeaderUpElements } from './HeaderUpElements/HeaderUpElements'
