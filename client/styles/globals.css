@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply text-dark
+}
+
+/* html, body, header, footer, main, section { 
+  @apply font-sans
+} */
+.app_wrapper { 
+  @apply font-sans
+}
+
+h2 {
+  font-size: 66px;
+  line-height: 77px;
+}
+
+h1, h2, h3 {
+  @apply font-mono
+}
+
+input {
+  outline: none;
+}
