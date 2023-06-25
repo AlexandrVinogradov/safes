@@ -1,30 +1,38 @@
-'use client'
+import { useRouter } from 'next/router'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 
-import { usePathname, useRouter, useSearchParams } from 'next/navigation'
-
-export default function useQueryParams<T = {}>() {
+export const useQueryParams = () => {
 	const router = useRouter()
-	const pathname = usePathname()
-	const searchParams = useSearchParams()
+	const [queryParams, setQueryParams] = useState({})
 
-	// const queryParams = searchParams as unknown as Partial<T>
-	const queryParams = searchParams
-	const urlSearchParams = new URLSearchParams(searchParams)
+	const updateQueryParams = useCallback(
+		(params: { [key: string]: string }) => {
+			const searchParams = new URLSearchParams({
+				...queryParams,
+				...params,
+			}).toString()
 
-	function setQueryParams(params: Partial<T>) {
-		Object.entries(params).forEach(([key, value]) => {
-			urlSearchParams.set(key, String(value))
-		})
+			const url = router.asPath.split('?')[0] // Убираем текущие параметры запроса из URL
+			const hasParams = router.asPath.includes('?')
+			const newUrl = hasParams ? `${url}?${searchParams}` : `${url}${searchParams ? `?${searchParams}` : ''}`
 
-		const search = urlSearchParams.toString()
-		const query = search ? `?${search}` : ''
+			router.replace(newUrl)
+		},
+		[queryParams, router],
+	)
 
-		router.push(`${pathname}${query}`)
-	}
+	const resetQueryParams = useCallback(() => {
+		const url = router.asPath.split('?')[0]
+		router.replace(url)
+	}, [router])
 
-	function resetQueryParams() {
-		router.push(`${pathname}`)
-	}
+	// FIXME: delete comment
+	//   const queryParamEntries = useMemo(() => Object.entries(queryParams), [queryParams]);
+	useEffect(() => {
+		const searchParams = new URLSearchParams(router.asPath.split('?')[1] || '')
+		const newQueryParams = Object.fromEntries(searchParams.entries())
+		setQueryParams(newQueryParams)
+	}, [router.asPath])
 
-	return { queryParams, setQueryParams, resetQueryParams }
+	return { queryParams, setQueryParams: updateQueryParams, resetQueryParams }
 }

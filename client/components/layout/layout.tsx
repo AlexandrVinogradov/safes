@@ -8,8 +8,9 @@ import { MetaType } from '../Meta/IMeta'
 const noto_sans = Noto_Sans({
 	weight: ['400', '700'],
 	variable: '--font-noto-sans',
-	display: 'swap',
+	display: 'auto',
 	subsets: [
+		// FIXME: delete comments
 		// 'cyrillic',
 		'latin',
 	],
@@ -18,7 +19,7 @@ const noto_sans = Noto_Sans({
 const tenor_sans = Tenor_Sans({
 	weight: '400',
 	variable: '--font-tenor-sans',
-	display: 'swap',
+	display: 'auto',
 	subsets: [
 		// 'cyrillic',
 		'latin',

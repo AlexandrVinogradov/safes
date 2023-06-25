@@ -1,9 +1,9 @@
 import { immer } from 'zustand/middleware/immer'
 import { create } from 'zustand'
-import { CategoriesType } from '../../models/ICategoriesStore'
+import { CategoryType } from '@/models/ICategoriesStore'
 
 type State = {
-	categories: CategoriesType[]
+	categories: CategoryType[]
 }
 
 type Actions = {
@@ -14,9 +14,11 @@ export const useCategoriesStore = create(
 	immer<State & Actions>((set) => ({
 		categories: [],
 		fetchCategories: async (url: string) => {
-			const res = await fetch(url)
+			const response = await fetch(url)
+			const data = await response.json()
 
-			set({ categories: await res.json() })
+			set({ categories: data })
+			return data
 		},
 	})),
 )

@@ -6,27 +6,66 @@ import { Category } from 'src/categories/categories.model'
 import { Manufacturer } from 'src/manufacturers/manufacturers.model'
 import { ProductImage } from 'src/productImages/productImages.model'
 import { CreateSafeDto } from './dto/create-safe.dto'
-import { Safe } from './safes.model'
+import { ProductToCategories, Safe } from './safes.model'
 
 @Injectable()
 export class SafesService {
 	constructor(
 		@InjectModel(Safe) private safeRepository: typeof Safe,
-	) // @InjectModel(Category) private categoryRepository: typeof Category,
-	{}
+		@InjectModel(ProductToCategories) private productToCategoriesRepository: typeof ProductToCategories,
+		@InjectModel(Category) private CategoryRepository: typeof Category,
+	) {}
 
 	async createSafe(dto: CreateSafeDto) {
 		const safe = await this.safeRepository.create(dto)
 		return safe
 	}
 
-	async getAllSafes(queryParams: { price?: string; weight?: string }) {
-		let where: any = {
+	async getAllSafes(queryParams: { price?: string; weight?: string; categoryId?: string }) {
+		const getProductsIdByCategoryId = async (categoriesId: number[]): Promise<{ product_id: number }[]> => {
+			const orCondition = categoriesId.map((el) => ({ category_id: el }))
+
+			const safesId = await this.productToCategoriesRepository.findAll({
+				where: {
+					[Op.or]: orCondition,
+				},
+			})
+
+			if (safesId.length) {
+				return safesId
+			} else {
+				// получаем newCategoriesId
+				const orCondition = categoriesId.map((el) => ({ category_parent_id: el }))
+				const childCategories = await this.CategoryRepository.findAll({
+					where: {
+						[Op.or]: orCondition,
+					},
+				})
+
+				const newCategoriesId = childCategories.map((el) => el.dataValues.category_id)
+
+				return getProductsIdByCategoryId(newCategoriesId)
+			}
+		}
+
+		let where = {
 			// extra_field_3: {
 			// 	[Op.endsWith]: '2',
 			// },
 			// extra_field_3: await this.extraValuesRepository.findAll({ limit: 1 }),
 		}
+
+		let productsIdByCategoryId: { product_id: number }[] = null
+		if (queryParams.categoryId) {
+			productsIdByCategoryId = await getProductsIdByCategoryId([Number(queryParams.categoryId)])
+
+			where = {
+				...where,
+				[Op.or]: productsIdByCategoryId.map((el) => ({ product_id: el.product_id })),
+			}
+		}
+
+		// ============================
 
 		for (const key in queryParams) {
 			switch (key) {
@@ -77,63 +116,6 @@ export class SafesService {
 			throw new HttpException('product does not exist', HttpStatus.NOT_FOUND)
 		}
 
-		console.log(selectedSafe['name_ru-RU'], '-------------------------')
-
 		return selectedSafe
 	}
-
-	// // более менее ===================
-	// async getSelectedSafe(queryParam: { safeAlias: string }) {
-	// 	let selectedBox: any = null
-
-	// 	if (selectedBox === null) {
-	// 		selectedBox = await this.categoryRepository.findOne({
-	// 			where: {
-	// 				'alias_ru-RU': queryParam.safeAlias,
-	// 			},
-	// 		})
-	// 		if (selectedBox !== null) return { box: 'cat', ...selectedBox }
-	// 	}
-
-	// 	if (selectedBox === null) {
-	// 		selectedBox = await this.safeRepository.findOne({
-	// 			where: {
-	// 				'alias_ru-RU': queryParam.safeAlias,
-	// 			},
-	// 			// include: { model: ProductImage, as: 'productImage' },
-	// 		})
-	// 		if (selectedBox !== null) return { box: 'safe', ...selectedBox }
-	// 	}
-	// }
-	// // более менее ===================
-
-	// async getSelectedSafe(queryParam: { safeAlias: string }) {
-	// let selectedBox: any = null
-
-	// selectedBox = await this.safeRepository.findOne({
-	// 	where: {
-	// 		'alias_ru-RU': queryParam.safeAlias,
-	// 	},
-	// 	include: { model: ProductImage, as: 'productImage', attributes: { exclude: ['safeId'] } },
-	// 	attributes: { exclude: ['productImageId'] },
-	// })
-
-	// if (selectedBox !== null) {
-	// 	// Если запись найдена в таблице safe, добавляем значение "box: 'safe'"
-	// 	return { box: 'safe', ...selectedBox.toJSON() }
-	// }
-
-	// selectedBox = await this.categoryRepository.findOne({
-	// 	where: {
-	// 		'alias_ru-RU': queryParam.safeAlias,
-	// 	},
-	// })
-
-	// if (selectedBox !== null) {
-	// 	// Если запись найдена в таблице category, добавляем значение "box: 'cat'"
-	// 	return { box: 'cat', ...selectedBox.toJSON() }
-	// }
-
-	// throw new Error(`Элемент с алиасом "${queryParam.safeAlias}" не найден`)
-	// }
 }

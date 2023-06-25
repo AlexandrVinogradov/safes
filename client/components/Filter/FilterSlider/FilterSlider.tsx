@@ -1,9 +1,9 @@
 import { Input } from '@/components/Input/Input'
-import { REGEX_ONLY_NUMBERS_ } from '@/constants/regexConstants'
-import useQueryParams from '@/hooks/useQueryParams'
+import { REGEX_ONLY_NUMBERS } from '@/constants/regexConstants'
 import { s } from './styles'
 import dynamic from 'next/dynamic'
 import { ValueSliderPropsType } from './ValueSlider/ValueSlider'
+import { useQueryParams } from '@/hooks/useQueryParams'
 
 const DynamicValueSlider = dynamic<ValueSliderPropsType>(() => import('./ValueSlider/ValueSlider'), { ssr: false })
 
@@ -20,15 +20,16 @@ export const FilterSlider = (props: PropsType) => {
 	const { setQueryParams } = useQueryParams()
 
 	const handleChangeMinLimitInput = (value: string) => {
-		if (!REGEX_ONLY_NUMBERS_.test(value)) return
+		if (!REGEX_ONLY_NUMBERS.test(value)) return
 
-		setQueryParams({ [paramId]: `${Number(value)}-${selectedDiapason[1]}` })
+		// FIXME: delete comments 
+		// setQueryParams({ [paramId]: `${Number(value)}-${selectedDiapason[1]}` })
 		setDiapason([Number(value), selectedDiapason[1]])
 	}
 	const handleChangeMaxLimitInput = (value: string) => {
-		if (!REGEX_ONLY_NUMBERS_.test(value)) return
+		if (!REGEX_ONLY_NUMBERS.test(value)) return
 
-		setQueryParams({ [paramId]: `${selectedDiapason[0]}-${value || 0}` })
+		// setQueryParams({ [paramId]: `${selectedDiapason[0]}-${value || 0}` })
 		setDiapason([selectedDiapason[0], Number(value) || 0])
 	}
 

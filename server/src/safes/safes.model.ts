@@ -107,3 +107,16 @@ export class Safe extends Model<Safe, SafeCreationAttrs> {
 	@Column({ type: DataType.STRING, allowNull: true })
 	extra_field_17: string
 }
+
+@Table({ tableName: 'products_to_categories', timestamps: false })
+// FIXME: SafeCreationAttrs
+export class ProductToCategories extends Model<ProductToCategories, SafeCreationAttrs> {
+	@ApiProperty({ example: 675, description: 'Product id' })
+	// @ForeignKey(() => ProductImage)
+	@Column({ type: DataType.INTEGER, unique: true, autoIncrement: true, primaryKey: true })
+	product_id: number
+
+	@ApiProperty({ example: 675, description: 'Category id' })
+	@Column({ type: DataType.INTEGER })
+	category_id: number
+}

@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from '@nestjs/common'
+import { Body, Controller, Get, Param, Post } from '@nestjs/common'
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger'
 import { CreateCategoryDto } from './dto/create-category.dto'
 import { Category } from './categories.model'
@@ -16,17 +16,18 @@ export class CategoriesController {
 		return this.categoryService.createCategory(categoryDto)
 	}
 
-	// @ApiOperation({ summary: 'Получить всех пользователей' })
-	// @ApiResponse({ status: 200, type: [Category] })
-	// @Get()
-	// getAll() {
-	// 	return this.categoryService.getAllCategories()
-	// }
-
-	@ApiOperation({ summary: 'Получить структуру' })
+	@ApiOperation({ summary: 'Получить все структуру категорий' })
 	@ApiResponse({ status: 200, type: [Category] })
 	@Get()
 	getCategory() {
 		return this.categoryService.getAllCategories()
 	}
+
+	@ApiOperation({ summary: 'Получить выбранную структуру категорий' })
+	@ApiResponse({ status: 200, type: [Category] })
+	@Get(':id')
+	getSelectedCategory(@Param('id') id: string) {
+		return this.categoryService.getSelectedCategory(id)
+	}
+
 }

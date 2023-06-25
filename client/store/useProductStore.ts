@@ -2,8 +2,6 @@ import { immer } from 'zustand/middleware/immer'
 import { create } from 'zustand'
 import { ServerProductCardType, FilterDataType } from '../models/IProductStore'
 
-// export const fetchCache = 'only-no-store'
-
 type State = {
 	products: ServerProductCardType[]
 	selectedProduct: ServerProductCardType | null
@@ -12,7 +10,7 @@ type State = {
 }
 
 type Actions = {
-	fetchProducts: (url: string) => Promise<ServerProductCardType[]>
+	fetchProducts: (url: string) => Promise<ServerProductCardType[] | ServerProductCardType>
 	setFilterData: (paramId: 'price' | 'weight', value: [number, number]) => void
 	initFilterData: (filterData: FilterDataType) => void
 	resetFilter: () => void
@@ -36,10 +34,7 @@ export const useProductStore = create(
 		fetchProductsError: null,
 		fetchProducts: async (url) => {
 			try {
-				const response = await fetch(url, {
-					// cache: 'no-store',
-					// next: { revalidate: 0 },
-				})
+				const response = await fetch(url)
 				const data = await response.json()
 
 				if (!response.ok) throw new Error(data.message)
@@ -69,6 +64,7 @@ export const useProductStore = create(
 		},
 		resetFilter: () => {
 			set((state) => {
+				// FIXME why cant use initialFilterData?
 				// state.filterData = initialFilterData
 				state.filterData = {
 					price: {

@@ -1,18 +1,20 @@
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import { Button } from '@/components/Button/Button'
 import { FilterSlider } from './FilterSlider/FilterSlider'
 import { useProductStore } from '@/store/useProductStore'
 import { isObjectEmpty } from '@/helpers/isObjectEmpty'
-import useQueryParams from '@/hooks/useQueryParams'
 import { useRouter } from 'next/router'
 import { FilterDataType } from '@/models/IProductStore'
+import { useQueryParams } from '@/hooks/useQueryParams'
+import { getApiProductURL } from '@/helpers/getApiProductURL'
 
-export const Filter = () => {
+export const Filter = ({ category }: any) => {
 	const { query } = useRouter()
 	const filterData = useProductStore((state) => state.filterData)
 	const setFilterData = useProductStore((state) => state.setFilterData)
 	const initFilterData = useProductStore((state) => state.initFilterData)
 	const resetFilter = useProductStore((state) => state.resetFilter)
+	const fetchProducts = useProductStore((state) => state.fetchProducts)
 
 	const { resetQueryParams } = useQueryParams()
 
@@ -20,7 +22,6 @@ export const Filter = () => {
 		if (isObjectEmpty(query)) return
 
 		let newFilterData = { ...filterData }
-
 		const params = ['price', 'weight']
 
 		for (const key in query) {
@@ -38,16 +39,29 @@ export const Filter = () => {
 		}
 
 		initFilterData(newFilterData)
-	}, [])
+	}, [query])
+
+	const selectedCategory = useRef(query.id)
+	useEffect(() => {
+		if (selectedCategory.current && selectedCategory.current !== query.id) {
+			selectedCategory.current = query.id
+			resetFilter()
+			resetQueryParams()
+		}
+	}, [query])
 
 	const handleResetFilter = () => {
 		resetFilter()
 		resetQueryParams()
 	}
 
+	const fetch = () => {
+		fetchProducts(getApiProductURL(query, category))
+	}
+
 	return (
 		<div className="mr-10">
-			{/* // FIXME: */}
+			{/* // TODO: add styles.ts */}
 
 			<div className="w-[315px] px-2.5 py-5 mb-5 text-white bg-branded rounded-sm text-[17px] self-start">
 				<p className="pb-2.5 text-lg font-bold">Фильтр</p>
