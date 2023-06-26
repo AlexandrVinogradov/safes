@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger'
-import { Column, DataType, Model, Table, HasMany, HasOne } from 'sequelize-typescript'
+import { Column, DataType, Model, Table, BelongsTo, ForeignKey } from 'sequelize-typescript'
 import { Safe } from 'src/safes/safes.model'
 
 interface ProductImageCreationAttrs {
@@ -14,6 +14,7 @@ export class ProductImage extends Model<ProductImage, ProductImageCreationAttrs>
 	image_id: number
 
 	@ApiProperty({ example: '1', description: 'id  продукта' })
+	@ForeignKey(() => Safe)
 	@Column({ type: DataType.INTEGER })
 	product_id: number
 
@@ -25,6 +26,6 @@ export class ProductImage extends Model<ProductImage, ProductImageCreationAttrs>
 	@Column({ type: DataType.INTEGER })
 	ordering: number
 
-	// @HasMany(() => Safe)
-	// safe: Safe[]
+	@BelongsTo(() => Safe, 'product_id')
+	safe: Safe
 }

@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger'
-import { Column, DataType, Model, Table, ForeignKey, BelongsTo } from 'sequelize-typescript'
+import { Column, DataType, Model, Table, ForeignKey, BelongsTo, HasMany } from 'sequelize-typescript'
 import { Manufacturer } from 'src/manufacturers/manufacturers.model'
 import { ProductImage } from 'src/productImages/productImages.model'
 
@@ -14,6 +14,10 @@ export class Safe extends Model<Safe, SafeCreationAttrs> {
 	@ForeignKey(() => ProductImage)
 	@Column({ type: DataType.INTEGER, unique: true, autoIncrement: true, primaryKey: true })
 	product_id: number
+
+	@ApiProperty({ example: 'ProductImages', description: 'images' })
+	@HasMany(() => ProductImage)
+	productImages: ProductImage[]
 
 	@ApiProperty({ example: '1', description: 'код товара' })
 	@Column({ type: DataType.STRING, allowNull: true })
@@ -51,13 +55,6 @@ export class Safe extends Model<Safe, SafeCreationAttrs> {
 	@ApiProperty({ example: 'ManufacturerTYPE', description: 'id производителя' })
 	@BelongsTo(() => Manufacturer)
 	manufacturer: Manufacturer
-
-	@ApiProperty({ example: 'ProductImages', description: 'images' })
-	@BelongsTo(() => ProductImage)
-	productImage: ProductImage
-	// @ApiProperty({ example: 'ProductImages', description: 'images' })
-	// @BelongsTo(() => ProductImage)
-	// productImage: ProductImage
 
 	@ApiProperty({ example: 'Сейф ALPHA 1475', description: 'Имя сейфа' })
 	@Column({ type: DataType.STRING, allowNull: true })

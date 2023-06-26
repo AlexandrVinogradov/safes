@@ -95,9 +95,10 @@ export class SafesService {
 			limit: 16,
 			include: [
 				{ model: Manufacturer, as: 'manufacturer' },
-				// { model: ProductImage, as: 'productImage' },
+				{ model: ProductImage, as: 'productImages', attributes: ['image_name'] },
 			],
 			where,
+			order: [['product_id', 'ASC']],
 		})
 
 		// const safes = await this.safeRepository.query("SELECT * FROM `users`", { type: QueryTypes.SELECT })
@@ -109,7 +110,7 @@ export class SafesService {
 			where: {
 				'alias_ru-RU': queryParam.safeAlias,
 			},
-			include: { model: ProductImage, as: 'productImage' },
+			include: { model: ProductImage, as: 'productImages', attributes: ['image_name'] },
 		})
 
 		if (!selectedSafe) {

@@ -20,7 +20,8 @@ export const ProductPage = (props: PropsType) => {
 		<Layout title="SELECTED">
 			<Main breadCrumbs={breadCrumbs}>
 				<ProductNameSection
-					image={selectedProduct?.image}
+					mainImage={selectedProduct?.image}
+					images={selectedProduct.productImages.map((image) => image.image_name)}
 					code={selectedProduct?.product_ean}
 					name={selectedProduct?.['name_ru-RU']}
 					price={selectedProduct?.product_price}
