@@ -93,7 +93,32 @@ export class SafesService {
 				{ model: ProductImage, as: 'productImages', attributes: ['image_name'] },
 				{
 					model: ExtraValue,
-					as: 'extraFieldValue',
+					as: 'extraFieldValue3',
+					attributes: ['name_ru-RU'],
+				},
+				{
+					model: ExtraValue,
+					as: 'extraFieldValue4',
+					attributes: ['name_ru-RU'],
+				},
+				{
+					model: ExtraValue,
+					as: 'extraFieldValue8',
+					attributes: ['name_ru-RU'],
+				},
+				{
+					model: ExtraValue,
+					as: 'extraFieldValue9',
+					attributes: ['name_ru-RU'],
+				},
+				{
+					model: ExtraValue,
+					as: 'extraFieldValue20',
+					attributes: ['name_ru-RU'],
+				},
+				{
+					model: ExtraValue,
+					as: 'extraFieldValue22',
 					attributes: ['name_ru-RU'],
 				},
 			],
@@ -101,12 +126,17 @@ export class SafesService {
 			order: [['product_id', 'ASC']],
 		})
 
-		// return safes
-
 		return safes.map((safe) => ({
 			...safe.toJSON(),
-			extra_field_3: safe.extraFieldValue?.['name_ru-RU'] ?? safe.extra_field_3, // заменяем значение extra_field_3 на name_ru-RU, если оно есть
+			extra_field_3: safe.extraFieldValue3?.['name_ru-RU'] ?? safe.extra_field_3, // заменяем значение extra_field_3 на name_ru-RU, если оно есть
+			extra_field_4: safe.extraFieldValue4?.['name_ru-RU'] ?? safe.extra_field_4, // заменяем значение extra_field_3 на name_ru-RU, если оно есть
+			extra_field_8: safe.extraFieldValue8?.['name_ru-RU'] ?? safe.extra_field_8, // заменяем значение extra_field_3 на name_ru-RU, если оно есть
+			extra_field_9: safe.extraFieldValue9?.['name_ru-RU'] ?? safe.extra_field_9, // заменяем значение extra_field_3 на name_ru-RU, если оно есть
+			extra_field_20: safe.extraFieldValue20?.['name_ru-RU'] ?? safe.extra_field_20, // заменяем значение extra_field_3 на name_ru-RU, если оно есть
+			extra_field_22: safe.extraFieldValue22?.['name_ru-RU'] ?? safe.extra_field_22, // заменяем значение extra_field_3 на name_ru-RU, если оно есть
 		}))
+
+		// return safes
 	}
 
 	async getSelectedSafe(queryParam: { safeAlias: string }) {
