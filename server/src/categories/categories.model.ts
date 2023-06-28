@@ -12,9 +12,9 @@ export class Category extends Model<Category, CategoryCreationAttrs> {
 	@Column({ type: DataType.INTEGER, unique: true, autoIncrement: true, primaryKey: true })
 	category_id: number
 
-	// @ApiProperty({ example: 'img1313.jpg', description: 'img' })
-	// @Column({ type: DataType.STRING })
-	// category_image: string
+	@ApiProperty({ example: 'img1313.jpg', description: 'img' })
+	@Column({ type: DataType.STRING })
+	category_image: string
 
 	@ApiProperty({ example: '1', description: 'хз' })
 	@Column({ type: DataType.INTEGER })
