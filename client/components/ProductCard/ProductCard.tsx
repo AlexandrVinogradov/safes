@@ -41,7 +41,7 @@ export const ProductCard = (props: PropsType) => {
 				<DescItem name="Производитель" data={card.manufacturer?.['name_ru-RU']} />
 				<DescItem name="Габариты (мм)" data={card.extra_field_15} />
 				<DescItem name="Вес (кг)" data={card.product_weight} />
-				<DescItem name="Взломостойкость" data={card.burglaryResistance} />
+				<DescItem name="Взломостойкость" data={card?.extra_field_3} />
 				<DescItem name="Огнестойкость" data={card.fireResistance} />
 				<DescItem name="Вид замка" data={card.castleType} />
 			</ul>

@@ -1,6 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger'
 import { Column, DataType, HasMany, Model, Table } from 'sequelize-typescript'
-import { Safe } from 'src/safes/safes.model'
 
 interface ExtraValueCreationAttrs {
 	// product_id: number
@@ -20,7 +19,4 @@ export class ExtraValue extends Model<ExtraValue, ExtraValueCreationAttrs> {
 	@ApiProperty({ example: '1 класс/ключевой', description: 'значение extra_field' })
 	@Column({ type: DataType.STRING })
 	'name_ru-RU': string
-
-	// @HasMany(() => Safe)
-	// safe: Safe[]
 }

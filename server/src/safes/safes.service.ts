@@ -2,11 +2,11 @@ import { HttpException, HttpStatus, Injectable } from '@nestjs/common'
 import { InjectModel } from '@nestjs/sequelize'
 import { Op } from 'sequelize'
 import { Category } from 'src/categories/categories.model'
-// import { ExtraValue } from 'src/extraValues/extraValues.model'
 import { Manufacturer } from 'src/manufacturers/manufacturers.model'
 import { ProductImage } from 'src/productImages/productImages.model'
 import { CreateSafeDto } from './dto/create-safe.dto'
 import { ProductToCategories, Safe } from './safes.model'
+import { ExtraValue } from 'src/extraValues/extraValues.model'
 
 @Injectable()
 export class SafesService {
@@ -48,12 +48,7 @@ export class SafesService {
 			}
 		}
 
-		let where = {
-			// extra_field_3: {
-			// 	[Op.endsWith]: '2',
-			// },
-			// extra_field_3: await this.extraValuesRepository.findAll({ limit: 1 }),
-		}
+		let where = {}
 
 		let productsIdByCategoryId: { product_id: number }[] = null
 		if (queryParams.categoryId) {
@@ -96,13 +91,22 @@ export class SafesService {
 			include: [
 				{ model: Manufacturer, as: 'manufacturer' },
 				{ model: ProductImage, as: 'productImages', attributes: ['image_name'] },
+				{
+					model: ExtraValue,
+					as: 'extraFieldValue',
+					attributes: ['name_ru-RU'],
+				},
 			],
 			where,
 			order: [['product_id', 'ASC']],
 		})
 
-		// const safes = await this.safeRepository.query("SELECT * FROM `users`", { type: QueryTypes.SELECT })
-		return safes
+		// return safes
+
+		return safes.map((safe) => ({
+			...safe.toJSON(),
+			extra_field_3: safe.extraFieldValue?.['name_ru-RU'] ?? safe.extra_field_3, // заменяем значение extra_field_3 на name_ru-RU, если оно есть
+		}))
 	}
 
 	async getSelectedSafe(queryParam: { safeAlias: string }) {
