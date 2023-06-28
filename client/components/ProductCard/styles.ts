@@ -9,7 +9,7 @@ export const s = {
 	imgWrapper: /*tw*/ 'h-[289px] w-full flex flex-col justify-center items-center',
 	image: /*tw*/ 'w-auto h-full',
 
-	desc: /*tw*/ 'pb-[18px]',
+	desc: /*tw*/ 'pb-[18px] max-h-[144px] h-full',
 
 	priceBlock: /*tw*/ 'flex items-center pb-5',
 	price: /*tw*/ 'text-branded mr-5',

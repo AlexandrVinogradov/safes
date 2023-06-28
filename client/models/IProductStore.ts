@@ -17,6 +17,11 @@ export type ServerProductCardType = {
 	'meta_description_ru-RU': string
 	'meta_keyword_ru-RU': string
 	extra_field_3: string
+	extra_field_4: string
+	extra_field_8: string
+	extra_field_9: string
+	extra_field_20: string
+	extra_field_22: string
 	extra_field_13: string
 	extra_field_15: string
 	extra_field_17: string

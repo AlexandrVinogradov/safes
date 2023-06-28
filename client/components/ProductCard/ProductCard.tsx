@@ -15,6 +15,7 @@ type PropsType = {
 
 export const ProductCard = (props: PropsType) => {
 	const { card, className } = props
+	console.log(card.extra_field_8 && 100)
 
 	return (
 		<article className={clsx(s.cardWrapper, className)}>
@@ -41,9 +42,12 @@ export const ProductCard = (props: PropsType) => {
 				<DescItem name="Производитель" data={card.manufacturer?.['name_ru-RU']} />
 				<DescItem name="Габариты (мм)" data={card.extra_field_15} />
 				<DescItem name="Вес (кг)" data={card.product_weight} />
-				<DescItem name="Взломостойкость" data={card?.extra_field_3} />
-				<DescItem name="Огнестойкость" data={card.fireResistance} />
-				<DescItem name="Вид замка" data={card.castleType} />
+
+				<DescItem name="Взломостойкость" data={card.extra_field_3} />
+				<DescItem name="Огнестойкость" data={card.extra_field_4} />
+				<DescItem name="Вид замка" data={card.extra_field_9} />
+				<DescItem name="Кол-во стволов" data={card.extra_field_8} />
+				<DescItem name="Толщина металла" data={card.extra_field_20} />
 			</ul>
 			<div className={s.priceBlock}>
 				{/* .toLocaleString() */}
