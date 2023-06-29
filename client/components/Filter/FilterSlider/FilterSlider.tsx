@@ -20,17 +20,23 @@ export const FilterSlider = (props: PropsType) => {
 	const { setQueryParams } = useQueryParams()
 
 	const handleChangeMinLimitInput = (value: string) => {
-		if (!REGEX_ONLY_NUMBERS.test(value)) return
-
-		// FIXME: delete comments 
+		// FIXME: delete comments
 		// setQueryParams({ [paramId]: `${Number(value)}-${selectedDiapason[1]}` })
-		setDiapason([Number(value), selectedDiapason[1]])
+
+		const strippedValue = value.replace(/\s/g, '')
+		if (!REGEX_ONLY_NUMBERS.test(strippedValue)) return
+
+		const newMinLimit = Number(strippedValue)
+		setDiapason([Number(newMinLimit), selectedDiapason[1]])
 	}
 	const handleChangeMaxLimitInput = (value: string) => {
-		if (!REGEX_ONLY_NUMBERS.test(value)) return
+		const strippedValue = value.replace(/\s/g, '')
+		if (!REGEX_ONLY_NUMBERS.test(strippedValue)) return
+
+		const newMaxLimit = Number(strippedValue)
+		setDiapason([selectedDiapason[0], Number(newMaxLimit) || 0])
 
 		// setQueryParams({ [paramId]: `${selectedDiapason[0]}-${value || 0}` })
-		setDiapason([selectedDiapason[0], Number(value) || 0])
 	}
 
 	const onChangeSlider = (value: [number, number]) => {
@@ -45,8 +51,16 @@ export const FilterSlider = (props: PropsType) => {
 		<div>
 			<p className={s.title}>{title}</p>
 			<div className={s.inputs}>
-				<Input className={s.input} value={selectedDiapason[0]} onChange={(e) => handleChangeMinLimitInput(e.target.value)} />
-				<Input className={s.input} value={selectedDiapason[1]} onChange={(e) => handleChangeMaxLimitInput(e.target.value)} />
+				<Input
+					className={s.input}
+					value={selectedDiapason[0].toLocaleString('ru-RU')}
+					onChange={(e) => handleChangeMinLimitInput(e.target.value)}
+				/>
+				<Input
+					className={s.input}
+					value={selectedDiapason[1].toLocaleString('ru-RU')}
+					onChange={(e) => handleChangeMaxLimitInput(e.target.value)}
+				/>
 			</div>
 			<DynamicValueSlider
 				defaultValue={fullDiapason}
