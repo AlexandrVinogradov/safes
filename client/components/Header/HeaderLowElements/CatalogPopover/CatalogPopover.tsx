@@ -1,10 +1,9 @@
-'use client'
 import { Button } from '@/components/Button/Button'
 import { CatalogMenuIcon } from '@/icons/CatalogMenuIcon'
 import { CrossIcon } from '@/icons/CrossIcon'
 import clsx from 'clsx'
 import { useState } from 'react'
-import { CatalogMenu } from '../CatalogMenu/CatalogMenu'
+import { CatalogMenu } from './CatalogMenu/CatalogMenu'
 import { s } from './styles'
 
 export const CatalogPopover = () => {

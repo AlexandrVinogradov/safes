@@ -1,8 +1,8 @@
 import { ArrowDownIcon } from '@/icons/ArrowDownIcon'
-import { BasketIcon } from '@/icons/BasketIcon'
 import Link from 'next/link'
 import { CatalogPopover } from './CatalogPopover/CatalogPopover'
 import { s } from './styles'
+import { BasketPopover } from './BasketPopover/BasketPopover'
 
 export const HeaderLowElements = () => {
 	return (
@@ -37,10 +37,7 @@ export const HeaderLowElements = () => {
 				</nav>
 			</div>
 
-			<button className={s.basket}>
-				<BasketIcon className={s.basketIcon} />
-				<p className="">250 000 руб.</p>
-			</button>
+			<BasketPopover />
 		</div>
 	)
 }

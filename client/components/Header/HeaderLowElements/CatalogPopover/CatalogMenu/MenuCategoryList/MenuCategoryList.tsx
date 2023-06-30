@@ -1,3 +1,4 @@
+// FIXME: this component doesn`t use
 import Link from 'next/link'
 import { s } from './styles'
 

@@ -1,4 +1,3 @@
-'use client'
 import { Button } from '@/components/Button/Button'
 import { container } from '@/styles/container'
 import Link from 'next/link'
