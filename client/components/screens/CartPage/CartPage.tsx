@@ -1,8 +1,9 @@
-import { WatchRecentlySection } from '@/components/commonSections/WatchRecentlySection/WatchRecentlySection'
 import { CartContentSection } from './sections/CartContentSection/CartContentSection'
 import { Main } from '../../Main/Main'
 import { Layout } from '../../layout/layout'
 import { ServerProductCardType } from '@/models/IProductStore'
+import { ProductSliderSection } from '@/components/commonSections/ProductSliderSection/ProductSliderSection'
+import { s } from './styles'
 
 type PropsType = {
 	products: ServerProductCardType[]
@@ -20,7 +21,7 @@ const СartPage = (props: PropsType) => {
 		<Layout title="Корзина">
 			<Main breadCrumbs={breadCrumbs}>
 				<CartContentSection />
-				<WatchRecentlySection products={products} />
+				<ProductSliderSection className={s.productSliderSection} title="Вы недавно смотрели" products={products} />
 			</Main>
 		</Layout>
 	)

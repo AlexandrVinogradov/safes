@@ -3,14 +3,17 @@ import { ProductNameSection } from './sections/ProductNameSection/ProductNameSec
 import { DescriptionSection } from './sections/DescriptionSection/DescriptionSection'
 import { Layout } from '@/components/layout/layout'
 import { Main } from '@/components/Main/Main'
+import { ProductSliderSection } from '@/components/commonSections/ProductSliderSection/ProductSliderSection'
+import { s } from './styles'
 
 type PropsType = {
 	selectedProduct: ServerProductCardType
+	relativeProducts: ServerProductCardType[] | null
 }
 
 // FIXME: finish this page
 export const ProductPage = (props: PropsType) => {
-	const { selectedProduct } = props
+	const { selectedProduct, relativeProducts } = props
 
 	const breadCrumbs = [
 		{ name: 'Главная', isActive: false, to: '/' },
@@ -24,13 +27,15 @@ export const ProductPage = (props: PropsType) => {
 					images={selectedProduct.productImages.map((image) => image.image_name)}
 					code={selectedProduct?.product_ean}
 					name={selectedProduct?.['name_ru-RU']}
-					price={selectedProduct?.product_price}
-					oldPrice={selectedProduct?.product_old_price}
+					// @ts-ignore
+					price={selectedProduct?.product_price.toLocaleString('ru-RU')}
+					// @ts-ignore
+					oldPrice={selectedProduct?.product_old_price.toLocaleString('ru-RU')}
 				/>
 
 				<DescriptionSection description={selectedProduct?.['description_ru-RU']} />
 
-				<pre>{JSON.stringify(selectedProduct, undefined, 2)}</pre>
+				<ProductSliderSection className={s.productSliderSection} title="Похожие товары" products={relativeProducts || []} />
 			</Main>
 		</Layout>
 	)

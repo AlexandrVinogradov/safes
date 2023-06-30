@@ -12,10 +12,11 @@ type PropsType = {
 	selectedProduct: any
 	category: CategoryType
 	products: ServerProductCardType[] | null
+	relativeProducts: ServerProductCardType[] | null
 }
 
-const Product: NextPage<PropsType> = ({ selectedProduct, category, products }) => {
-	if (selectedProduct) return <ProductPage selectedProduct={selectedProduct} />
+const Product: NextPage<PropsType> = ({ selectedProduct, category, products, relativeProducts }) => {
+	if (selectedProduct) return <ProductPage selectedProduct={selectedProduct} relativeProducts={relativeProducts} />
 	return <CatalogPage products={products || []} category={category} />
 }
 
@@ -29,6 +30,12 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps<PropsType> = async ({ params }) => {
 	const { fetchProducts } = useProductStore.getState()
 	const selectedProduct = (await fetchProducts(`${process.env.API_URL_PRODUCTS}/selected?safeAlias=${params?.id}`)) || null
+
+	let relativeProducts: ServerProductCardType[] | null = null
+	if (selectedProduct) {
+		// TODO: fetch relative products
+		relativeProducts = ((await fetchProducts(getApiProductURL(params))) as ServerProductCardType[]) || null
+	}
 
 	let category = null
 	let products: ServerProductCardType[] | null = null
@@ -44,6 +51,7 @@ export const getStaticProps: GetStaticProps<PropsType> = async ({ params }) => {
 			selectedProduct,
 			category,
 			products,
+			relativeProducts,
 		},
 	}
 }

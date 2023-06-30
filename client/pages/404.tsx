@@ -14,7 +14,7 @@ const NotFound: NextPage<PropsType> = ({ products }) => {
 
 export const getServerSideProps: GetServerSideProps<PropsType> = async (context) => {
 	const { fetchProducts } = useProductStore.getState()
-	const products = await fetchProducts(getApiProductURL(context.query))
+	const products = (await fetchProducts(getApiProductURL(context.query))) as ServerProductCardType[]
 
 	return {
 		props: { products },

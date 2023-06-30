@@ -3,14 +3,11 @@ const { fontFamily } = require('tailwindcss/defaultTheme')
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    "./app/**/*.{js,ts,jsx,tsx}",
+    // "./app/**/*.{js,ts,jsx,tsx}",
     "./pages/**/*.{js,ts,jsx,tsx}",
     "./components/**/*.{js,ts,jsx,tsx}",
-
     './styles/**/*.{js,ts,jsx,tsx,mdx}',
     './icons/**/*.{js,ts,jsx,tsx,mdx}',
-    
-    './ooo/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
     extend: {
@@ -24,6 +21,7 @@ module.exports = {
         
         'branded': '#40A3D2',
         'dimBranded': '#C5EBFD',
+        'dimBranded2': '#F5FCFF',
         
         'dimButton': '#477D9D',
 

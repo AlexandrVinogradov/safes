@@ -5,7 +5,7 @@ type PropsType = {
 	card: ServerProductCardType
 }
 
-export const WatchRecentlySlide = (props: PropsType) => {
+export const ProductSlide = (props: PropsType) => {
 	const { card } = props
 
 	return <ProductCard card={card} />

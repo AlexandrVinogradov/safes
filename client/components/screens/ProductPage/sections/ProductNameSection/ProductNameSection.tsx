@@ -16,8 +16,6 @@ type PropsType = {
 export const ProductNameSection = (props: PropsType) => {
 	const { name, code, mainImage, images, price, oldPrice } = props
 
-	// const src = `https://prommetsafe.ru/components/com_jshopping/files/img_products/${image}`
-
 	return (
 		<section className={clsx(s.section, container)}>
 			<div className={s.wrapper}>
@@ -25,8 +23,6 @@ export const ProductNameSection = (props: PropsType) => {
 					<div>
 						<Image
 							unoptimized={true}
-							// loader={() => src}
-							// src={src}
 							src={`https://prommetsafe.ru/components/com_jshopping/files/img_products/${mainImage}`}
 							alt={name || 'Фото сейфа'}
 							width="0"
@@ -37,6 +33,7 @@ export const ProductNameSection = (props: PropsType) => {
 					<div className="flex">
 						{images?.map((image) => (
 							<Image
+								key={image}
 								unoptimized={true}
 								src={`https://prommetsafe.ru/components/com_jshopping/files/img_products/${image}`}
 								alt={name || 'Фото сейфа'}

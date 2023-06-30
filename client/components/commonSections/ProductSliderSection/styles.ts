@@ -1,4 +1,4 @@
 export const s = {
-    section: /*tw*/ 'pb-[120px] ',
+    section: /*tw*/ '',
     title: /*tw*/ '-mb-[44px]'
 }
