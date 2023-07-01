@@ -7,6 +7,7 @@ import { IconButton } from '../IconButton/IconButton'
 import { DescItem } from './DescItem/DescItem'
 import { s } from './styles'
 import clsx from 'clsx'
+import { useBasketStore } from '@/store/useBasketStore'
 
 type PropsType = {
 	card: ServerProductCardType
@@ -15,6 +16,17 @@ type PropsType = {
 
 export const ProductCard = (props: PropsType) => {
 	const { card, className } = props
+
+	const addBasketItem = useBasketStore((state) => state.addBasketItem)
+
+	const handleClickAddProduct = () => {
+		addBasketItem({
+			id: card.product_id,
+			image: card.image,
+			name: card['name_ru-RU'],
+			price: card.product_price,
+		})
+	}
 
 	return (
 		<article className={clsx(s.cardWrapper, className)}>
@@ -56,7 +68,7 @@ export const ProductCard = (props: PropsType) => {
 			</div>
 			<footer className={s.footer}>
 				<Button href={`/${card['alias_ru-RU']}`}>Подробнее</Button>
-				<IconButton className={s.iconButton} icon={<BasketIcon />} />
+				<IconButton onClick={handleClickAddProduct} className={s.iconButton} icon={<BasketIcon />} />
 			</footer>
 		</article>
 	)

@@ -1,10 +1,10 @@
 export type ServerProductCardType = {
-	product_id: string
+	product_id: number
 	product_ean: string
 	product_date_added: string
 	date_modify: string
 	product_old_price: string
-	product_price: string
+	product_price: number
 	product_weight: string
 	image: string
 	productImages: { image_name: string }[]

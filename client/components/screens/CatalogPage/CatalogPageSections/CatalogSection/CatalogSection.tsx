@@ -39,7 +39,7 @@ export const CatalogSection = (props: PropsType) => {
 
 	const memoizedFilterData = useMemo(() => filterData, [filterData])
 	useEffect(() => {
-		console.log(filterData)
+		// console.log(filterData)
 
 		if (!isFirstRender) {
 			// TODO: call 2 times why?

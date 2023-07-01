@@ -1,24 +1,20 @@
-import { BasketIcon } from '@/icons/BasketIcon'
 import { useState } from 'react'
-import { s } from './styles'
 import { BasketPopup } from './BasketPopup/BasketPopup'
+import { BasketButton } from './BasketButton/BasketButton'
+import { s } from './styles'
+import { BasketPrice } from './BasketPrice/BasketPrice'
 
 export const BasketPopover = () => {
-	const [isHovering, setIsHovering] = useState(true)
+	const [isHovering, setIsHovering] = useState(false)
 
 	const handleMouseOver = () => setIsHovering(true)
-
 	const handleMouseOut = () => setIsHovering(false)
 
 	return (
 		<div className={s.basketButtonPopover}>
-			<button
-				// onMouseOver={handleMouseOver}
-				//  onMouseOut={handleMouseOut}
-				className={s.basket}
-			>
-				<BasketIcon className={s.basketIcon} />
-				<p className={s.price}>250 000 руб.</p>
+			<button onMouseOver={handleMouseOver} onMouseOut={handleMouseOut} className={s.basket}>
+				<BasketButton />
+				<BasketPrice />
 			</button>
 
 			<BasketPopup isHovering={isHovering} handleMouseOver={handleMouseOver} handleMouseOut={handleMouseOut} />
