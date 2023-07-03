@@ -4,7 +4,7 @@ import clsx from 'clsx'
 import Image from 'next/image'
 import { s } from './styles'
 
-export const CartContentSection = () => {
+export const CartEmptySection = () => {
 	return (
 		<section className={clsx(container, s.section)}>
 			<h1 className={s.title}>Ваша корзина пуста</h1>

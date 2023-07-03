@@ -9,7 +9,10 @@ const DynamicCustomBadge = dynamic<CustomBadgePropsType>(() => import('@/compone
 export const BasketButton = () => {
 	const basketItems = useBasketStore((state) => state.basketItems)
 
-	const badgeCount = basketItems.reduce((acc, item) => acc + item.count, 0)
+	const badgeCount = basketItems.reduce((acc, item) => {
+		if (item.isDeleted) return acc
+		return acc + item.count
+	}, 0)
 
 	return (
 		<DynamicCustomBadge count={badgeCount} offset={[-7, -4]}>

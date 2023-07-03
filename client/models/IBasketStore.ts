@@ -3,5 +3,8 @@ export type BasketItemType = {
 	image: string
 	name: string
 	price: number
+	oldPrice: number
 	count: number
+	code: string
+	isDeleted: boolean
 }

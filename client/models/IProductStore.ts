@@ -3,7 +3,7 @@ export type ServerProductCardType = {
 	product_ean: string
 	product_date_added: string
 	date_modify: string
-	product_old_price: string
+	product_old_price: number
 	product_price: number
 	product_weight: string
 	image: string

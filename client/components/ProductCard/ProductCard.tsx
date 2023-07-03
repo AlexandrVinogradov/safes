@@ -25,6 +25,9 @@ export const ProductCard = (props: PropsType) => {
 			image: card.image,
 			name: card['name_ru-RU'],
 			price: card.product_price,
+			oldPrice: card.product_old_price,
+			code: card.product_ean,
+			isDeleted: false,
 		})
 	}
 
