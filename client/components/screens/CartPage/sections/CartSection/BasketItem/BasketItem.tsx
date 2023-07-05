@@ -31,7 +31,7 @@ export const BasketItem = (props: PropsType) => {
 				<p className={s.code}>Код товара: {code}</p>
 			</div>
 
-			<div className={s.priceCell}>250 990 ₽</div>
+			<div className={s.priceCell}>{item.price.toLocaleString('ru-RU')} ₽</div>
 
 			<div className={s.countCell}>
 				<ClickInput value={item.count} onChange={handleChangeClickInput} />

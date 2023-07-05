@@ -11,6 +11,13 @@ type PropsType = {
 	products: ServerProductCardType[]
 }
 
+// TODO:
+// - reduce в helpers
+// - max-h basket popover
+// - basket in storage
+// - basket store types
+// - isDeleted - remove from popover
+
 const СartPage = (props: PropsType) => {
 	const { products } = props
 

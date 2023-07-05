@@ -10,17 +10,18 @@ type PropsTypes = {
 	onClick?: () => void
 	href?: string
 	type?: string
+	disabled?: boolean
 }
 
 export const Button = (props: PropsTypes & HTMLAttributes<HTMLButtonElement>) => {
-	const { children, className, styleType = 'outlined', href, ...otherProps } = props
+	const { children, className, disabled, styleType = 'outlined', href, ...otherProps } = props
 
 	// FIXME:
 	const CustomTag: keyof JSX.IntrinsicElements | any = href ? Link : 'button'
 
 	return (
 		<CustomTag
-			//
+			disabled={disabled}
 			className={clsx(s.button, styleType === 'filled' && s.filled, styleType === 'outlined' && s.outlined, className)}
 			href={href}
 			{...otherProps}

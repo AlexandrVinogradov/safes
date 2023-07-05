@@ -1,6 +1,15 @@
 import '@/styles/globals.css'
 import type { AppProps } from 'next/app'
+import { ConfigProvider } from 'antd'
 
 export default function App({ Component, pageProps }: AppProps) {
-	return <Component {...pageProps} />
+	const theme = {
+		token: { colorPrimary: '#40A3D2' },
+	}
+
+	return (
+		<ConfigProvider theme={theme}>
+			<Component {...pageProps} />
+		</ConfigProvider>
+	)
 }

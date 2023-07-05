@@ -7,14 +7,15 @@ type PropsType = {
 	children: ReactNode
 	className?: string
 	onChange: () => void
+	value: boolean
 	isError: boolean
 }
 
 const CustomCheckbox = (props: PropsType & HTMLAttributes<HTMLInputElement>) => {
-	const { children, className, onChange, isError } = props
+	const { children, className, isError, value } = props
 
 	return (
-		<Checkbox className={clsx(s.checkbox, isError && s.error, className)} onChange={onChange}>
+		<Checkbox className={clsx(s.checkbox, isError && s.error, className)} checked={value} {...props} >
 			{children}
 		</Checkbox>
 	)

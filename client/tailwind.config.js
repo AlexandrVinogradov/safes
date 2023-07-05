@@ -29,6 +29,8 @@ module.exports = {
         'dimText': '#8F8F8F',
         'dimmerText': '#DDDDDD',
         'dimmerText2': '#ABB2BF',
+
+        'disabled': '#9FD1E8'
       },
     },
   },
