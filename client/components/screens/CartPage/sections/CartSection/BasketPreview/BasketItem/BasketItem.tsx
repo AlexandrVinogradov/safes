@@ -8,10 +8,11 @@ import { s } from './styles'
 
 type PropsType = {
 	item: BasketItemType
+	isEditMode?: boolean
 }
 
 export const BasketItem = (props: PropsType) => {
-	const { item } = props
+	const { item, isEditMode = true } = props
 	const { name, code } = item
 
 	const changeItemCount = useBasketStore((state) => state.changeItemCount)
@@ -28,17 +29,24 @@ export const BasketItem = (props: PropsType) => {
 			<div className={s.image} />
 			<div className={s.nameCell}>
 				<p className={s.name}>{name}</p>
-				<p className={s.code}>Код товара: {code}</p>
+				{isEditMode && <p className={s.code}>Код товара: {code}</p>}
 			</div>
 
 			<div className={s.priceCell}>{item.price.toLocaleString('ru-RU')} ₽</div>
 
 			<div className={s.countCell}>
-				<ClickInput value={item.count} onChange={handleChangeClickInput} />
-				<button onClick={handleClickDeleteSelected} className={s.deleteButton}>
-					<CrossIcon width="w-[14px]" />
-					Удалить
-				</button>
+				{isEditMode ? (
+					<ClickInput value={item.count} onChange={handleChangeClickInput} />
+				) : (
+					<p className={s.countItem}>{item.count}</p>
+				)}
+
+				{isEditMode && (
+					<button onClick={handleClickDeleteSelected} className={s.deleteButton}>
+						<CrossIcon width="w-[14px]" />
+						Удалить
+					</button>
+				)}
 			</div>
 
 			{item.isDeleted && (

@@ -10,6 +10,8 @@ import { s } from './styles'
 import { PersonalForm } from './PersonalForm/PersonalForm'
 import { StateMachineProvider, createStore } from 'little-state-machine'
 import { DeliveryForm } from './DeliveryForm/DeliveryForm'
+import { ConfirmTab } from './ConfirmTab/ConfirmTab'
+import Link from 'next/link'
 
 export type SelectedTabType = 'personal' | 'delivery' | 'confirm'
 
@@ -35,7 +37,7 @@ const CheckoutPage = () => {
 
 	const breadCrumbs = [
 		{ name: 'Главная', isActive: false, to: '/' },
-		{ name: 'Корзина', isActive: false, to: '/' },
+		{ name: 'Корзина', isActive: false, to: '/cart' },
 		{ name: 'Оформление заказа', isActive: true },
 	]
 
@@ -49,10 +51,10 @@ const CheckoutPage = () => {
 			<Main breadCrumbs={breadCrumbs}>
 				<section className={clsx(container, s.section)}>
 					<h1 className={s.title}>Оформление заказа</h1>
-					<button onClick={() => router.back()} className={s.backButton}>
+					<Link href="/cart" onClick={() => router.back()} className={s.backButton}>
 						<LongArrowLeftIcon />
 						Назад
-					</button>
+					</Link>
 
 					<div className={s.tabButtons}>
 						<Button
@@ -84,6 +86,7 @@ const CheckoutPage = () => {
 							<PersonalForm setSelectedTab={setSelectedTab} setIsDisabledConfirmTab={setIsDisabledConfirmTab} />
 						)}
 						{selectedTab === 'delivery' && <DeliveryForm setSelectedTab={setSelectedTab} />}
+						{selectedTab === 'confirm' && <ConfirmTab />}
 					</StateMachineProvider>
 				</section>
 			</Main>

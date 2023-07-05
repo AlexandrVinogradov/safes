@@ -41,7 +41,7 @@ export const BasketPopup = (props: PropsType) => {
 							<Button onClick={handleClickRedirect} href="/cart" className={clsx([s.button, s.goToCartButton])}>
 								Перейти в корзину
 							</Button>
-							<Button onClick={handleClickRedirect} styleType="filled" href="/cart" className={s.button}>
+							<Button onClick={handleClickRedirect} styleType="filled" href="/checkout" className={s.button}>
 								Оформить заказ
 							</Button>
 						</>

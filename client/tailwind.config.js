@@ -30,6 +30,8 @@ module.exports = {
         'dimmerText': '#DDDDDD',
         'dimmerText2': '#ABB2BF',
 
+        'lightBlue': '#F5FBFF',
+
         'disabled': '#9FD1E8'
       },
     },

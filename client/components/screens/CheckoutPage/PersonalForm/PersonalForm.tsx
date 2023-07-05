@@ -21,8 +21,6 @@ type FormType = {
 	isAgree: boolean
 }
 
-type RadioValueType = 'Я физическое лицо' | 'Я юридическое лицо'
-
 type PropsType = {
 	setSelectedTab: (selectedTab: SelectedTabType) => void
 	setIsDisabledConfirmTab: (isDisabledConfirmTab: boolean) => void
@@ -86,15 +84,7 @@ export const PersonalForm = (props: PropsType) => {
 		if (state.fileList) setFileList(state.fileList)
 	}, [])
 
-	const onSubmit = (data: FormType) => {
-		actions.updateName({
-			person: radioData.find((el) => el.value === radioValue),
-			fileList,
-			...data,
-		})
-
-		setSelectedTab('delivery')
-	}
+	const onSubmit = () => setSelectedTab('delivery')
 
 	return (
 		<form className={s.form} onSubmit={handleSubmit(onSubmit)}>
@@ -146,7 +136,7 @@ export const PersonalForm = (props: PropsType) => {
 				)}
 			/>
 
-			{radioValue === 1 && <CustomUpload className={s.pb} fileList={fileList} setFileList={setFileList} />}
+			{radioValue === 2 && <CustomUpload className={s.pb} fileList={fileList} setFileList={setFileList} />}
 
 			<Controller
 				control={control}

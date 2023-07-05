@@ -3,7 +3,12 @@ import { Button } from '@/components/Button/Button'
 import { s } from './styles'
 import clsx from 'clsx'
 
-export const BasketSummary = () => {
+type PropsType = {
+	isEditMode?: boolean
+}
+
+export const BasketSummary = (props: PropsType) => {
+	const { isEditMode = true } = props
 	const basketItems = useBasketStore((state) => state.basketItems)
 
 	const count = basketItems.reduce((acc, item) => {
@@ -33,11 +38,16 @@ export const BasketSummary = () => {
 			</div>
 
 			<div className={clsx(s.summaryItem, s.boldSummaryItem)}>
-				<p>ИТОГО:</p>
+				{isEditMode ? <p>ИТОГО:</p> : <p>Всего к оплате:</p>}
+
 				<p>{summary.toLocaleString('ru-RU')} ₽</p>
 			</div>
 
-			<Button className={s.button}>Оформить заказ</Button>
+			{isEditMode && (
+				<Button href="/checkout" className={s.button}>
+					Оформить заказ
+				</Button>
+			)}
 		</div>
 	)
 }
