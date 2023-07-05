@@ -1,15 +1,20 @@
 import { RadioGroup } from '@/components/RadioGroup/RadioGroup'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { SelectedTabType } from '../CheckoutPage'
 import { Button } from '@/components/Button/Button'
 import { LongArrowRightIcon } from '@/icons/LongArrowRightIcon'
 import { s } from './styles'
+import { useStateMachine } from 'little-state-machine'
+import { updatePersonalForm } from '../PersonalForm/PersonalForm'
 
 type PropsType = {
 	setSelectedTab: (selectedTab: SelectedTabType) => void
 }
+
 export const DeliveryForm = (props: PropsType) => {
 	const { setSelectedTab } = props
+
+	const { actions, state }: any = useStateMachine({ updatePersonalForm })
 
 	const [radioValue, setRadioValue] = useState(1)
 	const radioData = [
@@ -77,6 +82,17 @@ export const DeliveryForm = (props: PropsType) => {
 			),
 		},
 	]
+
+	useEffect(() => {
+		actions.updatePersonalForm({
+			...state,
+			delivery: radioData.find((el) => el.value === radioValue)?.value || '',
+		})
+	}, [radioValue])
+
+	useEffect(() => {
+		if (state.delivery) setRadioValue(state.delivery)
+	}, [])
 
 	const onSubmit = () => setSelectedTab('confirm')
 

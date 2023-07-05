@@ -28,10 +28,8 @@ type PropsType = {
 	setIsDisabledConfirmTab: (isDisabledConfirmTab: boolean) => void
 }
 
-function updateName(state: any, payload: any) {
-	return {
-		...payload,
-	}
+export const updatePersonalForm = (state: any, payload: any) => {
+	return { ...payload }
 }
 
 export const PersonalForm = (props: PropsType) => {
@@ -51,7 +49,7 @@ export const PersonalForm = (props: PropsType) => {
 		{ value: 2, name: 'Я юридическое лицо' },
 	]
 	const [fileList, setFileList] = useState<UploadFile<any>[]>([])
-	const { actions, state }: any = useStateMachine({ updateName })
+	const { actions, state }: any = useStateMachine({ updatePersonalForm })
 
 	const nameWatch = watch('name')
 	const emailWatch = watch('email')
@@ -61,7 +59,8 @@ export const PersonalForm = (props: PropsType) => {
 	const isAgreeWatch = watch('isAgree')
 
 	useEffect(() => {
-		actions.updateName({
+		actions.updatePersonalForm({
+			...state,
 			person: radioValue,
 			fileList,
 			...getValues(),
