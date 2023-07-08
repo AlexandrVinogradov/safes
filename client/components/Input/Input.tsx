@@ -17,7 +17,7 @@ export const Input = (props: PropsType & InputHTMLAttributes<HTMLInputElement>) 
 	const { type, styleType = 'primary', className, isError, inputRef, label, isRequired, ...otherProps } = props
 
 	return (
-		<label className={s.label}>
+		<label className={clsx(label && s.label, className)}>
 			{label && (
 				<span className={s.InputName}>
 					{label} {isRequired && <span className={s.required}>*</span>}
@@ -25,12 +25,7 @@ export const Input = (props: PropsType & InputHTMLAttributes<HTMLInputElement>) 
 			)}
 
 			<input
-				className={clsx(
-					styleType === 'primary' && s.primaryInput,
-					styleType === 'form' && s.formInput,
-					isError && s.error,
-					className,
-				)}
+				className={clsx(styleType === 'primary' && s.primaryInput, styleType === 'form' && s.formInput, isError && s.error)}
 				type={type || 'text'}
 				ref={inputRef}
 				{...otherProps}
