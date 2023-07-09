@@ -1,6 +1,5 @@
 import { Button } from '@/components/Button/Button'
 import { CatalogMenuIcon } from '@/icons/CatalogMenuIcon'
-import { CrossIcon } from '@/icons/CrossIcon'
 import clsx from 'clsx'
 import { useState } from 'react'
 import { CatalogMenu } from './CatalogMenu/CatalogMenu'
@@ -14,18 +13,23 @@ export const CatalogPopover = () => {
 	const handleMouseOut = () => setIsHovering(false)
 
 	return (
-		<div className={s.catalogButtonPopover}>
+		<div>
 			<Button
 				onMouseOver={handleMouseOver}
 				onMouseOut={handleMouseOut}
 				styleType="filled"
 				className={clsx(isHovering && s.hoveredCatalogButton, s.catalogButton)}
 			>
-				{!isHovering ? <CatalogMenuIcon className={s.catalogButtonIcon} /> : <CrossIcon className={s.catalogButtonIcon} />}
+				<CatalogMenuIcon className={s.catalogButtonIcon} />
 				Каталог
 			</Button>
 
-			<CatalogMenu isHovering={isHovering} handleMouseOver={handleMouseOver} handleMouseOut={handleMouseOut} />
+			<CatalogMenu
+				isHovering={isHovering}
+				setIsHovering={setIsHovering}
+				handleMouseOver={handleMouseOver}
+				handleMouseOut={handleMouseOut}
+			/>
 		</div>
 	)
 }

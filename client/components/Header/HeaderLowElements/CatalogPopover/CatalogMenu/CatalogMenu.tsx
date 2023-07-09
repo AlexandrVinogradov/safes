@@ -1,18 +1,22 @@
-import { Button } from '@/components/Button/Button'
-import { container } from '@/styles/container'
-import Link from 'next/link'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { s } from './styles'
 import { useCategoriesStore } from '@/store/useCategoriesStore'
+import { MenuItem } from './MenuItem/MenuItem'
+import { MenuChildLvl } from './MenuChildLLvl/MenuChildLLvl'
+import { CategoryType } from '@/models/ICategoriesStore'
 
 type PropsType = {
 	isHovering: boolean
+	setIsHovering: (isHovering: boolean) => void
 	handleMouseOver: () => void
 	handleMouseOut: () => void
 }
 
 export const CatalogMenu = (props: PropsType) => {
-	const { isHovering, handleMouseOver, handleMouseOut } = props
+	const { isHovering, setIsHovering, handleMouseOver, handleMouseOut } = props
+
+	// TODO: add preloader and fetch after isHovering true
+	if (!isHovering) return null
 
 	const categories = useCategoriesStore((state) => state.categories)
 	const fetchCategories = useCategoriesStore((state) => state.fetchCategories)
@@ -28,44 +32,58 @@ export const CatalogMenu = (props: PropsType) => {
 		{ id: 'caches', name: 'Тайники' },
 		{ id: 'forWatch', name: 'Для часов' },
 		{ id: 'forLaptop', name: 'Для ноутбуков' },
-		{ id: 'policeCabinets', name: 'Полицейские шкафы' },
-		{ id: 'forHouse2', name: 'Сейфы для дома' },
 	]
+
+	const [selectedLvl1, setSelectedLvl1] = useState<CategoryType | null>(null)
+	const [selectedLvl2, setSelectedLvl2] = useState<CategoryType | null>(null)
+	const [isShowSecondLvl, setIsShowSecondLvl] = useState(false)
+	const [isShowThirdLvl, setIsShowThirdLvl] = useState(false)
+	const handleSetIsShowThirdLvl = (isShow: boolean) => {
+		setIsShowSecondLvl(isShow)
+		setIsShowThirdLvl(isShow)
+	}
+
 	return (
-		<>
-			{isHovering && (
-				<div className={s.menu} onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>
-					<div className={s.space} />
-					<div className={container}>
-						<div className={s.tags}>
-							{tags.map((tag) => (
-								<button key={tag.id} className={s.tag}>
-									{tag.name}
-								</button>
-							))}
-						</div>
+		<div className={s.menu} onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>
+			<div className={s.lvl1}>
+				<ul className={s.tags}>
+					{tags.map((tag) => (
+						<li key={tag.id} className={s.tag}>
+							<button className={s.tagButton}>{tag.name}</button>
+						</li>
+					))}
+				</ul>
 
-						<div className={s.content}>
-							{categories?.map((el) => (
-								<div key={el['alias_ru-RU']}>
-									<Link className="text-branded" href={el['alias_ru-RU']}>
-										{el.name}
-									</Link>
-									{el.child?.map((ell: any) => (
-										<div key={ell['alias_ru-RU']}>
-											<Link href={ell['alias_ru-RU']}>{ell['name_ru-RU']}</Link>
-										</div>
-									))}
-								</div>
-							))}
-						</div>
+				<ul>
+					{categories?.map((category) => (
+						<MenuItem
+							isSelected={category.name === selectedLvl1?.name}
+							setIsShow={setIsShowSecondLvl}
+							setSelectedLvl1={setSelectedLvl1}
+							category={category}
+							setIsHovering={setIsHovering}
+						/>
+					))}
+				</ul>
+			</div>
 
-						<Button className={s.toCatalogButton} href="/catalog">
-							В каталог
-						</Button>
-					</div>
-				</div>
-			)}
-		</>
+			<MenuChildLvl
+				selectedLvl1={selectedLvl1}
+				selectedLvl2={selectedLvl2}
+				setSelectedLvl1={setSelectedLvl2}
+				zIndex="z-20"
+				isShow={isShowSecondLvl}
+				setIsShow={setIsShowSecondLvl}
+				setIsShowChild={setIsShowThirdLvl}
+				setIsHovering={setIsHovering}
+			/>
+			<MenuChildLvl
+				selectedLvl1={selectedLvl2}
+				zIndex="z-10"
+				isShow={isShowThirdLvl}
+				setIsShow={handleSetIsShowThirdLvl}
+				setIsHovering={setIsHovering}
+			/>
+		</div>
 	)
 }

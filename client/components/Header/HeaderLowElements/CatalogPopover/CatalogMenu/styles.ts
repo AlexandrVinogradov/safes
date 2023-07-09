@@ -1,8 +1,8 @@
 export const s = {
-	menu: /*tw*/ 'absolute z-10 py-5 top-[54px] left-0 bg-white text-dark w-[calc(100vw-40px)] rounded-[3px] border border-[#C7EAFF] shadow-[0px_4px_4px_rgba(0,0,0,0.25)]',
-	space: /*tw*/ 'absolute -top-[13px] bg-transparent h-[12px] w-[160px]',
-	tags: /*tw*/ 'pb-5 flex justify-between items-center',
-	tag: /*tw*/ 'text-branded border border-branded text-sm leading-[16px] py-[6.5px] px-[29px] rounded-[42px]',
-	content: /*tw*/ 'grid grid-cols-5 gap-y-5 gap-x-[80px] justify-items-stretch mb-[70px] max-h-[480px] overflow-y-auto',
-	toCatalogButton: /*tw*/ 'mx-auto relative left-1/2 -translate-x-1/2 ',
+	menu: /*tw*/ 'fixed z-10 top-0 left-0 flex items-end',
+	lvl1: /*tw*/ 'z-30 overflow-y-auto h-screen py-[12px] bg-white w-[350px] shadow-[10px_0px_20px_0px_rgba(0,0,0,0.25)]',
+	tags: /*tw*/ 'pb-2.5 px-5 flex flex-wrap items-center',
+	tag: /*tw*/ `text-white text-[12px] bg-branded text-sm odd:mr-4 mb-5 [&:nth-last-child(-n+2)]:mb-0 leading-[16px] rounded-[42px] duration-300
+		hover:bg-[#477D9D] hover:shadow-[0px_4px_5px_0px_#25415240]`,
+	tagButton: /*tw*/ 'py-2 px-[15px]',
 }
