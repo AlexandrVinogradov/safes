@@ -39,6 +39,15 @@ export type ServerProductCardType = {
 	}
 }
 
+export type ProductsType = {
+	list: ServerProductCardType[]
+	pagination: {
+		currentPage: number
+		totalPages: number
+		totalRows: number
+	}
+}
+
 export type FilterDataType = {
 	price: {
 		selectedDiapason: [number, number]

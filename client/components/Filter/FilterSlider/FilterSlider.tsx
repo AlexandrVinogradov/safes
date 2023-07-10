@@ -44,7 +44,7 @@ export const FilterSlider = (props: PropsType) => {
 	}
 
 	const onAfterChangeSlider = (value: [number, number]) => {
-		setQueryParams({ [paramId]: `${value[0]}-${value[1]}` })
+		setQueryParams({ [paramId]: `${value[0]}-${value[1]}`, page: '1' })
 	}
 
 	return (

@@ -6,15 +6,13 @@ import { isObjectEmpty } from '@/helpers/isObjectEmpty'
 import { useRouter } from 'next/router'
 import { FilterDataType } from '@/models/IProductStore'
 import { useQueryParams } from '@/hooks/useQueryParams'
-import { getApiProductURL } from '@/helpers/getApiProductURL'
 
-export const Filter = ({ category }: any) => {
+export const Filter = () => {
 	const { query } = useRouter()
 	const filterData = useProductStore((state) => state.filterData)
 	const setFilterData = useProductStore((state) => state.setFilterData)
 	const initFilterData = useProductStore((state) => state.initFilterData)
 	const resetFilter = useProductStore((state) => state.resetFilter)
-	const fetchProducts = useProductStore((state) => state.fetchProducts)
 
 	const { resetQueryParams } = useQueryParams()
 
@@ -53,10 +51,6 @@ export const Filter = ({ category }: any) => {
 	const handleResetFilter = () => {
 		resetFilter()
 		resetQueryParams()
-	}
-
-	const fetch = () => {
-		fetchProducts(getApiProductURL(query, category))
 	}
 
 	return (

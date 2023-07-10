@@ -1,17 +1,22 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useRef } from 'react'
 import { useProductStore } from '@/store/useProductStore'
 import { container } from '@/styles/container'
 import { Filter } from '../../../../Filter/Filter'
 import { CatalogProducts } from './CatalogProducts/CatalogProducts'
-import { ServerProductCardType } from '@/models/IProductStore'
-import { s } from './styles'
-import clsx from 'clsx'
+import { ProductsType } from '@/models/IProductStore'
 import { getApiProductURL } from '../../../../../helpers/getApiProductURL'
 import { useRouter } from 'next/router'
 import { CategoryType } from '@/models/ICategoriesStore'
+import { ParsedUrlQuery } from 'querystring'
+import { PaginationPropsType } from '@/components/Pagination/Pagination'
+import dynamic from 'next/dynamic'
+import { s } from './styles'
+import clsx from 'clsx'
+
+const DynamicCustomPagination = dynamic<PaginationPropsType>(() => import('@/components/Pagination/Pagination'), { ssr: false })
 
 type PropsType = {
-	products: ServerProductCardType[]
+	products: ProductsType
 	category?: CategoryType
 }
 
@@ -19,44 +24,27 @@ export const CatalogSection = (props: PropsType) => {
 	const { products, category } = props
 	const { query } = useRouter()
 
-	const [isFirstRender, setIsFirstRender] = useState(true)
-	const filterData = useProductStore((state) => state.filterData)
-	const clientProducts = useProductStore((state) => state.products)
 	const fetchProducts = useProductStore((state) => state.fetchProducts)
 
+	const prevQueryRef = useRef<ParsedUrlQuery>(query)
 	useEffect(() => {
-		setIsFirstRender(false)
-	}, [])
+		if (prevQueryRef.current !== query) {
+			console.log('fetch =>')
 
-	// console.log(query)
-	// useEffect(() => {
-	// 	if (!isFirstRender) {
-	// 		// console.log(getApiProductURL(query))
-
-	// 		fetchProducts(getApiProductURL(query))
-	// 	}
-	// }, [query])
-
-	const memoizedFilterData = useMemo(() => filterData, [filterData])
-	useEffect(() => {
-		// console.log(filterData)
-
-		if (!isFirstRender) {
-			// TODO: call 2 times why?
-			console.log('change filter data')
 			fetchProducts(getApiProductURL(query, category))
+			prevQueryRef.current = query
 		}
-		// }, [JSON.stringify(filterData)])
-	}, [filterData.price.selectedDiapason])
-	// }, [memoizedFilterData])
+	}, [query])
 
 	return (
 		<section className={clsx(s.section, container)}>
 			<div className={s.wrapper}>
-				<Filter category={category} />
+				<Filter />
 
-				{/* FIXME: cant use .length cos if back return [] - will not rerender */}
-				<CatalogProducts products={clientProducts.length ? clientProducts : products} />
+				<div className={s.productsWithPagination}>
+					<CatalogProducts products={products.list} />
+					<DynamicCustomPagination className={s.pagination} total={products.pagination.totalRows} />
+				</div>
 			</div>
 		</section>
 	)
