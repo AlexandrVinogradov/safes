@@ -21,7 +21,7 @@ export const ProductsSection: FC<PropsType> = ({ products }) => {
 					<ProductCard key={card.product_id} card={card} className={s.productCard} />
 				))}
 			</div>
-			<Button href="/catalog" type="filled">
+			<Button className={s.button} href="/catalog" type="filled">
 				В каталог
 			</Button>
 		</section>

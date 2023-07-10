@@ -9,7 +9,7 @@ export const CategoriesSliderContainer = () => {
 		{
 			id: '1',
 			img: {
-				src: '/categoriesImg1.png',
+				src: '/CategoryImage1.jpg',
 				alt: 'сейфы для дома',
 			},
 			title: 'Для дома',
@@ -17,7 +17,7 @@ export const CategoriesSliderContainer = () => {
 		{
 			id: '2',
 			img: {
-				src: '/categoriesImg2.png',
+				src: '/CategoryImage2.jpg',
 				alt: 'сейфы для офиса',
 			},
 			title: 'Для офиса',
@@ -25,7 +25,7 @@ export const CategoriesSliderContainer = () => {
 		{
 			id: '3',
 			img: {
-				src: '/categoriesImg1.png',
+				src: '/CategoryImage1.jpg',
 				alt: 'сейфы для дома',
 			},
 			title: 'Для дома',

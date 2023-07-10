@@ -11,8 +11,7 @@ export const CategoriesSlide = (props: PropsType) => {
 
 	return (
 		<div className={s.slideWrapper}>
-			<h3 className={s.title}>{slide.title}</h3>
-			<Image className={s.img} alt={slide.img.alt} src={slide.img.src} width={330} height={330} priority />
+			<Image className={s.img} alt={slide.img.alt} src={slide.img.src} width={630} height={330} priority  quality={100}/>
 		</div>
 	)
 }
