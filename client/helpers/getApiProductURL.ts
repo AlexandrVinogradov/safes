@@ -9,7 +9,16 @@ export const getApiProductURL = (searchParams: SearchParamsType | undefined, cat
 	let selectedCategoryId = null
 	if (category) selectedCategoryId = getSelectCategory(category, String(id))?.category_id
 
-	const queryParameters = ['price', 'weight', 'page', 'pageSize']
+	const queryParameters = [
+		// filter
+		'price',
+		'weight',
+		// pagination
+		'page',
+		'pageSize',
+		// sort
+		'sort',
+	]
 
 	let url = `${process.env.API_URL_PRODUCTS}?`
 	if (selectedCategoryId) {

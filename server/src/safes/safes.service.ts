@@ -1,6 +1,6 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common'
 import { InjectModel } from '@nestjs/sequelize'
-import { Op } from 'sequelize'
+import { Op, Order } from 'sequelize'
 import { Category } from 'src/categories/categories.model'
 import { Manufacturer } from 'src/manufacturers/manufacturers.model'
 import { ProductImage } from 'src/productImages/productImages.model'
@@ -47,8 +47,25 @@ export class SafesService {
 		return safe
 	}
 
-	async getAllSafes(queryParams: { price?: string; weight?: string; categoryId?: string; page?: number; pageSize?: number }) {
+	async getAllSafes(queryParams: {
+		price?: string
+		weight?: string
+		categoryId?: string
+		page?: number
+		pageSize?: number
+		sort?: string
+	}) {
 		let where = {}
+
+		// Sort
+		let order: Order = [['product_id', 'ASC']]
+		if (queryParams.sort) {
+			const sortArr = queryParams.sort.split('*')
+			const value = sortArr[0]
+			const orderType = sortArr[1]
+
+			order = [[value, orderType]]
+		}
 
 		let productsIdByCategoryId: { product_id: number }[] = null
 		if (queryParams.categoryId) {
@@ -134,9 +151,8 @@ export class SafesService {
 				},
 			],
 			where,
-			order: [['product_id', 'ASC']],
+			order,
 		})
-
 
 		return {
 			pagination: {

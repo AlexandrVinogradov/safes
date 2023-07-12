@@ -9,6 +9,7 @@ import { useRouter } from 'next/router'
 import { CategoryType } from '@/models/ICategoriesStore'
 import { ParsedUrlQuery } from 'querystring'
 import { PaginationPropsType } from '@/components/Pagination/Pagination'
+import Sort from '@/components/Sort/Sort'
 import dynamic from 'next/dynamic'
 import { s } from './styles'
 import clsx from 'clsx'
@@ -36,8 +37,15 @@ export const CatalogSection = (props: PropsType) => {
 		}
 	}, [query])
 
+	const sortData = [
+		{ name: 'По порядку', value: 'product_id' },
+		{ name: 'По цене', value: 'product_price' },
+		{ name: 'По названию', value: 'name_ru-RU' },
+	]
+
 	return (
 		<section className={clsx(s.section, container)}>
+			<Sort className={s.sort} data={sortData} />
 			<div className={s.wrapper}>
 				<Filter />
 

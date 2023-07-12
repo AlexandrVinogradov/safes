@@ -10,7 +10,7 @@ export function ArrowDownIcon(props: PropsTypes) {
 
 	return (
 		<Icon className={className} width={width} stroke="none" viewBox="0 0 11 9">
-			<path d="M0.239136 0H10.7609L5.5 9" fill="white" />
+			<path d="M0.239136 0H10.7609L5.5 9" fill="currentColor" />
 		</Icon>
 	)
 }

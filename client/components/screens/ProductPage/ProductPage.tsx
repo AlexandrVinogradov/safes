@@ -1,4 +1,4 @@
-import { ProductsType, ServerProductCardType } from '@/models/IProductStore'
+import { ServerProductCardType } from '@/models/IProductStore'
 import { ProductNameSection } from './sections/ProductNameSection/ProductNameSection'
 import { DescriptionSection } from './sections/DescriptionSection/DescriptionSection'
 import { Layout } from '@/components/layout/layout'
@@ -8,12 +8,12 @@ import { s } from './styles'
 
 type PropsType = {
 	selectedProduct: ServerProductCardType
-	relativeProducts: ProductsType
+	relativeProductsList: ServerProductCardType[]
 }
 
 // FIXME: finish this page
 export const ProductPage = (props: PropsType) => {
-	const { selectedProduct, relativeProducts } = props
+	const { selectedProduct, relativeProductsList } = props
 
 	const breadCrumbs = [
 		{ name: 'Главная', isActive: false, to: '/' },
@@ -35,7 +35,7 @@ export const ProductPage = (props: PropsType) => {
 
 				<DescriptionSection description={selectedProduct?.['description_ru-RU']} />
 
-				<ProductSliderSection className={s.productSliderSection} title="Похожие товары" products={relativeProducts.list} />
+				<ProductSliderSection className={s.productSliderSection} title="Похожие товары" productsList={relativeProductsList} />
 			</Main>
 		</Layout>
 	)

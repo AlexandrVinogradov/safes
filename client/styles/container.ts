@@ -1,1 +1,1 @@
-export const container = /*tw*/ 'w-[1440px] mx-auto'
+export const container = /*tw*/ 'w-[1400px] mx-auto'
