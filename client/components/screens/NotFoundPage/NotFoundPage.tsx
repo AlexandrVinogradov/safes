@@ -6,11 +6,11 @@ import { ServerProductCardType } from '@/models/IProductStore'
 import { s } from './styles'
 
 type PropsType = {
-	products: ServerProductCardType[]
+	productsList: ServerProductCardType[]
 }
 
 const NotFoundPage = (props: PropsType) => {
-	const { products } = props
+	const { productsList } = props
 
 	const breadCrumbs = [
 		{ name: 'Главная', isActive: false, to: '/' },
@@ -21,7 +21,7 @@ const NotFoundPage = (props: PropsType) => {
 		<Layout title="notFound">
 			<Main breadCrumbs={breadCrumbs}>
 				<NotFoundContentSection />
-				<ProductSliderSection className={s.productSliderSection} title="Вы недавно смотрели" products={products} />
+				<ProductSliderSection className={s.productSliderSection} title="Вы недавно смотрели" productsList={productsList} />
 			</Main>
 		</Layout>
 	)

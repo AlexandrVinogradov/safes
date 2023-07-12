@@ -1,5 +1,6 @@
 export const s = {
-    section: /*tw*/ 'py-[120px] ',
-    title: /*tw*/ '-mb-[44px]'
-    
+	section: /*tw*/ 'py-[70px] flex flex-col',
+	title: /*tw*/ '-mb-[44px]',
+	productSliderSection: /*tw*/ 'pb-[30px]',
+	button: /*tw*/ 'self-center',
 }

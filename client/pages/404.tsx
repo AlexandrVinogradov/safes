@@ -1,23 +1,24 @@
 import NotFoundPage from '@/components/screens/NotFoundPage/NotFoundPage'
 import { getApiProductURL } from '@/helpers/getApiProductURL'
-import { ServerProductCardType } from '@/models/IProductStore'
+import { ProductsType, ServerProductCardType } from '@/models/IProductStore'
 import { useProductStore } from '@/store/useProductStore'
 import { GetServerSideProps, NextPage } from 'next/types'
 
 type PropsType = {
-	products: ServerProductCardType[]
+	productsList: ServerProductCardType[]
 }
 
-const NotFound: NextPage<PropsType> = ({ products }) => {
-	return <NotFoundPage products={products} />
+const NotFound: NextPage<PropsType> = ({ productsList }) => {
+	return <NotFoundPage productsList={productsList} />
 }
 
 export const getServerSideProps: GetServerSideProps<PropsType> = async (context) => {
 	const { fetchProducts } = useProductStore.getState()
-	const products = (await fetchProducts(getApiProductURL(context.query))) as ServerProductCardType[]
+	const products = (await fetchProducts(getApiProductURL(context.query))) as ProductsType
+	const productsList = products.list
 
 	return {
-		props: { products },
+		props: { productsList },
 	}
 }
 

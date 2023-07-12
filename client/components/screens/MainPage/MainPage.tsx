@@ -12,18 +12,18 @@ import { NextPage } from 'next/types'
 // Brands container
 
 type PropsType = {
-	products: ServerProductCardType[]
+	productsList: ServerProductCardType[]
 }
 
-const MainPage: NextPage<PropsType> = ({ products }) => {
+const MainPage: NextPage<PropsType> = ({ productsList }) => {
 	return (
 		<Layout title="Main">
 			<main>
 				<BannerSection />
 				<CategoriesSliderSection />
-				<ProductsSection products={products} />
+				<ProductsSection productsList={productsList} />
 				<HowToChoose />
-				<NoveltiesSection products={products} />
+				<NoveltiesSection productsList={productsList} />
 				<BrandsSection />
 				<ArticlesSection />
 			</main>

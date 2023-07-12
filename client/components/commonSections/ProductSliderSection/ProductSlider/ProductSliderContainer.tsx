@@ -5,15 +5,15 @@ import { ServerProductCardType } from '@/models/IProductStore'
 import { ProductSlide } from './ProductSlide/ProductSlide'
 
 type PropsType = {
-	products: ServerProductCardType[]
+	productsList: ServerProductCardType[]
 }
 
 export const ProductSliderContainer = (props: PropsType) => {
-	const { products } = props
+	const { productsList } = props
 
 	return (
 		<Slider slidesPerView={4} spaceBetween={20} isSmallArrows isProgress>
-			{products?.map((card) => (
+			{productsList?.map((card) => (
 				<SwiperSlide className={s.swiperSlide} key={card.product_id}>
 					<ProductSlide card={card} />
 				</SwiperSlide>

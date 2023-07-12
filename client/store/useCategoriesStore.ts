@@ -7,7 +7,7 @@ type State = {
 }
 
 type Actions = {
-	fetchCategories: (url: string) => void
+	fetchCategories: (url: string) => Promise<CategoryType[] | CategoryType>
 }
 
 export const useCategoriesStore = create(

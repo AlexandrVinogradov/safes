@@ -1,6 +1,6 @@
 import { immer } from 'zustand/middleware/immer'
 import { create } from 'zustand'
-import { ServerProductCardType, FilterDataType } from '../models/IProductStore'
+import { ServerProductCardType, FilterDataType, ProductsType } from '../models/IProductStore'
 
 type State = {
 	products: ServerProductCardType[]
@@ -10,7 +10,7 @@ type State = {
 }
 
 type Actions = {
-	fetchProducts: (url: string) => Promise<ServerProductCardType[] | ServerProductCardType>
+	fetchProducts: (url: string) => Promise<ProductsType | ServerProductCardType>
 	setFilterData: (paramId: 'price' | 'weight', value: [number, number]) => void
 	initFilterData: (filterData: FilterDataType) => void
 	resetFilter: () => void
@@ -18,12 +18,12 @@ type Actions = {
 
 const initialFilterData: FilterDataType = {
 	price: {
-		selectedDiapason: [0, 1850000],
-		fullDiapason: [0, 1850000],
+		selectedDiapason: [0, 2000000],
+		fullDiapason: [0, 2000000],
 	},
 	weight: {
-		selectedDiapason: [0, 500],
-		fullDiapason: [0, 500],
+		selectedDiapason: [0, 3000],
+		fullDiapason: [0, 3000],
 	},
 }
 
@@ -42,7 +42,7 @@ export const useProductStore = create(
 				if (url.includes('selected?safeAlias=')) {
 					set({ selectedProduct: data })
 				} else {
-					set({ products: data })
+					// set({ products: data })
 				}
 
 				return data
@@ -65,17 +65,17 @@ export const useProductStore = create(
 		resetFilter: () => {
 			set((state) => {
 				// FIXME why cant use initialFilterData?
-				// state.filterData = initialFilterData
-				state.filterData = {
-					price: {
-						selectedDiapason: [0, 1850000],
-						fullDiapason: [0, 1850000],
-					},
-					weight: {
-						selectedDiapason: [0, 500],
-						fullDiapason: [0, 500],
-					},
-				}
+				state.filterData = initialFilterData
+				// state.filterData = {
+				// 	price: {
+				// 		selectedDiapason: [0, 1850000],
+				// 		fullDiapason: [0, 1850000],
+				// 	},
+				// 	weight: {
+				// 		selectedDiapason: [0, 500],
+				// 		fullDiapason: [0, 500],
+				// 	},
+				// }
 			})
 		},
 	})),

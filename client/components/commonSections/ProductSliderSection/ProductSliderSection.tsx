@@ -5,19 +5,19 @@ import { ProductSliderContainer } from './ProductSlider/ProductSliderContainer'
 import clsx from 'clsx'
 
 type PropsType = {
-	products: ServerProductCardType[]
+	productsList: ServerProductCardType[]
 	title: string
 	className?: string
 }
 
 export const ProductSliderSection = (props: PropsType) => {
-	const { products, title, className } = props
+	const { productsList, title, className } = props
 
 	return (
 		<section className={clsx(s.section, className)}>
 			<div className={container}>
 				<h2 className={s.title}>{title}</h2>
-				<ProductSliderContainer products={products} />
+				<ProductSliderContainer productsList={productsList} />
 			</div>
 		</section>
 	)

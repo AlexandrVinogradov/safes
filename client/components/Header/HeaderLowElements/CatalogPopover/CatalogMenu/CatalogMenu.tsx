@@ -22,6 +22,7 @@ export const CatalogMenu = (props: PropsType) => {
 	const fetchCategories = useCategoriesStore((state) => state.fetchCategories)
 
 	useEffect(() => {
+		if (categories.length) return
 		fetchCategories(process.env.API_URL_CATEGORIES || '')
 	}, [])
 

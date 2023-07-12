@@ -8,16 +8,16 @@ import { FC } from 'react'
 import { ServerProductCardType } from '@/models/IProductStore'
 
 type PropsType = {
-	products: ServerProductCardType[]
+	productsList: ServerProductCardType[]
 }
 
-export const ProductsSection: FC<PropsType> = ({ products }) => {
+export const ProductsSection: FC<PropsType> = ({ productsList }) => {
 	return (
 		<section className={clsx(s.section, container)}>
 			<ProductsMenu />
 
 			<div className={s.productsWrapper}>
-				{products?.map((card) => (
+				{productsList?.map((card) => (
 					<ProductCard key={card.product_id} card={card} className={s.productCard} />
 				))}
 			</div>

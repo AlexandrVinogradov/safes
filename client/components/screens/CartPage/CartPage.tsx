@@ -8,7 +8,7 @@ import { useBasketStore } from '@/store/useBasketStore'
 import { CartSection } from './sections/CartSection/CartSection'
 
 type PropsType = {
-	products: ServerProductCardType[]
+	productsList: ServerProductCardType[]
 }
 
 // TODO:
@@ -19,7 +19,7 @@ type PropsType = {
 // - isDeleted - remove from popover
 
 const СartPage = (props: PropsType) => {
-	const { products } = props
+	const { productsList } = props
 
 	const breadCrumbs = [
 		{ name: 'Главная', isActive: false, to: '/' },
@@ -34,12 +34,12 @@ const СartPage = (props: PropsType) => {
 				{basketItems.length === 0 ? (
 					<>
 						<CartEmptySection />
-						<ProductSliderSection className={s.productSliderSection} title="Вы недавно смотрели" products={products} />
+						<ProductSliderSection className={s.productSliderSection} title="Вы недавно смотрели" productsList={productsList} />
 					</>
 				) : (
 					<>
 						<CartSection />
-						<ProductSliderSection className={s.productSliderSection} title="Похожие товары" products={products} />
+						<ProductSliderSection className={s.productSliderSection} title="Похожие товары" productsList={productsList} />
 					</>
 				)}
 			</Main>

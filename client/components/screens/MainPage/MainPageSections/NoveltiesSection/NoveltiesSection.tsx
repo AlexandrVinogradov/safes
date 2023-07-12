@@ -1,20 +1,22 @@
-import { container } from '@/styles/container'
-import { s } from './styles'
-import { ServerProductCardType } from '@/models/IProductStore'
 import { NextPage } from 'next/types'
-import { NoveltiesSliderContainer } from './NoveltiesSlider/NoveltiesSliderContainer'
+import { container } from '@/styles/container'
+import { ServerProductCardType } from '@/models/IProductStore'
+import { ProductSliderSection } from '@/components/commonSections/ProductSliderSection/ProductSliderSection'
+import { Button } from '@/components/Button/Button'
+import { s } from './styles'
+import clsx from 'clsx'
 
 type PropsType = {
-	products: ServerProductCardType[]
+	productsList: ServerProductCardType[]
 }
 
-export const NoveltiesSection: NextPage<PropsType> = ({ products }) => {
+export const NoveltiesSection: NextPage<PropsType> = ({ productsList }) => {
 	return (
-		<section className={s.section}>
-			<div className={container}>
-				<h2 className={s.title}>Новинки</h2>
-				<NoveltiesSliderContainer products={products} />
-			</div>
+		<section className={clsx(container, s.section)}>
+			<ProductSliderSection className={s.productSliderSection} title="Новинки" productsList={productsList} />
+			<Button href="catalog" className={s.button}>
+				В каталог
+			</Button>
 		</section>
 	)
 }

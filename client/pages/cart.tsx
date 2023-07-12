@@ -1,23 +1,24 @@
 import { GetServerSideProps, NextPage } from 'next'
 import CartPage from '@/components/screens/CartPage/CartPage'
-import { ServerProductCardType } from '@/models/IProductStore'
+import { ProductsType, ServerProductCardType } from '@/models/IProductStore'
 import { getApiProductURL } from '@/helpers/getApiProductURL'
 import { useProductStore } from '@/store/useProductStore'
 
 type PropsType = {
-	products: ServerProductCardType[]
+	productsList: ServerProductCardType[]
 }
 
-const AboutCompany: NextPage<PropsType> = ({ products }) => {
-	return <CartPage products={products} />
+const AboutCompany: NextPage<PropsType> = ({ productsList }) => {
+	return <CartPage productsList={productsList} />
 }
 
 export const getServerSideProps: GetServerSideProps<PropsType> = async (context) => {
 	const { fetchProducts } = useProductStore.getState()
-	const products = (await fetchProducts(getApiProductURL(context.query))) as ServerProductCardType[]
+	const products = (await fetchProducts(getApiProductURL(context.query))) as ProductsType
+	const productsList = products.list
 
 	return {
-		props: { products },
+		props: { productsList },
 	}
 }
 
