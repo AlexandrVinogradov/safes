@@ -13,6 +13,11 @@ export const getApiProductURL = (searchParams: SearchParamsType | undefined, cat
 		// filter
 		'price',
 		'weight',
+		'burglaryResistance',
+		'fireResistance',
+		'keyType',
+		'gunCount',
+		'metalThickness',
 		// pagination
 		'page',
 		'pageSize',

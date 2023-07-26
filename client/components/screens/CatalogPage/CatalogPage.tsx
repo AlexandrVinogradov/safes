@@ -1,7 +1,7 @@
 import { Main } from '@/components/Main/Main'
 import { Layout } from '../../layout/layout'
 import { CatalogSection } from './CatalogPageSections/CatalogSection/CatalogSection'
-import { ProductsType } from '@/models/IProductStore'
+import { ExtraValuesHandbook, ProductsType } from '@/models/IProductStore'
 import { CategoryType } from '@/models/ICategoriesStore'
 import { CategoriesSection } from './CatalogPageSections/CategoriesSection/CategoriesSection'
 import { useRouter } from 'next/router'
@@ -13,10 +13,11 @@ import { TitleSection } from './CatalogPageSections/TitleSection/TitleSection'
 type PropsType = {
 	products: ProductsType
 	category?: CategoryType
+	extraValuesHandbook: ExtraValuesHandbook[]
 }
 
 const CatalogPage = (props: PropsType) => {
-	const { products, category } = props
+	const { products, category, extraValuesHandbook } = props
 
 	let breadCrumbs: BreadCrumbsType = [
 		{ name: 'Главная', isActive: false, to: '/' },
@@ -39,7 +40,7 @@ const CatalogPage = (props: PropsType) => {
 
 				{selectedCategory && <CategoriesSection selectedCategory={selectedCategory} />}
 
-				<CatalogSection products={products} category={category} />
+				<CatalogSection products={products} category={category} extraValuesHandbook={extraValuesHandbook} />
 			</Main>
 		</Layout>
 	)

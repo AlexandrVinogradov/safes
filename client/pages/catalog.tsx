@@ -1,23 +1,25 @@
 import { GetServerSideProps, NextPage } from 'next'
 import CatalogPage from '@/components/screens/CatalogPage/CatalogPage'
-import { ProductsType } from '@/models/IProductStore'
+import { ExtraValuesHandbook, ProductsType } from '@/models/IProductStore'
 import { useProductStore } from '@/store/useProductStore'
 import { getApiProductURL } from '@/helpers/getApiProductURL'
 
 type PropsType = {
 	products: ProductsType
+	extraValuesHandbook: ExtraValuesHandbook[]
 }
 
-const Catalog: NextPage<PropsType> = ({ products }) => {
-	return <CatalogPage products={products} />
+const Catalog: NextPage<PropsType> = ({ products, extraValuesHandbook }) => {
+	return <CatalogPage products={products} extraValuesHandbook={extraValuesHandbook} />
 }
 
 export const getServerSideProps: GetServerSideProps<PropsType> = async (context) => {
-	const { fetchProducts } = useProductStore.getState()
+	const { fetchProducts, fetchExtraValuesHandbook } = useProductStore.getState()
 	const products = (await fetchProducts(getApiProductURL(context.query))) as ProductsType
 
+	const extraValuesHandbook: ExtraValuesHandbook[] = await fetchExtraValuesHandbook()
 	return {
-		props: { products },
+		props: { products, extraValuesHandbook },
 	}
 }
 

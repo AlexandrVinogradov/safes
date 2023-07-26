@@ -58,3 +58,9 @@ export type FilterDataType = {
 		fullDiapason: [number, number]
 	}
 }
+
+export type ExtraValuesHandbook = {
+	id: number
+	field_id: number
+	'name_ru-RU': string
+}

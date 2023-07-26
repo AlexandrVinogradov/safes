@@ -1,6 +1,6 @@
 import { immer } from 'zustand/middleware/immer'
 import { create } from 'zustand'
-import { ServerProductCardType, FilterDataType, ProductsType } from '../models/IProductStore'
+import { ServerProductCardType, FilterDataType, ProductsType, ExtraValuesHandbook } from '../models/IProductStore'
 
 type State = {
 	products: ServerProductCardType[]
@@ -11,6 +11,7 @@ type State = {
 
 type Actions = {
 	fetchProducts: (url: string) => Promise<ProductsType | ServerProductCardType>
+	fetchExtraValuesHandbook: () => Promise<ExtraValuesHandbook[]>
 	setFilterData: (paramId: 'price' | 'weight', value: [number, number]) => void
 	initFilterData: (filterData: FilterDataType) => void
 	resetFilter: () => void
@@ -49,6 +50,17 @@ export const useProductStore = create(
 			} catch (error: any) {
 				set({ fetchProductsError: error.message ?? '' })
 			}
+		},
+
+		fetchExtraValuesHandbook: async () => {
+			try {
+				const response = await fetch(process.env.API_URL_EXTRA_VALUE as string)
+				const data = await response.json()
+
+				if (!response.ok) throw new Error(data.message)
+
+				return data
+			} catch (error: any) {}
 		},
 
 		filterData: initialFilterData,

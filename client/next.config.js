@@ -4,6 +4,7 @@ const nextConfig = {
   env: {
     API_URL_PRODUCTS: 'http://localhost:5000/safes',
     API_URL_CATEGORIES: 'http://localhost:5000/categories',
+    API_URL_EXTRA_VALUE: 'http://localhost:5000/extraValue',
   },
 }
 

@@ -48,11 +48,20 @@ export class SafesService {
 	}
 
 	async getAllSafes(queryParams: {
+		// filter
 		price?: string
 		weight?: string
+		burglaryResistance?: string
+		fireResistance?: string
+		keyType?: string
+		gunCount?: string
+		metalThickness?: string
+		// category
 		categoryId?: string
+		// pagination
 		page?: number
 		pageSize?: number
+		//sort
 		sort?: string
 	}) {
 		let where = {}
@@ -98,6 +107,46 @@ export class SafesService {
 						...where,
 						product_weight: {
 							[Op.between]: queryParams.weight.split('-').map((el) => Number(el) || 0),
+						},
+					}
+					break
+				case 'burglaryResistance':
+					where = {
+						...where,
+						extra_field_3: {
+							[Op.or]: queryParams.burglaryResistance.split('-').map((el) => Number(el)),
+						},
+					}
+					break
+				case 'fireResistance':
+					where = {
+						...where,
+						extra_field_4: {
+							[Op.or]: queryParams.fireResistance.split('-').map((el) => Number(el)),
+						},
+					}
+					break
+				case 'keyType':
+					where = {
+						...where,
+						extra_field_9: {
+							[Op.or]: queryParams.keyType.split('-').map((el) => Number(el)),
+						},
+					}
+					break
+				case 'gunCount':
+					where = {
+						...where,
+						extra_field_8: {
+							[Op.or]: queryParams.gunCount.split('-').map((el) => Number(el)),
+						},
+					}
+					break
+				case 'metalThickness':
+					where = {
+						...where,
+						extra_field_20: {
+							[Op.or]: queryParams.metalThickness.split('-').map((el) => Number(el)),
 						},
 					}
 					break

@@ -3,7 +3,7 @@ import { useProductStore } from '@/store/useProductStore'
 import { container } from '@/styles/container'
 import { Filter } from '../../../../Filter/Filter'
 import { CatalogProducts } from './CatalogProducts/CatalogProducts'
-import { ProductsType } from '@/models/IProductStore'
+import { ExtraValuesHandbook, ProductsType } from '@/models/IProductStore'
 import { getApiProductURL } from '../../../../../helpers/getApiProductURL'
 import { useRouter } from 'next/router'
 import { CategoryType } from '@/models/ICategoriesStore'
@@ -19,10 +19,11 @@ const DynamicCustomPagination = dynamic<PaginationPropsType>(() => import('@/com
 type PropsType = {
 	products: ProductsType
 	category?: CategoryType
+	extraValuesHandbook: ExtraValuesHandbook[]
 }
 
 export const CatalogSection = (props: PropsType) => {
-	const { products, category } = props
+	const { products, category, extraValuesHandbook } = props
 	const { query } = useRouter()
 
 	const fetchProducts = useProductStore((state) => state.fetchProducts)
@@ -47,7 +48,7 @@ export const CatalogSection = (props: PropsType) => {
 		<section className={clsx(s.section, container)}>
 			<Sort className={s.sort} data={sortData} />
 			<div className={s.wrapper}>
-				<Filter />
+				<Filter extraValuesHandbook={extraValuesHandbook} />
 
 				<div className={s.productsWithPagination}>
 					<CatalogProducts products={products.list} />
