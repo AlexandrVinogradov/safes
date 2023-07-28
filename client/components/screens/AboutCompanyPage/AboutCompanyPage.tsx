@@ -17,7 +17,7 @@ const AboutCompanyPage = () => {
 	return (
 		<Layout title="О компании">
 			<Main breadCrumbs={breadCrumbs}>
-				<Image src="/semiShieldAboutCompany.png" alt="логотип ПРОММЕТСЕЙФ" width="352" height="941" className={s.image} />
+				<Image src="/sh.png" alt="логотип ПРОММЕТСЕЙФ" width="352" height="941" className={s.image} />
 
 				<DescriptionSection />
 				<CategorySection />

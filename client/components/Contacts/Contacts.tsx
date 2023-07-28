@@ -1,4 +1,3 @@
-'use client'
 import { MailIcon } from '@/icons/MailIcon'
 import { PhoneIcon } from '@/icons/PhoneIcon'
 import { useModalStore } from '@/store/useModalStore'
@@ -18,10 +17,10 @@ export const Contacts = () => {
 				</div>
 
 				<div>
-					<a className={s.phoneLink} href="tel:84956415518">
+					<a className={s.link} href="tel:84956415518">
 						8 (495) 641-55-18
 					</a>
-					<a className={s.phoneLink} href="tel:89265878650">
+					<a className={s.link} href="tel:89265878650">
 						8 (926) 587-86-50
 					</a>
 				</div>
@@ -32,7 +31,7 @@ export const Contacts = () => {
 					<PhoneIcon />
 				</button>
 
-				<a className="block" href="mailto:prommetsafe@yandex.ru">
+				<a className={s.link} href="mailto:prommetsafe@yandex.ru">
 					<MailIcon />
 				</a>
 			</div>

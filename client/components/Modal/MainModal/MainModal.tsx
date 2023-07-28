@@ -20,7 +20,7 @@ export const MainModal = (props: PropsTypes) => {
 				<div className={s.wrapper}>
 					<IconButton onClick={onClose} icon={<CloseIcon />} className={s.closeButton} />
 
-					<Image className={s.bgImg} src="/semiShield.png" alt="Промет лого" width={222} height={535} />
+					<Image className={s.bgImg} src="/semiShieldModal.png" alt="Промет лого" width={222} height={535} />
 
 					{children}
 				</div>
