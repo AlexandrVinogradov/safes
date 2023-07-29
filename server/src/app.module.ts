@@ -13,6 +13,7 @@ import { CategoriesModule } from './categories/categories.module'
 import { Category } from './categories/categories.model'
 import { ProductImage } from './productImages/productImages.model'
 import { ProductImagesModule } from './productImages/productImages.module'
+import { ContentModule } from './content/content.module'
 
 @Module({
 	controllers: [],
@@ -32,6 +33,7 @@ import { ProductImagesModule } from './productImages/productImages.module'
 			autoLoadModels: true,
 		}),
 		UsersModule,
+		ContentModule,
 		SafesModule,
 		ManufacturersModule,
 		ExtraValuesModule,
