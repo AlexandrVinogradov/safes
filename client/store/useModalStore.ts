@@ -6,6 +6,7 @@ type State = {
 	isCallRequested: boolean
 
 	isCutModal: boolean
+	isCutModalInfoRead: boolean
 }
 
 type Actions = {
@@ -13,24 +14,29 @@ type Actions = {
 	setIsCallRequested: (isRequestCallModal: boolean) => void
 
 	setIsCutModal: (isRequestCallModal: boolean) => void
+	setIsCutModalInfoRead: (isCutModalInfoRead: boolean) => void
 }
 
 export const useModalStore = create(
 	immer<State & Actions>((set) => ({
 		isRequestCallModal: false,
 		setIsRequestCallModal: (isRequestCallModal: boolean) => {
-			set({ isRequestCallModal: isRequestCallModal })
+			set({ isRequestCallModal })
 			set({ isCallRequested: false })
 		},
 
 		isCallRequested: false,
 		setIsCallRequested: (isCallRequested: boolean) => {
-			set({ isCallRequested: isCallRequested })
+			set({ isCallRequested })
 		},
 
-		isCutModal: true,
+		isCutModal: false,
 		setIsCutModal: (isCutModal: boolean) => {
-			set({ isCutModal: isCutModal })
+			set({ isCutModal })
+		},
+		isCutModalInfoRead: false,
+		setIsCutModalInfoRead: (isCutModalInfoRead: boolean) => {
+			set({ isCutModalInfoRead })
 		},
 	})),
 )
