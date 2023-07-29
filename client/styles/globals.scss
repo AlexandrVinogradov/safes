@@ -1,16 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import "./styles/fonts.scss";
 
 body {
-  @apply text-dark
-}
+  @apply font-noto text-dark
 
-/* html, body, header, footer, main, section { 
-  @apply font-sans
-} */
-.app_wrapper { 
-  @apply font-sans
 }
 
 h2 {
@@ -19,7 +14,7 @@ h2 {
 }
 
 h1, h2, h3 {
-  @apply font-mono
+  @apply font-tenor
 }
 
 input, textarea {

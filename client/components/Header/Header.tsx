@@ -1,4 +1,4 @@
-import { RequestCallModal } from '@/Modals/RequestCallModal/RequestCallModal'
+import { RequestCallModal } from '@/components/Modals/RequestCallModal/RequestCallModal'
 import { HeaderLowElements } from './HeaderLowElements/HeaderLowElements'
 import { HeaderUpElements } from './HeaderUpElements/HeaderUpElements'
 import { s } from './styles'

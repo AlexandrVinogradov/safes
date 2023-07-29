@@ -1,9 +1,6 @@
-const { fontFamily } = require('tailwindcss/defaultTheme')
-
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    // "./app/**/*.{js,ts,jsx,tsx}",
     "./pages/**/*.{js,ts,jsx,tsx}",
     "./components/**/*.{js,ts,jsx,tsx}",
     './styles/**/*.{js,ts,jsx,tsx,mdx}',
@@ -12,8 +9,8 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        "sans": "var(--font-noto-sans)",
-        "mono": "var(--font-tenor-sans)",
+        "noto": 'Noto Sans',
+        "tenor": "Tenor Sans",
       },
       colors: {
         'white': '#ffff',
