@@ -3,7 +3,6 @@ import { Main } from '../../Main/Main'
 import { Layout } from '../../layout/layout'
 import { ServerProductCardType } from '@/models/IProductStore'
 import { ProductSliderSection } from '@/components/commonSections/ProductSliderSection/ProductSliderSection'
-import { s } from './styles'
 import { useBasketStore } from '@/store/useBasketStore'
 import { CartSection } from './sections/CartSection/CartSection'
 
@@ -34,12 +33,12 @@ const СartPage = (props: PropsType) => {
 				{basketItems.length === 0 ? (
 					<>
 						<CartEmptySection />
-						<ProductSliderSection className={s.productSliderSection} title="Вы недавно смотрели" productsList={productsList} />
+						<ProductSliderSection title="Вы недавно смотрели" productsList={productsList} />
 					</>
 				) : (
 					<>
 						<CartSection />
-						<ProductSliderSection className={s.productSliderSection} title="Похожие товары" productsList={productsList} />
+						<ProductSliderSection title="Похожие товары" productsList={productsList} />
 					</>
 				)}
 			</Main>

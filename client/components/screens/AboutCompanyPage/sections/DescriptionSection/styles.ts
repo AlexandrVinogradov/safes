@@ -1,5 +1,5 @@
 export const s = {
-	section: /*tw*/ 'pt-[80px]',
+	section: /*tw*/ '',
 	title: /*tw*/ 'pb-[40px] text-[46px]',
 	textTag: /*tw*/ 'text-branded font-bold underline',
 

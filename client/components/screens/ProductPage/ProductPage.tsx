@@ -4,7 +4,6 @@ import { DescriptionSection } from './sections/DescriptionSection/DescriptionSec
 import { Layout } from '@/components/layout/layout'
 import { Main } from '@/components/Main/Main'
 import { ProductSliderSection } from '@/components/commonSections/ProductSliderSection/ProductSliderSection'
-import { s } from './styles'
 
 type PropsType = {
 	selectedProduct: ServerProductCardType
@@ -35,7 +34,7 @@ export const ProductPage = (props: PropsType) => {
 
 				<DescriptionSection description={selectedProduct?.['description_ru-RU']} />
 
-				<ProductSliderSection className={s.productSliderSection} title="Похожие товары" productsList={relativeProductsList} />
+				<ProductSliderSection title="Похожие товары" productsList={relativeProductsList} />
 			</Main>
 		</Layout>
 	)

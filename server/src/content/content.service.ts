@@ -16,4 +16,9 @@ export class ContentService {
 		const content = await this.contentRepository.findAll()
 		return content
 	}
+
+	async getSelectedContent(alias: string) {
+		const content = await this.contentRepository.findOne({ where: { alias } })
+		return content
+	}
 }

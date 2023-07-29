@@ -3,7 +3,6 @@ import { Main } from '../../Main/Main'
 import { NotFoundContentSection } from './NotFoundSections/NotFoundContentSection/NotFoundContentSection'
 import { ProductSliderSection } from '@/components/commonSections/ProductSliderSection/ProductSliderSection'
 import { ServerProductCardType } from '@/models/IProductStore'
-import { s } from './styles'
 
 type PropsType = {
 	productsList: ServerProductCardType[]
@@ -21,7 +20,7 @@ const NotFoundPage = (props: PropsType) => {
 		<Layout title="notFound">
 			<Main breadCrumbs={breadCrumbs}>
 				<NotFoundContentSection />
-				<ProductSliderSection className={s.productSliderSection} title="Вы недавно смотрели" productsList={productsList} />
+				<ProductSliderSection title="Вы недавно смотрели" productsList={productsList} />
 			</Main>
 		</Layout>
 	)

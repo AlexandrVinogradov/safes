@@ -1,5 +1,5 @@
 export const s = {
-	section: /*tw*/ 'pt-[80px] pb-[120px]',
+	section: /*tw*/ '',
 	title: /*tw*/ 'pb-[30px] text-[66px] leading-[77px]',
 	backButton: /*tw*/ 'flex justify-between items-center max-w-[80px] w-full text-branded pb-[44px]',
 

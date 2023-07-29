@@ -28,7 +28,7 @@ export const HeaderLowElements = () => {
 							</button>
 						</li>
 						<li>
-							<Link href="/delivery">Доставка и оплата</Link>
+							<Link href="/dostavka">Доставка и оплата</Link>
 						</li>
 						<li>
 							<Link href="/contacts">Контакты</Link>

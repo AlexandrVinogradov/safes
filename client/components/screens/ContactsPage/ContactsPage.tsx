@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import { Main } from '../../Main/Main'
 import { Layout } from '@/components/layout/layout'
 import { container } from '@/styles/container'
@@ -19,9 +18,7 @@ const ContactsPage = () => {
 		<Layout title="Контакты">
 			<CutModal />
 
-			<Main breadCrumbs={breadCrumbs}>
-				<Image src="/sh.png" alt="логотип ПРОММЕТСЕЙФ" width="352" height="941" className={s.image} />
-
+			<Main breadCrumbs={breadCrumbs} isShowShield>
 				<section className={clsx(container, s.section)}>
 					<ContactsDescription />
 					<ContactsInfo />

@@ -1,0 +1,21 @@
+.content {
+
+    h1, h2 {
+        font-size: 46px;
+        line-height: 53px;
+        padding-bottom: 40px;
+    }
+
+    & > p {
+        padding-bottom: 40px;
+        &:nth-of-type(1) {
+
+        }
+
+        & > span:nth-child(1), strong:nth-child(1) {
+            // padding-bottom: 20px;
+            display: block;
+            @apply text-branded
+        }
+    }
+}
