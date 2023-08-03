@@ -25,7 +25,7 @@ const MainPage: NextPage<PropsType> = ({ productsList }) => {
 				<HowToChoose />
 				<NoveltiesSection productsList={productsList} />
 				<BrandsSection />
-				<ArticlesSection />
+				<ArticlesSection title="Статьи" className="py-[120px]" />
 			</main>
 		</Layout>
 	)

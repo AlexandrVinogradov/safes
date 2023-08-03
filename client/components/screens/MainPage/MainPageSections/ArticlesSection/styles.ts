@@ -1,5 +1,5 @@
 export const s = {
-    section: /*tw*/ 'py-[120px] ',
+    section: /*tw*/ '',
     title: /*tw*/ '-mb-[44px]'
     
 }

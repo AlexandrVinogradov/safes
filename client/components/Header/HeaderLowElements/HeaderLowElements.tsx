@@ -16,7 +16,7 @@ export const HeaderLowElements = () => {
 							<Link href="/about-company">О компании</Link>
 						</li>
 						<li>
-							<Link href="/info">Информация</Link>
+							<Link href="/information">Статьи</Link>
 						</li>
 						<li>
 							<Link href="/instruction">Инструкции</Link>

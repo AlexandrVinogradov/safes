@@ -3,9 +3,15 @@ import { container } from '@/styles/container'
 import clsx from 'clsx'
 import { s } from './styles'
 
-export const RedirectSection = () => {
+type PropsType = {
+	className?: string
+}
+
+export const RedirectSection = (props: PropsType) => {
+	const { className } = props
+
 	return (
-		<section className={clsx(s.section, container)}>
+		<section className={clsx(s.section, className, container)}>
 			<div className={s.redirectBlock}>
 				<div className={s.content}>
 					<p className={s.message}>Звоните, консультируйтесь, заказывайте!</p>

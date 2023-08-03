@@ -18,6 +18,8 @@ import { InstructionsModule } from './instructions/instructions.module'
 import { Content } from './content/content.model'
 import { Instruction } from './instructions/instructions.model'
 import { InstructionCategories } from './instructions/instruction_categories.model'
+import { News } from './news/news.model'
+import { NewsModule } from './news/news.module'
 
 @Module({
 	controllers: [],
@@ -33,7 +35,7 @@ import { InstructionCategories } from './instructions/instruction_categories.mod
 			username: process.env.POSTGRES_USER,
 			password: process.env.POSTGRES_PASSWORD,
 			database: process.env.POSTGRES_DB,
-			models: [User, Safe, Manufacturer, ExtraValue, Category, ProductImage, Content, Instruction, InstructionCategories],
+			models: [User, Safe, Manufacturer, ExtraValue, Category, ProductImage, Content, Instruction, InstructionCategories, News],
 			autoLoadModels: true,
 		}),
 		UsersModule,
@@ -44,6 +46,7 @@ import { InstructionCategories } from './instructions/instruction_categories.mod
 		ExtraValuesModule,
 		CategoriesModule,
 		ProductImagesModule,
+		NewsModule,
 	],
 })
 export class AppModule {}
