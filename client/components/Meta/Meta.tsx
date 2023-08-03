@@ -5,7 +5,7 @@ import Head from 'next/head'
 const getTitle = (title: string) => {
 	return `${title} | Kek`
 }
-export const Meta: FC<PropsWithChildren<MetaType>> = ({ title, description, children }) => {
+export const Meta: FC<PropsWithChildren<MetaType>> = ({ title, description, keywords, children }) => {
 	return (
 		<>
 			<Head>
@@ -16,6 +16,7 @@ export const Meta: FC<PropsWithChildren<MetaType>> = ({ title, description, chil
 						<meta name="description" content={description} />
 						<meta name="og:title" content={getTitle(title)} />
 						<meta name="og:description" content={description} />
+						<meta name="keywords" content={keywords} />
 					</>
 				) : (
 					<meta name="roots" content="noindex nofollow" />

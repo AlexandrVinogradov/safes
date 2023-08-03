@@ -154,6 +154,7 @@ export class Safe extends Model<Safe, SafeCreationAttrs> {
 	@ApiProperty({ example: 'Сейф ALPHA 1475', description: 'хз' })
 	@Column({ type: DataType.STRING, allowNull: true })
 	'meta_keyword_ru-RU': string
+	
 	@ApiProperty({ example: '410', description: 'Объем (л)' })
 	@Column({ type: DataType.STRING, allowNull: true })
 	extra_field_13: string

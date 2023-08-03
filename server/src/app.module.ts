@@ -14,6 +14,10 @@ import { Category } from './categories/categories.model'
 import { ProductImage } from './productImages/productImages.model'
 import { ProductImagesModule } from './productImages/productImages.module'
 import { ContentModule } from './content/content.module'
+import { InstructionsModule } from './instructions/instructions.module'
+import { Content } from './content/content.model'
+import { Instruction } from './instructions/instructions.model'
+import { InstructionCategories } from './instructions/instruction_categories.model'
 
 @Module({
 	controllers: [],
@@ -29,16 +33,17 @@ import { ContentModule } from './content/content.module'
 			username: process.env.POSTGRES_USER,
 			password: process.env.POSTGRES_PASSWORD,
 			database: process.env.POSTGRES_DB,
-			models: [User, Safe, Manufacturer, ExtraValue, Category, ProductImage],
+			models: [User, Safe, Manufacturer, ExtraValue, Category, ProductImage, Content, Instruction, InstructionCategories],
 			autoLoadModels: true,
 		}),
 		UsersModule,
+		InstructionsModule,
 		ContentModule,
 		SafesModule,
 		ManufacturersModule,
 		ExtraValuesModule,
 		CategoriesModule,
-		ProductImagesModule
+		ProductImagesModule,
 	],
 })
 export class AppModule {}

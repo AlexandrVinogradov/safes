@@ -9,10 +9,10 @@ type PropsType = {
 }
 
 export const Layout = (props: PropsType & MetaType) => {
-	const { children, title, description } = props
+	const { children, title, description, keywords } = props
 
 	return (
-		<Meta title={title} description={description}>
+		<Meta title={title} description={description} keywords={keywords}>
 			<Header />
 			{children}
 			<Footer />
