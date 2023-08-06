@@ -2,19 +2,19 @@ import { Main } from '../../Main/Main'
 import { Layout } from '@/components/layout/layout'
 import { container } from '@/styles/container'
 import { ContentType } from '@/models/IContentStore'
-import styles from './DeliveryPage.module.scss'
+import styles from './PoliciesPage.module.scss'
 
 type PropsType = {
 	content: ContentType
 }
 
-const DeliveryPage = (props: PropsType) => {
+const PoliciesPage = (props: PropsType) => {
 	const { content } = props
 	const { title, fulltext, metadesc, metakey } = content
 
 	const breadCrumbs = [
 		{ name: 'Главная', isActive: false, to: '/' },
-		{ name: 'Доставка и оплата', isActive: true },
+		{ name: 'Политика конфиденциальности', isActive: true },
 	]
 
 	return (
@@ -28,4 +28,4 @@ const DeliveryPage = (props: PropsType) => {
 	)
 }
 
-export default DeliveryPage
+export default PoliciesPage

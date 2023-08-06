@@ -45,7 +45,9 @@ export const Footer = () => {
 					</ul>
 				</nav>
 
-				<p className={s.secondaryLink}>Политика конфиденциальности</p>
+				<Link href="/policies" className={s.secondaryLink}>
+					Политика конфиденциальности
+				</Link>
 				<p className={s.secondaryLink}>© 2023 Купить сейф в Москве. All Rights Reserved.</p>
 
 				<div className={s.icons}>

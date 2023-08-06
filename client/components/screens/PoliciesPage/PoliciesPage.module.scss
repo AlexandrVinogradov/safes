@@ -1,0 +1,63 @@
+.content {
+
+    h1 {
+        font-size: 46px;
+        line-height: 53px;
+        padding-bottom: 40px;
+    }
+
+
+    h1 {
+        + p:has(strong) {
+            padding-top: 0px;
+        } 
+    }
+
+    & > p, ul {
+        padding-bottom: 10px;
+
+        + p:has(strong) {
+            padding-top: 15px;
+        } 
+    }
+
+    & > p {
+        &:has(strong) {
+            display: block;
+            padding-bottom: 10px;
+            padding-top: 40px;
+            @apply text-branded   
+        }
+    }
+
+    & > ul, ol {
+        padding-top: 20px;
+        padding-left: 50px;
+        @apply space-y-[10px];
+
+        & > li {
+            padding-left: 15px;
+        }
+
+        + p:not(:has(strong)) {
+            padding-top: 20px;
+        }
+    }
+
+    & > ol {
+        & > li {
+            list-style-type: decimal;
+        }
+    }
+    & > ul {
+        & > li {
+            &::marker {
+                content: url('/listBullet.svg');
+            }
+        }
+    }
+
+    & > p:last-child {
+        padding-bottom: 0;
+    }
+}

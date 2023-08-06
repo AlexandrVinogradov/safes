@@ -15,7 +15,7 @@ export const Main = (props: PropsType) => {
 
 	return (
 		<main className={s.main}>
-			{isShowShield && <Image src="/sh.png" alt="логотип ПРОММЕТСЕЙФ" width="352" height="941" className={s.image} />}
+			{isShowShield && <Image src="/semiShieldMain.png" alt="логотип ПРОММЕТСЕЙФ" width="352" height="941" className={s.image} />}
 
 			<BreadCrumbs breadCrumbs={breadCrumbs} />
 			{children}
