@@ -39,4 +39,8 @@ export class News extends Model<News, NewsCreationAttrs> {
 	@ApiProperty({ example: 'Наш интернет магазин предлагает...', description: 'Превью статьи' })
 	@Column({ type: DataType.STRING, allowNull: false })
 	previewText: string
+
+	@ApiProperty({ example: '<p>Мы рады видеть...', description: 'Html статьи' })
+	@Column({ type: DataType.STRING, allowNull: false })
+	fullHtml: string
 }

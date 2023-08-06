@@ -7,4 +7,5 @@ export type NewsType = {
 	metakey: string
 	metadesc: string
 	previewText: string
+	fullHtml: string
 }

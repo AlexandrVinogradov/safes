@@ -19,7 +19,7 @@ export const getServerSideProps: GetServerSideProps<PropsType> = async () => {
 	const { fetchSelectedContent } = useContentStore.getState()
 
 	const instructionsCategories = (await fetchInstructionsCategories()) as InstructionCategoryType[]
-	const content = (await fetchSelectedContent('инструкции')) as ContentType
+	const content = (await fetchSelectedContent('instructions')) as ContentType
 
 	return {
 		props: { instructionsCategories, content },

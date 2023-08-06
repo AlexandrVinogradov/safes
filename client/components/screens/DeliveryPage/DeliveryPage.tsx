@@ -2,7 +2,7 @@ import { Main } from '../../Main/Main'
 import { Layout } from '@/components/layout/layout'
 import { container } from '@/styles/container'
 import { ContentType } from '@/models/IContentStore'
-import styles from './test.module.scss'
+import styles from './DeliveryPage.module.scss'
 
 type PropsType = {
 	content: ContentType
@@ -20,7 +20,7 @@ const DeliveryPage = (props: PropsType) => {
 		<Layout title="Доставка и оплата">
 			<Main breadCrumbs={breadCrumbs} isShowShield>
 				<section className={container}>
-					<div className={styles.content} dangerouslySetInnerHTML={{ __html: content.introtext }} />
+					<div className={styles.content} dangerouslySetInnerHTML={{ __html: content.fulltext }} />
 				</section>
 			</Main>
 		</Layout>

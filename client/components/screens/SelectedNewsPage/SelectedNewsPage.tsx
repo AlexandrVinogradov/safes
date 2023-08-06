@@ -12,7 +12,7 @@ type PropsType = {
 
 const SelectedNewsPage = (props: PropsType) => {
 	const { selectedNews } = props
-	const { title, metadesc, metakey, createdAt } = selectedNews
+	const { title, metadesc, metakey, createdAt, fullHtml } = selectedNews
 
 	const breadCrumbs = [
 		{ name: 'Главная', isActive: false, to: '/' },
@@ -28,7 +28,8 @@ const SelectedNewsPage = (props: PropsType) => {
 
 					<p className={s.date}>{createdAt}</p>
 
-					<p className="pb-[70px]">HTML</p>
+					{/* FIXME: */}
+					<div className="pb-[70px]" dangerouslySetInnerHTML={{ __html: fullHtml }} />
 				</section>
 
 				<RedirectSection className={s.redirectSection} />

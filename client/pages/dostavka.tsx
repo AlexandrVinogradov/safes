@@ -14,7 +14,7 @@ const Delivery: NextPage<PropsType> = ({ content }) => {
 export const getServerSideProps: GetServerSideProps<PropsType> = async () => {
 	const { fetchSelectedContent } = useContentStore.getState()
 
-	const content = (await fetchSelectedContent('доставка')) as ContentType
+	const content = (await fetchSelectedContent('delivery')) as ContentType
 
 	return {
 		props: { content },

@@ -28,14 +28,6 @@ export class Content extends Model<Content, ContentCreationAttrs> {
 	@Column({ type: DataType.STRING })
 	fulltext: string
 
-	@ApiProperty({ example: '2022-11-17 10:16:25', description: 'create date' })
-	@Column({ type: DataType.STRING })
-	createdAt: string
-
-	@ApiProperty({ example: '2022-11-17 10:16:25', description: 'modify date' })
-	@Column({ type: DataType.STRING })
-	updatedAt: string
-
 	@ApiProperty({ example: 'доставка сейфов, сейф', description: 'meta key' })
 	@Column({ type: DataType.STRING })
 	metakey: string

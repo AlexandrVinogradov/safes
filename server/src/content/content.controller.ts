@@ -1,6 +1,6 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common'
+import { Body, Controller, Get, Param, Patch, Post } from '@nestjs/common'
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger'
-import { CreateContentDto } from './dto/create-content.dto'
+import { CreateContentDto, UpdateContentDto } from './dto/create-content.dto'
 import { Content } from './content.model'
 import { ContentService } from './content.service'
 
@@ -14,6 +14,13 @@ export class ContentController {
 	@Post()
 	create(@Body() contentDto: CreateContentDto) {
 		return this.contentService.createContent(contentDto)
+	}
+
+	@ApiOperation({ summary: 'Обновить контент' })
+	@ApiResponse({ status: 200, type: Content })
+	@Patch(':id')
+	update(@Param('id') alias: string, @Body() contentDto: UpdateContentDto) {
+		return this.contentService.updateContent(alias, contentDto)
 	}
 
 	@ApiOperation({ summary: 'Получить весь контент' })
