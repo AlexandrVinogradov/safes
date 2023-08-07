@@ -1,8 +1,8 @@
-import Link from 'next/link'
 import { MenuItem } from '../MenuItem/MenuItem'
+import { CategoryType } from '@/models/ICategoriesStore'
+import { CatalogMenuShowAllButton } from '../CatalogMenuShowAllButton/CatalogMenuShowAllButton'
 import clsx from 'clsx'
 import { s } from './styles'
-import { CategoryType } from '@/models/ICategoriesStore'
 
 type PropsType = {
 	selectedLvl1: CategoryType | null
@@ -10,7 +10,7 @@ type PropsType = {
 	setSelectedLvl1?: (category: CategoryType | null) => void
 	zIndex: string
 	isShow: boolean
-	setIsShow: (isShow: boolean) => void 
+	setIsShow: (isShow: boolean) => void
 	setIsShowChild?: (isShow: boolean) => void
 	setIsHovering: (isHovering: boolean) => void
 }
@@ -30,15 +30,13 @@ export const MenuChildLvl = (props: PropsType) => {
 	return (
 		<div className={clsx(s.menu, zIndex)} onMouseOver={handleOnMouseOver} onMouseOut={handleOnMouseOut}>
 			<h5 className={s.title}>{selectedLvl1?.['name_ru-RU']}</h5>
-			<Link
-				className={s.link}
+
+			<CatalogMenuShowAllButton
+				title="Показать все товары категории"
 				href={`/${selectedLvl1?.['alias_ru-RU']}`}
-				onMouseOver={handleOnMouseOverAll}
-				onClick={() => setIsHovering(false)}
-			>
-				<span className={s.dot} />
-				Показать все товары категории
-			</Link>
+				handleOnMouseOverAll={handleOnMouseOverAll}
+				setIsHovering={setIsHovering}
+			/>
 
 			<ul>
 				{selectedLvl1?.child?.map((category) => (

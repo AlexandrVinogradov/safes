@@ -4,6 +4,7 @@ import { useCategoriesStore } from '@/store/useCategoriesStore'
 import { MenuItem } from './MenuItem/MenuItem'
 import { MenuChildLvl } from './MenuChildLLvl/MenuChildLLvl'
 import { CategoryType } from '@/models/ICategoriesStore'
+import { CatalogMenuShowAllButton } from './CatalogMenuShowAllButton/CatalogMenuShowAllButton'
 
 type PropsType = {
 	isHovering: boolean
@@ -56,6 +57,13 @@ export const CatalogMenu = (props: PropsType) => {
 				</ul>
 
 				<ul>
+					<CatalogMenuShowAllButton
+						title="Все товары каталога"
+						className={s.showAll}
+						href="/catalog"
+						handleOnMouseOverAll={() => setSelectedLvl1(null)}
+						setIsHovering={setIsHovering}
+					/>
 					{categories?.map((category) => (
 						<MenuItem
 							isSelected={category.name === selectedLvl1?.name}

@@ -5,4 +5,5 @@ export const s = {
 	tag: /*tw*/ `text-white text-[12px] bg-branded text-sm odd:mr-4 mb-5 [&:nth-last-child(-n+2)]:mb-0 leading-[16px] rounded-[42px] duration-300
 		hover:bg-[#477D9D] hover:shadow-[0px_4px_5px_0px_#25415240]`,
 	tagButton: /*tw*/ 'py-2 px-[15px]',
+	showAll: /*tw*/ 'text-dimButton',
 }
