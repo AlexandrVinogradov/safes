@@ -33,7 +33,7 @@ const NewsPage = (props: PropsType) => {
 							<li key={el.id}>
 								<h3 className={s.newsTitle}>{el.title}</h3>
 
-								<p className={s.previewText}>{el.previewText}</p>
+								<div className={s.previewHtml} dangerouslySetInnerHTML={{ __html: el.previewHtml }} />
 
 								<Button className={s.button} href={`/information/${el.alias}`}>
 									Подробнее...

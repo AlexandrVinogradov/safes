@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import clsx from 'clsx'
 import { container } from '@/styles/container'
+import styles from './NewsSection.module.scss'
 import { s } from './styles'
 
 type PropsType = {
@@ -17,8 +18,8 @@ export const NewsSection = (props: PropsType) => {
 		<section className={clsx(container, s.section)}>
 			<h1 className={s.title}>{title}</h1>
 			<p className={s.date}>{fakeDate}</p>
-			<Image src="/articlePreview1.jpg" alt="логотип ПРОММЕТСЕЙФ" width="335" height="258" className={s.image} />
-			<div className={s.fullHtml} dangerouslySetInnerHTML={{ __html: fullHtml }} />
+			<Image src="/articlePreview1.jpg" alt={`Статья ${title}`} width="335" height="258" className={s.image} />
+			<div className={styles.content} dangerouslySetInnerHTML={{ __html: fullHtml }} />
 		</section>
 	)
 }

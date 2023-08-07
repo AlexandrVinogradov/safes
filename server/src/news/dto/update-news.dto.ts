@@ -3,8 +3,10 @@ import { ApiProperty } from '@nestjs/swagger'
 export class UpdateNewsDto {
 	@ApiProperty({ example: 'Доставка и оплата', description: 'Заголовок' })
 	readonly title: string
-	@ApiProperty({ example: ' ', description: 'хз' })
+	@ApiProperty({ example: '<p>Мы рады видеть...', description: 'Html статьи' })
 	readonly fullHtml: string
+	@ApiProperty({ example: '<p>Мы рады видеть...', description: 'Html preview' })
+	readonly previewHtml: string
 	@ApiProperty({ example: 'доставка сейфов, сейф', description: 'meta key' })
 	readonly metakey: string
 	@ApiProperty({ example: 'Доставка сейфов от компании Проммет', description: 'meta desc' })

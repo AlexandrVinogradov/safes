@@ -32,6 +32,10 @@ export class News extends Model<News, NewsCreationAttrs> {
 	@Column({ type: DataType.STRING, allowNull: false })
 	fullHtml: string
 
+	@ApiProperty({ example: '<p>Мы рады видеть...', description: 'Html preview' })
+	@Column({ type: DataType.STRING, allowNull: false })
+	previewHtml: string
+
 	@ApiProperty({ example: '13.06.2022', description: 'Дата создания статьи' })
 	@Column({ type: DataType.STRING, allowNull: false })
 	fakeDate: string

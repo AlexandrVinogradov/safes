@@ -1,0 +1,52 @@
+.content {
+
+    h2, h3, h4, h5, h6 {
+        padding-bottom: 15px;
+    }
+
+    h2 {
+        font-size: 36px;
+        line-height: 40px;
+    }
+
+    h3, h4, h5, h6 {
+        font-size: 28px;
+        line-height: 32px; 
+    }
+
+
+    li > strong, p > strong {
+        @apply text-branded  
+
+    }
+
+    & > p, ul, ol {
+        padding-bottom: 15px;
+    }
+
+    & > ul, ol {
+        padding-left: 50px;
+        @apply space-y-[10px];
+
+        & > li {
+            padding-left: 15px;
+        }
+    }
+
+    & > ol {
+        & > li {
+            list-style-type: decimal;
+        }
+    }
+    & > ul {
+        & > li {
+            &::marker {
+                content: url('/listBullet.svg');
+            }
+        }
+    }
+
+    & > p:last-child {
+        padding-bottom: 0;
+    }
+}

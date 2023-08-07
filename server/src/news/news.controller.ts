@@ -1,8 +1,9 @@
 import { Body, Controller, Get, Param, Patch, Post } from '@nestjs/common'
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger'
-import { CreateNewsDto, UpdateNewsDto } from './dto/create-news.dto'
+import { CreateNewsDto } from './dto/create-news.dto'
 import { News } from './news.model'
 import { NewsService } from './news.service'
+import { UpdateNewsDto } from './dto/update-news.dto'
 
 @ApiTags('Статьи')
 @Controller('news')
