@@ -13,7 +13,8 @@ export const s = {
 	countItem: /*tw*/ 'font-semibold',
 	deleteButton: /*tw*/ 'flex items-center justify-between text-branded max-w-[83px] w-full text-[14px]',
 
-	overlay: /*tw*/ 'absolute flex flex-col justify-center items-center top-0 w-full h-full bg-[#477D9DB2]',
+	overlay:
+		/*tw*/ 'absolute flex flex-col justify-center items-center top-0 w-full h-full bg-[linear-gradient(0deg,rgba(0,0,0,0.4),rgba(0,0,0,0.4)),linear-gradient(0deg,rgba(71,125,157,0.7),rgba(71,125,157,0.7))]',
 	content: /*tw*/ 'flex flex-col justify-center items-center bg-white text-branded font-bold w-min rounded py-[30px] px-[60px]',
 	overlayMessage: /*tw*/ 'whitespace-nowrap pb-4',
 	overlayButton: /*tw*/ 'flex justify-between px-[30px] w-[211px]',
