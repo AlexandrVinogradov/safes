@@ -1,6 +1,6 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common'
+import { Body, Controller, Get, Param, Patch, Post } from '@nestjs/common'
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger'
-import { CreateNewsDto } from './dto/create-news.dto'
+import { CreateNewsDto, UpdateNewsDto } from './dto/create-news.dto'
 import { News } from './news.model'
 import { NewsService } from './news.service'
 
@@ -14,6 +14,13 @@ export class NewsController {
 	@Post()
 	create(@Body() newsDto: CreateNewsDto) {
 		return this.newsService.createNews(newsDto)
+	}
+
+	@ApiOperation({ summary: 'Обновить Статью' })
+	@ApiResponse({ status: 200, type: News })
+	@Patch(':id')
+	update(@Param('id') alias: string, @Body() newsDto: UpdateNewsDto) {
+		return this.newsService.updateNews(alias, newsDto)
 	}
 
 	@ApiOperation({ summary: 'Получить вcе статьи' })

@@ -6,6 +6,7 @@ export type NewsType = {
 	updateAt: string
 	metakey: string
 	metadesc: string
-	previewText: string
 	fullHtml: string
+	fakeDate: string
+	image: string
 }

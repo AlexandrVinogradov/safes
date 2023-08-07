@@ -1,8 +1,9 @@
 import { Body, Controller, Get, Param, Patch, Post } from '@nestjs/common'
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger'
-import { CreateContentDto, UpdateContentDto } from './dto/create-content.dto'
+import { CreateContentDto } from './dto/create-content.dto'
 import { Content } from './content.model'
 import { ContentService } from './content.service'
+import { UpdateContentDto } from './dto/update-content.dto'
 
 @ApiTags('Контент')
 @Controller('content')

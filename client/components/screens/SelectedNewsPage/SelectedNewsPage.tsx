@@ -1,10 +1,10 @@
 import { Main } from '../../Main/Main'
 import { Layout } from '@/components/layout/layout'
-import { container } from '@/styles/container'
-import { s } from './styles'
 import { NewsType } from '@/models/INewsStore'
 import { RedirectSection } from '../AboutCompanyPage/sections/RedirectSection/RedirectSection'
 import { ArticlesSection } from '../MainPage/MainPageSections/ArticlesSection/ArticlesSection'
+import { NewsSection } from './NewsSection/NewsSection'
+import { s } from './styles'
 
 type PropsType = {
 	selectedNews: NewsType
@@ -12,7 +12,7 @@ type PropsType = {
 
 const SelectedNewsPage = (props: PropsType) => {
 	const { selectedNews } = props
-	const { title, metadesc, metakey, createdAt, fullHtml } = selectedNews
+	const { title, metadesc, metakey, fakeDate, image, fullHtml } = selectedNews
 
 	const breadCrumbs = [
 		{ name: 'Главная', isActive: false, to: '/' },
@@ -23,14 +23,7 @@ const SelectedNewsPage = (props: PropsType) => {
 	return (
 		<Layout title={title} description={metadesc} keywords={metakey}>
 			<Main breadCrumbs={breadCrumbs} isShowShield>
-				<section className={container}>
-					<h1 className={s.title}>{title}</h1>
-
-					<p className={s.date}>{createdAt}</p>
-
-					{/* FIXME: */}
-					<div className="pb-[70px]" dangerouslySetInnerHTML={{ __html: fullHtml }} />
-				</section>
+				<NewsSection title={title} fakeDate={fakeDate} fullHtml={fullHtml} image={image} />
 
 				<RedirectSection className={s.redirectSection} />
 

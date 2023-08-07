@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common'
 import { InjectModel } from '@nestjs/sequelize'
 import { CreateNewsDto } from './dto/create-news.dto'
 import { News } from './news.model'
+import { UpdateNewsDto } from './dto/update-news.dto'
 
 @Injectable()
 export class NewsService {
@@ -10,6 +11,15 @@ export class NewsService {
 	async createNews(dto: CreateNewsDto) {
 		const news = await this.newsRepository.create(dto)
 		return news
+	}
+
+	async updateNews(alias: string, newsDto: UpdateNewsDto) {
+		const news = await this.newsRepository.findOne({ where: { alias } })
+		if (!news) {
+			throw new Error('Статья не найдена')
+		}
+
+		return this.newsRepository.update(newsDto, { where: { alias } })
 	}
 
 	async getAllNews() {

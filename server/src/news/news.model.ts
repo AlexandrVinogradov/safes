@@ -20,14 +20,6 @@ export class News extends Model<News, NewsCreationAttrs> {
 	@Column({ type: DataType.STRING, allowNull: false })
 	alias: string
 
-	@ApiProperty({ example: '2023-08-31 17:31:41', description: 'Время создания' })
-	@Column({ type: DataType.STRING, allowNull: false })
-	createdAt: string
-
-	@ApiProperty({ example: '2023-08-31 17:31:41', description: 'Время обновления' })
-	@Column({ type: DataType.STRING, allowNull: false })
-	updatedAt: string
-
 	@ApiProperty({ example: 'купить сейф в Москве', description: 'keywords' })
 	@Column({ type: DataType.STRING, allowNull: false })
 	metakey: string
@@ -36,11 +28,15 @@ export class News extends Model<News, NewsCreationAttrs> {
 	@Column({ type: DataType.STRING, allowNull: false })
 	metadesc: string
 
-	@ApiProperty({ example: 'Наш интернет магазин предлагает...', description: 'Превью статьи' })
-	@Column({ type: DataType.STRING, allowNull: false })
-	previewText: string
-
 	@ApiProperty({ example: '<p>Мы рады видеть...', description: 'Html статьи' })
 	@Column({ type: DataType.STRING, allowNull: false })
 	fullHtml: string
+
+	@ApiProperty({ example: '13.06.2022', description: 'Дата создания статьи' })
+	@Column({ type: DataType.STRING, allowNull: false })
+	fakeDate: string
+
+	@ApiProperty({ example: 'test.jpg', description: 'Картинка' })
+	@Column({ type: DataType.STRING, allowNull: false })
+	image: string
 }
