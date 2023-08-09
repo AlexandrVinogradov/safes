@@ -3,7 +3,7 @@ export const s = {
 	space: /*tw*/ 'absolute -top-[33px] bg-transparent h-[32px] w-full',
 	emptyBasketMessage: /*tw*/ `relative text-[14px] w-full text-center pb-3 mb-[30px]
 		after:absolute after:w-full after:bg-dimmerText after:h-[1px] after:bottom-0 after:left-0`,
-	basketItemsList: /*tw*/ 'pb-[20px]',
+	basketItemsList: /*tw*/ 'mb-[20px] max-h-[60vh] overflow-y-auto',
 	button: /*tw*/ 'w-[193px]',
 	goToCartButton: /*tw*/ 'mb-5',
 }

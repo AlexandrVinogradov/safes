@@ -20,7 +20,7 @@ export const CartSection = () => {
 				Удалить все
 			</button>
 
-			<BasketPreview  className={s.basketPreview}/>
+			<BasketPreview  className={s.basketPreview} />
 
 			<Link href="/catalog" className={s.returnButton}>
 				<LongArrowLeftIcon />

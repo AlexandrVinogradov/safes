@@ -3,6 +3,7 @@ import { BasketItemType } from '@/models/IBasketStore'
 import { ClickInput } from '@/components/ClickInput/ClickInput'
 import { useBasketStore } from '@/store/useBasketStore'
 import { Button } from '@/components/Button/Button'
+import Image from 'next/image'
 import { ReturnIcon } from '@/icons/ReturnIcon'
 import { s } from './styles'
 
@@ -26,7 +27,16 @@ export const BasketItem = (props: PropsType) => {
 
 	return (
 		<li className={s.basketItem}>
-			<div className={s.image} />
+			<div className={s.image}>
+				<Image
+					unoptimized={true}
+					src={`https://prommetsafe.ru/components/com_jshopping/files/img_products/${item.image}`}
+					alt={name}
+					width={318}
+					height={91}
+				/>
+			</div>
+
 			<div className={s.nameCell}>
 				<p className={s.name}>{name}</p>
 				{isEditMode && <p className={s.code}>Код товара: {code}</p>}

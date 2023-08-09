@@ -26,9 +26,10 @@ export const BasketPopup = (props: PropsType) => {
 						<p className={s.emptyBasketMessage}>В корзине нет товаров</p>
 					) : (
 						<ul className={s.basketItemsList}>
-							{basketItems.map((item) => (
-								<ProductBasketItem item={item} />
-							))}
+							{basketItems.map((item) => {
+								if (item.isDeleted) return
+								return <ProductBasketItem item={item} />
+							})}
 						</ul>
 					)}
 

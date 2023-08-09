@@ -1,16 +1,20 @@
 import { useBasketStore } from '@/store/useBasketStore'
 import { BasketItem } from './BasketItem/BasketItem'
 import { BasketSummary } from './BasketSummary/BasketSummary'
+import { usePersistStore } from '@/hooks/usePersistStore'
 import { s } from './styles'
 import clsx from 'clsx'
 
 type PropsType = {
 	isEditMode?: boolean
-    className?: string
+	className?: string
+	isShowDeleted?: boolean
 }
+
 export const BasketPreview = (props: PropsType) => {
-	const { isEditMode = true, className } = props
-	const basketItems = useBasketStore((state) => state.basketItems)
+	const { isEditMode = true, className, isShowDeleted = true } = props
+	const basketStore = usePersistStore(useBasketStore, (state) => state)
+	const basketItems = basketStore?.basketItems
 
 	return (
 		<div className={clsx(s.mainContent, className)}>
@@ -22,9 +26,10 @@ export const BasketPreview = (props: PropsType) => {
 					<p className={s.count}>Кол-во</p>
 				</header>
 				<ul className={s.basketItemsList}>
-					{basketItems.map((item) => (
-						<BasketItem isEditMode={isEditMode} item={item} />
-					))}
+					{basketItems?.map((item) => {
+						if (!isShowDeleted && item.isDeleted) return
+						return <BasketItem key={item.id} isEditMode={isEditMode} item={item} />
+					})}
 				</ul>
 			</div>
 

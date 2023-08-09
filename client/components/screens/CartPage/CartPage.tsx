@@ -5,6 +5,7 @@ import { ServerProductCardType } from '@/models/IProductStore'
 import { ProductSliderSection } from '@/components/commonSections/ProductSliderSection/ProductSliderSection'
 import { useBasketStore } from '@/store/useBasketStore'
 import { CartSection } from './sections/CartSection/CartSection'
+import { usePersistStore } from '@/hooks/usePersistStore'
 
 type PropsType = {
 	productsList: ServerProductCardType[]
@@ -12,10 +13,7 @@ type PropsType = {
 
 // TODO:
 // - reduce в helpers
-// - max-h basket popover
-// - basket in storage
-// - basket store types
-// - isDeleted - remove from popover
+// - how to real delete item from basket?
 
 const СartPage = (props: PropsType) => {
 	const { productsList } = props
@@ -25,12 +23,13 @@ const СartPage = (props: PropsType) => {
 		{ name: 'Корзина', isActive: true },
 	]
 
-	const basketItems = useBasketStore((state) => state.basketItems)
+	const basketStore = usePersistStore(useBasketStore, (state) => state)
+	const basketItems = basketStore?.basketItems
 
 	return (
 		<Layout title="Корзина">
 			<Main breadCrumbs={breadCrumbs}>
-				{basketItems.length === 0 ? (
+				{basketItems?.length === 0 ? (
 					<>
 						<CartEmptySection />
 						<ProductSliderSection title="Вы недавно смотрели" productsList={productsList} />

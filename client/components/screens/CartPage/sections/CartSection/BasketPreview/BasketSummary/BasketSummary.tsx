@@ -2,6 +2,7 @@ import { useBasketStore } from '@/store/useBasketStore'
 import { Button } from '@/components/Button/Button'
 import { s } from './styles'
 import clsx from 'clsx'
+import { usePersistStore } from '@/hooks/usePersistStore'
 
 type PropsType = {
 	isEditMode?: boolean
@@ -9,7 +10,11 @@ type PropsType = {
 
 export const BasketSummary = (props: PropsType) => {
 	const { isEditMode = true } = props
-	const basketItems = useBasketStore((state) => state.basketItems)
+
+	const basketStore = usePersistStore(useBasketStore, (state) => state)
+	const basketItems = basketStore?.basketItems
+
+	if (!basketItems) return null
 
 	const count = basketItems.reduce((acc, item) => {
 		if (item.isDeleted) return acc

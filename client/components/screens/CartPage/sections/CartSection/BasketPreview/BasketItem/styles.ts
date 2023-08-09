@@ -1,7 +1,7 @@
 export const s = {
 	basketItem: /*tw*/ 'relative grid grid-flow-col auto-cols-min max-w-[1045px] w-full border border-dimmerText rounded-[4px]',
 
-	image: /*tw*/ 'w-[426px] h-[182px] bg-[#F5FBFF]',
+	image: /*tw*/ 'w-[426px] h-[182px] flex justify-center ',
 
 	nameCell: /*tw*/ 'flex flex-col justify-between w-[336px] pt-4 pl-5 pb-[13px]',
 	name: /*tw*/ 'text-[17px] font-[500]',
