@@ -1,0 +1,7 @@
+.ComparisonTable {
+    & > div:nth-child(odd) {
+        & > div {
+            @apply bg-lightBlue
+        }
+    }
+}

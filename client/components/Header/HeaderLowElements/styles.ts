@@ -5,4 +5,5 @@ export const s = {
 	navList: 'flex justify-between',
 	manufacturers: 'inline-flex items-center',
 	manufacturersIcon: 'ml-[5px]',
+	iconButtons: 'flex items-center',
 }

@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { CatalogPopover } from './CatalogPopover/CatalogPopover'
 import { s } from './styles'
 import { BasketPopover } from './BasketPopover/BasketPopover'
+import { ComparisonButton } from './ComparisonButton/ComparisonButton'
 
 export const HeaderLowElements = () => {
 	return (
@@ -37,7 +38,10 @@ export const HeaderLowElements = () => {
 				</nav>
 			</div>
 
-			<BasketPopover />
+			<div className={s.iconButtons}>
+				<ComparisonButton />
+				<BasketPopover />
+			</div>
 		</div>
 	)
 }

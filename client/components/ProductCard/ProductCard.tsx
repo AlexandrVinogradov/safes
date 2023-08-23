@@ -1,13 +1,16 @@
 import Image from 'next/image'
+import { CompareButtonPropsType } from './ComparisonButton/ComparisonButton'
 import { BasketIcon } from '@/icons/BasketIcon'
 import { ServerProductCardType } from '@/models/IProductStore'
-import { CompareIcon } from '@/icons/CompareIcon'
 import { Button } from '../Button/Button'
 import { IconButton } from '../IconButton/IconButton'
 import { DescItem } from './DescItem/DescItem'
+import { useBasketStore } from '@/store/useBasketStore'
+import dynamic from 'next/dynamic'
 import { s } from './styles'
 import clsx from 'clsx'
-import { useBasketStore } from '@/store/useBasketStore'
+
+const DynamicComparisonButton = dynamic<CompareButtonPropsType>(() => import('./ComparisonButton/ComparisonButton'), { ssr: false })
 
 type PropsType = {
 	card: ServerProductCardType
@@ -36,7 +39,7 @@ export const ProductCard = (props: PropsType) => {
 			<header>
 				<div className={s.nameBlock}>
 					<h3 className={s.name}>{card['name_ru-RU']}</h3>
-					<IconButton className={s.iconButton} icon={<CompareIcon />} />
+					<DynamicComparisonButton card={card} />
 				</div>
 
 				<p className={s.code}>Код: {card.product_ean}</p>
