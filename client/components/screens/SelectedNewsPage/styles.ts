@@ -1,3 +1,3 @@
 export const s = {
-	redirectSection: /*tw*/ 'pb-[70px]',
+	redirectSection: /*tw*/ 'mb-[70px]',
 }

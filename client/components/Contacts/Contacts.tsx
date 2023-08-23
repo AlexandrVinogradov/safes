@@ -1,13 +1,8 @@
-import { MailIcon } from '@/icons/MailIcon'
-import { PhoneIcon } from '@/icons/PhoneIcon'
-import { useModalStore } from '@/store/useModalStore'
+import { PhoneButton } from './PhoneButton/PhoneButton'
+import { MailButton } from './MailButton/MailButton'
 import { s } from './styles'
 
 export const Contacts = () => {
-	const setIsRequestCallModal = useModalStore((state) => state.setIsRequestCallModal)
-
-	const handleOpenRequestCallModal = () => setIsRequestCallModal(true)
-
 	return (
 		<div className={s.contactsWrapper}>
 			<div className={s.contacts}>
@@ -27,13 +22,9 @@ export const Contacts = () => {
 			</div>
 
 			<div className={s.contactIcons}>
-				<button onClick={handleOpenRequestCallModal}>
-					<PhoneIcon />
-				</button>
+				<PhoneButton />
 
-				<a className={s.link} href="mailto:prommetsafe@yandex.ru">
-					<MailIcon />
-				</a>
+				<MailButton />
 			</div>
 		</div>
 	)

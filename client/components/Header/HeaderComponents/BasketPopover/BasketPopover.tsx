@@ -4,7 +4,13 @@ import { BasketButton } from './BasketButton/BasketButton'
 import { s } from './styles'
 import { BasketPrice } from './BasketPrice/BasketPrice'
 
-export const BasketPopover = () => {
+type PropsType = {
+	isShowPrice?: boolean
+}
+
+export const BasketPopover = (props: PropsType) => {
+	const { isShowPrice = true } = props
+
 	const [isHovering, setIsHovering] = useState(false)
 
 	const handleMouseOver = () => setIsHovering(true)
@@ -14,7 +20,7 @@ export const BasketPopover = () => {
 		<div className={s.basketButtonPopover}>
 			<button onMouseOver={handleMouseOver} onMouseOut={handleMouseOut} className={s.basket}>
 				<BasketButton />
-				<BasketPrice />
+				{isShowPrice && <BasketPrice />}
 			</button>
 
 			<BasketPopup isHovering={isHovering} handleMouseOver={handleMouseOver} handleMouseOut={handleMouseOut} />
