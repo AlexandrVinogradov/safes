@@ -4,5 +4,5 @@ export const s = {
 	catalogProducts: /*tw*/ 'pb-[30px]',
 	wrapper: /*tw*/ 'flex',
 	productsWithPagination: /*tw*/ 'flex flex-col',
-	pagination: /*tw*/ 'm-10 self-center',
+	pagination: /*tw*/ 'pt-10 self-center',
 }

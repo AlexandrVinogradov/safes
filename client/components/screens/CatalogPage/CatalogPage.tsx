@@ -9,6 +9,7 @@ import { BreadCrumbsType } from '@/components/BreadCrumbs/type'
 import { getCategoryBreadCrumbs } from '@/helpers/getCategoryBreadCrumbs'
 import { getSelectCategory } from '@/helpers/getSelectCategory'
 import { TitleSection } from './CatalogPageSections/TitleSection/TitleSection'
+import { ProductSliderSection } from '@/components/commonSections/ProductSliderSection/ProductSliderSection'
 
 type PropsType = {
 	products: ProductsType
@@ -41,6 +42,7 @@ const CatalogPage = (props: PropsType) => {
 				{selectedCategory && <CategoriesSection selectedCategory={selectedCategory} />}
 
 				<CatalogSection products={products} category={category} extraValuesHandbook={extraValuesHandbook} />
+				<ProductSliderSection title="Вы недавно смотрели" productsList={products.list} />
 			</Main>
 		</Layout>
 	)
