@@ -3,6 +3,7 @@ import { Button } from '@/components/Button/Button'
 import Link from 'next/link'
 import { s } from './styles'
 import { useProductStore } from '@/store/useProductStore'
+import { HighlightText } from '@/components/HighLightText/HighLightText'
 
 type PropsType = {
 	inputRef: RefObject<HTMLInputElement>
@@ -41,9 +42,9 @@ export const SearchPopover = (props: PropsType) => {
 			<ul className={s.list}>
 				{searchData?.list.length ? (
 					<>
-						{searchData?.list.map((product: any) => (
+						{searchData?.list.map((product) => (
 							<Link key={product.product_id} className={s.listItem} href={`/${product['alias_ru-RU']}`}>
-								{product['name_ru-RU']} (код: {product.product_ean})
+								<HighlightText value={`${product['name_ru-RU']} (код: ${product.product_ean})`} highlight={searchValue} />
 							</Link>
 						))}
 					</>
