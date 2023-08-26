@@ -1,29 +1,25 @@
 import { useEffect, useRef } from 'react'
 import { useProductStore } from '@/store/useProductStore'
 import { container } from '@/styles/container'
-import { Filter } from '../../../../Filter/Filter'
-import { ExtraValuesHandbook, ProductsType } from '@/models/IProductStore'
+import { ProductsGrid } from '../../../../ProductsGrid/ProductsGrid'
+import { ProductsType } from '@/models/IProductStore'
 import { getApiProductURL } from '../../../../../helpers/getApiProductURL'
 import { useRouter } from 'next/router'
-import { CategoryType } from '@/models/ICategoriesStore'
 import { ParsedUrlQuery } from 'querystring'
 import { PaginationPropsType } from '@/components/Pagination/Pagination'
 import Sort from '@/components/Sort/Sort'
 import dynamic from 'next/dynamic'
 import { s } from './styles'
 import clsx from 'clsx'
-import { ProductsGrid } from '@/components/ProductsGrid/ProductsGrid'
 
 const DynamicCustomPagination = dynamic<PaginationPropsType>(() => import('@/components/Pagination/Pagination'), { ssr: false })
 
 type PropsType = {
 	products: ProductsType
-	category?: CategoryType
-	extraValuesHandbook: ExtraValuesHandbook[]
 }
 
-export const CatalogSection = (props: PropsType) => {
-	const { products, category, extraValuesHandbook } = props
+export const SearchResultSection = (props: PropsType) => {
+	const { products } = props
 	const { query } = useRouter()
 
 	const fetchProducts = useProductStore((state) => state.fetchProducts)
@@ -33,7 +29,7 @@ export const CatalogSection = (props: PropsType) => {
 		if (prevQueryRef.current !== query) {
 			console.log('fetch =>')
 
-			fetchProducts(getApiProductURL(query, category))
+			fetchProducts(getApiProductURL(query))
 			prevQueryRef.current = query
 		}
 	}, [query])
@@ -48,10 +44,8 @@ export const CatalogSection = (props: PropsType) => {
 		<section className={clsx(s.section, container)}>
 			<Sort className={s.sort} data={sortData} />
 			<div className={s.wrapper}>
-				<Filter extraValuesHandbook={extraValuesHandbook} />
-
 				<div className={s.productsWithPagination}>
-					<ProductsGrid products={products.list} />
+					<ProductsGrid products={products.list} className={s.productGrid} />
 					<DynamicCustomPagination className={s.pagination} total={products.pagination.totalRows} />
 				</div>
 			</div>

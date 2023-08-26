@@ -2,7 +2,7 @@ import { CategoryType } from '@/models/ICategoriesStore'
 import { SearchParamsType } from '@/types/SearchParamsType'
 import { getSelectCategory } from './getSelectCategory'
 
-export const getApiProductURL = (searchParams: SearchParamsType | undefined, category?: CategoryType) => {
+export const getApiProductURL = (searchParams: SearchParamsType | undefined, category?: CategoryType, search?: string) => {
 	// FIXME: extend {id?: string}
 	const { id, ...params } = searchParams
 
@@ -23,11 +23,16 @@ export const getApiProductURL = (searchParams: SearchParamsType | undefined, cat
 		'pageSize',
 		// sort
 		'sort',
+		// search
+		'search',
 	]
 
 	let url = `${process.env.API_URL_PRODUCTS}?`
 	if (selectedCategoryId) {
 		url = url + `categoryId=${selectedCategoryId}&`
+	}
+	if (search) {
+		url = url + `search=${search}&`
 	}
 
 	if (!searchParams) return url

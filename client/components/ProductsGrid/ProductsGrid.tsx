@@ -7,7 +7,7 @@ type PropsType = {
 	products: ServerProductCardType[]
 	className?: string 
 }
-export const CatalogProducts = (props: PropsType) => {
+export const ProductsGrid = (props: PropsType) => {
 	const { products, className } = props
 
 	if (!products.length) return <div>Не найдено</div>

@@ -8,8 +8,8 @@ import { useRouter } from 'next/router'
 import { BreadCrumbsType } from '@/components/BreadCrumbs/type'
 import { getCategoryBreadCrumbs } from '@/helpers/getCategoryBreadCrumbs'
 import { getSelectCategory } from '@/helpers/getSelectCategory'
-import { TitleSection } from './CatalogPageSections/TitleSection/TitleSection'
 import { ProductSliderSection } from '@/components/commonSections/ProductSliderSection/ProductSliderSection'
+import { ProductsTitleSection } from '@/components/commonSections/ProductsTitleSection/ProductsTitleSection'
 
 type PropsType = {
 	products: ProductsType
@@ -37,7 +37,7 @@ const CatalogPage = (props: PropsType) => {
 	return (
 		<Layout title="Каталог">
 			<Main breadCrumbs={breadCrumbs}>
-				<TitleSection title={categoryTitle || 'Каталог'} total={products.pagination.totalRows} />
+				<ProductsTitleSection title={categoryTitle || 'Каталог'} total={products.pagination.totalRows} />
 
 				{selectedCategory && <CategoriesSection selectedCategory={selectedCategory} />}
 

@@ -1,5 +1,7 @@
 export const s = {
-	search: /*tw*/ 'flex items-center w-full',
-	searchInput: /*tw*/ 'grow mr-[5px]',
-	searchButton: /*tw*/ 'h-[38px] border border-branded rounded-[3px] w-[96px]', // FIXME:
+	search: /*tw*/ 'relative w-full',
+	searchInputWrapper: /*tw*/ "relative flex items-center",
+	searchInput: /*tw*/ 'grow',
+	searchIconButton: /*tw*/ 'absolute right-5 top-[7px]',
+	searchButton: /*tw*/ 'max-h-[38px] border-branded text-white rounded-[3px] w-[96px] ml-[5px]',
 }

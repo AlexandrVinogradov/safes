@@ -3,11 +3,11 @@ import { s } from './styles'
 import { container } from '@/styles/container'
 
 type PropsType = {
-	title: string
+	title: string | JSX.Element
 	total: number
 }
 
-export const TitleSection = (props: PropsType) => {
+export const ProductsTitleSection = (props: PropsType) => {
 	const { title, total } = props
 
 	return (

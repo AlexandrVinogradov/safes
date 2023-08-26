@@ -3,6 +3,8 @@ import { create } from 'zustand'
 import { ServerProductCardType, FilterDataType, ProductsType, ExtraValuesHandbook } from '../models/IProductStore'
 
 type State = {
+	searchData: ProductsType | null
+	searchValue: string
 	products: ServerProductCardType[]
 	selectedProduct: ServerProductCardType | null
 	fetchProductsError: string | null
@@ -10,6 +12,7 @@ type State = {
 }
 
 type Actions = {
+	setSearchValue: (searchValue: string) => void
 	fetchProducts: (url: string) => Promise<ProductsType | ServerProductCardType>
 	fetchExtraValuesHandbook: () => Promise<ExtraValuesHandbook[]>
 	setFilterData: (paramId: 'price' | 'weight', value: [number, number]) => void
@@ -30,6 +33,20 @@ const initialFilterData: FilterDataType = {
 
 export const useProductStore = create(
 	immer<State & Actions>((set) => ({
+		searchData: null,
+		searchValue: '',
+		setSearchValue: async (searchValue) => {
+			set({ searchValue })
+			try {
+				const response = await fetch(`${process.env.API_URL_PRODUCTS}?search=${searchValue}` as string)
+				const data = await response.json()
+
+				if (!response.ok) throw new Error(data.message)
+				set({ searchData: data })
+			} catch {
+				//
+			}
+		},
 		products: [],
 		selectedProduct: null,
 		fetchProductsError: null,

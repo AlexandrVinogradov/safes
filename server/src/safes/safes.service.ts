@@ -61,8 +61,10 @@ export class SafesService {
 		// pagination
 		page?: number
 		pageSize?: number
-		//sort
+		// sort
 		sort?: string
+		// search
+		search?: string
 	}) {
 		let where = {}
 
@@ -94,6 +96,14 @@ export class SafesService {
 
 		for (const key in queryParams) {
 			switch (key) {
+				case 'search':
+					where = {
+						...where,
+						['name_ru-RU']: {
+							[Op.iLike]: `%${queryParams.search}%`,
+						},
+					}
+					break
 				case 'price':
 					where = {
 						...where,
