@@ -13,7 +13,7 @@ type State = {
 
 type Actions = {
 	setSearchValue: (searchValue: string) => void
-	fetchProducts: (url: string) => Promise<ProductsType | ServerProductCardType>
+	fetchProducts: (url: string, searchValue?: string) => Promise<ProductsType | ServerProductCardType>
 	fetchExtraValuesHandbook: () => Promise<ExtraValuesHandbook[]>
 	setFilterData: (paramId: 'price' | 'weight', value: [number, number]) => void
 	initFilterData: (filterData: FilterDataType) => void
@@ -35,22 +35,11 @@ export const useProductStore = create(
 	immer<State & Actions>((set) => ({
 		searchData: null,
 		searchValue: '',
-		setSearchValue: async (searchValue) => {
-			set({ searchValue })
-			try {
-				const response = await fetch(`${process.env.API_URL_PRODUCTS}?search=${searchValue}` as string)
-				const data = await response.json()
-
-				if (!response.ok) throw new Error(data.message)
-				set({ searchData: data })
-			} catch {
-				//
-			}
-		},
+		setSearchValue: (searchValue) => set({ searchValue }),
 		products: [],
 		selectedProduct: null,
 		fetchProductsError: null,
-		fetchProducts: async (url) => {
+		fetchProducts: async (url, searchValue?: string) => {
 			try {
 				const response = await fetch(url)
 				const data = await response.json()
@@ -61,6 +50,11 @@ export const useProductStore = create(
 					set({ selectedProduct: data })
 				} else {
 					// set({ products: data })
+				}
+
+				if (searchValue) {
+					set({ searchData: data })
+					return
 				}
 
 				return data

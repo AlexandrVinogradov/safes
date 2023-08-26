@@ -10,5 +10,6 @@ export const s = {
 `,
 	list: /*tw*/ 'flex flex-col text-dark px-5 pt-3 pb-[30px] space-y-4',
 	listItem: /*tw*/ 'text-[14px] py-2 leading-[16px] hover:text-branded duration-300',
+	searchValue: /*tw*/ 'text-branded font-semibold',
 	button: /*tw*/ 'self-center w-auto px-5 !mt-[30px]',
 }

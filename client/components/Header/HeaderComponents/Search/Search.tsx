@@ -8,6 +8,7 @@ import { useRouter } from 'next/router'
 import { IconButton } from '@/components/IconButton/IconButton'
 import clsx from 'clsx'
 import { s } from './styles'
+import { useDebounce } from '@/hooks/useDebounce'
 
 type PropsType = {
 	className?: string
@@ -21,6 +22,9 @@ export const Search = (props: PropsType) => {
 	const router = useRouter()
 	const searchValue = useProductStore((state) => state.searchValue)
 	const setSearchValue = useProductStore((state) => state.setSearchValue)
+	const searchData = useProductStore((state) => state.searchData)
+	const fetchProducts = useProductStore((state) => state.fetchProducts)
+	const debouncedValue = useDebounce<string>(searchValue, 500)
 
 	useEffect(() => {
 		if (inputRef.current === document.activeElement && !!searchValue) {
@@ -30,10 +34,18 @@ export const Search = (props: PropsType) => {
 		}
 	}, [!!searchValue])
 
+	useEffect(() => {
+		fetchProducts(`${process.env.API_URL_PRODUCTS}?search=${searchValue}`, searchValue)
+	}, [debouncedValue])
+
 	const selectSearchValue = () => {
-		router.push(`/search/result?search=${searchValue}`)
 		setIsShowPopover(false)
 		setSearchValue('')
+		if (!searchData?.list.length) {
+			router.push('/catalog')
+			return
+		}
+		router.push(`/search/result?search=${searchValue}`)
 	}
 	const handleChangeSearch = (e: string) => setSearchValue(e)
 	const handleClickInput = () => searchValue && setIsShowPopover(true)

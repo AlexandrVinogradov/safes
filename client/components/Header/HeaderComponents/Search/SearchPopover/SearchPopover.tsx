@@ -34,7 +34,7 @@ export const SearchPopover = (props: PropsType) => {
 		return () => document.removeEventListener('click', handleClickOutside)
 	}, [isShow])
 
-	if (!isShow) return null
+	if (!isShow || !searchData) return null
 
 	return (
 		<div ref={popoverRef} className={s.searchPopover}>
@@ -49,7 +49,7 @@ export const SearchPopover = (props: PropsType) => {
 					</>
 				) : (
 					<li>
-						Не найдено результатов по запросу: "<span className="text-branded font-semibold">{searchValue}</span>"
+						Не найдено результатов по запросу: "<span className={s.searchValue}>{searchValue}</span>"
 					</li>
 				)}
 
