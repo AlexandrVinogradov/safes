@@ -65,6 +65,8 @@ export class SafesService {
 		sort?: string
 		// search
 		search?: string
+		// other
+		isPublish?: string
 	}) {
 		let where = {}
 
@@ -96,6 +98,12 @@ export class SafesService {
 
 		for (const key in queryParams) {
 			switch (key) {
+				case 'isPublish':
+					where = {
+						...where,
+						product_publish: Number(queryParams.isPublish),
+					}
+					break
 				case 'search':
 					where = {
 						...where,

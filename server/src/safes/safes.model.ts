@@ -9,7 +9,7 @@ export interface SafeCreationAttrs {
 	product_ean: string
 }
 
-@Table({ tableName: '3', timestamps: false })
+@Table({ tableName: '4', timestamps: false })
 export class Safe extends Model<Safe, SafeCreationAttrs> {
 	@ApiProperty({ example: 675, description: 'Уникальный идентификатор' })
 	@ForeignKey(() => ProductImage)
@@ -23,6 +23,10 @@ export class Safe extends Model<Safe, SafeCreationAttrs> {
 	@ApiProperty({ example: '1', description: 'код товара' })
 	@Column({ type: DataType.STRING, allowNull: true })
 	product_ean: string
+
+	@ApiProperty({ example: '1', description: 'Показывать ли на фронте' })
+	@Column({ type: DataType.INTEGER, })
+	product_publish: string
 
 	@ApiProperty({ example: '2022-10-10', description: 'Дата создания записи' })
 	@Column({ type: DataType.STRING, allowNull: true })

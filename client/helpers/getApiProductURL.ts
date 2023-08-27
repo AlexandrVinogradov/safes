@@ -27,7 +27,7 @@ export const getApiProductURL = (searchParams: SearchParamsType | undefined, cat
 		'search',
 	]
 
-	let url = `${process.env.API_URL_PRODUCTS}?`
+	let url = `${process.env.API_URL_PRODUCTS}?isPublish=1&`
 	if (selectedCategoryId) {
 		url = url + `categoryId=${selectedCategoryId}&`
 	}
