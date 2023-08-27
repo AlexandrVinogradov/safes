@@ -35,6 +35,8 @@ export const Search = (props: PropsType) => {
 	}, [!!searchValue])
 
 	useEffect(() => {
+		if (!searchValue) return
+
 		fetchProducts(`${process.env.API_URL_PRODUCTS}?search=${searchValue}`, searchValue)
 	}, [debouncedValue])
 

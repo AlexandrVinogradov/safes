@@ -7,17 +7,15 @@ import { CategoryType } from '@/models/ICategoriesStore'
 import { CatalogMenuShowAllButton } from './CatalogMenuShowAllButton/CatalogMenuShowAllButton'
 
 type PropsType = {
-	isHovering: boolean
 	setIsHovering: (isHovering: boolean) => void
 	handleMouseOver: () => void
 	handleMouseOut: () => void
 }
 
 export const CatalogMenu = (props: PropsType) => {
-	const { isHovering, setIsHovering, handleMouseOver, handleMouseOut } = props
+	const { setIsHovering, handleMouseOver, handleMouseOut } = props
 
 	// TODO: add preloader and fetch after isHovering true
-	if (!isHovering) return null
 
 	const categories = useCategoriesStore((state) => state.categories)
 	const fetchCategories = useCategoriesStore((state) => state.fetchCategories)
@@ -66,6 +64,7 @@ export const CatalogMenu = (props: PropsType) => {
 					/>
 					{categories?.map((category) => (
 						<MenuItem
+							key={category.category_id}
 							isSelected={category.name === selectedLvl1?.name}
 							setIsShow={setIsShowSecondLvl}
 							setSelectedLvl1={setSelectedLvl1}

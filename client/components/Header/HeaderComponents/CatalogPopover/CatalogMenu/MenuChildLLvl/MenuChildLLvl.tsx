@@ -41,6 +41,7 @@ export const MenuChildLvl = (props: PropsType) => {
 			<ul>
 				{selectedLvl1?.child?.map((category) => (
 					<MenuItem
+						key={category.category_id}
 						isSelected={category['name_ru-RU'] === selectedLvl2?.['name_ru-RU']}
 						setIsShow={setIsShowChild}
 						setSelectedLvl1={setSelectedLvl1}

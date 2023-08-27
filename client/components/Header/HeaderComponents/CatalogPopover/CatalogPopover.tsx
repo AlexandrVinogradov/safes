@@ -29,12 +29,7 @@ export const CatalogPopover = (props: PropsType) => {
 				Каталог
 			</Button>
 
-			<CatalogMenu
-				isHovering={isHovering}
-				setIsHovering={setIsHovering}
-				handleMouseOver={handleMouseOver}
-				handleMouseOut={handleMouseOut}
-			/>
+			{isHovering && <CatalogMenu setIsHovering={setIsHovering} handleMouseOver={handleMouseOver} handleMouseOut={handleMouseOut} />}
 		</>
 	)
 }
