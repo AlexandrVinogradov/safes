@@ -12,6 +12,7 @@ type Actions = {
 	changeItemCount: (id: number, operation: 'increase' | 'decrease') => void
 	deleteItemToggle: (id: number, operation: 'delete' | 'return') => void
 	deleteAllItems: () => void
+	fullDeleteItems: () => void
 	clearItems: () => void
 }
 
@@ -54,6 +55,11 @@ export const useBasketStore = create(
 			deleteAllItems: () => {
 				set((state) => {
 					state.basketItems.forEach((item) => (item.isDeleted = true))
+				})
+			},
+			fullDeleteItems: () => {
+				set((state) => {
+					state.basketItems = state.basketItems.filter((item) => !item.isDeleted)
 				})
 			},
 			clearItems: () => {

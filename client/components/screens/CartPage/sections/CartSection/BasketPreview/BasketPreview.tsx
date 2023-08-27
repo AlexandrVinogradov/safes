@@ -8,11 +8,10 @@ import clsx from 'clsx'
 type PropsType = {
 	isEditMode?: boolean
 	className?: string
-	isShowDeleted?: boolean
 }
 
 export const BasketPreview = (props: PropsType) => {
-	const { isEditMode = true, className, isShowDeleted = true } = props
+	const { isEditMode = true, className = true } = props
 	const basketStore = usePersistStore(useBasketStore, (state) => state)
 	const basketItems = basketStore?.basketItems
 
@@ -26,10 +25,9 @@ export const BasketPreview = (props: PropsType) => {
 					<p className={s.count}>Кол-во</p>
 				</header>
 				<ul className={s.basketItemsList}>
-					{basketItems?.map((item) => {
-						if (!isShowDeleted && item.isDeleted) return
-						return <BasketItem key={item.id} isEditMode={isEditMode} item={item} />
-					})}
+					{basketItems?.map((item) => (
+						<BasketItem key={item.id} isEditMode={isEditMode} item={item} />
+					))}
 				</ul>
 			</div>
 

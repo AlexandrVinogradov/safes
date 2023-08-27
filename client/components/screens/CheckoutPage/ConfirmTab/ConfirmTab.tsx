@@ -22,7 +22,7 @@ export const ConfirmTab = () => {
 
 	return (
 		<form className={s.form} onSubmit={onSubmit}>
-			<BasketPreview isShowDeleted={false} isEditMode={false} className={s.basketPreview} />
+			<BasketPreview isEditMode={false} className={s.basketPreview} />
 			<PersonSummary />
 
 			<Button

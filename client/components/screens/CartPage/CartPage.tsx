@@ -6,6 +6,7 @@ import { ProductSliderSection } from '@/components/commonSections/ProductSliderS
 import { useBasketStore } from '@/store/useBasketStore'
 import { CartSection } from './sections/CartSection/CartSection'
 import { usePersistStore } from '@/hooks/usePersistStore'
+import { useEffect } from 'react'
 
 type PropsType = {
 	productsList: ServerProductCardType[]
@@ -13,7 +14,6 @@ type PropsType = {
 
 // TODO:
 // - reduce в helpers
-// - how to real delete item from basket?
 
 const СartPage = (props: PropsType) => {
 	const { productsList } = props
@@ -23,8 +23,15 @@ const СartPage = (props: PropsType) => {
 		{ name: 'Корзина', isActive: true },
 	]
 
+	const fullDeleteItems = useBasketStore((state) => state.fullDeleteItems)
 	const basketStore = usePersistStore(useBasketStore, (state) => state)
 	const basketItems = basketStore?.basketItems
+
+	useEffect(() => {
+		return () => {
+			if (basketItems?.some((item) => item.isDeleted)) fullDeleteItems()
+		}
+	}, [])
 
 	return (
 		<Layout title="Корзина">
