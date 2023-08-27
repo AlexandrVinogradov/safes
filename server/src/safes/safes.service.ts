@@ -100,7 +100,8 @@ export class SafesService {
 					where = {
 						...where,
 						['name_ru-RU']: {
-							[Op.iLike]: `%${queryParams.search}%`,
+							// 	[Op.iLike]: `%${queryParams.search}%`,
+							[Op.iRegexp]: `(${queryParams.search.replace(/\s+/g, '|')})`,
 						},
 					}
 					break

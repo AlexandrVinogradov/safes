@@ -1,5 +1,5 @@
 export const s = {
-	section: /*tw*/ '',
-	title: /*tw*/ 'text-[66px] text-center max-w-[1200px] mx-auto pb-[40px]',
+	section: /*tw*/ 'pb-[50px]',
+	title: /*tw*/ 'text-[46px] leading-[53px] text-center max-w-[1200px] mx-auto pb-[40px]',
 	image: /*tw*/ 'pb-[80px] mx-auto',
 }

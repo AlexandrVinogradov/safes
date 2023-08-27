@@ -5,11 +5,11 @@ import { ProductSliderSection } from '@/components/commonSections/ProductSliderS
 import { ServerProductCardType } from '@/models/IProductStore'
 
 type PropsType = {
-	productsList: ServerProductCardType[]
+	// productsList: ServerProductCardType[]
 }
 
 const NotFoundPage = (props: PropsType) => {
-	const { productsList } = props
+	// const { productsList } = props
 
 	const breadCrumbs = [
 		{ name: 'Главная', isActive: false, to: '/' },
@@ -20,7 +20,9 @@ const NotFoundPage = (props: PropsType) => {
 		<Layout title="notFound">
 			<Main breadCrumbs={breadCrumbs}>
 				<NotFoundContentSection />
-				<ProductSliderSection title="Вы недавно смотрели" productsList={productsList} />
+				{/* FIXME: */}
+				тут должен быть какой-то слайдер
+				{/* <ProductSliderSection title="Вы недавно смотрели" productsList={productsList} /> */}
 			</Main>
 		</Layout>
 	)
