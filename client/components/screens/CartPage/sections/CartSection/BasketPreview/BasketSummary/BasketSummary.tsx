@@ -3,6 +3,7 @@ import { Button } from '@/components/Button/Button'
 import { s } from './styles'
 import clsx from 'clsx'
 import { usePersistStore } from '@/hooks/usePersistStore'
+import { useRouter } from 'next/router'
 
 type PropsType = {
 	isEditMode?: boolean
@@ -11,8 +12,10 @@ type PropsType = {
 export const BasketSummary = (props: PropsType) => {
 	const { isEditMode = true } = props
 
+	const clearItems = useBasketStore((state) => state.clearItems)
 	const basketStore = usePersistStore(useBasketStore, (state) => state)
 	const basketItems = basketStore?.basketItems
+	const router = useRouter()
 
 	if (!basketItems) return null
 
@@ -44,6 +47,13 @@ export const BasketSummary = (props: PropsType) => {
 		}
 	}
 
+	const handleClickConfirm = () => {
+		setTimeout(() => {
+			clearItems()
+		}, 1_000)
+		router.replace('/order-is-processed')
+	}
+
 	return (
 		<div className={s.basketSummary}>
 			<p className={s.order}>Ваш заказ</p>
@@ -63,9 +73,13 @@ export const BasketSummary = (props: PropsType) => {
 				<p>{summary.toLocaleString('ru-RU')} ₽</p>
 			</div>
 
-			{isEditMode && (
+			{isEditMode ? (
 				<Button {...getButtonProps()} className={s.button}>
 					Оформить заказ
+				</Button>
+			) : (
+				<Button onClick={handleClickConfirm} className={s.button}>
+					Подтвердить заказ
 				</Button>
 			)}
 		</div>
