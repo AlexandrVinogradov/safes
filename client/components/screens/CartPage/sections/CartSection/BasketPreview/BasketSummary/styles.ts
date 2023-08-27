@@ -5,5 +5,5 @@ export const s = {
 	lastSummaryItem: /*tw*/ `relative pb-4
 		after:absolute after:w-full after:bg-white after:h-[1px] after:bottom-[0px] after:left-0`,
 	boldSummaryItem: /*tw*/ 'text-[18px] font-bold',
-	button: /*tw*/ 'bg-white w-full',
+	button: /*tw*/ 'bg-white w-full disabled:bg-dimmerText',
 }

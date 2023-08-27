@@ -32,7 +32,7 @@ createStore(
 
 const CheckoutPage = () => {
 	const [selectedTab, setSelectedTab] = useState<SelectedTabType>('personal')
-	const [isDisabledConfirmTab, setIsDisabledConfirmTab] = useState(true)
+	const [isRequiredFieldsAreFilled, setIsRequiredFieldsAreFilled] = useState(true)
 	const router = useRouter()
 
 	const breadCrumbs = [
@@ -65,6 +65,7 @@ const CheckoutPage = () => {
 							1. Личные данные
 						</Button>
 						<Button
+							disabled={isRequiredFieldsAreFilled}
 							styleType={getTabStyles('delivery')}
 							className={clsx(s.tabButton)}
 							onClick={() => setSelectedTab('delivery')}
@@ -72,7 +73,7 @@ const CheckoutPage = () => {
 							2. Способ доставки
 						</Button>
 						<Button
-							disabled={isDisabledConfirmTab}
+							disabled={isRequiredFieldsAreFilled}
 							styleType={getTabStyles('confirm')}
 							className={clsx(s.tabButton)}
 							onClick={() => setSelectedTab('confirm')}
@@ -83,7 +84,7 @@ const CheckoutPage = () => {
 
 					<StateMachineProvider>
 						{selectedTab === 'personal' && (
-							<PersonalForm setSelectedTab={setSelectedTab} setIsDisabledConfirmTab={setIsDisabledConfirmTab} />
+							<PersonalForm setSelectedTab={setSelectedTab} setIsRequiredFieldsAreFilled={setIsRequiredFieldsAreFilled} />
 						)}
 						{selectedTab === 'delivery' && <DeliveryForm setSelectedTab={setSelectedTab} />}
 						{selectedTab === 'confirm' && <ConfirmTab />}

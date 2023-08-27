@@ -28,9 +28,7 @@ const СartPage = (props: PropsType) => {
 	const basketItems = basketStore?.basketItems
 
 	useEffect(() => {
-		return () => {
-			if (basketItems?.some((item) => item.isDeleted)) fullDeleteItems()
-		}
+		return () => fullDeleteItems()
 	}, [])
 
 	return (

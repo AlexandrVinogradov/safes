@@ -29,6 +29,21 @@ export const BasketSummary = (props: PropsType) => {
 		return acc + item.price * item.count
 	}, 0)
 
+	const getButtonProps = () => {
+		const hasItemsForOrder = basketItems.some((item) => !item.isDeleted)
+
+		if (hasItemsForOrder) {
+			return {
+				disabled: false,
+				href: '/checkout',
+			}
+		} else {
+			return {
+				disabled: true,
+			}
+		}
+	}
+
 	return (
 		<div className={s.basketSummary}>
 			<p className={s.order}>Ваш заказ</p>
@@ -49,7 +64,7 @@ export const BasketSummary = (props: PropsType) => {
 			</div>
 
 			{isEditMode && (
-				<Button href="/checkout" className={s.button}>
+				<Button {...getButtonProps()} className={s.button}>
 					Оформить заказ
 				</Button>
 			)}

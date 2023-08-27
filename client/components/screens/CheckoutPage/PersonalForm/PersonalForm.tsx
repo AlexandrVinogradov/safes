@@ -23,7 +23,7 @@ type FormType = {
 
 type PropsType = {
 	setSelectedTab: (selectedTab: SelectedTabType) => void
-	setIsDisabledConfirmTab: (isDisabledConfirmTab: boolean) => void
+	setIsRequiredFieldsAreFilled: (isRequiredFieldsAreFilled: boolean) => void
 }
 
 export const updatePersonalForm = (state: any, payload: any) => {
@@ -31,7 +31,7 @@ export const updatePersonalForm = (state: any, payload: any) => {
 }
 
 export const PersonalForm = (props: PropsType) => {
-	const { setSelectedTab, setIsDisabledConfirmTab } = props
+	const { setSelectedTab, setIsRequiredFieldsAreFilled } = props
 	const defaultValues = {
 		name: '',
 		email: '',
@@ -64,10 +64,10 @@ export const PersonalForm = (props: PropsType) => {
 			...getValues(),
 		})
 
-		if (nameWatch && phoneWatch) {
-			setIsDisabledConfirmTab(false)
+		if (nameWatch && phoneWatch && isAgreeWatch) {
+			setIsRequiredFieldsAreFilled(false)
 		} else {
-			setIsDisabledConfirmTab(true)
+			setIsRequiredFieldsAreFilled(true)
 		}
 	}, [nameWatch, emailWatch, addressWatch, phoneWatch, commentWatch, isAgreeWatch, radioValue, fileList])
 

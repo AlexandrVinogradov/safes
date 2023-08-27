@@ -12,10 +12,10 @@ type PropsType = {
 }
 
 const CustomCheckbox = (props: PropsType & HTMLAttributes<HTMLInputElement>) => {
-	const { children, className, isError, value } = props
+	const { children, className, isError, value, ...otherProps } = props
 
 	return (
-		<Checkbox className={clsx(s.checkbox, isError && s.error, className)} checked={value} {...props} >
+		<Checkbox className={clsx(s.checkbox, isError && s.error, className)} checked={value} {...otherProps}>
 			{children}
 		</Checkbox>
 	)

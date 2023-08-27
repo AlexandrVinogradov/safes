@@ -1,3 +1,4 @@
+import { FormEvent } from 'react'
 import { Button } from '@/components/Button/Button'
 import { s } from './styles'
 import { PersonSummary } from './PersonSummary/PersonSummary'
@@ -9,14 +10,13 @@ export const ConfirmTab = () => {
 	const clearItems = useBasketStore((state) => state.clearItems)
 	const router = useRouter()
 
-	const onSubmit = () => {
+	const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+		e.preventDefault()
 		// TODO: send email for prommet and for user
 
-		// prefetch ???
-		clearItems()
-
-		// FIXME: page reload
-		// router.push('/order-is-processed', undefined, { shallow: true })
+		setTimeout(() => {
+			clearItems()
+		}, 1_000)
 		router.replace('/order-is-processed')
 	}
 
@@ -25,12 +25,7 @@ export const ConfirmTab = () => {
 			<BasketPreview isEditMode={false} className={s.basketPreview} />
 			<PersonSummary />
 
-			<Button
-				// href="/order-is-processed"
-				styleType="filled"
-				className={s.confirmButton}
-				type="submit"
-			>
+			<Button styleType="filled" className={s.confirmButton} type="submit">
 				Подтвердить заказ
 			</Button>
 		</form>

@@ -5,8 +5,7 @@ import { OrderIsProcessedSection } from './sections/OrderIsProcessedSection/Orde
 const OrderIsProcessedPage = () => {
 	const breadCrumbs = [
 		{ name: 'Главная', isActive: false, to: '/' },
-		{ name: 'Корзина', isActive: false, to: '/cart' },
-		{ name: 'Оформление заказа', isActive: true },
+		{ name: 'Заказ успешно оформлен', isActive: true },
 	]
 
 	return (
