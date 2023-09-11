@@ -101,7 +101,8 @@ export class SafesService {
 				case 'isPublish':
 					where = {
 						...where,
-						product_publish: Number(queryParams.isPublish),
+						// FIXME: не отдавать на фронт product_publish
+						product_publish: Boolean(queryParams.isPublish),
 					}
 					break
 				case 'search':

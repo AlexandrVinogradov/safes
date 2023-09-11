@@ -25,15 +25,15 @@ export class News extends Model<News, NewsCreationAttrs> {
 	metakey: string
 
 	@ApiProperty({ example: 'Наш интернет магазин предлагает...', description: 'description' })
-	@Column({ type: DataType.STRING, allowNull: false })
+	@Column({ type: DataType.TEXT, allowNull: false })
 	metadesc: string
 
 	@ApiProperty({ example: '<p>Мы рады видеть...', description: 'Html статьи' })
-	@Column({ type: DataType.STRING, allowNull: false })
+	@Column({ type: DataType.TEXT, allowNull: false })
 	fullHtml: string
 
 	@ApiProperty({ example: '<p>Мы рады видеть...', description: 'Html preview' })
-	@Column({ type: DataType.STRING, allowNull: false })
+	@Column({ type: DataType.TEXT, allowNull: false })
 	previewHtml: string
 
 	@ApiProperty({ example: '13.06.2022', description: 'Дата создания статьи' })

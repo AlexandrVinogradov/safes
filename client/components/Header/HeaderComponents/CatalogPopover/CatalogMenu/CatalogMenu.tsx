@@ -5,6 +5,7 @@ import { MenuItem } from './MenuItem/MenuItem'
 import { MenuChildLvl } from './MenuChildLLvl/MenuChildLLvl'
 import { CategoryType } from '@/models/ICategoriesStore'
 import { CatalogMenuShowAllButton } from './CatalogMenuShowAllButton/CatalogMenuShowAllButton'
+import { getClientServerUrl } from '@/helpers/getClientServerUrl'
 
 type PropsType = {
 	setIsHovering: (isHovering: boolean) => void
@@ -22,7 +23,9 @@ export const CatalogMenu = (props: PropsType) => {
 
 	useEffect(() => {
 		if (categories.length) return
-		fetchCategories(process.env.API_URL_CATEGORIES || '')
+
+		const API_URL = getClientServerUrl('categories')
+		fetchCategories(API_URL)
 	}, [])
 
 	const tags = [

@@ -1,6 +1,7 @@
 import CatalogPage from '@/components/screens/CatalogPage/CatalogPage'
 import { ProductPage } from '@/components/screens/ProductPage/ProductPage'
 import { getApiProductURL } from '@/helpers/getApiProductURL'
+import { getClientServerUrl } from '@/helpers/getClientServerUrl'
 import { CategoryType } from '@/models/ICategoriesStore'
 import { ExtraValuesHandbook, ProductsType, ServerProductCardType } from '@/models/IProductStore'
 import { useCategoriesStore } from '@/store/useCategoriesStore'
@@ -24,7 +25,10 @@ const Product: NextPage<PropsType> = ({ selectedProduct, category, products, rel
 
 export const getServerSideProps: GetServerSideProps<PropsType> = async (context) => {
 	const { fetchProducts, fetchExtraValuesHandbook } = useProductStore.getState()
-	const selectedProduct = (await fetchProducts(`${process.env.API_URL_PRODUCTS}/selected?safeAlias=${context.query?.id}`)) || null
+	const API_URL_PRODUCTS = getClientServerUrl('products')
+	const API_URL_CATEGORIES = getClientServerUrl('categories')
+
+	const selectedProduct = (await fetchProducts(`${API_URL_PRODUCTS}/selected?safeAlias=${context.query?.id}`)) || null
 
 	let relativeProductsList: ServerProductCardType[] | null = null
 	if (selectedProduct) {
@@ -38,10 +42,9 @@ export const getServerSideProps: GetServerSideProps<PropsType> = async (context)
 	let extraValuesHandbook: ExtraValuesHandbook[] | null = null
 	if (!selectedProduct) {
 		const { fetchCategories } = useCategoriesStore.getState()
-		category = (await fetchCategories(`${process.env.API_URL_CATEGORIES}/${context.query?.id}`)) as CategoryType
+		category = (await fetchCategories(`${API_URL_CATEGORIES}/${context.query?.id}`)) as CategoryType
 
 		products = (await fetchProducts(getApiProductURL(context.query, category))) as ProductsType
-
 
 		extraValuesHandbook = await fetchExtraValuesHandbook()
 	}

@@ -1,0 +1,55 @@
+version: '3.0'
+
+services:
+  frontend: 
+    build: 
+      context: ../client
+      dockerfile: ../dev-config/Dockerfile.frontend
+    ports: 
+      - 3000:3000
+    volumes: 
+      - ../client/:/app
+      # without this line there will be an error SWR
+      - /app/node_modules
+    networks:
+      - starlink
+
+  backend:
+    container_name: backend
+    build:
+      context: ../server
+      dockerfile: ../dev-config/Dockerfile.backend
+    env_file:
+      - ../server/.development.env
+    volumes:
+      - ../server:/app
+    ports:
+      - 5000:5000
+      - 9229:9229
+    command: npm run start:dev
+    depends_on:
+      - postgres
+    restart: always
+    networks:
+      - starlink
+
+  postgres:
+    container_name: postgres
+    image: postgres:12
+    env_file:
+      - ../server/.development.env
+    environment:
+      PG_DATA: /var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - /c/Users/PC/Desktop/shop-202309050134_N6:/var/lib/postgresql/shop-202309050134_N6
+    restart: always
+    networks:
+      - starlink
+
+networks:
+  starlink:
+volumes:
+  pgdata:

@@ -12,8 +12,8 @@ export class ExtraValue extends Model<ExtraValue, ExtraValueCreationAttrs> {
 	@Column({ type: DataType.INTEGER, unique: true, autoIncrement: true, primaryKey: true })
 	id: number
 
-	@ApiProperty({ example: 12, description: 'лого' })
-	@Column({ type: DataType.NUMBER })
+	@ApiProperty({ example: 12, description: 'ID поля' })
+	@Column({ type: DataType.INTEGER })
 	field_id: number
 
 	@ApiProperty({ example: '1 класс/ключевой', description: 'значение extra_field' })

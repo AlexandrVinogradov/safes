@@ -1,3 +1,4 @@
+import { getClientServerUrl } from '@/helpers/getClientServerUrl'
 import { ContentType } from '@/models/IContentStore'
 import { create } from 'zustand'
 import { immer } from 'zustand/middleware/immer'
@@ -15,7 +16,8 @@ export const useContentStore = create(
 		content: [],
 		fetchSelectedContent: async (alias: string) => {
 			try {
-				const response = await fetch(`${process.env.API_URL_CONTENT}/${alias}` || '')
+				const API_URL = getClientServerUrl('content')
+				const response = await fetch(`${API_URL}/${alias}`)
 				const data = await response.json()
 
 				if (!response.ok) throw new Error(data.message)

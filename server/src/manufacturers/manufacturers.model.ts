@@ -19,7 +19,7 @@ export class Manufacturer extends Model<Manufacturer, ManufacturerCreationAttrs>
 
 	@ApiProperty({ example: '1', description: 'хз' })
 	@Column({ type: DataType.INTEGER, allowNull: true })
-	ordering: string
+	ordering: number
 
 	@ApiProperty({ example: 'Сейфы VALBERG (Россия)', description: 'имя' })
 	@Column({ type: DataType.STRING, allowNull: true })
@@ -37,7 +37,7 @@ export class Manufacturer extends Model<Manufacturer, ManufacturerCreationAttrs>
 		example: '<p>VALBERG — самый продаваемый бренд на Российском рынке систем безопасности. Можно...',
 		description: 'описание с тегами',
 	})
-	@Column({ type: DataType.STRING, allowNull: true })
+	@Column({ type: DataType.TEXT, allowNull: true })
 	'description_ru-RU': string
 
 	@ApiProperty({ example: 'Сейфы Valberg — купить сейф Valberg в Москве', description: 'хз' })

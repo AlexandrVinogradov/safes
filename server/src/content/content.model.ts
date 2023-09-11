@@ -25,7 +25,7 @@ export class Content extends Model<Content, ContentCreationAttrs> {
 	introtext: string
 
 	@ApiProperty({ example: ' ', description: 'хз' })
-	@Column({ type: DataType.STRING })
+	@Column({ type: DataType.TEXT })
 	fulltext: string
 
 	@ApiProperty({ example: 'доставка сейфов, сейф', description: 'meta key' })

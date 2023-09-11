@@ -9,7 +9,7 @@ interface InstructionCreationAttrs {
 
 @Table({ tableName: 'instructions', timestamps: false })
 export class Instruction extends Model<Instruction, InstructionCreationAttrs> {
-	@ApiProperty({ example: '1', description: 'Уникальный идентификатор' })
+	@ApiProperty({ example: '1', description: 'Идентификатор' })
 	@Column({ type: DataType.INTEGER, unique: true, autoIncrement: true, primaryKey: true })
 	id: number
 
@@ -23,7 +23,7 @@ export class Instruction extends Model<Instruction, InstructionCreationAttrs> {
 	instructionCategory: InstructionCategories
 
 	@ApiProperty({ example: 'Инструкция по эксплуатации электронного кодового замка', description: 'Имя' })
-	@Column({ type: DataType.STRING, unique: true, allowNull: false })
+	@Column({ type: DataType.STRING, allowNull: false })
 	name: string
 
 	@ApiProperty({ example: 'tehnomaks-EL-MEBEL.pdf', description: 'Ссылка' })

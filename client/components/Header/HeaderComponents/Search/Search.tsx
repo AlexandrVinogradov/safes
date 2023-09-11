@@ -8,6 +8,7 @@ import { useRouter } from 'next/router'
 import { IconButton } from '@/components/IconButton/IconButton'
 import clsx from 'clsx'
 import { s } from './styles'
+import { getClientServerUrl } from '@/helpers/getClientServerUrl'
 import { useDebounce } from '@/hooks/useDebounce'
 
 type PropsType = {
@@ -36,8 +37,9 @@ export const Search = (props: PropsType) => {
 
 	useEffect(() => {
 		if (!searchValue) return
+		const API_URL = getClientServerUrl('products')
 
-		fetchProducts(`${process.env.API_URL_PRODUCTS}?search=${searchValue}`, searchValue)
+		fetchProducts(`${API_URL}?search=${searchValue}`, searchValue)
 	}, [debouncedValue])
 
 	const selectSearchValue = () => {

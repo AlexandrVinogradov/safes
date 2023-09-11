@@ -1,6 +1,7 @@
 import { immer } from 'zustand/middleware/immer'
 import { create } from 'zustand'
 import { InstructionCategoryType, InstructionsDataType } from '@/models/IInstructionsStore'
+import { getClientServerUrl } from '@/helpers/getClientServerUrl'
 
 type State = {
 	instructionsData: InstructionsDataType
@@ -26,14 +27,16 @@ export const useInstructionsStore = create(
 			instructions: [],
 		},
 		fetchInstructionsCategories: async () => {
-			const response = await fetch(process.env.API_URL_INSTRUCTIONS || '')
+			const API_URL = getClientServerUrl('instructions')
+			const response = await fetch(API_URL)
 			const data = await response.json()
 
 			return data
 		},
 
 		fetchInstructionsData: async (alias) => {
-			const response = await fetch(`${process.env.API_URL_INSTRUCTIONS}/${alias}`)
+			const API_URL = getClientServerUrl('instructions')
+			const response = await fetch(`${API_URL}/${alias}`)
 			const data = await response.json()
 
 			return data

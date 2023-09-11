@@ -1,6 +1,7 @@
 import { immer } from 'zustand/middleware/immer'
 import { create } from 'zustand'
 import { ServerProductCardType, FilterDataType, ProductsType, ExtraValuesHandbook } from '../models/IProductStore'
+import { getClientServerUrl } from '@/helpers/getClientServerUrl'
 
 type State = {
 	searchData: ProductsType | null
@@ -65,7 +66,8 @@ export const useProductStore = create(
 
 		fetchExtraValuesHandbook: async () => {
 			try {
-				const response = await fetch(process.env.API_URL_EXTRA_VALUE as string)
+				const API_URL = getClientServerUrl('extra_value')
+				const response = await fetch(API_URL)
 				const data = await response.json()
 
 				if (!response.ok) throw new Error(data.message)

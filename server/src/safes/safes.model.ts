@@ -9,7 +9,7 @@ export interface SafeCreationAttrs {
 	product_ean: string
 }
 
-@Table({ tableName: '4', timestamps: false })
+@Table({ tableName: 'mz', timestamps: false })
 export class Safe extends Model<Safe, SafeCreationAttrs> {
 	@ApiProperty({ example: 675, description: 'Уникальный идентификатор' })
 	@ForeignKey(() => ProductImage)
@@ -25,8 +25,8 @@ export class Safe extends Model<Safe, SafeCreationAttrs> {
 	product_ean: string
 
 	@ApiProperty({ example: '1', description: 'Показывать ли на фронте' })
-	@Column({ type: DataType.INTEGER, })
-	product_publish: string
+	@Column({ type: DataType.BOOLEAN })
+	product_publish: boolean
 
 	@ApiProperty({ example: '2022-10-10', description: 'Дата создания записи' })
 	@Column({ type: DataType.STRING, allowNull: true })
@@ -37,15 +37,15 @@ export class Safe extends Model<Safe, SafeCreationAttrs> {
 	date_modify: string
 
 	@ApiProperty({ example: 28130.0, description: 'старая цена' })
-	@Column({ type: DataType.NUMBER, allowNull: true })
+	@Column({ type: DataType.INTEGER, allowNull: true })
 	product_old_price: number
 
 	@ApiProperty({ example: 28130.0, description: 'цена' })
-	@Column({ type: DataType.NUMBER, allowNull: true })
+	@Column({ type: DataType.INTEGER, allowNull: true })
 	product_price: number
 
 	@ApiProperty({ example: 435500.0, description: 'вес' })
-	@Column({ type: DataType.NUMBER, allowNull: true })
+	@Column({ type: DataType.DOUBLE, allowNull: true })
 	product_weight: number
 
 	@ApiProperty({ example: 'Primat_Alpha_1475.png', description: 'картинка' })
@@ -54,7 +54,7 @@ export class Safe extends Model<Safe, SafeCreationAttrs> {
 
 	@ApiProperty({ example: 58, description: 'id производителя' })
 	@ForeignKey(() => Manufacturer)
-	@Column({ type: DataType.NUMBER, allowNull: true })
+	@Column({ type: DataType.INTEGER, allowNull: true })
 	product_manufacturer_id: number
 
 	@ApiProperty({ example: 'ManufacturerTYPE', description: 'id производителя' })
@@ -74,11 +74,11 @@ export class Safe extends Model<Safe, SafeCreationAttrs> {
 			'Большой сейф PRIMAT для квартиры, дома или офиса. Универсальный сейф для документов и ценных вещей. Устойчивость сейфа к взлому сертифицирована по стандарту EN 1143-1.',
 		description: 'короткое описание',
 	})
-	@Column({ type: DataType.STRING, allowNull: true })
+	@Column({ type: DataType.TEXT, allowNull: true })
 	'short_description_ru-RU': string
 
 	@ApiProperty({ example: '<p>{tab Характеристики}</p> <h2>Характеристики сейфа ALPHA 1475</h2> ...', description: 'описание c тегами' })
-	@Column({ type: DataType.STRING, allowNull: true })
+	@Column({ type: DataType.TEXT, allowNull: true })
 	'description_ru-RU': string
 
 	@ApiProperty({ example: 'Взломостойкий сейф ALPHA 1475 купить в Промметсейф', description: 'хз' })
@@ -86,7 +86,7 @@ export class Safe extends Model<Safe, SafeCreationAttrs> {
 	'meta_title_ru-RU': string
 
 	@ApiProperty({ example: 'Сейф ALPHA 1475 по доступным ценам с доставкой и установкой', description: 'хз' })
-	@Column({ type: DataType.STRING, allowNull: true })
+	@Column({ type: DataType.TEXT, allowNull: true })
 	'meta_description_ru-RU': string
 
 	@ApiProperty({ example: '1 класс', description: 'Взломостойкость' })
@@ -99,7 +99,7 @@ export class Safe extends Model<Safe, SafeCreationAttrs> {
 		as: 'extraFieldValue3',
 	})
 	extraFieldValue3: ExtraValue
-	
+
 	@ApiProperty({ example: '60Б - 60 минут', description: 'Огнестойкость' })
 	@Column({ type: DataType.INTEGER, allowNull: true })
 	extra_field_4: number
@@ -156,9 +156,9 @@ export class Safe extends Model<Safe, SafeCreationAttrs> {
 	extraFieldValue22: ExtraValue
 
 	@ApiProperty({ example: 'Сейф ALPHA 1475', description: 'хз' })
-	@Column({ type: DataType.STRING, allowNull: true })
+	@Column({ type: DataType.TEXT, allowNull: true })
 	'meta_keyword_ru-RU': string
-	
+
 	@ApiProperty({ example: '410', description: 'Объем (л)' })
 	@Column({ type: DataType.STRING, allowNull: true })
 	extra_field_13: string
@@ -177,10 +177,14 @@ export class Safe extends Model<Safe, SafeCreationAttrs> {
 export class ProductToCategories extends Model<ProductToCategories, SafeCreationAttrs> {
 	@ApiProperty({ example: 675, description: 'Product id' })
 	// @ForeignKey(() => ProductImage)
-	@Column({ type: DataType.INTEGER, unique: true, autoIncrement: true, primaryKey: true })
+	@Column({ type: DataType.INTEGER })
 	product_id: number
 
 	@ApiProperty({ example: 675, description: 'Category id' })
 	@Column({ type: DataType.INTEGER })
 	category_id: number
+
+	@ApiProperty({ example: 3, description: 'хз' })
+	@Column({ type: DataType.INTEGER })
+	product_ordering: number
 }
