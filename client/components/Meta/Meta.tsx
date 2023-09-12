@@ -13,13 +13,19 @@ export const Meta: FC<PropsWithChildren<MetaType>> = ({ title, description, keyw
 
 				{description ? (
 					<>
+						{/* TODO: meta tag for disable SEO */}
+						<meta name="robots" content="noindex, nofollow" />
+						{/* TODO: meta tag for disable SEO */}
+
 						<meta name="description" content={description} />
 						<meta name="og:title" content={getTitle(title)} />
 						<meta name="og:description" content={description} />
 						<meta name="keywords" content={keywords} />
 					</>
 				) : (
+					//  TODO: meta tag for disable SEO
 					<meta name="roots" content="noindex nofollow" />
+					//  TODO: meta tag for disable SEO
 				)}
 			</Head>
 			{children}
