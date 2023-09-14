@@ -17,5 +17,9 @@
   ],
   "editor.quickSuggestions": {
     "strings": true
-  }
+  },
+  "eslint.workingDirectories": [
+    { "pattern": "client/" },
+    { "pattern": "server/" }
+  ]
 }

@@ -45,14 +45,14 @@ export const ProductCard = (props: PropsType) => {
 				<p className={s.code}>Код: {card.product_ean}</p>
 			</header>
 			<div className={s.imgWrapper}>
-				<Image
+				{/* <Image
 					unoptimized={true}
 					src={`https://prommetsafe.ru/components/com_jshopping/files/img_products/${card.image}`}
 					alt={card['name_ru-RU']}
 					width="0"
 					height="0"
 					className={s.image}
-				/>
+				/> */}
 			</div>
 
 			<ul className={s.desc}>

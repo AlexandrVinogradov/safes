@@ -28,13 +28,13 @@ export const BasketItem = (props: PropsType) => {
 	return (
 		<li className={s.basketItem}>
 			<div className={s.image}>
-				<Image
+				{/* <Image
 					unoptimized={true}
 					src={`https://prommetsafe.ru/components/com_jshopping/files/img_products/${item.image}`}
 					alt={name}
 					width={318}
 					height={91}
-				/>
+				/> */}
 			</div>
 
 			<div className={s.nameCell}>

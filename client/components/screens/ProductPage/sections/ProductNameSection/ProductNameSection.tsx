@@ -21,17 +21,17 @@ export const ProductNameSection = (props: PropsType) => {
 			<div className={s.wrapper}>
 				<div className=" max-w-[690px] w-full">
 					<div>
-						<Image
+						{/* <Image
 							unoptimized={true}
 							src={`https://prommetsafe.ru/components/com_jshopping/files/img_products/${mainImage}`}
 							alt={name || 'Фото сейфа'}
 							width="0"
 							height="0"
 							className={s.image}
-						/>
+						/> */}
 					</div>
 					<div className="flex">
-						{images?.map((image) => (
+						{/* {images?.map((image) => (
 							<Image
 								key={image}
 								unoptimized={true}
@@ -40,7 +40,7 @@ export const ProductNameSection = (props: PropsType) => {
 								width={100}
 								height={100}
 							/>
-						))}
+						))} */}
 					</div>
 				</div>
 
