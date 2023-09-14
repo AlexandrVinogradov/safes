@@ -52,7 +52,7 @@ export const Footer = () => {
 
 				<div className={s.icons}>
 					{iconLinks.map((link) => (
-						<a target="_blank" key={link.name} href={link.to}>
+						<a target="_blank" key={link.name} rel="noreferrer" href={link.to}>
 							{link.icon}
 						</a>
 					))}

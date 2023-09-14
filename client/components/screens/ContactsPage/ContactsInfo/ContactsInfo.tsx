@@ -18,10 +18,10 @@ export const ContactsInfo = () => {
 			</div>
 			<div className={s.secondBlock}>
 				<div className={s.secondBlockLinks}>
-					<a href="https://api.whatsapp.com/send?phone=79265878650" target="_blank">
+					<a rel="noreferrer" href="https://api.whatsapp.com/send?phone=79265878650" target="_blank">
 						<WhatsApp />
 					</a>
-					<a href="viber://add?number=79265878650" target="_blank">
+					<a rel="noreferrer" href="viber://add?number=79265878650" target="_blank">
 						<ViberIcon />
 					</a>
 				</div>

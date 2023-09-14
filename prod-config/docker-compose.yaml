@@ -1,0 +1,57 @@
+version: '3.0'
+
+services:
+  nextjs:
+    build:
+      context: ../client
+      dockerfile: ../prod-config/Dockerfile.frontend
+    # ports:
+      # - 80:80  
+    networks:
+      - starlink
+
+  nginx:
+    build: 
+      context: .
+      dockerfile: ./Dockerfile.nginx
+    ports:
+      - 80:80
+    networks:
+      - starlink
+
+  backend:
+    container_name: backend
+    build:
+      context: ../server
+      dockerfile: ../prod-config/Dockerfile.backend
+    env_file:
+      - ../server/.production.env 
+    ports:
+      - 5000:5000
+    depends_on:
+      - postgres
+    restart: always
+    networks:
+      - starlink
+
+  postgres:
+    container_name: postgres
+    image: postgres:12
+    env_file:
+      - ../server/.production.env  
+    environment:
+      PG_DATA: /var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - /c/Users/PC/Desktop/shop-202309050134_N6:/var/lib/postgresql/shop-202309050134_N6
+      # - /c/Users/PC/Desktop/restore-script.sh:/docker-entrypoint-initdb.d/restore-script.sh
+    restart: always
+    networks:
+      - starlink
+
+networks:
+  starlink:
+volumes:
+  pgdata:

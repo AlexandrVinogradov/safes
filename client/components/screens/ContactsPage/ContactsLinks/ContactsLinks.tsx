@@ -18,10 +18,10 @@ export const ContactsLinks = () => {
 				<Button className={s.cutButton}>% Отправить заявку</Button>
 			</div>
 			<div className={s.ytBlock}>
-				<a href="https://www.youtube.com/channel/UCaRW0DJyJQiJI-nfOtVBlZg" target="_blank" className={s.ytLink}>
+				<a rel="noreferrer" href="https://www.youtube.com/channel/UCaRW0DJyJQiJI-nfOtVBlZg" target="_blank" className={s.ytLink}>
 					Наш YOUTUBE-канал
 				</a>
-				<a href="https://www.youtube.com/channel/UCaRW0DJyJQiJI-nfOtVBlZg" target="_blank">
+				<a rel="noreferrer" href="https://www.youtube.com/channel/UCaRW0DJyJQiJI-nfOtVBlZg" target="_blank">
 					<YoutubeIcon2 />
 				</a>
 			</div>

@@ -50,7 +50,7 @@ export const SearchPopover = (props: PropsType) => {
 					</>
 				) : (
 					<li>
-						Не найдено результатов по запросу: "<span className={s.searchValue}>{searchValue}</span>"
+						Не найдено результатов по запросу: {`"${<span className={s.searchValue}>{searchValue}</span>}"`}
 					</li>
 				)}
 

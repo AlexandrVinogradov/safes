@@ -26,8 +26,8 @@ const CatalogPage = (props: PropsType) => {
 	]
 
 	let selectedCategory
+	const { query } = useRouter()
 	if (category) {
-		const { query } = useRouter()
 		breadCrumbs = getCategoryBreadCrumbs(category, query.id as string)
 		selectedCategory = getSelectCategory(category, query.id as string)
 	}

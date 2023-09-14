@@ -46,7 +46,7 @@ export const CustomUpload = (props: PropsType) => {
 	return (
 		<Upload {...uploadProps} {...props}>
 			<Button type="button" className={s.button}>
-				<UploadOutlined className={s.icon} /> Приложите файл с реквизитами
+				<UploadOutlined rev={{}} className={s.icon} /> Приложите файл с реквизитами
 			</Button>
 		</Upload>
 	)

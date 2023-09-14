@@ -29,7 +29,7 @@ export const BasketPopup = (props: PropsType) => {
 							<ul className={s.basketItemsList}>
 								{basketItems.map((item) => {
 									if (item.isDeleted) return
-									return <ProductBasketItem item={item} />
+									return <ProductBasketItem key={item.id} item={item} />
 								})}
 							</ul>
 							<Button onClick={handleClickRedirect} href="/cart" className={clsx([s.button, s.goToCartButton])}>

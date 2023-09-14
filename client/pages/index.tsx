@@ -15,7 +15,7 @@ const Home: NextPage<PropsType> = ({ productsList }) => {
 export const getServerSideProps: GetServerSideProps<PropsType> = async (context) => {
 	const { fetchProducts } = useProductStore.getState()
 	const products = (await fetchProducts(getApiProductURL(context.query))) as ProductsType
-	const productsList = products.list
+	const productsList = products?.list || null
 
 	return {
 		props: { productsList },

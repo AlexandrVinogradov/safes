@@ -25,7 +25,7 @@ export const Comparison = () => {
 			<div className="overflow-x-auto">
 				<ul className={s.list}>
 					{comparisonItems?.map((el) => (
-						<li className={s.listItem}>
+						<li key={el.product_id} className={s.listItem}>
 							<IconButton
 								onClick={() => handleClickDeleteItem(el.product_id)}
 								className={s.removeItemButton}

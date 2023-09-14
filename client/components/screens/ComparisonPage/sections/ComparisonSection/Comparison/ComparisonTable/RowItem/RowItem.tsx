@@ -17,7 +17,7 @@ export const RowItem = (props: PropsType) => {
 		<div className={s.row}>
 			<p className={s.title}>{title}</p>
 			{comparisonItems?.map((el) => (
-				<div className={s.cell}>{valueType !== 'product_price' ? el[valueType] : el[valueType].toLocaleString('ru-RU')}</div>
+				<div key={el.product_id} className={s.cell}>{valueType !== 'product_price' ? el[valueType] : el[valueType].toLocaleString('ru-RU')}</div>
 			))}
 		</div>
 	)
