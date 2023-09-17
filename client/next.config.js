@@ -6,6 +6,7 @@ const nextConfig = {
     // this also controls running workers https://github.com/vercel/next.js/issues/45508#issuecomment-1597087133, which is causing
     // memory issues in 13.4.4 so until that's fixed, we don't want this.
   },
+  output: 'standalone',
 
   serverRuntimeConfig: {
     API_URL_CONTENT: 'http://backend:5000/content',
