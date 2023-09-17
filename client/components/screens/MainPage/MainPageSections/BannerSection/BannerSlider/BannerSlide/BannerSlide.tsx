@@ -1,4 +1,3 @@
-'use client'
 import Image from 'next/image'
 import { Button } from '@/components/Button/Button'
 import { BannerSlideType } from './IBannerSlide'
