@@ -24,6 +24,7 @@ const nextConfig = {
     API_URL_INSTRUCTIONS: 'http://localhost:5000/instructions',
     API_URL_NEWS: 'http://localhost:5000/news',
   },
+  staticPageGenerationTimeout: 1000,
 }
 process.on('unhandledRejection', error => {
   console.log('unhandledRejection', error);
