@@ -14,7 +14,7 @@ const Policy: NextPage<PropsType> = ({ content }) => {
 export const getStaticProps: GetStaticProps<PropsType> = async () => {
 	const { fetchSelectedContent } = useContentStore.getState()
 
-	const content = (await fetchSelectedContent('policies')) as ContentType
+	const content = (await fetchSelectedContent('policies') || null) as ContentType 
 
 	return {
 		props: { content },
