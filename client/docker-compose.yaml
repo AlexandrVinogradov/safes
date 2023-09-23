@@ -2,16 +2,15 @@ version: '3.5'
 
 services:
   nextjs:
-      # container_name: frontend
-      # build: .
+      container_name: frontend
       build:
         context: .
         dockerfile: Dockerfile.frontend
-      restart: always #change if you don't want your container restarting
+      restart: always
       environment:
         - NODE_ENV=production
-      # ports:
-        # - 3000:3000
+      ports:
+        - 3000:3000
       networks:
         - starlink
 
@@ -27,3 +26,4 @@ services:
 networks:
   starlink:
     name: starlink
+

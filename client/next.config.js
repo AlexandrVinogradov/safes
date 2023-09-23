@@ -9,12 +9,12 @@ const nextConfig = {
 	output: 'standalone',
 
 	serverRuntimeConfig: {
-		API_URL_CONTENT: 'http://backend:5000/content',
-		API_URL_CATEGORIES: 'http://backend:5000/categories',
-		API_URL_PRODUCTS: 'http://backend:5000/safes',
-		API_URL_EXTRA_VALUE: 'http://backend:5000/extraValue',
-		API_URL_INSTRUCTIONS: 'http://backend:5000/instructions',
-		API_URL_NEWS: 'http://backend:5000/news',
+		API_URL_CONTENT: 'http://host.docker.internal:5000/content',
+		API_URL_CATEGORIES: 'http://host.docker.internal:5000/categories',
+		API_URL_PRODUCTS: 'http://host.docker.internal:5000/safes',
+		API_URL_EXTRA_VALUE: 'http://host.docker.internal:5000/extraValue',
+		API_URL_INSTRUCTIONS: 'http://host.docker.internal:5000/instructions',
+		API_URL_NEWS: 'http://host.docker.internal:5000/news',
 	},
 	publicRuntimeConfig: {
 		API_URL_CONTENT: 'http://localhost:5000/content',

@@ -1,4 +1,4 @@
-version: '3.0'
+version: '3.7'
 
 services:
   backend:
@@ -11,6 +11,9 @@ services:
     depends_on:
       - postgres
     restart: always
+    volumes:
+      - .:/usr/src/app
+    command: npm run start:prod
     networks:
       - starlink
 
@@ -25,7 +28,8 @@ services:
       - 5432:5432
     volumes:
       - pgdata:/var/lib/postgresql/data
-      - /c/Users/PC/Desktop/shop-202309050134_N6:/var/lib/postgresql/shop-202309050134_N6
+      # - /c/Users/PC/Desktop/shop-202309050134_N6:/var/lib/postgresql/shop-202309050134_N6
+      - /Users/chartenek/Desktop/shop-202309050134_N6:/var/lib/postgresql/shop-202309050134_N6
       # - /c/Users/PC/Desktop/restore-script.sh:/docker-entrypoint-initdb.d/restore-script.sh
     restart: always
     networks:
@@ -34,5 +38,6 @@ services:
 networks:
   starlink:
     name: starlink
+    driver: bridge
 volumes:
   pgdata:
