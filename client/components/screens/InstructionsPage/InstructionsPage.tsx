@@ -35,7 +35,7 @@ const InstructionsPage = (props: PropsType) => {
 									{el.name}
 								</a>
 
-								{/* {el.image && (
+								{el.image && (
 									<Image
 										unoptimized={true}
 										src={`https://prommetsafe.ru/instructions/${el.image}`}
@@ -43,7 +43,7 @@ const InstructionsPage = (props: PropsType) => {
 										width={100}
 										height={100}
 									/>
-								)} */}
+								)}
 							</li>
 						))}
 					</ul>

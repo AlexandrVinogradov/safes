@@ -13,13 +13,13 @@ export const ProductBasketItem = (props: PropsType) => {
 	return (
 		<li className={s.item}>
 			<div className={s.nameBlock}>
-				{/* <Image
+				<Image
 					unoptimized={true}
 					src={`https://prommetsafe.ru/components/com_jshopping/files/img_products/${image}`}
 					alt={name}
 					width={118}
 					height={91}
-				/> */}
+				/>
 				<p className={s.name}>{name}</p>
 			</div>
 			<div className={s.descItem}>
