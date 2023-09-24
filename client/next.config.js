@@ -9,12 +9,19 @@ const nextConfig = {
 	output: 'standalone',
 
 	serverRuntimeConfig: {
-		API_URL_CONTENT: 'http://host.docker.internal:5000/content',
-		API_URL_CATEGORIES: 'http://host.docker.internal:5000/categories',
-		API_URL_PRODUCTS: 'http://host.docker.internal:5000/safes',
-		API_URL_EXTRA_VALUE: 'http://host.docker.internal:5000/extraValue',
-		API_URL_INSTRUCTIONS: 'http://host.docker.internal:5000/instructions',
-		API_URL_NEWS: 'http://host.docker.internal:5000/news',
+		API_URL_CONTENT: 'http://172.28.0.1:5000/content',
+		API_URL_CATEGORIES: 'http://172.28.0.1:5000/categories',
+		API_URL_PRODUCTS: 'http://172.28.0.1:5000/safes',
+		API_URL_EXTRA_VALUE: 'http://172.28.0.1:5000/extraValue',
+		API_URL_INSTRUCTIONS: 'http://172.28.0.1:5000/instructions',
+		API_URL_NEWS: 'http://172.28.0.1:5000/news',
+
+		// API_URL_CONTENT: 'http://host.docker.internal:5000/content',
+		// API_URL_CATEGORIES: 'http://host.docker.internal:5000/categories',
+		// API_URL_PRODUCTS: 'http://host.docker.internal:5000/safes',
+		// API_URL_EXTRA_VALUE: 'http://host.docker.internal:5000/extraValue',
+		// API_URL_INSTRUCTIONS: 'http://host.docker.internal:5000/instructions',
+		// API_URL_NEWS: 'http://host.docker.internal:5000/news',
 	},
 	publicRuntimeConfig: {
 		API_URL_CONTENT: 'http://62.217.178.31:5000/content',
