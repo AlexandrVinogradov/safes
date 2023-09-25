@@ -1,60 +1,51 @@
 import { container } from '@/styles/container'
-import Image from 'next/image'
-import clsx from 'clsx'
 import { Button } from '@/components/Button/Button'
+import { ProductGallery } from './ProductGallery/ProductGallery'
+import { useBasketStore } from '@/store/useBasketStore'
+import { ServerProductCardType } from '@/models/IProductStore'
 import { s } from './styles'
+import clsx from 'clsx'
 
 type PropsType = {
-	name: string | undefined
-	code: string | undefined
-	mainImage: string | undefined
-	images: string[] | undefined
-	price: string | undefined
-	oldPrice: string | undefined
+	selectedProduct: ServerProductCardType
 }
 
 export const ProductNameSection = (props: PropsType) => {
-	const { name, code, mainImage, images, price, oldPrice } = props
+	const { selectedProduct } = props
+	const { product_id, image, product_ean, productImages, product_price, product_old_price } = selectedProduct
+	const addBasketItem = useBasketStore((state) => state.addBasketItem)
+
+	const imgItems = productImages?.map((img, id) => ({ id, src: img.image_name, alt: `Фото ${name}` }))
+	console.log(productImages)
+
+	const handleClickAddProduct = () => {
+		addBasketItem({
+			id: product_id,
+			image: image,
+			name: selectedProduct['name_ru-RU'],
+			price: product_price,
+			oldPrice: product_old_price,
+			code: product_ean,
+			isDeleted: false,
+		})
+	}
 
 	return (
 		<section className={clsx(s.section, container)}>
 			<div className={s.wrapper}>
-				<div className=" max-w-[690px] w-full">
-					<div>
-						<Image
-							unoptimized={true}
-							src={`https://prommetsafe.ru/components/com_jshopping/files/img_products/${mainImage}`}
-							alt={name || 'Фото сейфа'}
-							width="0"
-							height="0"
-							className={s.image}
-						/>
-					</div>
-					<div className="flex">
-						{images?.map((image) => (
-							<Image
-								key={image}
-								unoptimized={true}
-								src={`https://prommetsafe.ru/components/com_jshopping/files/img_products/${image}`}
-								alt={name || 'Фото сейфа'}
-								width={100}
-								height={100}
-							/>
-						))}
-					</div>
-				</div>
+				<ProductGallery items={imgItems} />
 
-				<div className="w-full">
-					<p className={s.code}>Код товара: {code}</p>
-					<h1 className={s.name}>{name}</h1>
+				<div className="w-full ml-5">
+					<p className={s.code}>Код товара: {product_ean}</p>
+					<h1 className={s.name}>{selectedProduct?.['name_ru-RU']}</h1>
 					<div className={s.prices}>
 						{/* FIXME: .toLocaleString() */}
-						<p className={s.oldPrice}>{oldPrice} ₽</p>
-						<p className={s.price}>{price} ₽</p>
+						<p className={s.oldPrice}>{product_old_price} ₽</p>
+						<p className={s.price}>{product_price} ₽</p>
 					</div>
 					<button className={s.cheaper}>Нашли дешевле?</button>
 					<div className={s.orderButtons}>
-						<Button styleType="filled" className={s.oderButton}>
+						<Button onClick={handleClickAddProduct} styleType="filled" className={s.oderButton}>
 							В корзину
 						</Button>
 						<Button className={s.oderButton}>Быстрый заказ</Button>
