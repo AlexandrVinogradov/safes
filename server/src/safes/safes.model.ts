@@ -1,5 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger'
-import { Column, DataType, Model, Table, ForeignKey, BelongsTo, HasMany, HasOne } from 'sequelize-typescript'
+import { Column, DataType, Model, Table, ForeignKey, BelongsTo, HasMany, HasOne, BelongsToMany } from 'sequelize-typescript'
+import { Category } from 'src/categories/categories.model'
 import { ExtraValue } from 'src/extraValues/extraValues.model'
 import { Manufacturer } from 'src/manufacturers/manufacturers.model'
 import { ProductImage } from 'src/productImages/productImages.model'
@@ -13,6 +14,11 @@ export interface SafeCreationAttrs {
 export class Safe extends Model<Safe, SafeCreationAttrs> {
 	@ApiProperty({ example: 675, description: 'Уникальный идентификатор' })
 	@ForeignKey(() => ProductImage)
+	@BelongsToMany(() => Category, {
+		through: () => ProductToCategories,
+		foreignKey: 'category_id',
+		as: 'associatedSafes' 
+	})
 	@Column({ type: DataType.INTEGER, unique: true, autoIncrement: true, primaryKey: true })
 	product_id: number
 
@@ -176,11 +182,12 @@ export class Safe extends Model<Safe, SafeCreationAttrs> {
 // FIXME: SafeCreationAttrs
 export class ProductToCategories extends Model<ProductToCategories, SafeCreationAttrs> {
 	@ApiProperty({ example: 675, description: 'Product id' })
-	// @ForeignKey(() => ProductImage)
+	@ForeignKey(() => Safe)
 	@Column({ type: DataType.INTEGER })
 	product_id: number
 
 	@ApiProperty({ example: 675, description: 'Category id' })
+	@ForeignKey(() => Category)
 	@Column({ type: DataType.INTEGER })
 	category_id: number
 

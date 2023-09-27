@@ -32,6 +32,7 @@
 	.swiper-slide {
 		background-size: cover;
 		background-position: center;
+		padding: 3px;
 	}
 
 	.mySwiper2 {
@@ -57,6 +58,8 @@
 	}
 
 	.mySwiper .swiper-slide-thumb-active {
+		border-radius: 10px;
+		border: solid 1px #40A3D2;
 		opacity: 1;
 	}
 

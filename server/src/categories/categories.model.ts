@@ -1,5 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger'
-import { Column, DataType, Model, Table } from 'sequelize-typescript'
+import { Column, DataType, Model, Table, BelongsToMany } from 'sequelize-typescript'
+import { ProductToCategories, Safe } from 'src/safes/safes.model'
 
 interface CategoryCreationAttrs {
 	email: string
@@ -9,6 +10,11 @@ interface CategoryCreationAttrs {
 @Table({ tableName: 'categories', timestamps: false })
 export class Category extends Model<Category, CategoryCreationAttrs> {
 	@ApiProperty({ example: '1', description: 'Уникальный идентификатор' })
+	@BelongsToMany(() => Safe, {
+		through: () => ProductToCategories,
+		foreignKey: 'category_id',
+		as: 'associatedSafes' 
+	})
 	@Column({ type: DataType.INTEGER, unique: true, autoIncrement: true, primaryKey: true })
 	category_id: number
 
