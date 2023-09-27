@@ -13,6 +13,7 @@ type PropsType = {
 export const ProductNameSection = (props: PropsType) => {
 	const { selectedProduct } = props
 	const { product_id, image, product_ean, productImages, product_price, product_old_price } = selectedProduct
+	const name = selectedProduct['name_ru-RU']
 	const addBasketItem = useBasketStore((state) => state.addBasketItem)
 
 	const imgItems = productImages?.map((img, id) => ({ id, src: img.image_name, alt: `Фото ${name}` }))
@@ -22,7 +23,7 @@ export const ProductNameSection = (props: PropsType) => {
 		addBasketItem({
 			id: product_id,
 			image: image,
-			name: selectedProduct['name_ru-RU'],
+			name: name,
 			price: product_price,
 			oldPrice: product_old_price,
 			code: product_ean,

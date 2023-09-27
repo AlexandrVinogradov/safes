@@ -11,6 +11,11 @@ type PropsType = {
 }
 
 // FIXME: finish this page
+// Нашли дешевле
+// Вкладки
+// Relative clider
+// Что после заказа кнопки?
+
 export const ProductPage = (props: PropsType) => {
 	const { selectedProduct, relativeProductsList } = props
 

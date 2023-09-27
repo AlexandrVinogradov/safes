@@ -7,21 +7,31 @@ import { CategoryType } from '@/models/ICategoriesStore'
 type PropsType = {
 	category: CategoryType
 	lvl?: number
-	setSelectedLvl1?: (category: CategoryType) => void
-	setIsShow: ((isShow: boolean) => void) | undefined
+	// setSelectedLvl1?: (category: CategoryType) => void
+	// setIsShow: ((isShow: boolean) => void) | undefined
 	isSelected: boolean
 	setIsHovering: (isHovering: boolean) => void
+	onChange?: (category: CategoryType) => void
 }
 
 export const MenuItem = (props: PropsType) => {
-	const { category, lvl = 1, setSelectedLvl1, setIsShow, isSelected, setIsHovering } = props
+	const {
+		onChange,
+		category,
+		lvl = 1,
+		// setSelectedLvl1, setIsShow,
+		isSelected,
+		setIsHovering,
+	} = props
 
 	const handleOnMouseOver = () => {
-		if (setSelectedLvl1) setSelectedLvl1(category)
-		if (setIsShow && category.child) setIsShow(true)
+		// if (setSelectedLvl1) setSelectedLvl1(category)
+		// if (setIsShow && category.child) setIsShow(true)
+		onChange && onChange(category)
 	}
 	const handleOnMouseOut = () => {
-		if (setIsShow) setIsShow(false)
+		// if (setIsShow) setIsShow(false)
+		// if (setSelectedLvl1) setSelectedLvl1(null)
 	}
 
 	return (
