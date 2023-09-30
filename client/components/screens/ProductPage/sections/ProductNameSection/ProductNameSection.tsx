@@ -21,8 +21,11 @@ export const ProductNameSection = (props: PropsType) => {
 	return (
 		<section className={clsx(s.section, container)}>
 			<div className={s.wrapper}>
-				<ProductGallery items={imgItems} />
-
+				<ProductGallery
+					items={imgItems}
+					// videoLink='<iframe src="https://www.youtube.com/embed/xbEA9I1bW8Y" width="560" height="315" frameBorder="0" allowFullScreen={true}></iframe>'
+				/>
+				{/* TODO: manufacturer logo?  */}
 				<div className={s.description}>
 					<p className={s.code}>Код товара: {product_ean}</p>
 					<h1 className={s.name}>{selectedProduct?.['name_ru-RU']}</h1>

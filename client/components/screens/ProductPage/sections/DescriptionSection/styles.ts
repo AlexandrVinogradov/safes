@@ -10,6 +10,7 @@ export const s = {
 		[&_h3]:pb-5 [&_h3]:text-[18px] [&_h3]:font-bold [&_h3]:leading-[24px]
 		[&_ul]:space-y-1.5 [&_ul]:pl-1.5 [&_ul]:pb-4
 		[&_li]:before:content-['—'] [&_li]:before:pr-1.5
+		[&_iframe]:pb-4
 	`,
 	common: /*tw*/ 'flex items-start',
 	attentionIcon: /*tw*/ 'shrink-0 mr-3 mt-1.5',
