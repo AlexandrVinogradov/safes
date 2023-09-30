@@ -1,6 +1,7 @@
 export const s = {
 	section: /*tw*/ '',
 	wrapper: /*tw*/ 'flex',
+	description: /*tw*/ 'w-full ml-5',
 	image: /*tw*/ 'w-auto h-full w-[690px]',
 
 	code: /*tw*/ 'text-xl text-dimText pb-[30px] font-normal',

@@ -9,7 +9,7 @@ type State = {
 
 type Actions = {
 	addBasketItem: (product: Omit<BasketItemType, 'count'>) => void
-	changeItemCount: (id: number, operation: 'increase' | 'decrease') => void
+	changeItemCount: (id: number, operation: 'increase' | 'decrease', isAllowClearItem?: boolean) => void
 	deleteItemToggle: (id: number, operation: 'delete' | 'return') => void
 	deleteAllItems: () => void
 	fullDeleteItems: () => void
@@ -32,15 +32,27 @@ export const useBasketStore = create(
 					}
 				})
 			},
-			changeItemCount: (id: number, operation: 'increase' | 'decrease') => {
+			changeItemCount: (id: number, operation: 'increase' | 'decrease', isAllowClearItem?: boolean) => {
 				set((state) => {
 					const { basketItems } = state
 					const selectedProduct = basketItems.find((el) => el.id === id)
 
 					if (!selectedProduct) return
 
-					if (operation === 'increase') selectedProduct.count++
-					if (operation === 'decrease' && selectedProduct.count > 1) selectedProduct.count--
+					if (operation === 'increase') {
+						selectedProduct.count++
+						return
+					}
+					if (isAllowClearItem) {
+						if (operation === 'decrease' && selectedProduct.count > 1) {
+							selectedProduct.count--
+						} else {
+							const itemIndex = basketItems.findIndex((product) => product.id === id)
+							basketItems.splice(itemIndex, 1)
+						}
+					} else {
+						if (operation === 'decrease' && selectedProduct.count > 1) selectedProduct.count--
+					}
 				})
 			},
 			deleteItemToggle: (id: number, operation: 'delete' | 'return') => {
