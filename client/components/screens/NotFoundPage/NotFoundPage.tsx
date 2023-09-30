@@ -2,7 +2,7 @@ import { Layout } from '@/components/layout/layout'
 import { Main } from '../../Main/Main'
 import { NotFoundContentSection } from './NotFoundSections/NotFoundContentSection/NotFoundContentSection'
 import { ProductSliderSection } from '@/components/commonSections/ProductSliderSection/ProductSliderSection'
-import { ServerProductCardType } from '@/models/IProductStore'
+import { ProductCardType } from '@/models/IProductStore'
 
 type PropsType = {
 	// productsList: ServerProductCardType[]

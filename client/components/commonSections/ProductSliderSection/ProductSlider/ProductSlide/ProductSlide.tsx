@@ -1,8 +1,8 @@
 import { ProductCard } from '@/components/ProductCard/ProductCard'
-import { ServerProductCardType } from '@/models/IProductStore'
+import { ProductCardType } from '@/models/IProductStore'
 
 type PropsType = {
-	card: ServerProductCardType
+	card: ProductCardType
 }
 
 export const ProductSlide = (props: PropsType) => {

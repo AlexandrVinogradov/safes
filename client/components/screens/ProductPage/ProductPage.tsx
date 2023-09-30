@@ -1,4 +1,4 @@
-import { ServerProductCardType } from '@/models/IProductStore'
+import { SelectedProductType } from '@/models/IProductStore'
 import { ProductSliderSection } from '@/components/commonSections/ProductSliderSection/ProductSliderSection'
 import { ProductNameSection } from './sections/ProductNameSection/ProductNameSection'
 import { DescriptionSection } from './sections/DescriptionSection/DescriptionSection'
@@ -6,8 +6,7 @@ import { Layout } from '@/components/layout/layout'
 import { Main } from '@/components/Main/Main'
 
 type PropsType = {
-	selectedProduct: ServerProductCardType
-	relativeProductsList: ServerProductCardType[]
+	selectedProduct: SelectedProductType
 }
 
 // FIXME: finish this page
@@ -17,7 +16,7 @@ type PropsType = {
 // Что после заказа кнопки?
 
 export const ProductPage = (props: PropsType) => {
-	const { selectedProduct, relativeProductsList } = props
+	const { selectedProduct } = props
 
 	const breadCrumbs = [
 		{ name: 'Главная', isActive: false, to: '/' },
@@ -30,7 +29,7 @@ export const ProductPage = (props: PropsType) => {
 
 				<DescriptionSection description={selectedProduct?.['description_ru-RU']} />
 
-				<ProductSliderSection title="Похожие товары" productsList={relativeProductsList} />
+				<ProductSliderSection title="Похожие товары" productsList={selectedProduct.relatedSafes} />
 			</Main>
 		</Layout>
 	)

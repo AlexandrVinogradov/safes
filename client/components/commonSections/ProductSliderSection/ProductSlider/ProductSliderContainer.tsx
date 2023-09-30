@@ -1,11 +1,11 @@
 import { Slider } from '@/components/Slider/Slider'
 import { SwiperSlide } from 'swiper/react'
 import { s } from './styles'
-import { ServerProductCardType } from '@/models/IProductStore'
+import { ProductCardType } from '@/models/IProductStore'
 import { ProductSlide } from './ProductSlide/ProductSlide'
 
 type PropsType = {
-	productsList: ServerProductCardType[]
+	productsList: ProductCardType[]
 }
 
 export const ProductSliderContainer = (props: PropsType) => {

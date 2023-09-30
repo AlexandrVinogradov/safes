@@ -43,10 +43,10 @@ const getSubstring = (startIndex: number, endIndex: number, fullStr: string) => 
 }
 
 export const getTabContent = (selector: '{tab Характеристики}' | '{tab Описание}' | '<p>{tab Видео}', fullString: string) => {
-  if (!fullString.includes(selector)) return undefined
+  if (!fullString.includes(selector)) return ''
 
   const startIndex = fullString.indexOf(selector) + selector.length
   const endIndex = findNextOpeningBraceIndex(fullString, startIndex)
 
-  return getSubstring(startIndex, endIndex, fullString)
+  return getSubstring(startIndex, endIndex, fullString) || ''
 }

@@ -1,13 +1,13 @@
 import { NextPage } from 'next/types'
 import { container } from '@/styles/container'
-import { ServerProductCardType } from '@/models/IProductStore'
+import { ProductCardType } from '@/models/IProductStore'
 import { ProductSliderSection } from '@/components/commonSections/ProductSliderSection/ProductSliderSection'
 import { Button } from '@/components/Button/Button'
 import { s } from './styles'
 import clsx from 'clsx'
 
 type PropsType = {
-	productsList: ServerProductCardType[]
+	productsList: ProductCardType[]
 }
 
 export const NoveltiesSection: NextPage<PropsType> = ({ productsList }) => {

@@ -1,10 +1,10 @@
 import { ProductCard } from '@/components/ProductCard/ProductCard'
 import { s } from './styles'
-import { ServerProductCardType } from '@/models/IProductStore'
+import { ProductCardType } from '@/models/IProductStore'
 import clsx from 'clsx'
 
 type PropsType = {
-	products: ServerProductCardType[]
+	products: ProductCardType[]
 	className?: string 
 }
 export const ProductsGrid = (props: PropsType) => {

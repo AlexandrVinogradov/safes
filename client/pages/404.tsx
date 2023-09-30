@@ -1,6 +1,6 @@
 import NotFoundPage from '@/components/screens/NotFoundPage/NotFoundPage'
 import { getApiProductURL } from '@/helpers/getApiProductURL'
-import { ProductsType, ServerProductCardType } from '@/models/IProductStore'
+import { ProductCardType } from '@/models/IProductStore'
 import { useProductStore } from '@/store/useProductStore'
 import { GetServerSideProps, NextPage } from 'next/types'
 

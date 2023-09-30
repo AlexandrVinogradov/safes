@@ -1,11 +1,11 @@
 import { container } from '@/styles/container'
 import { s } from './styles'
-import { ServerProductCardType } from '@/models/IProductStore'
+import { ProductCardType } from '@/models/IProductStore'
 import { ProductSliderContainer } from './ProductSlider/ProductSliderContainer'
 import clsx from 'clsx'
 
 type PropsType = {
-	productsList: ServerProductCardType[]
+	productsList: ProductCardType[]
 	title: string
 	className?: string
 }

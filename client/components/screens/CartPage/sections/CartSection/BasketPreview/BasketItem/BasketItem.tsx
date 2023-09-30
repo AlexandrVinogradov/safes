@@ -30,7 +30,7 @@ export const BasketItem = (props: PropsType) => {
 			<div className={s.image}>
 				<Image
 					unoptimized={true}
-					src={`https://prommetsafe.ru/components/com_jshopping/files/img_products/${item.image}`}
+					src={`https://prommetsafe.ru/components/com_jshopping/files/img_products/${item.images[0].image_name}`}
 					alt={name}
 					width={318}
 					height={91}

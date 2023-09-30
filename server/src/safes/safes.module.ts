@@ -4,7 +4,7 @@ import { CategoriesController } from 'src/categories/categories.controller'
 import { Category } from 'src/categories/categories.model'
 import { CategoriesService } from 'src/categories/categories.service'
 import { SafesController } from './safes.controller'
-import { ProductToCategories, Safe } from './safes.model'
+import { ProductToCategories, ProductsRelations, Safe } from './safes.model'
 import { SafesService } from './safes.service'
 
 @Module({
@@ -14,6 +14,7 @@ import { SafesService } from './safes.service'
 		SequelizeModule.forFeature([Safe]),
 		SequelizeModule.forFeature([ProductToCategories]),
 		SequelizeModule.forFeature([Category]),
+		SequelizeModule.forFeature([ProductsRelations]),
 	],
 })
 export class SafesModule {}

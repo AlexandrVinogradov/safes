@@ -1,4 +1,4 @@
-import { ServerProductCardType } from '@/models/IProductStore'
+import { ProductCardType } from '@/models/IProductStore'
 import { Layout } from '../../layout/layout'
 import { ArticlesSection } from './MainPageSections/ArticlesSection/ArticlesSection'
 import { BannerSection } from './MainPageSections/BannerSection/BannerSection'
@@ -12,7 +12,7 @@ import { NextPage } from 'next/types'
 // Brands container
 
 type PropsType = {
-	productsList: ServerProductCardType[]
+	productsList: ProductCardType[]
 }
 
 const MainPage: NextPage<PropsType> = ({ productsList }) => {

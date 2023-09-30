@@ -1,20 +1,20 @@
 import { immer } from 'zustand/middleware/immer'
 import { create } from 'zustand'
-import { ServerProductCardType, FilterDataType, ProductsType, ExtraValuesHandbook } from '../models/IProductStore'
+import { SelectedProductType, FilterDataType, ProductsType, ExtraValuesHandbook } from '../models/IProductStore'
 import { getClientServerUrl } from '@/helpers/getClientServerUrl'
 
 type State = {
 	searchData: ProductsType | null
 	searchValue: string
-	products: ServerProductCardType[]
-	selectedProduct: ServerProductCardType | null
+	products: ProductsType | null
+	selectedProduct: SelectedProductType | null
 	fetchProductsError: string | null
 	filterData: FilterDataType
 }
 
 type Actions = {
 	setSearchValue: (searchValue: string) => void
-	fetchProducts: (url: string, searchValue?: string) => Promise<ProductsType | ServerProductCardType>
+	fetchProducts: (url: string, searchValue?: string) => Promise<ProductsType | SelectedProductType>
 	fetchExtraValuesHandbook: () => Promise<ExtraValuesHandbook[]>
 	setFilterData: (paramId: 'price' | 'weight', value: [number, number]) => void
 	initFilterData: (filterData: FilterDataType) => void
@@ -37,7 +37,7 @@ export const useProductStore = create(
 		searchData: null,
 		searchValue: '',
 		setSearchValue: (searchValue) => set({ searchValue }),
-		products: [],
+		products: null,
 		selectedProduct: null,
 		fetchProductsError: null,
 		fetchProducts: async (url, searchValue?: string) => {

@@ -3,21 +3,20 @@ import { ProductPage } from '@/components/screens/ProductPage/ProductPage'
 import { getApiProductURL } from '@/helpers/getApiProductURL'
 import { getClientServerUrl } from '@/helpers/getClientServerUrl'
 import { CategoryType } from '@/models/ICategoriesStore'
-import { ExtraValuesHandbook, ProductsType, ServerProductCardType } from '@/models/IProductStore'
+import { ExtraValuesHandbook, ProductsType, SelectedProductType } from '@/models/IProductStore'
 import { useCategoriesStore } from '@/store/useCategoriesStore'
 import { useProductStore } from '@/store/useProductStore'
 import { GetServerSideProps, NextPage } from 'next'
 
 type PropsType = {
-	selectedProduct: any
+	selectedProduct: SelectedProductType
 	category: CategoryType | null
 	products: ProductsType | null
-	relativeProductsList: ServerProductCardType[] | null
 	extraValuesHandbook: ExtraValuesHandbook[] | null
 }
 
-const Product: NextPage<PropsType> = ({ selectedProduct, category, products, relativeProductsList, extraValuesHandbook }) => {
-	if (selectedProduct) return <ProductPage selectedProduct={selectedProduct} relativeProductsList={relativeProductsList || []} />
+const Product: NextPage<PropsType> = ({ selectedProduct, category, products, extraValuesHandbook }) => {
+	if (selectedProduct) return <ProductPage selectedProduct={selectedProduct} />
 	return (
 		<CatalogPage products={products as ProductsType} category={category || undefined} extraValuesHandbook={extraValuesHandbook || []} />
 	)
@@ -28,14 +27,8 @@ export const getServerSideProps: GetServerSideProps<PropsType> = async (context)
 	const API_URL_PRODUCTS = getClientServerUrl('products')
 	const API_URL_CATEGORIES = getClientServerUrl('categories')
 
-	const selectedProduct = (await fetchProducts(`${API_URL_PRODUCTS}/selected?safeAlias=${context.query?.id}`)) || null
-
-	let relativeProductsList: ServerProductCardType[] | null = null
-	if (selectedProduct) {
-		// TODO: fetch relative products
-		const relativeProducts = (await fetchProducts(getApiProductURL(context.query))) as ProductsType as ProductsType
-		relativeProductsList = relativeProducts.list
-	}
+	const selectedProduct =
+		((await fetchProducts(`${API_URL_PRODUCTS}/selected?safeAlias=${context.query?.id}`)) as SelectedProductType) || null
 
 	let products: ProductsType | null = null
 	let category: CategoryType | null = null
@@ -54,7 +47,6 @@ export const getServerSideProps: GetServerSideProps<PropsType> = async (context)
 			selectedProduct,
 			category,
 			products,
-			relativeProductsList,
 			extraValuesHandbook,
 		},
 	}

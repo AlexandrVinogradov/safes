@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import { CompareButtonPropsType } from './ComparisonButton/ComparisonButton'
 import { BasketIcon } from '@/icons/BasketIcon'
-import { ServerProductCardType } from '@/models/IProductStore'
+import { ProductCardType } from '@/models/IProductStore'
 import { Button } from '../Button/Button'
 import { IconButton } from '../IconButton/IconButton'
 import { DescItem } from './DescItem/DescItem'
@@ -13,7 +13,7 @@ import clsx from 'clsx'
 const DynamicComparisonButton = dynamic<CompareButtonPropsType>(() => import('./ComparisonButton/ComparisonButton'), { ssr: false })
 
 type PropsType = {
-	card: ServerProductCardType
+	card: ProductCardType
 	className?: string
 }
 
@@ -25,7 +25,7 @@ export const ProductCard = (props: PropsType) => {
 	const handleClickAddProduct = () => {
 		addBasketItem({
 			id: card.product_id,
-			image: card.image,
+			images: card.productImages,
 			name: card['name_ru-RU'],
 			price: card.product_price,
 			oldPrice: card.product_old_price,
@@ -47,7 +47,7 @@ export const ProductCard = (props: PropsType) => {
 			<div className={s.imgWrapper}>
 				<Image
 					unoptimized={true}
-					src={`https://prommetsafe.ru/components/com_jshopping/files/img_products/${card.image}`}
+					src={`https://prommetsafe.ru/components/com_jshopping/files/img_products/${card.productImages[0].image_name}`}
 					alt={card['name_ru-RU']}
 					width="0"
 					height="0"

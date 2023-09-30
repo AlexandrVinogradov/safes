@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger'
-import { Column, DataType, Model, Table, ForeignKey, BelongsTo, HasMany, HasOne, BelongsToMany } from 'sequelize-typescript'
+import { Column, DataType, Model, Table, ForeignKey, BelongsTo, HasOne, BelongsToMany } from 'sequelize-typescript'
 import { Category } from 'src/categories/categories.model'
 import { ExtraValue } from 'src/extraValues/extraValues.model'
 import { Manufacturer } from 'src/manufacturers/manufacturers.model'
@@ -23,8 +23,21 @@ export class Safe extends Model<Safe, SafeCreationAttrs> {
 	product_id: number
 
 	@ApiProperty({ example: 'ProductImages', description: 'images' })
-	@HasMany(() => ProductImage)
+	@BelongsToMany(() => ProductImage, {
+    through:  () => ProductImage, // Имя таблицы-связи между Safe и ProductImage
+    foreignKey: 'product_id',
+    otherKey: 'image_id',
+    as: 'productImages', // Алиас для ассоциации с ProductImage
+  })
 	productImages: ProductImage[]
+
+  @BelongsToMany(() => Safe, {
+    through: () => ProductsRelations,
+    as: 'relations',
+    foreignKey: 'product_id',
+    otherKey: 'product_related_id',
+  })
+  related: Safe[];
 
 	@ApiProperty({ example: '1', description: 'код товара' })
 	@Column({ type: DataType.STRING, allowNull: true })
@@ -194,4 +207,23 @@ export class ProductToCategories extends Model<ProductToCategories, SafeCreation
 	@ApiProperty({ example: 3, description: 'хз' })
 	@Column({ type: DataType.INTEGER })
 	product_ordering: number
+}
+
+@Table({ tableName: 'products_relations', timestamps: false })
+export class ProductsRelations extends Model<ProductToCategories, SafeCreationAttrs> {
+	@ApiProperty({ example: 675, description: 'id',  })
+	@Column({ type: DataType.INTEGER, unique: true, autoIncrement: true, primaryKey: true })
+	id: number
+
+	@ApiProperty({ example: 675, description: 'product_id' })
+	@ForeignKey(() => Safe)
+	@BelongsTo(() => Safe, { foreignKey: 'product_id', as: 'product' })
+	@Column({ type: DataType.INTEGER })
+	product_id: number
+
+	@ApiProperty({ example: 3, description: 'product_id' })
+	@ForeignKey(() => Safe)
+	@BelongsTo(() => Safe, { foreignKey: 'product_related_id', as: 'relatedProduct' })
+	@Column({ type: DataType.INTEGER })
+	product_related_id: number
 }
