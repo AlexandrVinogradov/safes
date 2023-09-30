@@ -3,6 +3,7 @@ import { Button } from '@/components/Button/Button'
 import { ProductGallery } from './ProductGallery/ProductGallery'
 import { useBasketStore } from '@/store/useBasketStore'
 import { SelectedProductType } from '@/models/IProductStore'
+import { CutButton } from '@/components/CutButton/CutButton'
 import { s } from './styles'
 import clsx from 'clsx'
 
@@ -43,7 +44,9 @@ export const ProductNameSection = (props: PropsType) => {
 						<p className={s.oldPrice}>{product_old_price} ₽</p>
 						<p className={s.price}>{product_price} ₽</p>
 					</div>
-					<button className={s.cheaper}>Нашли дешевле?</button>
+
+					<CutButton className={s.cheaper}>Нашли дешевле?</CutButton>
+
 					<div className={s.orderButtons}>
 						<Button onClick={handleClickAddProduct} styleType="filled" className={s.oderButton}>
 							В корзину
