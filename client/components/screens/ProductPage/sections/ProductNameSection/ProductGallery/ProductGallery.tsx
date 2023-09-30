@@ -20,7 +20,7 @@ export const ProductGallery = (props: PropsType) => {
 	return (
 		<Galley>
 			{items.map((slide) => (
-				<SwiperSlide>
+				<SwiperSlide key={slide.id}>
 					<GallerySlide slide={slide} />
 				</SwiperSlide>
 			))}

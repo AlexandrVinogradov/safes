@@ -7,6 +7,7 @@ import { Main } from '@/components/Main/Main'
 
 type PropsType = {
 	selectedProduct: SelectedProductType
+	deliveryContent: string
 }
 
 // FIXME: finish this page
@@ -16,18 +17,19 @@ type PropsType = {
 // Что после заказа кнопки?
 
 export const ProductPage = (props: PropsType) => {
-	const { selectedProduct } = props
+	const { selectedProduct, deliveryContent } = props
 
 	const breadCrumbs = [
 		{ name: 'Главная', isActive: false, to: '/' },
 		{ name: 'Продукт', isActive: true, to: '/' },
 	]
+
 	return (
 		<Layout title="SELECTED">
 			<Main breadCrumbs={breadCrumbs}>
 				<ProductNameSection selectedProduct={selectedProduct} />
 
-				<DescriptionSection description={selectedProduct?.['description_ru-RU']} />
+				<DescriptionSection description={selectedProduct?.['description_ru-RU']} deliveryContent={deliveryContent} />
 
 				<ProductSliderSection title="Похожие товары" productsList={selectedProduct.relatedSafes} />
 			</Main>

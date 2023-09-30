@@ -8,12 +8,13 @@ import { getTabContent } from './helpers/getTabContent'
 
 type PropsType = {
 	description: string | undefined
+	deliveryContent: string
 }
 
 export type TabsType = 'char' | 'desc' | 'video' | 'delivery'
 
 export const DescriptionSection = (props: PropsType) => {
-	const { description } = props
+	const { description, deliveryContent } = props
 	const [selectedTab, setSelectedTab] = useState<TabsType>('char')
 
 	if (!description) return null
@@ -28,14 +29,13 @@ export const DescriptionSection = (props: PropsType) => {
 		if (tab === 'char') return charContent
 		if (tab === 'desc') return descContent
 		if (tab === 'video') return videoContent
-		if (tab === 'delivery') return delN
+		if (tab === 'delivery') return deliveryContent
 		return ''
 	}
 
 	const charContent = getTabContent('{tab Характеристики}', description)
 	const descContent = getTabContent('{tab Описание}', description)
 	const videoContent = getTabContent('<p>{tab Видео}', description)?.replace('</p>', '')
-	const delN = '<p>Тут будет доставка</p>'
 
 	return (
 		<section className={s.section}>
@@ -66,7 +66,7 @@ export const DescriptionSection = (props: PropsType) => {
 						tabName="delivery"
 						selectedTab={selectedTab}
 						setSelectedTab={setSelectedTab}
-						hasContent={!!delN}
+						hasContent={!!deliveryContent}
 						title="Доставка"
 					/>
 				</div>
