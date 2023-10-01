@@ -2,7 +2,7 @@ import { Main } from '../../Main/Main'
 import { Layout } from '@/components/layout/layout'
 import { container } from '@/styles/container'
 import { ContentType } from '@/models/IContentStore'
-import styles from './DeliveryPage.module.scss'
+import styles from '../../../styles/ServerHTML.module.scss'
 
 type PropsType = {
 	content: ContentType

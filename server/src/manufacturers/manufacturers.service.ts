@@ -14,7 +14,13 @@ export class ManufacturersService {
 
 	async getAllManufacturers() {
 		const manufacturers = await this.manufacturerRepository.findAll()
-
 		return manufacturers
+	}
+
+	async getSelectedManufacturer(alias: string) {
+		const manufacturer = await this.manufacturerRepository.findOne({ where: { 'alias_ru-RU': alias } })
+
+		// FIXME: need norm handler
+		return manufacturer
 	}
 }

@@ -1,7 +1,7 @@
 import getConfig from 'next/config'
 import { isObjectEmpty } from './isObjectEmpty'
 
-type EndpointType = 'content' | 'categories' | 'products' | 'extra_value' | 'instructions' | 'news'
+type EndpointType = 'content' | 'categories' | 'products' | 'extra_value' | 'instructions' | 'news' | 'manufacturers'
 type ObjectType = Record<string, string>
 type ConfigType = { serverRuntimeConfig: ObjectType; publicRuntimeConfig: ObjectType }
 

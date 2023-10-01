@@ -59,6 +59,8 @@ export class SafesService {
 		metalThickness?: string
 		// category
 		categoryId?: string
+		// manufacturer
+		manufacturerId?: string
 		// pagination
 		page?: number
 		pageSize?: number
@@ -81,6 +83,7 @@ export class SafesService {
 			order = [[value, orderType]]
 		}
 
+		// Category
 		let productsIdByCategoryId: { product_id: number }[] = null
 		if (queryParams.categoryId) {
 			productsIdByCategoryId = await getProductsIdByCategoryId(
@@ -92,6 +95,14 @@ export class SafesService {
 			where = {
 				...where,
 				[Op.or]: productsIdByCategoryId.map((el) => ({ product_id: el.product_id })),
+			}
+		}
+		
+		// Manufacturer
+		if (queryParams.manufacturerId) {
+			where = {
+				product_manufacturer_id: queryParams.manufacturerId,
+				...where,
 			}
 		}
 

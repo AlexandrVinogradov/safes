@@ -3,8 +3,12 @@ import { SearchParamsType } from '@/types/SearchParamsType'
 import { getSelectCategory } from './getSelectCategory'
 import { getClientServerUrl } from './getClientServerUrl'
 
-
-export const getApiProductURL = (searchParams: SearchParamsType | undefined, category?: CategoryType, search?: string) => {
+export const getApiProductURL = (
+	searchParams: SearchParamsType | undefined,
+	category?: CategoryType,
+	search?: string,
+	manufacturerId?: string,
+) => {
 	// FIXME: extend {id?: string}
 	// @ts-ignore
 	const { id, ...params } = searchParams
@@ -36,6 +40,9 @@ export const getApiProductURL = (searchParams: SearchParamsType | undefined, cat
 	}
 	if (search) {
 		url = url + `search=${search}&`
+	}
+	if (manufacturerId) {
+		url = url + `manufacturerId=${manufacturerId}&`
 	}
 
 	if (!searchParams) return url

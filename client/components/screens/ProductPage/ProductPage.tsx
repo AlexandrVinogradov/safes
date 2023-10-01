@@ -7,7 +7,7 @@ import { Main } from '@/components/Main/Main'
 
 type PropsType = {
 	selectedProduct: SelectedProductType
-	deliveryContent: string
+	deliveryContent: string | null
 }
 
 // FIXME: finish this page
@@ -29,7 +29,7 @@ export const ProductPage = (props: PropsType) => {
 			<Main breadCrumbs={breadCrumbs}>
 				<ProductNameSection selectedProduct={selectedProduct} />
 
-				<DescriptionSection description={selectedProduct?.['description_ru-RU']} deliveryContent={deliveryContent} />
+				<DescriptionSection description={selectedProduct?.['description_ru-RU']} deliveryContent={deliveryContent || ''} />
 
 				<ProductSliderSection title="Похожие товары" productsList={selectedProduct.relatedSafes} />
 			</Main>
