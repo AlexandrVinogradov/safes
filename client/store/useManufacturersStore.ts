@@ -1,13 +1,13 @@
 import { immer } from 'zustand/middleware/immer'
 import { create } from 'zustand'
-import { ManufacturerType } from '@/models/IManufacturersStore'
+import { ManufacturerType, SelectedManufacturer } from '@/models/IManufacturersStore'
 
 type State = {
 	manufacturers: ManufacturerType[]
 }
 
 type Actions = {
-	fetchManufacturers: (url: string) => Promise<ManufacturerType[] | ManufacturerType>
+	fetchManufacturers: (url: string) => Promise<ManufacturerType[] | SelectedManufacturer>
 }
 
 export const useManufacturersStore = create(

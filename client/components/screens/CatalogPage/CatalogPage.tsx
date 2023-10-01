@@ -10,14 +10,14 @@ import { getCategoryBreadCrumbs } from '@/helpers/getCategoryBreadCrumbs'
 import { getSelectCategory } from '@/helpers/getSelectCategory'
 import { ProductSliderSection } from '@/components/commonSections/ProductSliderSection/ProductSliderSection'
 import { ProductsTitleSection } from '@/components/commonSections/ProductsTitleSection/ProductsTitleSection'
-import { ManufacturerType } from '@/models/IManufacturersStore'
+import { SelectedManufacturer } from '@/models/IManufacturersStore'
 import { CatalogDescriptionSection } from './CatalogPageSections/CatalogDescriptionSection/CatalogDescriptionSection'
 
 type PropsType = {
 	products: ProductsType
 	category?: CategoryType
 	extraValuesHandbook: ExtraValuesHandbook[]
-	manufacturer: ManufacturerType | null
+	manufacturer?: SelectedManufacturer | null
 }
 
 const CatalogPage = (props: PropsType) => {
@@ -36,11 +36,12 @@ const CatalogPage = (props: PropsType) => {
 	}
 
 	const categoryTitle = selectedCategory?.['name_ru-RU']
+	const manufacturerTitle = manufacturer?.['name_ru-RU']
 
 	return (
 		<Layout title="Каталог">
 			<Main breadCrumbs={breadCrumbs}>
-				<ProductsTitleSection title={categoryTitle || 'Каталог'} total={products.pagination.totalRows} />
+				<ProductsTitleSection title={categoryTitle || manufacturerTitle || 'Каталог'} total={products.pagination.totalRows} />
 				{selectedCategory && <CategoriesSection selectedCategory={selectedCategory} />}
 				<CatalogSection products={products} category={category} extraValuesHandbook={extraValuesHandbook} />
 				<CatalogDescriptionSection description={manufacturer?.['description_ru-RU']} />

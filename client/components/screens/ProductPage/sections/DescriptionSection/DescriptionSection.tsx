@@ -41,6 +41,7 @@ export const DescriptionSection = (props: PropsType) => {
 		<section className={s.section}>
 			<div>
 				<div className={clsx(s.tabButtons, container)}>
+					{/* FIXME: Add # to url like on prommet.ru */}
 					<TabButton
 						tabName="char"
 						selectedTab={selectedTab}

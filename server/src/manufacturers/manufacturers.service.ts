@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common'
 import { InjectModel } from '@nestjs/sequelize'
 import { CreateManufacturerDto } from './dto/create-manufacturer.dto'
-import { Manufacturer } from './manufacturers.model'
+import { Country, Manufacturer } from './manufacturers.model'
 
 @Injectable()
 export class ManufacturersService {
@@ -13,8 +13,29 @@ export class ManufacturersService {
 	}
 
 	async getAllManufacturers() {
-		const manufacturers = await this.manufacturerRepository.findAll()
-		return manufacturers
+		const manufacturers = await this.manufacturerRepository.findAll({
+			include: [{ model: Country, as: 'country' }],
+		})
+
+		const countryManufacturers = manufacturers.reduce((acc, man) => {
+			const index = acc.findIndex((el) => el.country === man.country?.name)
+
+			if (index === -1) {
+				const newItem = {
+					country: man.country?.name,
+					flag: man.country?.image,
+					manufacturers: [{ ...man.toJSON() }],
+				}
+
+				acc.push(newItem)
+			} else {
+				acc[index].manufacturers = [...acc[index].manufacturers, { ...man.toJSON() }]
+			}
+
+			return acc
+		}, [])
+
+		return countryManufacturers
 	}
 
 	async getSelectedManufacturer(alias: string) {

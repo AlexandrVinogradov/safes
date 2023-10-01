@@ -19,7 +19,7 @@ export const CatalogMenu = (props: PropsType) => {
 	const { setIsHovering, handleMouseOver, handleMouseOut } = props
 
 	// TODO: add preloader and fetch after isHovering true
-	// TODO: turn off scroll for body if isShow menu true 
+	// TODO: turn off scroll for body if isShow menu true
 	const categories = useCategoriesStore((state) => state.categories)
 	const fetchCategories = useCategoriesStore((state) => state.fetchCategories)
 
@@ -52,12 +52,7 @@ export const CatalogMenu = (props: PropsType) => {
 
 	return (
 		<div className={s.menu} onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>
-			<div
-				className={clsx(
-					s.lvl1,
-					style.Scrollbar
-				)}
-			>
+			<div className={clsx(s.lvl1, style.Scrollbar)}>
 				<ul className={s.tags}>
 					{tags.map((tag) => (
 						<li key={tag.id} className={s.tag}>
