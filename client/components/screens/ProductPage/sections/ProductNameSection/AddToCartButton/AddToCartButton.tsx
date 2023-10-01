@@ -10,7 +10,7 @@ type PropsType = {
 
 export const AddToCartButton = (props: PropsType) => {
 	const { selectedProduct } = props
-	const { product_id, productImages, product_price, product_old_price, product_ean } = selectedProduct
+	const { product_id, image, productImages, product_price, product_old_price, product_ean } = selectedProduct
 	const name = selectedProduct['name_ru-RU']
 
 	const basketItems = useBasketStore((state) => state.basketItems)
@@ -21,6 +21,7 @@ export const AddToCartButton = (props: PropsType) => {
 	const handleClickAddProduct = () => {
 		addBasketItem({
 			id: product_id,
+			image,
 			images: productImages,
 			name: name,
 			price: product_price,
@@ -36,7 +37,7 @@ export const AddToCartButton = (props: PropsType) => {
 
 	return (
 		<div className={s.oderButton}>
-			<Button className='w-full' onClick={handleClickAddProduct} styleType="filled">
+			<Button className={s.button} onClick={handleClickAddProduct} styleType="filled">
 				В корзину
 			</Button>
 

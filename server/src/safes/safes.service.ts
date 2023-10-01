@@ -97,7 +97,7 @@ export class SafesService {
 				[Op.or]: productsIdByCategoryId.map((el) => ({ product_id: el.product_id })),
 			}
 		}
-		
+
 		// Manufacturer
 		if (queryParams.manufacturerId) {
 			where = {
@@ -198,6 +198,7 @@ export class SafesService {
 			limit: limitRows,
 			offset: offset,
 			attributes: [
+				'image',
 				'product_id',
 				'name_ru-RU',
 				'product_old_price',
@@ -307,6 +308,7 @@ export class SafesService {
 
 		const relatedSafes = await this.safeRepository.findAll({
 			attributes: [
+				'image',
 				'product_id',
 				'name_ru-RU',
 				'product_old_price',

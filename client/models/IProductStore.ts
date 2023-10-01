@@ -12,6 +12,7 @@ export type SelectedProductType = ProductCardType & {
 
 export type ProductImageType = { image_name: string }
 export type ProductCardType = {
+	image: string
 	product_id: number
 	'name_ru-RU': string
 	product_old_price: number

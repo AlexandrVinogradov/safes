@@ -35,7 +35,7 @@ export const Comparison = () => {
 							<div className={s.imgWrapper}>
 								<Image
 									unoptimized={true}
-									src={`https://prommetsafe.ru/components/com_jshopping/files/img_products/${el.productImages[0].image_name}`}
+									src={`https://prommetsafe.ru/components/com_jshopping/files/img_products/${el.image}`}
 									alt={el['name_ru-RU']}
 									width="0"
 									height="0"

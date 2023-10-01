@@ -1,7 +1,8 @@
-import { ProductImageType } from "./IProductStore"
+import { ProductImageType } from './IProductStore'
 
 export type BasketItemType = {
 	id: number
+	image: string
 	images: ProductImageType[]
 	name: string
 	price: number

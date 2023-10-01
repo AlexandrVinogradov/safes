@@ -1,5 +1,5 @@
 export const s = {
-	section: /*tw*/ '',
+	section: /*tw*/ 'pb-[70px]',
 	wrapper: /*tw*/ 'flex',
 	description: /*tw*/ 'w-full ml-5',
 	image: /*tw*/ 'w-auto h-full w-[690px]',

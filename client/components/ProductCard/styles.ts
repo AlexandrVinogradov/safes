@@ -6,7 +6,8 @@ export const s = {
 	iconButton: /*tw*/ 'mr-2.5 mt-1.5',
 	code: /*tw*/ 'text-branded text-[14px]',
 
-	imgWrapper: /*tw*/ 'h-[289px] w-full flex flex-col justify-center items-center',
+	imgWrapper: /*tw*/ 'h-[289px] py-2.5 w-full flex flex-col justify-center items-center duration-300 hover:opacity-[85%]',
+	imgLink: /*tw*/ 'w-auto h-full',
 	image: /*tw*/ 'w-auto h-full',
 
 	desc: /*tw*/ 'pb-[18px] max-h-[144px] h-full',
