@@ -21,7 +21,7 @@ export class Content extends Model<Content, ContentCreationAttrs> {
 	alias: string
 
 	@ApiProperty({ example: '<h1><span>Доставка и ', description: 'html' })
-	@Column({ type: DataType.STRING })
+	@Column({ type: DataType.TEXT })
 	introtext: string
 
 	@ApiProperty({ example: ' ', description: 'хз' })

@@ -6,9 +6,9 @@ FROM node:18-alpine As development
 
 WORKDIR /usr/src/app
 
-COPY --chown=node:node package*.json ./
+COPY --chown=node:node package*.json yarn.lock* ./
 
-RUN npm ci
+RUN yarn --frozen-lockfile
 
 COPY --chown=node:node . .
 
@@ -28,11 +28,11 @@ COPY --chown=node:node --from=development /usr/src/app/node_modules ./node_modul
 
 COPY --chown=node:node . .
 
-RUN npm run build
+RUN yarn build
 
 ENV NODE_ENV production
 
-RUN npm ci --only=production && npm cache clean --force
+RUN yarn --frozen-lockfile --only=production && yarn cache clean --force
 
 USER node
 
