@@ -1,7 +1,7 @@
 import { CartEmptySection } from './sections/CartEmptySection/CartEmptySection'
 import { Main } from '../../Main/Main'
 import { Layout } from '../../layout/layout'
-import { ServerProductCardType } from '@/models/IProductStore'
+import { ProductCardType } from '@/models/IProductStore'
 import { ProductSliderSection } from '@/components/commonSections/ProductSliderSection/ProductSliderSection'
 import { useBasketStore } from '@/store/useBasketStore'
 import { CartSection } from './sections/CartSection/CartSection'
@@ -9,7 +9,7 @@ import { usePersistStore } from '@/hooks/usePersistStore'
 import { useEffect } from 'react'
 
 type PropsType = {
-	productsList: ServerProductCardType[]
+	productsList: ProductCardType[]
 }
 
 // TODO:

@@ -1,24 +1,30 @@
 import Image from 'next/image'
-import { ArticleSlideType } from './IArticleSlide'
+import ellipsisStyle from './Ellipsis.module.scss'
+import { NewsType } from '@/models/INewsStore'
+import Link from 'next/link'
+import clsx from 'clsx'
 import { s } from './styles'
 
 type PropsType = {
-	slide: ArticleSlideType
+	slide: NewsType
 }
 
 export const ArticleSlide = (props: PropsType) => {
 	const { slide } = props
+	const { title, fakeDate, previewHtml, alias } = slide
 
 	return (
 		<article className={s.articleWrapper}>
-			<Image className={s.preview} alt={slide.img.alt} src={slide.img.src} width={335} height={258} priority />
+			<Link href={`/information/${alias}`} className={s.link}>
+				<Image className={s.preview} alt={title} src="/articlePreview1.jpg" width={335} height={258} priority />
+			</Link>
 
 			<article className={s.articleContent}>
 				<header className={s.header}>
-					<p>{slide.date}</p>
+					<p>{fakeDate}</p>
 				</header>
-				<h3 className={s.title}>{slide.title}</h3>
-				<p className={s.desc}>{slide.desc}</p>
+				<h3 className={s.title}>{title}</h3>
+				<div className={clsx(s.desc, ellipsisStyle.descr)} dangerouslySetInnerHTML={{ __html: previewHtml }} />
 			</article>
 		</article>
 	)

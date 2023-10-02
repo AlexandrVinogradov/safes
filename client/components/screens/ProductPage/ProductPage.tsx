@@ -1,40 +1,37 @@
-import { ServerProductCardType } from '@/models/IProductStore'
+import { SelectedProductType } from '@/models/IProductStore'
+import { ProductSliderSection } from '@/components/commonSections/ProductSliderSection/ProductSliderSection'
 import { ProductNameSection } from './sections/ProductNameSection/ProductNameSection'
 import { DescriptionSection } from './sections/DescriptionSection/DescriptionSection'
 import { Layout } from '@/components/layout/layout'
 import { Main } from '@/components/Main/Main'
-import { ProductSliderSection } from '@/components/commonSections/ProductSliderSection/ProductSliderSection'
 
 type PropsType = {
-	selectedProduct: ServerProductCardType
-	relativeProductsList: ServerProductCardType[]
+	selectedProduct: SelectedProductType
+	deliveryContent: string | null
 }
 
 // FIXME: finish this page
+// Нашли дешевле
+// Вкладки
+// Relative clider
+// Что после заказа кнопки?
+
 export const ProductPage = (props: PropsType) => {
-	const { selectedProduct, relativeProductsList } = props
+	const { selectedProduct, deliveryContent } = props
 
 	const breadCrumbs = [
 		{ name: 'Главная', isActive: false, to: '/' },
 		{ name: 'Продукт', isActive: true, to: '/' },
 	]
+
 	return (
 		<Layout title="SELECTED">
 			<Main breadCrumbs={breadCrumbs}>
-				<ProductNameSection
-					mainImage={selectedProduct?.image}
-					images={selectedProduct.productImages.map((image) => image.image_name)}
-					code={selectedProduct?.product_ean}
-					name={selectedProduct?.['name_ru-RU']}
-					// @ts-ignore
-					price={selectedProduct?.product_price.toLocaleString('ru-RU')}
-					// @ts-ignore
-					oldPrice={selectedProduct?.product_old_price.toLocaleString('ru-RU')}
-				/>
+				<ProductNameSection selectedProduct={selectedProduct} />
 
-				<DescriptionSection description={selectedProduct?.['description_ru-RU']} />
+				<DescriptionSection description={selectedProduct?.['description_ru-RU']} deliveryContent={deliveryContent || ''} />
 
-				<ProductSliderSection title="Похожие товары" productsList={relativeProductsList} />
+				<ProductSliderSection title="Похожие товары" productsList={selectedProduct.relatedSafes} />
 			</Main>
 		</Layout>
 	)

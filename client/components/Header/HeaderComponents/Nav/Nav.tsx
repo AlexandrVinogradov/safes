@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { s } from './styles'
-import { ArrowDownIcon } from '@/icons/ArrowDownIcon'
 import clsx from 'clsx'
+import { ManufacturerPopover } from '../ManufacturerPopover/ManufacturerPopover'
 
 type PropsType = {
 	className?: string
@@ -14,25 +14,32 @@ export const Nav = (props: PropsType) => {
 		<nav className={clsx(s.nav, className)}>
 			<ul className={s.navList}>
 				<li>
-					<Link href="/about-company">О компании</Link>
+					<Link className={s.link} href="/about-company">
+						О компании
+					</Link>
 				</li>
 				<li>
-					<Link href="/information">Статьи</Link>
+					<Link className={s.link} href="/information">
+						Статьи
+					</Link>
 				</li>
 				<li>
-					<Link href="/instruction">Инструкции</Link>
+					<Link className={s.link} href="/instruction">
+						Инструкции
+					</Link>
 				</li>
 				<li>
-					<button className={s.manufacturers}>
-						Производители
-						<ArrowDownIcon className={s.manufacturersIcon} />
-					</button>
+					<ManufacturerPopover />
 				</li>
 				<li>
-					<Link href="/dostavka">Доставка и оплата</Link>
+					<Link className={s.link} href="/dostavka">
+						Доставка и оплата
+					</Link>
 				</li>
 				<li>
-					<Link href="/contacts">Контакты</Link>
+					<Link className={s.link} href="/contacts">
+						Контакты
+					</Link>
 				</li>
 			</ul>
 		</nav>

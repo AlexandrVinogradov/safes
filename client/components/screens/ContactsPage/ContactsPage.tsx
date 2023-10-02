@@ -16,8 +16,6 @@ const ContactsPage = () => {
 
 	return (
 		<Layout title="Контакты">
-			<CutModal />
-
 			<Main breadCrumbs={breadCrumbs} isShowShield>
 				<section className={clsx(container, s.section)}>
 					<ContactsDescription />

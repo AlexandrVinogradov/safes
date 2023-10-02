@@ -8,18 +8,18 @@ type PropsType = {
 
 export const ProductBasketItem = (props: PropsType) => {
 	const { item } = props
-	const { name, image, count, price } = item
+	const { name, images, count, price } = item
 
 	return (
 		<li className={s.item}>
 			<div className={s.nameBlock}>
-				{/* <Image
+				<Image
 					unoptimized={true}
-					src={`https://prommetsafe.ru/components/com_jshopping/files/img_products/${image}`}
+					src={`https://prommetsafe.ru/components/com_jshopping/files/img_products/${images[0].image_name}`}
 					alt={name}
 					width={118}
 					height={91}
-				/> */}
+				/>
 				<p className={s.name}>{name}</p>
 			</div>
 			<div className={s.descItem}>

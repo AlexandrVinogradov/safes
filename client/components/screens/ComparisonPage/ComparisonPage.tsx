@@ -1,13 +1,13 @@
 import { ComparisonSection } from './sections/ComparisonSection/ComparisonSection'
 import { Main } from '../../Main/Main'
 import { Layout } from '../../layout/layout'
-import { ServerProductCardType } from '@/models/IProductStore'
+import { ProductCardType } from '@/models/IProductStore'
 import { ProductSliderSection } from '@/components/commonSections/ProductSliderSection/ProductSliderSection'
 
 
 
 type PropsType = {
-	productsList: ServerProductCardType[]
+	productsList: ProductCardType[]
 }
 
 const ComparisonPage = (props: PropsType) => {

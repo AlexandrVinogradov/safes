@@ -1,4 +1,3 @@
-'use client'
 import React, { useState } from 'react'
 import { s } from './styles'
 import { Button } from '../Button/Button'

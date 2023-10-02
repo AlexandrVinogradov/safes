@@ -10,7 +10,7 @@ type PropsType = {
 
 const PoliciesPage = (props: PropsType) => {
 	const { content } = props
-	const { title, fulltext, metadesc, metakey } = content
+	const { title, fulltext, metadesc, metakey } = content || {}
 
 	const breadCrumbs = [
 		{ name: 'Главная', isActive: false, to: '/' },

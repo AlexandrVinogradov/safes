@@ -33,14 +33,14 @@ export const Comparison = () => {
 							/>
 
 							<div className={s.imgWrapper}>
-								{/* <Image
+								<Image
 									unoptimized={true}
 									src={`https://prommetsafe.ru/components/com_jshopping/files/img_products/${el.image}`}
 									alt={el['name_ru-RU']}
 									width="0"
 									height="0"
 									className={s.image}
-								/> */}
+								/>
 							</div>
 							<span className={s.itemName}>{el['name_ru-RU']}</span>
 						</li>

@@ -1,11 +1,11 @@
 import { Module } from '@nestjs/common'
 import { ConfigModule } from '@nestjs/config'
 import { SequelizeModule } from '@nestjs/sequelize'
-import { Safe } from './safes/safes.model'
+import { ProductToCategories, ProductsRelations, Safe } from './safes/safes.model'
 import { SafesModule } from './safes/safes.module'
 import { User } from './users/users.model'
 import { UsersModule } from './users/users.module'
-import { Manufacturer } from './manufacturers/manufacturers.model'
+import { Country, Manufacturer } from './manufacturers/manufacturers.model'
 import { ManufacturersModule } from './manufacturers/manufacturers.module'
 import { ExtraValue } from './extraValues/extraValues.model'
 import { ExtraValuesModule } from './extraValues/extraValues.module'
@@ -35,7 +35,7 @@ import { NewsModule } from './news/news.module'
 			username: process.env.POSTGRES_USER,
 			password: process.env.POSTGRES_PASSWORD,
 			database: process.env.POSTGRES_DB,
-			models: [User, Instruction, InstructionCategories, Content, News, Category, Safe, Manufacturer, ExtraValue, ProductImage],
+			models: [User, Instruction, InstructionCategories, Content, News, Category, Safe, ProductToCategories, ProductsRelations, Manufacturer, Country, ExtraValue, ProductImage],
 			autoLoadModels: true,
 		}),
 		UsersModule,

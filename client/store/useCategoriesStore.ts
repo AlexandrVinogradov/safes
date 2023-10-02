@@ -14,11 +14,13 @@ export const useCategoriesStore = create(
 	immer<State & Actions>((set) => ({
 		categories: [],
 		fetchCategories: async (url: string) => {
-			const response = await fetch(url)
-			const data = await response.json()
+			try {
+				const response = await fetch(url)
+				const data = await response.json()
 
-			set({ categories: data })
-			return data
+				set({ categories: data })
+				return data
+			} catch {}
 		},
 	})),
 )

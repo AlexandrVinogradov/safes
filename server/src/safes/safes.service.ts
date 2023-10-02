@@ -5,7 +5,7 @@ import { Category } from 'src/categories/categories.model'
 import { Manufacturer } from 'src/manufacturers/manufacturers.model'
 import { ProductImage } from 'src/productImages/productImages.model'
 import { CreateSafeDto } from './dto/create-safe.dto'
-import { ProductToCategories, Safe } from './safes.model'
+import { ProductToCategories, ProductsRelations, Safe } from './safes.model'
 import { ExtraValue } from 'src/extraValues/extraValues.model'
 
 async function getProductsIdByCategoryId(categoriesId: number[], productToCategoriesRepository: any, categoryRepository: any) {
@@ -40,6 +40,7 @@ export class SafesService {
 		@InjectModel(Safe) private safeRepository: typeof Safe,
 		@InjectModel(ProductToCategories) private productToCategoriesRepository: typeof ProductToCategories,
 		@InjectModel(Category) private CategoryRepository: typeof Category,
+		@InjectModel(ProductsRelations) private productsRelationsRepository: typeof ProductsRelations,
 	) {}
 
 	async createSafe(dto: CreateSafeDto) {
@@ -58,6 +59,8 @@ export class SafesService {
 		metalThickness?: string
 		// category
 		categoryId?: string
+		// manufacturer
+		manufacturerId?: string
 		// pagination
 		page?: number
 		pageSize?: number
@@ -80,6 +83,7 @@ export class SafesService {
 			order = [[value, orderType]]
 		}
 
+		// Category
 		let productsIdByCategoryId: { product_id: number }[] = null
 		if (queryParams.categoryId) {
 			productsIdByCategoryId = await getProductsIdByCategoryId(
@@ -91,6 +95,14 @@ export class SafesService {
 			where = {
 				...where,
 				[Op.or]: productsIdByCategoryId.map((el) => ({ product_id: el.product_id })),
+			}
+		}
+
+		// Manufacturer
+		if (queryParams.manufacturerId) {
+			where = {
+				product_manufacturer_id: queryParams.manufacturerId,
+				...where,
 			}
 		}
 
@@ -185,8 +197,27 @@ export class SafesService {
 		const safes = await this.safeRepository.findAll({
 			limit: limitRows,
 			offset: offset,
+			attributes: [
+				'image',
+				'product_id',
+				'name_ru-RU',
+				'product_old_price',
+				'product_price',
+				'product_ean',
+				'alias_ru-RU',
+				'product_weight',
+				'extra_field_3',
+				'extra_field_4',
+				'extra_field_8',
+				'extra_field_9',
+				'extra_field_20',
+				'extra_field_22',
+				'extra_field_13',
+				'extra_field_15',
+				'extra_field_17',
+			],
 			include: [
-				{ model: Manufacturer, as: 'manufacturer' },
+				{ model: Manufacturer, as: 'manufacturer', attributes: ['name_ru-RU'] },
 				{ model: ProductImage, as: 'productImages', attributes: ['image_name'] },
 				{
 					model: ExtraValue,
@@ -246,13 +277,64 @@ export class SafesService {
 			where: {
 				'alias_ru-RU': queryParam.safeAlias,
 			},
-			include: { model: ProductImage, as: 'productImages', attributes: ['image_name'] },
+			include: [{ model: ProductImage, as: 'productImages', attributes: ['image_name'] }],
 		})
 
 		if (!selectedSafe) {
 			throw new HttpException('product does not exist', HttpStatus.NOT_FOUND)
 		}
 
-		return selectedSafe
+		const relatedSafes = await this.getRelatedSafes(selectedSafe)
+
+		return {
+			...selectedSafe.toJSON(),
+			relatedSafes,
+		}
+	}
+
+	// ###################################
+	// ####### GET RELATED SAFES   #######
+	// ####### FOR getSelectedSafe #######
+	// ###################################
+	async getRelatedSafes(selectedSafe: Safe) {
+		const relatedSafesObjIdList = await this.productsRelationsRepository.findAll({
+			attributes: ['product_related_id'],
+			where: {
+				product_id: selectedSafe.product_id,
+			},
+		})
+
+		const relatedSafesIdList = relatedSafesObjIdList.map((el) => el.product_related_id)
+
+		const relatedSafes = await this.safeRepository.findAll({
+			attributes: [
+				'image',
+				'product_id',
+				'name_ru-RU',
+				'product_old_price',
+				'product_price',
+				'product_ean',
+				'alias_ru-RU',
+				'product_weight',
+				'extra_field_3',
+				'extra_field_4',
+				'extra_field_8',
+				'extra_field_9',
+				'extra_field_20',
+				'extra_field_22',
+				'extra_field_13',
+				'extra_field_15',
+				'extra_field_17',
+			],
+			include: [
+				{ model: ProductImage, as: 'productImages', attributes: ['image_name'] },
+				{ model: Manufacturer, as: 'manufacturer', attributes: ['name_ru-RU'] },
+			],
+			where: {
+				product_id: relatedSafesIdList,
+			},
+		})
+
+		return relatedSafes
 	}
 }

@@ -1,11 +1,11 @@
 import { GetServerSideProps, NextPage } from 'next'
 import CartPage from '@/components/screens/CartPage/CartPage'
-import { ProductsType, ServerProductCardType } from '@/models/IProductStore'
+import { ProductsType, ProductCardType } from '@/models/IProductStore'
 import { getApiProductURL } from '@/helpers/getApiProductURL'
 import { useProductStore } from '@/store/useProductStore'
 
 type PropsType = {
-	productsList: ServerProductCardType[]
+	productsList: ProductCardType[]
 }
 
 const AboutCompany: NextPage<PropsType> = ({ productsList }) => {

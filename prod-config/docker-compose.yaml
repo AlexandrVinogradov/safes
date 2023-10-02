@@ -1,14 +1,31 @@
 version: '3.0'
 
 services:
+  # nextjs:
+  #   build:
+  #     context: ../client
+  #     dockerfile: ../prod-config/Dockerfile.frontend
+  #   # ports:
+  #     # - 80:80  
+  #   networks:
+  #     - starlink
+
+  # Standelon
+  # frontend:
   nextjs:
-    build:
-      context: ../client
-      dockerfile: ../prod-config/Dockerfile.frontend
-    # ports:
-      # - 80:80  
-    networks:
-      - starlink
+      # container_name: frontend
+      # build: .
+      build:
+        context: ../client
+        dockerfile: ../prod-config/Dockerfile.frontend
+      restart: always #change if you don't want your container restarting
+      environment:
+        - NODE_ENV=production
+      # ports:
+        # - 3000:3000
+      networks:
+        - starlink
+
 
   nginx:
     build: 

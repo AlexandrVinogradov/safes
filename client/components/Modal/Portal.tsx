@@ -5,7 +5,8 @@ interface PropsType {
 	children: ReactNode
 }
 
-export const Portal = (props: PropsType) => {
+// FIXME: any
+export const Portal = (props: PropsType):any => {
 	const ref = useRef<Element | null>(null)
 	const [mounted, setMounted] = useState(false)
 

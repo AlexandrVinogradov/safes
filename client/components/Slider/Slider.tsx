@@ -1,4 +1,3 @@
-'use client'
 import { ReactNode } from 'react'
 import { Swiper } from 'swiper/react'
 import 'swiper/css'

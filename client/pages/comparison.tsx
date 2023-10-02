@@ -1,11 +1,11 @@
 import { GetServerSideProps, NextPage } from 'next'
-import { ProductsType, ServerProductCardType } from '@/models/IProductStore'
+import { ProductsType, ProductCardType } from '@/models/IProductStore'
 import { getApiProductURL } from '@/helpers/getApiProductURL'
 import { useProductStore } from '@/store/useProductStore'
 import ComparisonPage from '@/components/screens/ComparisonPage/ComparisonPage'
 
 type PropsType = {
-	productsList: ServerProductCardType[]
+	productsList: ProductCardType[]
 }
 
 const Comparison: NextPage<PropsType> = ({ productsList }) => {

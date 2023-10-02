@@ -3,64 +3,73 @@ import { container } from '@/styles/container'
 import clsx from 'clsx'
 import { s } from './styles'
 import { AttentionIcon } from '@/icons/AttentionIcon'
+import { TabButton } from './TabButton/TabButton'
+import { getTabContent } from './helpers/getTabContent'
 
 type PropsType = {
 	description: string | undefined
+	deliveryContent: string
 }
 
-type TabsType = 'char' | 'desc' | 'video' | 'delivery' | 'delivery'
+export type TabsType = 'char' | 'desc' | 'video' | 'delivery'
 
 export const DescriptionSection = (props: PropsType) => {
-	const { description } = props
+	const { description, deliveryContent } = props
 	const [selectedTab, setSelectedTab] = useState<TabsType>('char')
 
 	if (!description) return null
 
-	const characteristicMatch = description.match(/{tab Характеристики}<\/p>([\s\S]*?)<div style="text-align: justify;">{tab Описание}/)
-	const char = characteristicMatch ? characteristicMatch[1] : ''
-	const descMatch = description.match(/{tab Описание}<\/div>([\s\S]*?){tab Видео}/)
-	const desc = descMatch ? descMatch[1] : ''
-	const videoMatch = description.match(/{tab Видео}([\s\S]*?){tab Доставка}{module Доставка}/)
-	const video = videoMatch ? videoMatch[1] : ''
 	const commonMatch = description.match(/{\/tabs}([\s\S]*)$/)
 	const common = commonMatch ? commonMatch[1] : ''
 
+	// valberg-zaslon-el {tab Замок}
+
 	const getTabContentString = (tab: TabsType) => {
-		if (tab === 'char') return char
-		if (tab === 'desc') return desc
-		if (tab === 'video') return video
-		if (tab === 'delivery') return ''
+		// TODO: <p><span>{tab Замок} {module Инструкция к замку PS300}</span></p>
+		if (tab === 'char') return charContent
+		if (tab === 'desc') return descContent
+		if (tab === 'video') return videoContent
+		if (tab === 'delivery') return deliveryContent
 		return ''
 	}
+
+	const charContent = getTabContent('{tab Характеристики}', description)
+	const descContent = getTabContent('{tab Описание}', description)
+	const videoContent = getTabContent('<p>{tab Видео}', description)?.replace('</p>', '')
 
 	return (
 		<section className={s.section}>
 			<div>
 				<div className={clsx(s.tabButtons, container)}>
-					<button
-						className={clsx([s.tabButton, selectedTab === 'char' && s.activeTabButton])}
-						onClick={() => setSelectedTab('char')}
-					>
-						Характеристики
-					</button>
-					<button
-						className={clsx([s.tabButton, selectedTab === 'desc' && s.activeTabButton])}
-						onClick={() => setSelectedTab('desc')}
-					>
-						Описание
-					</button>
-					<button
-						className={clsx([s.tabButton, selectedTab === 'video' && s.activeTabButton])}
-						onClick={() => setSelectedTab('video')}
-					>
-						Видео
-					</button>
-					<button
-						className={clsx([s.tabButton, selectedTab === 'delivery' && s.activeTabButton])}
-						onClick={() => setSelectedTab('delivery')}
-					>
-						Доставка
-					</button>
+					{/* FIXME: Add # to url like on prommet.ru */}
+					<TabButton
+						tabName="char"
+						selectedTab={selectedTab}
+						setSelectedTab={setSelectedTab}
+						hasContent={!!charContent}
+						title="Характеристики"
+					/>
+					<TabButton
+						tabName="desc"
+						selectedTab={selectedTab}
+						setSelectedTab={setSelectedTab}
+						hasContent={!!descContent}
+						title="Описание"
+					/>
+					<TabButton
+						tabName="video"
+						selectedTab={selectedTab}
+						setSelectedTab={setSelectedTab}
+						hasContent={!!videoContent}
+						title="Видео"
+					/>
+					<TabButton
+						tabName="delivery"
+						selectedTab={selectedTab}
+						setSelectedTab={setSelectedTab}
+						hasContent={!!deliveryContent}
+						title="Доставка"
+					/>
 				</div>
 
 				<div className={s.tabContentWrapper}>
@@ -72,6 +81,8 @@ export const DescriptionSection = (props: PropsType) => {
 				<AttentionIcon className={s.attentionIcon} />
 				<div dangerouslySetInnerHTML={{ __html: common }} />
 			</div>
+
+			{/* <div className="mt-5">{description}</div> */}
 		</section>
 	)
 }

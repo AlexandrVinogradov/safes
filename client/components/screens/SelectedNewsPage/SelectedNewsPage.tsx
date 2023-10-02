@@ -7,11 +7,12 @@ import { NewsSection } from './NewsSection/NewsSection'
 import { s } from './styles'
 
 type PropsType = {
+	news: NewsType[]
 	selectedNews: NewsType
 }
 
 const SelectedNewsPage = (props: PropsType) => {
-	const { selectedNews } = props
+	const { selectedNews, news } = props
 	const { title, metadesc, metakey, fakeDate, image, fullHtml } = selectedNews
 
 	const breadCrumbs = [
@@ -27,7 +28,7 @@ const SelectedNewsPage = (props: PropsType) => {
 
 				<RedirectSection className={s.redirectSection} />
 
-				<ArticlesSection title="Последние новости" />
+				<ArticlesSection news={news} title="Последние новости" />
 			</Main>
 		</Layout>
 	)

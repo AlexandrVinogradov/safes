@@ -5,10 +5,10 @@ import clsx from 'clsx'
 import { ProductsMenu } from './ProductsMenu/ProductsMenu'
 import { s } from './styles'
 import { FC } from 'react'
-import { ServerProductCardType } from '@/models/IProductStore'
+import { ProductCardType } from '@/models/IProductStore'
 
 type PropsType = {
-	productsList: ServerProductCardType[]
+	productsList: ProductCardType[]
 }
 
 export const ProductsSection: FC<PropsType> = ({ productsList }) => {
