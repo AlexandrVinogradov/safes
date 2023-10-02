@@ -16,8 +16,9 @@ export class Safe extends Model<Safe, SafeCreationAttrs> {
 	@ForeignKey(() => ProductImage)
 	@BelongsToMany(() => Category, {
 		through: () => ProductToCategories,
-		foreignKey: 'category_id',
-		as: 'associatedSafes' 
+		foreignKey: 'product_id',
+		otherKey: 'category_id', // Имя поля в связующей таблице, указывающее на роль
+		as: 'associatedSafes' ,
 	})
 	@Column({ type: DataType.INTEGER, unique: true, autoIncrement: true, primaryKey: true })
 	product_id: number

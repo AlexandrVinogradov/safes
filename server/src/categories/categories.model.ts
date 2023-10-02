@@ -13,6 +13,7 @@ export class Category extends Model<Category, CategoryCreationAttrs> {
 	@BelongsToMany(() => Safe, {
 		through: () => ProductToCategories,
 		foreignKey: 'category_id',
+		otherKey: 'product_id', // Имя поля в связующей таблице, указывающее на роль
 		as: 'associatedSafes' 
 	})
 	@Column({ type: DataType.INTEGER, unique: true, autoIncrement: true, primaryKey: true })

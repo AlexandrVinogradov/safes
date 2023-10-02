@@ -19,6 +19,7 @@ export const GallerySlide = (props: PropsType) => {
 					width="0"
 					height="0"
 					className=" !object-contain"
+					quality={100}
 				/>
 			)}
 
