@@ -5,19 +5,22 @@ import { NewsType } from '@/models/INewsStore'
 
 type PropsType = {
 	selectedNews: NewsType
+	news: NewsType[]
 }
 
-const SelectedNews: NextPage<PropsType> = ({ selectedNews }) => {
-	return <SelectedNewsPage selectedNews={selectedNews} />
+const SelectedNews: NextPage<PropsType> = ({ selectedNews, news }) => {
+	return <SelectedNewsPage selectedNews={selectedNews} news={news} />
 }
 
 export const getServerSideProps: GetServerSideProps<PropsType> = async ({ query }) => {
 	const { fetchSelectedNews } = useNewsStore.getState()
+	const { fetchNews } = useNewsStore.getState()
 
 	const selectedNews = (await fetchSelectedNews(String(query.id))) as NewsType
+	const news = (await fetchNews()) as NewsType[]
 
 	return {
-		props: { selectedNews },
+		props: { selectedNews, news },
 	}
 }
 

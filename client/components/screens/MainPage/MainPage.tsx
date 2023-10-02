@@ -8,14 +8,16 @@ import { HowToChoose } from './MainPageSections/HowToChoose/HowToChoose'
 import { NoveltiesSection } from './MainPageSections/NoveltiesSection/NoveltiesSection'
 import { ProductsSection } from './MainPageSections/ProductsSection/ProductsSection'
 import { NextPage } from 'next/types'
+import { NewsType } from '@/models/INewsStore'
 
 // Brands container
 
 type PropsType = {
 	productsList: ProductCardType[]
+	news: NewsType[]
 }
 
-const MainPage: NextPage<PropsType> = ({ productsList }) => {
+const MainPage: NextPage<PropsType> = ({ productsList, news }) => {
 	return (
 		<Layout title="Main">
 			<main>
@@ -25,7 +27,7 @@ const MainPage: NextPage<PropsType> = ({ productsList }) => {
 				<HowToChoose />
 				<NoveltiesSection productsList={productsList} />
 				<BrandsSection />
-				<ArticlesSection title="Статьи" className="py-[120px]" />
+				<ArticlesSection title="Статьи" className="py-[120px]" news={news} />
 			</main>
 		</Layout>
 	)
