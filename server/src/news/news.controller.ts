@@ -1,14 +1,17 @@
-import { Body, Controller, Get, Param, Patch, Post } from '@nestjs/common'
+import { Body, Controller, Get, Param, Patch, Post, UploadedFile, UseInterceptors } from '@nestjs/common'
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger'
 import { CreateNewsDto } from './dto/create-news.dto'
 import { News } from './news.model'
 import { NewsService } from './news.service'
 import { UpdateNewsDto } from './dto/update-news.dto'
+import { FilesService } from 'src/files/files.service'
+import { multerConfig } from 'multer.config'
+import { FileInterceptor } from '@nestjs/platform-express'
 
 @ApiTags('Статьи')
 @Controller('news')
 export class NewsController {
-	constructor(private newsService: NewsService) {}
+	constructor(private newsService: NewsService, private readonly filesService: FilesService) {}
 
 	@ApiOperation({ summary: 'Создание инструкции' })
 	@ApiResponse({ status: 200, type: News })
@@ -20,8 +23,17 @@ export class NewsController {
 	@ApiOperation({ summary: 'Обновить Статью' })
 	@ApiResponse({ status: 200, type: News })
 	@Patch(':id')
-	update(@Param('id') alias: string, @Body() newsDto: UpdateNewsDto) {
-		return this.newsService.updateNews(alias, newsDto)
+	@UseInterceptors(FileInterceptor('image', multerConfig))
+	async update(@Param('id') id: string, @Body() newsDto: UpdateNewsDto, @UploadedFile() file: Express.Multer.File) {
+		let imageUrl: string | null = null
+
+		if (file) {
+			imageUrl = await this.filesService.uploadFile(file)
+		}
+
+		const updatedNews = await this.newsService.updateNews(id, newsDto, imageUrl)
+
+		return updatedNews
 	}
 
 	@ApiOperation({ summary: 'Получить вcе статьи' })

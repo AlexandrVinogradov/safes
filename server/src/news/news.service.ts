@@ -13,7 +13,7 @@ export class NewsService {
 		return news
 	}
 
-	async updateNews(alias: string, newsDto: UpdateNewsDto) {
+	async updateNews(alias: string, newsDto: UpdateNewsDto, imageUrl: string) {
 		const news = await this.newsRepository.findOne({ where: { alias } })
 		if (!news) {
 			throw new Error('Статья не найдена')
