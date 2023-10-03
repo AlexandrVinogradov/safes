@@ -9,8 +9,6 @@ export const GallerySlide = (props: PropsType) => {
 	const { slide } = props
 	const { alt, src, videoHtml } = slide
 
-	console.log(src);
-	
 	return (
 		<>
 			{src && (

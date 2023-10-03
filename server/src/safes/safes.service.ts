@@ -120,10 +120,10 @@ export class SafesService {
 				case 'search':
 					where = {
 						...where,
-						['name_ru-RU']: {
-							// 	[Op.iLike]: `%${queryParams.search}%`,
-							[Op.iRegexp]: `(${queryParams.search.replace(/\s+/g, '|')})`,
-						},
+						[Op.or]: [
+							{ ['name_ru-RU']: { [Op.iLike]: `%${queryParams.search}%` } },
+							{ product_ean: { [Op.iLike]: `%${queryParams.search}%` } },
+						],
 					}
 					break
 				case 'price':

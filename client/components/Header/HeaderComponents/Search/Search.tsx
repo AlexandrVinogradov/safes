@@ -44,7 +44,7 @@ export const Search = (props: PropsType) => {
 
 	const selectSearchValue = () => {
 		setIsShowPopover(false)
-		setSearchValue('')
+		// setSearchValue('')
 		if (!searchData?.list.length) {
 			router.push('/catalog')
 			return

@@ -1,5 +1,5 @@
 export const s = {
-	searchPopover: /*tw*/ ` absolute top-[36px] w-full bg-white border border-b-[#9BD9FE] border-l-[#9BD9FE] border-r-[#9BD9FE] border-t-white rounded-b-[3px]
+	searchPopover: /*tw*/ ` absolute z-10 top-[36px] w-full bg-white border border-b-[#9BD9FE] border-l-[#9BD9FE] border-r-[#9BD9FE] border-t-white rounded-b-[3px]
 	after:absolute 
 	after:h-px  
 	after:bg-[#DFE1E7] 

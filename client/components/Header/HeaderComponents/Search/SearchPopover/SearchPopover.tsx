@@ -37,20 +37,27 @@ export const SearchPopover = (props: PropsType) => {
 
 	if (!isShow || !searchData) return null
 
+	const handleClickLink = () => setIsShowPopover(false)
+
 	return (
 		<div ref={popoverRef} className={s.searchPopover}>
 			<ul className={s.list}>
 				{searchData?.list.length ? (
 					<>
 						{searchData?.list.map((product) => (
-							<Link key={product.product_id} className={s.listItem} href={`/${product['alias_ru-RU']}`}>
+							<Link
+								key={product.product_id}
+								className={s.listItem}
+								onClick={handleClickLink}
+								href={`/${product['alias_ru-RU']}`}
+							>
 								<HighlightText value={`${product['name_ru-RU']} (код: ${product.product_ean})`} highlight={searchValue} />
 							</Link>
 						))}
 					</>
 				) : (
 					<li>
-						Не найдено результатов по запросу: {`"${<span className={s.searchValue}>{searchValue}</span>}"`}
+						Не найдено результатов по запросу: <span className={s.searchValue}>{searchValue}</span>
 					</li>
 				)}
 
