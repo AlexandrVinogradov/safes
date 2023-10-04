@@ -6,7 +6,6 @@ import { MenuChildLvl } from './MenuChildLLvl/MenuChildLLvl'
 import { CategoryType } from '@/models/ICategoriesStore'
 import { CatalogMenuShowAllButton } from './CatalogMenuShowAllButton/CatalogMenuShowAllButton'
 import { getClientServerUrl } from '@/helpers/getClientServerUrl'
-import style from '@/styles/Scrollbar.module.scss'
 import { clsx } from 'clsx'
 
 type PropsType = {
@@ -52,7 +51,7 @@ export const CatalogMenu = (props: PropsType) => {
 
 	return (
 		<div className={s.menu} onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>
-			<div className={clsx(s.lvl1, style.Scrollbar)}>
+			<div className={clsx(s.lvl1)}>
 				<ul className={s.tags}>
 					{tags.map((tag) => (
 						<li key={tag.id} className={s.tag}>

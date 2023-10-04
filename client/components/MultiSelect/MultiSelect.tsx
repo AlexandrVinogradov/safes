@@ -50,7 +50,10 @@ const MultiSelect = (props: PropsType) => {
 		},
 	}
 
-	const handleClickReset = () => value && removeQueryParams([id])
+	const handleClickReset = () => {
+		value && removeQueryParams([id])
+		setOpen(false)
+	}
 	const handleClickDone = () => setOpen(false)
 
 	return (

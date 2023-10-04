@@ -13,7 +13,9 @@ export const Header = () => {
 		const handleScroll = () => {
 			if (window.scrollY >= diff) {
 				setIsScrolled(true)
-			} else {
+			}
+
+			if (window.scrollY <= StickyHeaderHeight) {
 				setIsScrolled(false)
 			}
 		}

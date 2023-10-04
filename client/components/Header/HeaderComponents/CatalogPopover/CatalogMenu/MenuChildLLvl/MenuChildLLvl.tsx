@@ -2,7 +2,6 @@ import { MenuItem } from '../MenuItem/MenuItem'
 import { CategoryType } from '@/models/ICategoriesStore'
 import { CatalogMenuShowAllButton } from '../CatalogMenuShowAllButton/CatalogMenuShowAllButton'
 import clsx from 'clsx'
-import style from '@/styles/Scrollbar.module.scss'
 import { s } from './styles'
 
 type PropsType = {
@@ -22,13 +21,7 @@ export const MenuChildLvl = (props: PropsType) => {
 	if (lvl === 2 && !data?.child) return null
 
 	return (
-		<div
-			className={clsx(
-				s.menu,
-				zIndex,
-				style.Scrollbar
-			)}
-		>
+		<div className={clsx(s.menu, zIndex)}>
 			<h5 className={s.title}>{data?.['name_ru-RU']}</h5>
 
 			<CatalogMenuShowAllButton

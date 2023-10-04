@@ -1,0 +1,7 @@
+.Scrollbar {
+	&:hover {
+		&::-webkit-scrollbar-thumb {
+			background-color: #cecece;
+		}
+	}
+}

@@ -10,6 +10,8 @@ import { ExtraValuesHandbook, FilterDataType } from '@/models/IProductStore'
 import { useQueryParams } from '@/hooks/useQueryParams'
 import MultiSelect from '../MultiSelect/MultiSelect'
 import { s } from './styles'
+import ScrollStyle from './Scrollbar.module.scss'
+import clsx from 'clsx'
 
 type PropsType = {
 	extraValuesHandbook: ExtraValuesHandbook[]
@@ -75,7 +77,7 @@ export const Filter = (props: PropsType) => {
 
 	return (
 		<div className={s.filter}>
-			<div className={s.settings}>
+			<div className={clsx(s.settings, ScrollStyle.Scrollbar)}>
 				<p className={s.title}>Фильтр</p>
 
 				<p className={s.label}>Производитель</p>
