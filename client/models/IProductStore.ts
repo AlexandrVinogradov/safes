@@ -43,13 +43,25 @@ export type ProductsType = {
 		totalRows: number
 	}
 }
-
+export type FilterParamType = 'price' | 'weight' | 'height' | 'width' | 'depth'
 export type FilterDataType = {
 	price: {
 		selectedDiapason: [number, number]
 		fullDiapason: [number, number]
 	}
 	weight: {
+		selectedDiapason: [number, number]
+		fullDiapason: [number, number]
+	}
+	height: {
+		selectedDiapason: [number, number]
+		fullDiapason: [number, number]
+	}
+	width: {
+		selectedDiapason: [number, number]
+		fullDiapason: [number, number]
+	}
+	depth: {
 		selectedDiapason: [number, number]
 		fullDiapason: [number, number]
 	}

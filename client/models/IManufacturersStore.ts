@@ -4,9 +4,12 @@ export type ManufacturerType = {
 	manufacturers: SelectedManufacturer[]
 }
 
-export type SelectedManufacturer = {
+export type SimplManufactureType = {
 	'name_ru-RU': string
 	manufacturer_id: number
+}
+
+export type SelectedManufacturer = {
 	manufacturer_logo: string
 	ordering: number
 	'alias_ru-RU': string
@@ -16,4 +19,4 @@ export type SelectedManufacturer = {
 	'meta_description_ru-RU': string
 	'meta_keyword_ru-RU': string
 	country_id: number
-}
+} & SimplManufactureType

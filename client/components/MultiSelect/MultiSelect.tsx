@@ -7,7 +7,7 @@ import { useQueryParams } from '@/hooks/useQueryParams'
 type PropsType = {
 	options: ItemProps[]
 	className?: string
-	id: 'burglaryResistance' | 'fireResistance' | 'keyType' | 'gunCount' | 'metalThickness'
+	id: 'manufacturer' | 'burglaryResistance' | 'fireResistance' | 'keyType' | 'gunCount' | 'metalThickness'
 }
 
 type ItemProps = {

@@ -13,6 +13,7 @@ import dynamic from 'next/dynamic'
 import { s } from './styles'
 import clsx from 'clsx'
 import { ProductsGrid } from '@/components/ProductsGrid/ProductsGrid'
+import { SimplManufactureType } from '@/models/IManufacturersStore'
 
 const DynamicCustomPagination = dynamic<PaginationPropsType>(() => import('@/components/Pagination/Pagination'), { ssr: false })
 
@@ -20,10 +21,11 @@ type PropsType = {
 	products: ProductsType
 	category?: CategoryType
 	extraValuesHandbook: ExtraValuesHandbook[]
+	simpleManufacturers: SimplManufactureType[] | null
 }
 
 export const CatalogSection = (props: PropsType) => {
-	const { products, category, extraValuesHandbook } = props
+	const { products, category, extraValuesHandbook, simpleManufacturers } = props
 	const { query } = useRouter()
 
 	const fetchProducts = useProductStore((state) => state.fetchProducts)
@@ -48,7 +50,7 @@ export const CatalogSection = (props: PropsType) => {
 		<section className={clsx(s.section, container)}>
 			<Sort className={s.sort} data={sortData} />
 			<div className={s.wrapper}>
-				<Filter extraValuesHandbook={extraValuesHandbook} />
+				<Filter extraValuesHandbook={extraValuesHandbook} simpleManufacturers={simpleManufacturers} />
 
 				<div className={s.productsWithPagination}>
 					<ProductsGrid products={products.list} />

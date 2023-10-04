@@ -1,6 +1,6 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common'
 import { InjectModel } from '@nestjs/sequelize'
-import { Op, Order } from 'sequelize'
+import { Op, Order, literal } from 'sequelize'
 import { Category } from 'src/categories/categories.model'
 import { Manufacturer } from 'src/manufacturers/manufacturers.model'
 import { ProductImage } from 'src/productImages/productImages.model'
@@ -53,10 +53,14 @@ export class SafesService {
 		price?: string
 		weight?: string
 		burglaryResistance?: string
+		manufacturer?: string
 		fireResistance?: string
 		keyType?: string
 		gunCount?: string
 		metalThickness?: string
+		height?: string
+		width?: string
+		depth?: string
 		// category
 		categoryId?: string
 		// manufacturer
@@ -150,6 +154,14 @@ export class SafesService {
 						},
 					}
 					break
+				case 'manufacturer':
+					where = {
+						...where,
+						product_manufacturer_id: {
+							[Op.or]: queryParams.manufacturer.split('-').map((el) => Number(el)),
+						},
+					}
+					break
 				case 'fireResistance':
 					where = {
 						...where,
@@ -180,6 +192,69 @@ export class SafesService {
 						extra_field_20: {
 							[Op.or]: queryParams.metalThickness.split('-').map((el) => Number(el)),
 						},
+					}
+					break
+				case 'height':
+					const [minHeight, maxHeight] = queryParams.height.split('-')
+
+					where = {
+						...where,
+						[Op.and]: [
+							literal(`
+							extra_field_10 <> '' 
+							AND (
+								(
+									extra_field_10 ~ '^[0-9]+$' -- Проверка на то, что значение состоит только из цифр
+									AND CAST(extra_field_10 AS INTEGER) >= ${minHeight}
+									AND CAST(extra_field_10 AS INTEGER) <= ${maxHeight}
+								)
+								OR
+								extra_field_10 IS NULL
+							)
+						`),
+						],
+					}
+					break
+				case 'width':
+					const [minWidth, maxWidth] = queryParams.width.split('-')
+
+					where = {
+						...where,
+						[Op.and]: [
+							literal(`
+							extra_field_11 <> '' 
+							AND (
+								(
+									extra_field_11 ~ '^[0-9]+$' -- Проверка на то, что значение состоит только из цифр
+									AND CAST(extra_field_11 AS INTEGER) >= ${minWidth}
+									AND CAST(extra_field_11 AS INTEGER) <= ${maxWidth}
+								)
+								OR
+								extra_field_11 IS NULL
+							)
+						`),
+						],
+					}
+					break
+				case 'depth':
+					const [minDepth, maxDepth] = queryParams.depth.split('-')
+
+					where = {
+						...where,
+						[Op.and]: [
+							literal(`
+							extra_field_12 <> '' 
+							AND (
+								(
+									extra_field_12 ~ '^[0-9]+$' -- Проверка на то, что значение состоит только из цифр
+									AND CAST(extra_field_12 AS INTEGER) >= ${minDepth}
+									AND CAST(extra_field_12 AS INTEGER) <= ${maxDepth}
+								)
+								OR
+								extra_field_12 IS NULL
+							)
+						`),
+						],
 					}
 					break
 
@@ -271,6 +346,11 @@ export class SafesService {
 			})),
 		}
 	}
+
+	// ###################################
+	// ####### GET SELECTED SAFE   #######
+	// #######                     #######
+	// ###################################
 
 	async getSelectedSafe(queryParam: { safeAlias: string }) {
 		const selectedSafe = await this.safeRepository.findOne({

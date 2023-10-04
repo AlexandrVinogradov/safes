@@ -10,7 +10,7 @@ export interface SafeCreationAttrs {
 	product_ean: string
 }
 
-@Table({ tableName: 'mz', timestamps: false })
+@Table({ tableName: 'new_mz', timestamps: false })
 export class Safe extends Model<Safe, SafeCreationAttrs> {
 	@ApiProperty({ example: 675, description: 'Уникальный идентификатор' })
 	@ForeignKey(() => ProductImage)
@@ -18,27 +18,27 @@ export class Safe extends Model<Safe, SafeCreationAttrs> {
 		through: () => ProductToCategories,
 		foreignKey: 'product_id',
 		otherKey: 'category_id', // Имя поля в связующей таблице, указывающее на роль
-		as: 'associatedSafes' ,
+		as: 'associatedSafes',
 	})
 	@Column({ type: DataType.INTEGER, unique: true, autoIncrement: true, primaryKey: true })
 	product_id: number
 
 	@ApiProperty({ example: 'ProductImages', description: 'images' })
 	@BelongsToMany(() => ProductImage, {
-    through:  () => ProductImage, // Имя таблицы-связи между Safe и ProductImage
-    foreignKey: 'product_id',
-    otherKey: 'image_id',
-    as: 'productImages', // Алиас для ассоциации с ProductImage
-  })
+		through: () => ProductImage, // Имя таблицы-связи между Safe и ProductImage
+		foreignKey: 'product_id',
+		otherKey: 'image_id',
+		as: 'productImages', // Алиас для ассоциации с ProductImage
+	})
 	productImages: ProductImage[]
 
-  @BelongsToMany(() => Safe, {
-    through: () => ProductsRelations,
-    as: 'relations',
-    foreignKey: 'product_id',
-    otherKey: 'product_related_id',
-  })
-  related: Safe[];
+	@BelongsToMany(() => Safe, {
+		through: () => ProductsRelations,
+		as: 'relations',
+		foreignKey: 'product_id',
+		otherKey: 'product_related_id',
+	})
+	related: Safe[]
 
 	@ApiProperty({ example: '1', description: 'код товара' })
 	@Column({ type: DataType.STRING, allowNull: true })
@@ -153,6 +153,18 @@ export class Safe extends Model<Safe, SafeCreationAttrs> {
 	})
 	extraFieldValue9: ExtraValue
 
+	@ApiProperty({ example: '200', description: 'Высота' })
+	@Column({ type: DataType.STRING, allowNull: true })
+	extra_field_10: string
+
+	@ApiProperty({ example: '260', description: 'Ширина' })
+	@Column({ type: DataType.STRING, allowNull: true })
+	extra_field_11: string
+
+	@ApiProperty({ example: '180', description: 'Глубина' })
+	@Column({ type: DataType.STRING, allowNull: true })
+	extra_field_12: string
+
 	@ApiProperty({ example: 'дверь 10мм; корпус 3мм', description: 'Толщина металла' })
 	@Column({ type: DataType.INTEGER, allowNull: true })
 	extra_field_20: number
@@ -212,7 +224,7 @@ export class ProductToCategories extends Model<ProductToCategories, SafeCreation
 
 @Table({ tableName: 'products_relations', timestamps: false })
 export class ProductsRelations extends Model<ProductToCategories, SafeCreationAttrs> {
-	@ApiProperty({ example: 675, description: 'id',  })
+	@ApiProperty({ example: 675, description: 'id' })
 	@Column({ type: DataType.INTEGER, unique: true, autoIncrement: true, primaryKey: true })
 	id: number
 

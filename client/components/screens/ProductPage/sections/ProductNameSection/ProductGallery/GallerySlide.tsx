@@ -18,7 +18,7 @@ export const GallerySlide = (props: PropsType) => {
 					alt={alt || 'Фото сейфа'}
 					width="0"
 					height="0"
-					className=" !object-contain"
+					className="!object-contain"
 					quality={100}
 				/>
 			)}

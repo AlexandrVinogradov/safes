@@ -20,11 +20,15 @@ export const getApiProductURL = (
 		// filter
 		'price',
 		'weight',
+		'manufacturer',
 		'burglaryResistance',
 		'fireResistance',
 		'keyType',
 		'gunCount',
 		'metalThickness',
+		'height',
+		'width',
+		'depth',
 		// pagination
 		'page',
 		'pageSize',

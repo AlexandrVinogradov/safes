@@ -12,32 +12,42 @@ export class ManufacturersService {
 		return manufacturer
 	}
 
-	async getAllManufacturers() {
+	async getAllManufacturers(queryParams: { filter: 'byCountry' }) {
 		const manufacturers = await this.manufacturerRepository.findAll({
 			include: [{ model: Country, as: 'country' }],
 		})
 
-		const countryManufacturers = manufacturers.reduce((acc, man) => {
-			const index = acc.findIndex((el) => el.country === man.country?.name)
+		const getManufacturerByCountry = () => {
+			return manufacturers.reduce((acc, man) => {
+				const index = acc.findIndex((el) => el.country === man.country?.name)
 
-			if (index === -1) {
-				const newItem = {
-					country: man.country?.name,
-					flag: man.country?.image,
-					manufacturers: [{ ...man.toJSON() }],
+				if (index === -1) {
+					const newItem = {
+						country: man.country?.name,
+						flag: man.country?.image,
+						manufacturers: [{ ...man.toJSON() }],
+					}
+
+					acc.push(newItem)
+				} else {
+					acc[index].manufacturers = [...acc[index].manufacturers, { ...man.toJSON() }]
 				}
 
-				acc.push(newItem)
-			} else {
-				acc[index].manufacturers = [...acc[index].manufacturers, { ...man.toJSON() }]
-			}
+				return acc
+			}, [])
+		}
 
-			return acc
-		}, [])
-
-		return countryManufacturers
+		if (queryParams.filter === 'byCountry') return getManufacturerByCountry()
+		return manufacturers
 	}
 
+	async getAllSimpleListManufacturers() {
+		const manufacturer = await this.manufacturerRepository.findAll({
+			attributes: ['name_ru-RU', 'manufacturer_id'],
+		})
+
+		return manufacturer
+	}
 	async getSelectedManufacturer(alias: string) {
 		const manufacturer = await this.manufacturerRepository.findOne({ where: { 'alias_ru-RU': alias } })
 

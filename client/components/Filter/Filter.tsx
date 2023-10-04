@@ -4,6 +4,8 @@ import { FilterSlider } from './FilterSlider/FilterSlider'
 import { useProductStore } from '@/store/useProductStore'
 import { isObjectEmpty } from '@/helpers/isObjectEmpty'
 import { useRouter } from 'next/router'
+import { SimplManufactureType } from '@/models/IManufacturersStore'
+import { getClearManufacturerName } from '@/helpers/getClearManufacturerName'
 import { ExtraValuesHandbook, FilterDataType } from '@/models/IProductStore'
 import { useQueryParams } from '@/hooks/useQueryParams'
 import MultiSelect from '../MultiSelect/MultiSelect'
@@ -11,10 +13,11 @@ import { s } from './styles'
 
 type PropsType = {
 	extraValuesHandbook: ExtraValuesHandbook[]
+	simpleManufacturers: SimplManufactureType[] | null
 }
 
 export const Filter = (props: PropsType) => {
-	const { extraValuesHandbook } = props
+	const { extraValuesHandbook, simpleManufacturers } = props
 	const { query } = useRouter()
 	const filterData = useProductStore((state) => state.filterData)
 	const setFilterData = useProductStore((state) => state.setFilterData)
@@ -60,29 +63,38 @@ export const Filter = (props: PropsType) => {
 		resetQueryParams()
 	}
 
-	const getOptions = (handbook: ExtraValuesHandbook[], fieldId: number) => {
+	const getExtraValuesOptions = (handbook: ExtraValuesHandbook[], fieldId: number) => {
 		return handbook.filter((el) => el.field_id === fieldId).map((el) => ({ label: el['name_ru-RU'], value: String(el.id) }))
 	}
+
+	const manufacturersOption =
+		simpleManufacturers?.map((manufacturer) => ({
+			label: getClearManufacturerName(manufacturer['name_ru-RU']),
+			value: String(manufacturer.manufacturer_id),
+		})) || []
 
 	return (
 		<div className={s.filter}>
 			<div className={s.settings}>
 				<p className={s.title}>Фильтр</p>
 
+				<p className={s.label}>Производитель</p>
+				<MultiSelect id="manufacturer" options={manufacturersOption} className={s.settingItem} />
+
 				<p className={s.label}>Взломостойкость</p>
-				<MultiSelect id="burglaryResistance" options={getOptions(extraValuesHandbook, 3)} className={s.settingItem} />
+				<MultiSelect id="burglaryResistance" options={getExtraValuesOptions(extraValuesHandbook, 3)} className={s.settingItem} />
 
 				<p className={s.label}>Огнестойкость</p>
-				<MultiSelect id="fireResistance" options={getOptions(extraValuesHandbook, 4)} className={s.settingItem} />
+				<MultiSelect id="fireResistance" options={getExtraValuesOptions(extraValuesHandbook, 4)} className={s.settingItem} />
 
 				<p className={s.label}>Вид замка</p>
-				<MultiSelect id="keyType" options={getOptions(extraValuesHandbook, 9)} className={s.settingItem} />
+				<MultiSelect id="keyType" options={getExtraValuesOptions(extraValuesHandbook, 9)} className={s.settingItem} />
 
 				<p className={s.label}>Кол-во стволов</p>
-				<MultiSelect id="gunCount" options={getOptions(extraValuesHandbook, 8)} className={s.settingItem} />
+				<MultiSelect id="gunCount" options={getExtraValuesOptions(extraValuesHandbook, 8)} className={s.settingItem} />
 
 				<p className={s.label}>Толщина металла</p>
-				<MultiSelect id="metalThickness" options={getOptions(extraValuesHandbook, 20)} className={s.settingItem} />
+				<MultiSelect id="metalThickness" options={getExtraValuesOptions(extraValuesHandbook, 20)} className={s.settingItem} />
 
 				<FilterSlider
 					paramId="price"
@@ -97,6 +109,27 @@ export const Filter = (props: PropsType) => {
 					fullDiapason={filterData.weight.fullDiapason}
 					title="Вес (кг)"
 					setDiapason={(value) => setFilterData('weight', value)}
+				/>
+				<FilterSlider
+					paramId="height"
+					selectedDiapason={filterData.height.selectedDiapason}
+					fullDiapason={filterData.height.fullDiapason}
+					title="Высота (ММ)"
+					setDiapason={(value) => setFilterData('height', value)}
+				/>
+				<FilterSlider
+					paramId="width"
+					selectedDiapason={filterData.width.selectedDiapason}
+					fullDiapason={filterData.width.fullDiapason}
+					title="Ширина (ММ)"
+					setDiapason={(value) => setFilterData('width', value)}
+				/>
+				<FilterSlider
+					paramId="depth"
+					selectedDiapason={filterData.depth.selectedDiapason}
+					fullDiapason={filterData.depth.fullDiapason}
+					title="Глубина (ММ)"
+					setDiapason={(value) => setFilterData('depth', value)}
 				/>
 			</div>
 			<Button onClick={handleResetFilter} className={s.resetButton}>

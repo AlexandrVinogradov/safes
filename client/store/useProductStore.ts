@@ -1,6 +1,6 @@
 import { immer } from 'zustand/middleware/immer'
 import { create } from 'zustand'
-import { SelectedProductType, FilterDataType, ProductsType, ExtraValuesHandbook } from '../models/IProductStore'
+import { SelectedProductType, FilterDataType, ProductsType, ExtraValuesHandbook, FilterParamType } from '../models/IProductStore'
 import { getClientServerUrl } from '@/helpers/getClientServerUrl'
 
 type State = {
@@ -16,7 +16,7 @@ type Actions = {
 	setSearchValue: (searchValue: string) => void
 	fetchProducts: (url: string, searchValue?: string) => Promise<ProductsType | SelectedProductType>
 	fetchExtraValuesHandbook: () => Promise<ExtraValuesHandbook[]>
-	setFilterData: (paramId: 'price' | 'weight', value: [number, number]) => void
+	setFilterData: (paramId: FilterParamType, value: [number, number]) => void
 	initFilterData: (filterData: FilterDataType) => void
 	resetFilter: () => void
 }
@@ -27,6 +27,18 @@ const initialFilterData: FilterDataType = {
 		fullDiapason: [0, 2000000],
 	},
 	weight: {
+		selectedDiapason: [0, 3000],
+		fullDiapason: [0, 3000],
+	},
+	height: {
+		selectedDiapason: [0, 3000],
+		fullDiapason: [0, 3000],
+	},
+	width: {
+		selectedDiapason: [0, 3000],
+		fullDiapason: [0, 3000],
+	},
+	depth: {
 		selectedDiapason: [0, 3000],
 		fullDiapason: [0, 3000],
 	},
@@ -82,7 +94,7 @@ export const useProductStore = create(
 				state.filterData = filterData
 			})
 		},
-		setFilterData: (paramId: 'price' | 'weight', value: [number, number]) => {
+		setFilterData: (paramId: FilterParamType, value: [number, number]) => {
 			set((state) => {
 				state.filterData[paramId].selectedDiapason = value
 			})

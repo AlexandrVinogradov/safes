@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { useManufacturersStore } from '@/store/useManufacturersStore'
 import { getClientServerUrl } from '@/helpers/getClientServerUrl'
+import { getClearManufacturerName } from '@/helpers/getClearManufacturerName'
 import Image from 'next/image'
 import Link from 'next/link'
 import { s } from './styles'
@@ -21,16 +22,11 @@ export const ManufacturerPopup = (props: PropsType) => {
 	useEffect(() => {
 		if (manufacturers.length || !isHovering) return
 
-		const API_URL = getClientServerUrl('manufacturers')
+		const API_URL = getClientServerUrl('manufacturers', { filter: 'byCountry' })
 		fetchManufacturers(API_URL)
 	}, [isHovering])
 
 	if (!isHovering) return null
-
-	const getClearManufacturerName = (input: string) => {
-		const regex = /\([^)]+\)/g
-		return input?.replace(regex, '').replace('Сейфы', '').trim()
-	}
 
 	const handleClickLink = () => setIsHovering(false)
 

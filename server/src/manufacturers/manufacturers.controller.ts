@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, Param } from '@nestjs/common'
+import { Body, Controller, Get, Post, Param, Query } from '@nestjs/common'
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger'
 import { CreateManufacturerDto } from './dto/create-manufacturer.dto'
 import { Manufacturer } from './manufacturers.model'
@@ -19,8 +19,15 @@ export class ManufacturersController {
 	@ApiOperation({ summary: 'Получить всех производителей' })
 	@ApiResponse({ status: 200, type: [Manufacturer] })
 	@Get()
-	getAll() {
-		return this.manufacturerService.getAllManufacturers()
+	getAll(@Query() queryParams) {
+		return this.manufacturerService.getAllManufacturers(queryParams)
+	}
+
+	@ApiOperation({ summary: 'Получить всех производителей' })
+	@ApiResponse({ status: 200, type: [Manufacturer] })
+	@Get('/simple')
+	getAllSimpleList() {
+		return this.manufacturerService.getAllSimpleListManufacturers()
 	}
 
 	@ApiOperation({ summary: 'Получить выбранного производителя' })

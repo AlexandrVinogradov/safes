@@ -15,17 +15,27 @@ const getRightConfig = () => {
 	return {}
 }
 
-const getUrl = (config: ObjectType, endpoint: EndpointType) => {
+const getUrl = (config: ObjectType, endpoint: EndpointType, queryParams?: Record<string, string>) => {
 	for (const key in config) {
-		if (key.toLowerCase().includes(endpoint)) return config[key]
+		if (key.toLowerCase().includes(endpoint)) {
+			let path = config[key]
+
+			if (queryParams) {
+				path = path + '?'
+				for (const key in queryParams) {
+					path = path + `${key}=${queryParams[key]}&`
+				}
+			}
+			return path
+		}
 	}
 
 	return ''
 }
 
-export const getClientServerUrl = (endpoint: EndpointType) => {
+export const getClientServerUrl = (endpoint: EndpointType, queryParams?: Record<string, string>) => {
 	const config = getRightConfig()
-	const url = getUrl(config, endpoint)
+	const url = getUrl(config, endpoint, queryParams)
 
 	return url
 }
