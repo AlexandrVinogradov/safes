@@ -6,7 +6,7 @@ export const useQueryParams = () => {
 	const [queryParams, setQueryParams] = useState({})
 
 	const updateQueryParams = useCallback(
-		(params: { [key: string]: string }) => {
+		(params: { [key: string]: string }, scroll?: { scroll: boolean }) => {
 			const searchParams = new URLSearchParams({
 				...queryParams,
 				...params,
@@ -16,13 +16,13 @@ export const useQueryParams = () => {
 			const hasParams = router.asPath.includes('?')
 			const newUrl = hasParams ? `${url}?${searchParams}` : `${url}${searchParams ? `?${searchParams}` : ''}`
 
-			router.replace(newUrl, undefined, { scroll: false })
+			router.replace(newUrl, undefined, { scroll: !!scroll })
 		},
 		[queryParams, router],
 	)
 
 	const removeQueryParams = useCallback(
-		(paramsForRemove: string[]) => {
+		(paramsForRemove: string[], scroll?: { scroll: boolean }) => {
 			const searchParams = new URLSearchParams(queryParams)
 
 			paramsForRemove.forEach((param) => {
@@ -33,15 +33,18 @@ export const useQueryParams = () => {
 			const hasParams = router.asPath.includes('?')
 			const newUrl = hasParams ? `${url}?${searchParams.toString()}` : url
 
-			router.replace(newUrl, undefined, { scroll: false })
+			router.replace(newUrl, undefined, { scroll: !!scroll })
 		},
 		[queryParams, router],
 	)
 
-	const resetQueryParams = useCallback(() => {
-		const url = router.asPath.split('?')[0]
-		router.replace(url, undefined, { scroll: false })
-	}, [router])
+	const resetQueryParams = useCallback(
+		(scroll?: { scroll: boolean }) => {
+			const url = router.asPath.split('?')[0]
+			router.replace(url, undefined, { scroll: !!scroll })
+		},
+		[router],
+	)
 
 	useEffect(() => {
 		const searchParams = new URLSearchParams(router.asPath.split('?')[1] || '')

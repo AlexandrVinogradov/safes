@@ -20,7 +20,7 @@ const CustomPagination = (props: PaginationPropsType) => {
 		const isNewPage = queryPage !== page
 		const isNewPageSize = queryPageSize !== pageSize
 
-		if (isNewPage) setQueryParams({ page: String(page) })
+		if (isNewPage) setQueryParams({ page: String(page) }, { scroll: true })
 
 		if (isNewPageSize) {
 			setQueryParams({ page: '1', pageSize: String(pageSize) })
