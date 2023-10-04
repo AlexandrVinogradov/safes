@@ -1,8 +1,10 @@
-import React, { useRef, useState } from 'react'
+import React, { useState } from 'react'
 import type { SelectProps } from 'antd'
-import { Select } from 'antd'
+import { Divider, Select } from 'antd'
 import { useRouter } from 'next/router'
 import { useQueryParams } from '@/hooks/useQueryParams'
+import { s } from './styles'
+import { Button } from '../Button/Button'
 
 type PropsType = {
 	options: ItemProps[]
@@ -19,8 +21,6 @@ const MultiSelect = (props: PropsType) => {
 	const { className, options, id } = props
 
 	const [open, setOpen] = useState(false)
-	// FIXME:
-	const selectRef = useRef<any>()
 
 	const { query } = useRouter()
 	const { setQueryParams, removeQueryParams } = useQueryParams()
@@ -33,29 +33,48 @@ const MultiSelect = (props: PropsType) => {
 		placeholder: 'Все',
 		value: value?.split('-'),
 		style: { width: '100%' },
-		maxTagCount: 'responsive',
-		options: [{ label: 'Все', value: 'all' }, ...options],
-		onFocus: () => setOpen(true),
-		onBlur: () => setOpen(false),
+		// maxTagCount: 'responsive',
+		options,
+
+		optionFilterProp: 'children',
+		filterOption: (input, option) => String(option?.label).toLocaleLowerCase().includes(input.toLocaleLowerCase()),
+
+		onDropdownVisibleChange: (visible) => setOpen(visible),
 		onChange: (newValue: string[]) => {
-			if (newValue.includes('all')) {
-				removeQueryParams([id])
-				setOpen(false)
-				selectRef.current?.blur()
-
-				return
-			}
-
 			if (!newValue.length) {
 				removeQueryParams([id])
 				return
 			}
 
-			setQueryParams({ [id]: newValue.join('-') })
+			setQueryParams({ [id]: newValue.join('-'), page: '1' })
 		},
 	}
 
-	return <Select ref={selectRef} className={className} {...selectProps} />
+	const handleClickReset = () => value && removeQueryParams([id])
+	const handleClickDone = () => setOpen(false)
+
+	return (
+		<Select
+			className={className}
+			{...selectProps}
+			dropdownRender={(menu) => (
+				<>
+					{menu}
+					<Divider style={{ margin: '8px 0' }} />
+
+					<div className={s.buttons}>
+						<Button className={s.button} onClick={handleClickReset}>
+							Сбросить
+						</Button>
+
+						<Button className={s.button} styleType="filled" onClick={handleClickDone}>
+							Готово
+						</Button>
+					</div>
+				</>
+			)}
+		/>
+	)
 }
 
 export default MultiSelect
