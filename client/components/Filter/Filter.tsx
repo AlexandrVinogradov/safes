@@ -32,7 +32,7 @@ export const Filter = (props: PropsType) => {
 		if (isObjectEmpty(query)) return
 
 		let newFilterData = { ...filterData }
-		const params = ['price', 'weight']
+		const params = ['price', 'weight', 'height', 'width', 'depth']
 
 		for (const key in query) {
 			if (params.includes(key)) {

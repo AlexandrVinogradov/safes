@@ -23,8 +23,8 @@ type Actions = {
 
 const initialFilterData: FilterDataType = {
 	price: {
-		selectedDiapason: [0, 2000000],
-		fullDiapason: [0, 2000000],
+		selectedDiapason: [0, 35000000],
+		fullDiapason: [0, 35000000],
 	},
 	weight: {
 		selectedDiapason: [0, 3000],
