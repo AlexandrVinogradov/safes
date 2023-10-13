@@ -16,20 +16,22 @@ export const CategoriesSection = (props: PropsType) => {
 
 	return (
 		<section className={clsx(container, s.section)}>
-			<ul className={s.categoriesList}>
-				{selectedCategory.child.map((el: any) => (
-					<Link key={el.category_id} href={el['alias_ru-RU']} className={s.childCategoryLink}>
-						<Image
-							unoptimized={true}
-							src={`https://prommetsafe.ru/components/com_jshopping/files/img_categories/${el.category_image}`}
-							alt={el['name_ru-RU']}
-							width={50}
-							height={50}
-						/>
-						<span className={s.childCategoryLinkName}> {el['name_ru-RU']}</span>
-					</Link>
-				))}
-			</ul>
+			<div className={s.wrapper}>
+				<ul className={s.categoriesList}>
+					{selectedCategory.child.map((el: any) => (
+						<Link key={el.category_id} href={el['alias_ru-RU']} className={s.childCategoryLink}>
+							<Image
+								unoptimized={true}
+								src={`https://prommetsafe.ru/components/com_jshopping/files/img_categories/${el.category_image}`}
+								alt={el['name_ru-RU']}
+								width={50}
+								height={50}
+							/>
+							<span className={s.childCategoryLinkName}> {el['name_ru-RU']}</span>
+						</Link>
+					))}
+				</ul>
+			</div>
 		</section>
 	)
 }

@@ -30,14 +30,14 @@ export const Footer = () => {
 			<div className={clsx(container, s.mainFooter)}>
 				<div>
 					<LogoIcon className={s.logo} />
-					<Contacts />
+					<Contacts className={s.contacts} />
 				</div>
 
-				<nav className="col-span-2">
+				<nav className={s.nav}>
 					<ul className={s.navList}>
 						{nav.map((link) => (
 							<li key={link.name}>
-								<Link className="whitespace-nowrap" href={link.to}>
+								<Link className={s.navLink} href={link.to}>
 									{link.name}
 								</Link>
 							</li>
@@ -48,6 +48,7 @@ export const Footer = () => {
 				<Link href="/policies" className={s.secondaryLink}>
 					Политика конфиденциальности
 				</Link>
+
 				<p className={s.secondaryLink}>© 2023 Купить сейф в Москве. All Rights Reserved.</p>
 
 				<div className={s.icons}>

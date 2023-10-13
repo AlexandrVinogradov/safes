@@ -8,12 +8,12 @@ export const HeaderUpElements = () => {
 	return (
 		<div className={s.mainWrapper}>
 			<Link href="/">
-				<LogoIcon />
+				<LogoIcon className={s.logo} />
 			</Link>
 
 			<Search className={s.search} />
 
-			<Contacts />
+			<Contacts className={s.contacts} />
 		</div>
 	)
 }

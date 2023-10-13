@@ -35,6 +35,7 @@ module.exports = {
         'xl': {'max': '1279px'},
         //
         'container': {'max': '1440px'}, // use
+        'maxLg++': {'max': '1260px'}, // use
         'maxLg+': {'max': '1200px'}, // use
         'maxLg': {'max': '1024px'}, // use
         'maxMd': {'max': '767px'}, // use

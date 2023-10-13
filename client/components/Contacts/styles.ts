@@ -3,5 +3,5 @@ export const s = {
 	contacts: /*tw*/ 'flex',
 	schedule: /*tw*/ 'mr-2.5',
 	link: /*tw*/ 'block',
-	contactIcons: /*tw*/ 'flex justify-between items-center max-w-[91px] w-full',
+	contactIcons: /*tw*/ 'flex justify-between items-center w-[81px]',
 }

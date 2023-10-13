@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { LargeHeader } from './LargeHeader/LargeHeader'
 import { StickyHeader } from './StickyHeader/StickyHeader'
+import { s } from './styles'
 
 export const Header = () => {
 	const [isScrolled, setIsScrolled] = useState(false)
@@ -27,7 +28,7 @@ export const Header = () => {
 	return (
 		<>
 			{!isScrolled ? <LargeHeader /> : <StickyHeader />}
-			<div className="h-[159px]" />
+			<div className={s.transparent} />
 		</>
 	)
 }

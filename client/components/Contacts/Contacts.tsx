@@ -1,10 +1,17 @@
 import { PhoneButton } from './PhoneButton/PhoneButton'
 import { MailButton } from './MailButton/MailButton'
 import { s } from './styles'
+import clsx from 'clsx'
 
-export const Contacts = () => {
+type PropsType = {
+	className?: string
+}
+
+export const Contacts = (props: PropsType) => {
+	const { className } = props
+
 	return (
-		<div className={s.contactsWrapper}>
+		<div className={clsx(s.contactsWrapper, className)}>
 			<div className={s.contacts}>
 				<div className={s.schedule}>
 					<p>Пн - Вс:</p>

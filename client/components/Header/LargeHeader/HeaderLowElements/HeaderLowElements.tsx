@@ -10,7 +10,7 @@ export const HeaderLowElements = () => {
 			<div className={s.navWithCatalog}>
 				<CatalogPopover className={s.catalogPopover} />
 
-				<Nav />
+				<Nav className={s.nav} />
 			</div>
 
 			<div className={s.iconButtons}>
