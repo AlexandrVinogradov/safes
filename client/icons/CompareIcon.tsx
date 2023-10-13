@@ -9,7 +9,7 @@ export function ComparisonIcon(props: PropsTypes) {
 	const { className, width = 'w-[19px]' } = props
 
 	return (
-		<Icon className={className} width={width} stroke="none" viewBox="0 0 19 16">
+		<Icon width={width} className={className} stroke="none" viewBox="0 0 19 16">
 			<rect width="19" height="1.94872" fill="currentColor" />
 			<rect y="5.94873" width="19" height="1.94872" fill="currentColor" />
 			<rect x="6" y="12.3594" width="13" height="1.94872" fill="currentColor" />

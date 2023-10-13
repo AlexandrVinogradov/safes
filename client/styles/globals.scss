@@ -5,6 +5,10 @@
 
 body {
   @apply font-noto text-dark;
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #40a3d2;
+  }
 }
 
 h2 {

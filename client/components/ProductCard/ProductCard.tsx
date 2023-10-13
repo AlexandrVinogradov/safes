@@ -41,7 +41,7 @@ export const ProductCard = (props: PropsType) => {
 			<header>
 				<div className={s.nameBlock}>
 					<h3 className={s.name}>{card['name_ru-RU']}</h3>
-					<DynamicComparisonButton card={card} />
+					<DynamicComparisonButton card={card} iconStyles={s.comparisonButton} />
 				</div>
 
 				<p className={s.code}>Код: {card.product_ean}</p>
@@ -71,14 +71,14 @@ export const ProductCard = (props: PropsType) => {
 				<DescItem name="Толщина металла" data={card.extra_field_20} />
 			</ul>
 			<div className={s.priceBlock}>
-				{/* @ts-ignore */}
 				<p className={s.price}>{card.product_price.toLocaleString('ru-RU')} ₽</p>
-				{/* @ts-ignore */}
 				<p className={s.priceBeforeDiscount}>{card.product_old_price.toLocaleString('ru-RU')} ₽</p>
 			</div>
 			<footer className={s.footer}>
-				<Button href={`/${card['alias_ru-RU']}`}>Подробнее</Button>
-				<IconButton onClick={handleClickAddProduct} className={s.iconButton} icon={<BasketIcon />} />
+				<Button className={s.moreButton} href={`/${card['alias_ru-RU']}`}>
+					Подробнее
+				</Button>
+				<IconButton onClick={handleClickAddProduct} className={s.iconButton} icon={<BasketIcon className={s.cartIcon} />} />
 			</footer>
 		</article>
 	)

@@ -30,7 +30,22 @@ module.exports = {
 
         'disabled': '#9FD1E8'
       },
+      screens: {
+        '2xl': {'max': '1535px'},
+        'xl': {'max': '1279px'},
+        //
+        'container': {'max': '1440px'}, // use
+        'maxLg+': {'max': '1200px'}, // use
+        'maxLg': {'max': '1024px'}, // use
+        'maxMd': {'max': '767px'}, // use
+        'maxSm': {'max': '350px'}, // use
+        //
+        'sm': {'max': '639px'},
+      }
     },
   },
   plugins: [],
 }
+
+// ipad 1180
+// iphone 12 pro 380px

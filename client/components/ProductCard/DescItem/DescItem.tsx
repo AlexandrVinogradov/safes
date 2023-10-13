@@ -7,7 +7,7 @@ export const DescItem = (props: { name: string; data: string }) => {
 
 	return (
 		<li className={s.descItem}>
-			<p className={s.name}>{name}</p> <p>{data}</p>
+			<p className={s.name}>{name}</p> <p className={s.data}>{data}</p>
 		</li>
 	)
 }

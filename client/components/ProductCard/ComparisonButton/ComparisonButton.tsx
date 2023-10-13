@@ -7,10 +7,11 @@ import clsx from 'clsx'
 
 export type CompareButtonPropsType = {
 	card: ProductCardType
+	iconStyles?: string
 }
 
 const ComparisonButton = (props: CompareButtonPropsType) => {
-	const { card } = props
+	const { card, iconStyles } = props
 
 	const addComparisonItem = useComparisonStore((state) => state.addComparisonItem)
 	const deleteItem = useComparisonStore((state) => state.deleteItem)
@@ -30,7 +31,11 @@ const ComparisonButton = (props: CompareButtonPropsType) => {
 	}
 
 	return (
-		<IconButton onClick={handleClickCompareProduct} className={clsx(s.iconButton, hasItem && s.selected)} icon={<ComparisonIcon />} />
+		<IconButton
+			onClick={handleClickCompareProduct}
+			className={clsx(s.iconButton, hasItem && s.selected)}
+			icon={<ComparisonIcon className={iconStyles} />}
+		/>
 	)
 }
 
