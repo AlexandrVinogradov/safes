@@ -14,6 +14,7 @@ import { s } from './styles'
 import clsx from 'clsx'
 import { ProductsGrid } from '@/components/ProductsGrid/ProductsGrid'
 import { SimplManufactureType } from '@/models/IManufacturersStore'
+import { FilterButton } from './FilterButton/FilterButton'
 
 const DynamicCustomPagination = dynamic<PaginationPropsType>(() => import('@/components/Pagination/Pagination'), { ssr: false })
 
@@ -48,7 +49,10 @@ export const CatalogSection = (props: PropsType) => {
 
 	return (
 		<section className={clsx(s.section, container)}>
-			<Sort className={s.sort} data={sortData} />
+			<div className={s.filterSort}>
+				<FilterButton className={s.filterButton} />
+				<Sort className={s.sort} data={sortData} />
+			</div>
 			<div className={s.wrapper}>
 				<Filter extraValuesHandbook={extraValuesHandbook} simpleManufacturers={simpleManufacturers} />
 
