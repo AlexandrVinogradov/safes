@@ -1,3 +1,4 @@
+import { scrollToggle } from '@/helpers/scrollToggle'
 import { create } from 'zustand'
 import { immer } from 'zustand/middleware/immer'
 
@@ -7,6 +8,8 @@ type State = {
 
 	isCutModal: boolean
 	isCutModalInfoRead: boolean
+
+	isMobileMenuModal: boolean
 }
 
 type Actions = {
@@ -15,6 +18,8 @@ type Actions = {
 
 	setIsCutModal: (isRequestCallModal: boolean) => void
 	setIsCutModalInfoRead: (isCutModalInfoRead: boolean) => void
+
+	setIsMobileMenuModal: (isMobileMenuModal: boolean) => void
 }
 
 export const useModalStore = create(
@@ -37,6 +42,13 @@ export const useModalStore = create(
 		isCutModalInfoRead: false,
 		setIsCutModalInfoRead: (isCutModalInfoRead: boolean) => {
 			set({ isCutModalInfoRead })
+		},
+
+		isMobileMenuModal: false,
+		setIsMobileMenuModal: (isMobileMenuModal: boolean) => {
+			set({ isMobileMenuModal })
+
+			scrollToggle(isMobileMenuModal)
 		},
 	})),
 )
