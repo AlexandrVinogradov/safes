@@ -1,3 +1,3 @@
 export const s = {
-    swiperSlide: /*tw*/ 'p-[3px]' 
+    swiperSlide: /*tw*/ `p-[3px]` 
 }

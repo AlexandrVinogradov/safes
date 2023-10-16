@@ -3,10 +3,11 @@ import { ProductCardType } from '@/models/IProductStore'
 
 type PropsType = {
 	card: ProductCardType
+	className?: string
 }
 
 export const ProductSlide = (props: PropsType) => {
-	const { card } = props
+	const { card, ...otherProps } = props
 
-	return <ProductCard card={card} />
+	return <ProductCard card={card} {...otherProps} />
 }

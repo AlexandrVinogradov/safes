@@ -4,7 +4,7 @@ import 'swiper/css'
 import 'swiper/css/pagination'
 import 'swiper/css/navigation'
 import { Pagination, Navigation } from 'swiper'
-import { SwiperModule } from 'swiper/types'
+import { SwiperModule, SwiperOptions } from 'swiper/types'
 import { SmallArrowLeftIcon } from '@/icons/SmallArrowLeftIcon'
 import clsx from 'clsx'
 import { SmallArrowRightIcon } from '@/icons/SmallArrowRightIcon'
@@ -14,7 +14,13 @@ import { BigArrowRightIcon } from '@/icons/BigArrowRightIcon'
 type PropsType = {
 	children: ReactNode
 	isPagination?: boolean
-	slidesPerView?: number
+	slidesPerView?: number | 'auto'
+	breakpoints?:
+		| {
+				[width: number]: SwiperOptions
+				[ratio: string]: SwiperOptions
+		  }
+		| undefined
 	spaceBetween?: number
 	isSmallArrows?: boolean
 	isBigArrows?: boolean
@@ -50,6 +56,7 @@ export const Slider = (props: PropsType) => {
 		children,
 		isPagination,
 		slidesPerView = 1,
+		breakpoints,
 		spaceBetween = 0,
 		isSmallArrows = false,
 		isBigArrows = false,
@@ -73,6 +80,7 @@ export const Slider = (props: PropsType) => {
 				clickable: true,
 				type: isProgress ? 'progressbar' : 'bullets',
 			}}
+			breakpoints={breakpoints}
 			modules={getModules()}
 			slidesPerView={slidesPerView}
 			spaceBetween={spaceBetween}

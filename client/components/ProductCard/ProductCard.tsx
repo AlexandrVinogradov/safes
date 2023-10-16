@@ -46,6 +46,7 @@ export const ProductCard = (props: PropsType) => {
 
 				<p className={s.code}>Код: {card.product_ean}</p>
 			</header>
+			
 			<div className={s.imgWrapper}>
 				<Link className={s.imgLink} href={`/${card['alias_ru-RU']}`}>
 					<Image
