@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { s } from './styles'
 import clsx from 'clsx'
 import { ManufacturerPopover } from '../ManufacturerPopover/ManufacturerPopover'
+import { NavType, nav } from '@/constants/nav'
 
 type PropsType = {
 	className?: string
@@ -10,38 +11,36 @@ type PropsType = {
 export const Nav = (props: PropsType) => {
 	const { className } = props
 
-	return (
-		<nav className={clsx(s.nav, className)}>
-			<ul className={s.navList}>
-				<li>
-					<Link className={s.link} href="/about-company">
-						О компании
-					</Link>
-				</li>
-				<li>
-					<Link className={s.link} href="/information">
-						Статьи
-					</Link>
-				</li>
-				<li>
-					<Link className={s.link} href="/instruction">
-						Инструкции
-					</Link>
-				</li>
-				<li>
+	const getHeaderNav = (nav: NavType[]) => {
+		const headerNav = [...nav]
+		const index = headerNav.findIndex((item) => item.name === 'Каталог')
+
+		if (index === -1) return headerNav
+		headerNav.splice(index, 1)
+
+		return headerNav
+	}
+
+	const getNavItem = (item: NavType) => {
+		if (item.name === 'Производители')
+			return (
+				<li key={item.id}>
 					<ManufacturerPopover />
 				</li>
-				<li>
-					<Link className={s.link} href="/dostavka">
-						Доставка и оплата
-					</Link>
-				</li>
-				<li>
-					<Link className={s.link} href="/contacts">
-						Контакты
-					</Link>
-				</li>
-			</ul>
+			)
+
+		return (
+			<li key={item.name}>
+				<Link key={item.id} className={s.link} href={item.to}>
+					{item.name}
+				</Link>
+			</li>
+		)
+	}
+
+	return (
+		<nav className={clsx(s.nav, className)}>
+			<ul className={s.navList}>{getHeaderNav(nav).map((item) => getNavItem(item))}</ul>
 		</nav>
 	)
 }

@@ -5,7 +5,7 @@ import clsx from 'clsx'
 
 type PropsTypes = {
 	children: React.ReactNode
-	onClose: MouseEventHandler<HTMLDivElement>
+	onClose?: MouseEventHandler<HTMLDivElement>
 	isOpen: boolean
 	className?: string
 }

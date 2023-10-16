@@ -1,4 +1,4 @@
-import { FilterIcon } from '@/icons/CrossIcon'
+import { FilterIcon } from '@/icons/FilterIcon'
 import { s } from './styles'
 import clsx from 'clsx'
 

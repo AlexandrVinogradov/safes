@@ -3,6 +3,7 @@ import Link from 'next/link'
 import clsx from 'clsx'
 import { s } from './styles'
 import { CategoryType } from '@/models/ICategoriesStore'
+import { mainMenuItemStyle } from '@/styles/mainMenuItem'
 
 type PropsType = {
 	category: CategoryType
@@ -39,7 +40,7 @@ export const MenuItem = (props: PropsType) => {
 			{category.child ? (
 				<button
 					className={clsx(
-						lvl === 1 && s.button,
+						lvl === 1 && mainMenuItemStyle,
 						lvl === 1 && isSelected && s.selectedButton,
 						lvl === 2 && s.buttonLvl2,
 						lvl === 2 && isSelected && s.selectedButtonLvl2,
@@ -62,7 +63,7 @@ export const MenuItem = (props: PropsType) => {
 					href={`/${category['alias_ru-RU']}`}
 					className={clsx(
 						s.link,
-						lvl === 1 && s.button,
+						lvl === 1 && mainMenuItemStyle,
 						lvl === 1 && isSelected && s.selectedButton,
 						lvl === 2 && s.buttonLvl2,
 						lvl === 2 && isSelected && s.selectedButtonLvl2,

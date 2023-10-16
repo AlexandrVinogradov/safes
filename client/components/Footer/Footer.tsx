@@ -7,18 +7,9 @@ import { LogoIcon } from '@/icons/LogoIcon'
 import { TelegramIcon } from '@/icons/TelegramIcon'
 import { YouTubeIcon } from '@/icons/YouTubeIcon'
 import { VkIcon } from '@/icons/VkIcon'
+import { nav } from '@/constants/nav'
 
 export const Footer = () => {
-	const nav = [
-		{ name: 'Каталог', to: '/catalog' },
-		{ name: 'О компании', to: '/company' },
-		{ name: 'Информация', to: '/info' },
-		{ name: 'Инструкции', to: '/instruction' },
-		{ name: 'Производители', to: '/manufacturers' },
-		{ name: 'Доставка и оплата', to: '/delivery' },
-		{ name: 'Контакты', to: '/contacts' },
-	]
-
 	const iconLinks = [
 		{ name: 'vk', to: 'https://www.vk.com', icon: <VkIcon /> },
 		{ name: 'yt', to: 'https://www.youtube.com/', icon: <YouTubeIcon /> },
