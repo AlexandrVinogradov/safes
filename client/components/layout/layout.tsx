@@ -3,6 +3,7 @@ import { Header } from '@/components/Header/Header'
 import { ReactNode } from 'react'
 import { Meta } from '../Meta/Meta'
 import { MetaType } from '../Meta/IMeta'
+import { Cookies } from '../Cookies/Cookies'
 
 type PropsType = {
 	children: ReactNode
@@ -16,6 +17,7 @@ export const Layout = (props: PropsType & MetaType) => {
 			<Header />
 			{children}
 			<Footer />
+			<Cookies />
 		</Meta>
 	)
 }

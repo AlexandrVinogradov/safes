@@ -6,13 +6,14 @@ import { MobileScreenType } from '@/constants/nav'
 import { LongArrowLeftIcon } from '@/icons/LongArrowLeftIcon'
 
 type PropsType = {
+	title: string
 	screen?: MobileScreenType
 	setScreen: (screen: MobileScreenType) => void
 	onBack?: () => void
 }
 
 export const MobileMenuModalHeader = (props: PropsType) => {
-	const { screen = 'menu', setScreen, onBack } = props
+	const { title, screen = 'menu', setScreen, onBack } = props
 
 	const setIsMobileMenuModal = useModalStore((state) => state.setIsMobileMenuModal)
 
@@ -21,17 +22,11 @@ export const MobileMenuModalHeader = (props: PropsType) => {
 		setScreen('menu')
 	}
 
-	const getTitle = (screen: MobileScreenType) => {
-		if (screen === 'catalog') return 'Каталог'
-		if (screen === 'manufacturers') return 'Производители'
-		return 'Меню'
-	}
-
 	return (
 		<header className={s.header}>
 			{screen !== 'menu' && <IconButton onClick={onBack} icon={<LongArrowLeftIcon />} />}
 
-			{getTitle(screen)}
+			<span className={s.title}>{title}</span>
 			<IconButton onClick={handleClose} icon={<CrossIcon />} />
 		</header>
 	)

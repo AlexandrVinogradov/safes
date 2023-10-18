@@ -8,21 +8,23 @@ type PropsType = {
 	selectedLvl2?: CategoryType | null
 	data: CategoryType | null
 	setSelectedLvl1?: (category: CategoryType | null) => void
-	zIndex: string
-	setIsHovering: (isHovering: boolean) => void
-	lvl: number
+	zIndex?: string
+	setIsHovering?: (isHovering: boolean) => void
+	lvl?: number
 	onChange?: (category: CategoryType) => void
+	isClickLogic?: boolean
+	className?: string
 }
 
 export const MenuChildLvl = (props: PropsType) => {
-	const { onChange, lvl, selectedLvl2, zIndex, setIsHovering, data } = props
+	const { onChange, lvl, selectedLvl2, zIndex, setIsHovering, data, isClickLogic, className } = props
 
 	if (lvl === 1 && !data?.child) return null
 	if (lvl === 2 && !data?.child) return null
 
 	return (
-		<div className={clsx(s.menu, zIndex)}>
-			<h5 className={s.title}>{data?.['name_ru-RU']}</h5>
+		<div className={clsx(s.menu, zIndex, className)}>
+			{!isClickLogic && <h5 className={s.title}>{data?.['name_ru-RU']}</h5>}
 
 			<CatalogMenuShowAllButton
 				title="Показать все товары категории"
@@ -39,6 +41,7 @@ export const MenuChildLvl = (props: PropsType) => {
 						lvl={2}
 						setIsHovering={setIsHovering}
 						onChange={onChange}
+						isClickLogic={isClickLogic}
 					/>
 				))}
 			</ul>

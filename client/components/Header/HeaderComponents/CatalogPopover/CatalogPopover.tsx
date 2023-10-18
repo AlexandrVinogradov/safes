@@ -1,9 +1,10 @@
 import { Button } from '@/components/Button/Button'
 import { CatalogMenuIcon } from '@/icons/CatalogMenuIcon'
 import clsx from 'clsx'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { CatalogMenu } from './CatalogMenu/CatalogMenu'
 import { s } from './styles'
+import { scrollToggle } from '@/helpers/scrollToggle'
 
 type PropsType = {
 	className?: string
@@ -16,6 +17,10 @@ export const CatalogPopover = (props: PropsType) => {
 
 	const handleMouseOver = () => setIsHovering(true)
 	const handleMouseOut = () => setIsHovering(false)
+
+	useEffect(() => {
+		scrollToggle(isHovering)
+	}, [isHovering])
 
 	return (
 		<>

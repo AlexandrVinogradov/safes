@@ -28,20 +28,30 @@ export const useModalStore = create(
 		setIsRequestCallModal: (isRequestCallModal: boolean) => {
 			set({ isRequestCallModal })
 			set({ isCallRequested: false })
+
+			scrollToggle(isRequestCallModal)
+
 		},
 
 		isCallRequested: false,
 		setIsCallRequested: (isCallRequested: boolean) => {
 			set({ isCallRequested })
+
+			scrollToggle(isCallRequested)
 		},
 
 		isCutModal: false,
 		setIsCutModal: (isCutModal: boolean) => {
 			set({ isCutModal })
+
+			scrollToggle(isCutModal)
 		},
+
 		isCutModalInfoRead: false,
 		setIsCutModalInfoRead: (isCutModalInfoRead: boolean) => {
 			set({ isCutModalInfoRead })
+
+			scrollToggle(isCutModalInfoRead)
 		},
 
 		isMobileMenuModal: false,

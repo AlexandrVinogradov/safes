@@ -1,12 +1,10 @@
 import { useEffect, useState } from 'react'
-import { s } from './styles'
 import { useCategoriesStore } from '@/store/useCategoriesStore'
-import { MenuItem } from './MenuItem/MenuItem'
 import { MenuChildLvl } from './MenuChildLLvl/MenuChildLLvl'
 import { CategoryType } from '@/models/ICategoriesStore'
-import { CatalogMenuShowAllButton } from './CatalogMenuShowAllButton/CatalogMenuShowAllButton'
 import { getClientServerUrl } from '@/helpers/getClientServerUrl'
-import { clsx } from 'clsx'
+import { CatalogMenuParentLvl } from './CatalogMenuParentLvl/CatalogMenuParentLvl'
+import { s } from './styles'
 
 type PropsType = {
 	setIsHovering: (isHovering: boolean) => void
@@ -18,7 +16,6 @@ export const CatalogMenu = (props: PropsType) => {
 	const { setIsHovering, handleMouseOver, handleMouseOut } = props
 
 	// TODO: add preloader and fetch after isHovering true
-	// TODO: turn off scroll for body if isShow menu true
 	const categories = useCategoriesStore((state) => state.categories)
 	const fetchCategories = useCategoriesStore((state) => state.fetchCategories)
 
@@ -29,57 +26,22 @@ export const CatalogMenu = (props: PropsType) => {
 		fetchCategories(API_URL)
 	}, [])
 
-	const tags = [
-		{ id: 'forHouse', name: 'Сейфы для дома' },
-		{ id: 'forOffice', name: 'Сейфы для офиса' },
-		{ id: 'forApartments', name: 'Сейфы для квартиры' },
-		{ id: 'caches', name: 'Тайники' },
-		{ id: 'forWatch', name: 'Для часов' },
-		{ id: 'forLaptop', name: 'Для ноутбуков' },
-	]
-
 	const [selectedLvl1, setSelectedLvl1] = useState<CategoryType | null>(null)
 	const [selectedLvl2, setSelectedLvl2] = useState<CategoryType | null>(null)
 
-	const handleChangeLvl1 = (category: CategoryType) => {
-		setSelectedLvl1(category)
-		setSelectedLvl2(null)
-	}
 	const handleChangeLvl2 = (category: CategoryType) => {
 		setSelectedLvl2(category)
 	}
 
 	return (
 		<div className={s.menu} onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>
-			<div className={clsx(s.lvl1)}>
-				<ul className={s.tags}>
-					{tags.map((tag) => (
-						<li key={tag.id} className={s.tag}>
-							<button className={s.tagButton}>{tag.name}</button>
-						</li>
-					))}
-				</ul>
-
-				<ul>
-					<CatalogMenuShowAllButton
-						title="Все товары каталога"
-						className={s.showAll}
-						href="/catalog"
-						handleOnMouseOverAll={() => setSelectedLvl1(null)}
-						setIsHovering={setIsHovering}
-					/>
-					{categories?.map((category) => (
-						<MenuItem
-							key={category.category_id}
-							isSelected={category.name === selectedLvl1?.name}
-							category={category}
-							setIsHovering={setIsHovering}
-							onChange={handleChangeLvl1}
-						/>
-					))}
-				</ul>
-			</div>
-
+			<CatalogMenuParentLvl
+				setIsHovering={setIsHovering}
+				selectedLvl1={selectedLvl1}
+				setSelectedLvl1={setSelectedLvl1}
+				setSelectedLvl2={setSelectedLvl2}
+				categories={categories}
+			/>
 			<MenuChildLvl
 				data={selectedLvl1}
 				selectedLvl2={selectedLvl2}

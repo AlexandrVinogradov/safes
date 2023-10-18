@@ -27,7 +27,7 @@ export const MainModal = (props: PropsTypes) => {
 						backgroundSize: 'cover',
 					}}
 				>
-					<IconButton onClick={onClose} icon={<CloseIcon />} className={s.closeButton} />
+					<IconButton onClick={onClose} icon={<CloseIcon className={s.closeButtonIcon} />} className={s.closeButton} />
 
 					<Image className={s.bgImg} src="/semiShieldModal.png" alt="Промет лого" width={222} height={535} />
 

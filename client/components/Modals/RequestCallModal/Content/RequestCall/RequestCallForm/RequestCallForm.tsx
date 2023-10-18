@@ -51,6 +51,7 @@ export const RequestCallForm = () => {
 				rules={{ required: true }}
 				render={({ field: { onChange, ref }, fieldState: { error } }) => (
 					<Input
+						className={s.input}
 						label="Ваше Имя"
 						isRequired
 						styleType="form"
@@ -68,6 +69,7 @@ export const RequestCallForm = () => {
 				rules={{ required: true }}
 				render={({ field: { onChange }, fieldState: { error } }) => (
 					<Input
+						className={s.input}
 						label="Ваш телефон"
 						isRequired
 						styleType="form"
@@ -80,7 +82,7 @@ export const RequestCallForm = () => {
 
 			<div>
 				{/* TODO: to styles */}
-				<p className="mb-[10px]">Время звонка</p>
+				<p className={s.time}>Время звонка</p>
 
 				<div className={s.selects}>
 					<Select defaultValue={callTimes[0].value} options={callTimes} />

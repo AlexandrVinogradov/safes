@@ -45,6 +45,7 @@ export const CutModalForm = () => {
 					rules={{ required: true }}
 					render={({ field: { onChange, ref }, fieldState: { error } }) => (
 						<Input
+							className={s.input}
 							label="Ваше Имя"
 							isRequired
 							styleType="form"
@@ -122,7 +123,7 @@ export const CutModalForm = () => {
 					name="isAgree"
 					rules={{ required: true }}
 					render={({ field: { onChange, value }, fieldState: { error } }) => (
-						<Checkbox onChange={onChange} value={value} isError={!!error}>
+						<Checkbox className={s.checkbox} onChange={onChange} value={value} isError={!!error}>
 							Даю согласие на обработку персональных данных
 						</Checkbox>
 					)}

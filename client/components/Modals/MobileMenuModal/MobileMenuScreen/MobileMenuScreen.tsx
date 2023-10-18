@@ -37,7 +37,7 @@ export const MobileMenuScreen = (props: PropsType) => {
 
 	return (
 		<section>
-			<MobileMenuModalHeader setScreen={setScreen} />
+			<MobileMenuModalHeader title='Меню' setScreen={setScreen} />
 
 			<ul>
 				{nav.map((item) => (

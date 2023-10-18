@@ -59,7 +59,7 @@ export const MobileManufacturersMenuScreen = (props: PropsType) => {
 
 	return (
 		<section>
-			<MobileMenuModalHeader onBack={handleClickBack} screen={screen} setScreen={setScreen} />
+			<MobileMenuModalHeader title="Производители" onBack={handleClickBack} screen={screen} setScreen={setScreen} />
 			<Collapse items={items} className="mx-2.5" />
 		</section>
 	)

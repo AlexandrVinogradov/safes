@@ -4,39 +4,36 @@ import clsx from 'clsx'
 import { s } from './styles'
 import { CategoryType } from '@/models/ICategoriesStore'
 import { mainMenuItemStyle } from '@/styles/mainMenuItem'
+import { useModalStore } from '@/store/useModalStore'
 
 type PropsType = {
 	category: CategoryType
 	lvl?: number
-	// setSelectedLvl1?: (category: CategoryType) => void
-	// setIsShow: ((isShow: boolean) => void) | undefined
 	isSelected: boolean
-	setIsHovering: (isHovering: boolean) => void
+	setIsHovering?: (isHovering: boolean) => void
 	onChange?: (category: CategoryType) => void
+	isClickLogic?: boolean
 }
 
 export const MenuItem = (props: PropsType) => {
-	const {
-		onChange,
-		category,
-		lvl = 1,
-		// setSelectedLvl1, setIsShow,
-		isSelected,
-		setIsHovering,
-	} = props
+	const { onChange, category, lvl = 1, isSelected, setIsHovering, isClickLogic } = props
+
+	const setIsMobileMenuModal = useModalStore((state) => state.setIsMobileMenuModal)
 
 	const handleOnMouseOver = () => {
-		// if (setSelectedLvl1) setSelectedLvl1(category)
-		// if (setIsShow && category.child) setIsShow(true)
-		onChange && onChange(category)
+		onChange && !isClickLogic && onChange(category)
 	}
-	const handleOnMouseOut = () => {
-		// if (setIsShow) setIsShow(false)
-		// if (setSelectedLvl1) setSelectedLvl1(null)
+	const handleClickItem = () => {
+		onChange && isClickLogic && onChange(category)
+	}
+
+	const handleClickLink = () => {
+		setIsMobileMenuModal(false)
+		setIsHovering && setIsHovering(false)
 	}
 
 	return (
-		<li onMouseOver={handleOnMouseOver} onMouseOut={handleOnMouseOut}>
+		<li onMouseOver={handleOnMouseOver} onClick={handleClickItem}>
 			{category.child ? (
 				<button
 					className={clsx(
@@ -68,7 +65,7 @@ export const MenuItem = (props: PropsType) => {
 						lvl === 2 && s.buttonLvl2,
 						lvl === 2 && isSelected && s.selectedButtonLvl2,
 					)}
-					onClick={() => setIsHovering(false)}
+					onClick={handleClickLink}
 				>
 					{category.name || category['name_ru-RU']}
 				</Link>

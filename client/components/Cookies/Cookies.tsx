@@ -1,15 +1,25 @@
-import React, { useState } from 'react'
-import { s } from './styles'
+import React, { useEffect, useState } from 'react'
 import { Button } from '../Button/Button'
-import clsx from 'clsx'
+import { s } from './styles'
 
-// FIXME: add local storage
 export const Cookies = () => {
-	const [isShowCookies, setIsShowCookies] = useState(true)
+	const [isShowCookies, setIsShowCookies] = useState(false)
 
-	const handleApply = () => setIsShowCookies(false)
+	useEffect(() => {
+		if (localStorage.getItem('isAcceptCookies') === 'true') return
+
+		setIsShowCookies(true)
+	}, [])
+
+	if (!isShowCookies) return null
+
+	const handleApply = () => {
+		localStorage.setItem('isAcceptCookies', 'true')
+		setIsShowCookies(false)
+	}
+
 	return (
-		<div className={clsx(!isShowCookies && 'hidden', s.cookies)}>
+		<div className={s.cookies}>
 			<p className={s.message}>Мы используем файлы cookie для обработки ваших персональных данных</p>
 			<Button onClick={handleApply} styleType="filled">
 				Принять
