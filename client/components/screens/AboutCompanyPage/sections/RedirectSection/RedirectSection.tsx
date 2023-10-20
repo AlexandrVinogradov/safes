@@ -12,18 +12,19 @@ export const RedirectSection = (props: PropsType) => {
 	const { className } = props
 
 	return (
-		<section
-			className={clsx(s.section, className, container)}
-			style={{
-				backgroundImage: `url(${bg.src})`,
-				backgroundSize: "cover"
-			}}
-		>
-			<div className={s.redirectBlock}>
-				<div className={s.content}>
-					<p className={s.message}>Звоните, консультируйтесь, заказывайте!</p>
-					<p className={clsx(s.secondMessage, s.message)}>Мы рады Вам, Вы благодарны нам!</p>
-					<RedirectButtons />
+		<section className={clsx(s.section, className, container)}>
+			<div
+				style={{
+					backgroundImage: `url(${bg.src})`,
+					backgroundSize: 'cover',
+				}}
+			>
+				<div className={s.redirectBlock}>
+					<div className={s.content}>
+						<p className={s.message}>Звоните, консультируйтесь, заказывайте!</p>
+						<p className={clsx(s.message, s.secondMessage)}>Мы рады Вам, Вы благодарны нам!</p>
+						<RedirectButtons />
+					</div>
 				</div>
 			</div>
 		</section>

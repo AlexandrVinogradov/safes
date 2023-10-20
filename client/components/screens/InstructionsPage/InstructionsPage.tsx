@@ -30,20 +30,23 @@ const InstructionsPage = (props: PropsType) => {
 					<ul>
 						{instructions?.map((el) => (
 							<li className={s.listItem} key={el.id}>
-								<a target="_blan" className={s.pdfLink} href={`https://prommetsafe.ru/instructions/${el.link}`}>
-									<PdfIcon className="mr-4" />
-									{el.name}
-								</a>
+								<a target="_blan" className={s.link} href={`https://prommetsafe.ru/instructions/${el.link}`}>
+									<div className={s.iconWithTitle}>
+										<PdfIcon className={s.icon} />
+										{el.name}
+									</div>
 
-								{el.image && (
-									<Image
-										unoptimized={true}
-										src={`https://prommetsafe.ru/instructions/${el.image}`}
-										alt={el.name}
-										width={100}
-										height={100}
-									/>
-								)}
+									{el.image && (
+										<Image
+											unoptimized={true}
+											src={`https://prommetsafe.ru/instructions/${el.image}`}
+											alt={el.name}
+											width="0"
+											height="0"
+											className={s.img}
+										/>
+									)}
+								</a>
 							</li>
 						))}
 					</ul>

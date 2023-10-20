@@ -1,4 +1,6 @@
 export const s = {
-	buttons: /*tw*/ 'flex justify-between w-[436px] mx-auto',
-	button: /*tw*/ 'w-[193px]',
+	buttons: /*tw*/ `flex justify-between w-[436px] mx-auto
+		maxMd:w-[240px]
+	`,
+	button: /*tw*/ `w-[193px]`,
 }

@@ -31,7 +31,7 @@ export const CatalogPopover = (props: PropsType) => {
 				className={clsx(isHovering && s.hoveredCatalogButton, s.catalogButton, className)}
 			>
 				<CatalogMenuIcon className={s.catalogButtonIcon} />
-				Каталог
+				<span>Каталог</span>
 			</Button>
 
 			{isHovering && <CatalogMenu setIsHovering={setIsHovering} handleMouseOver={handleMouseOver} handleMouseOut={handleMouseOut} />}

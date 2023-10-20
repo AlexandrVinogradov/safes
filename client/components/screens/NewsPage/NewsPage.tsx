@@ -30,7 +30,7 @@ const NewsPage = (props: PropsType) => {
 
 					<ul className={s.list}>
 						{news.map((el) => (
-							<li key={el.id}>
+							<li key={el.id} className={s.listItem}>
 								<h3 className={s.newsTitle}>{el.title}</h3>
 
 								<div className={s.previewHtml} dangerouslySetInnerHTML={{ __html: el.previewHtml }} />

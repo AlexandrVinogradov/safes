@@ -1,7 +1,16 @@
 .content {
-
-    h2, h3, h4, h5, h6 {
+    
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
         padding-bottom: 15px;
+        @media (max-width: 12450px) {
+
+        }
+
+ 
     }
 
     h2 {
@@ -9,22 +18,32 @@
         line-height: 40px;
     }
 
-    h3, h4, h5, h6 {
+    h3,
+    h4,
+    h5,
+    h6 {
         font-size: 28px;
-        line-height: 32px; 
+        line-height: 32px;
     }
 
+    p {
 
-    li > strong, p > strong {
-        @apply text-branded  
-
+        @apply maxMd:text-[13px] maxMd:leading-[17px]
     }
 
-    & > p, ul, ol {
+    li > strong,
+    p > strong {
+        @apply text-branded;
+    }
+
+    & > p,
+    ul,
+    ol {
         padding-bottom: 15px;
     }
 
-    & > ul, ol {
+    & > ul,
+    ol {
         padding-left: 50px;
         @apply space-y-[10px];
 
@@ -41,7 +60,7 @@
     & > ul {
         & > li {
             &::marker {
-                content: url('/listBullet.svg');
+                content: url("/listBullet.svg");
             }
         }
     }
@@ -49,4 +68,6 @@
     & > p:last-child {
         padding-bottom: 0;
     }
+
+    
 }

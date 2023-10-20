@@ -18,7 +18,17 @@ export const NewsSection = (props: PropsType) => {
 		<section className={clsx(container, s.section)}>
 			<h1 className={s.title}>{title}</h1>
 			<p className={s.date}>{fakeDate}</p>
-			<Image src="/articlePreview1.jpg" alt={`Статья ${title}`} width="335" height="258" className={s.image} />
+
+			<Image
+				unoptimized={true}
+				src="/articlePreview1.jpg"
+				alt={`Статья ${title}`}
+				width="0"
+				height="0"
+				className={s.image}
+				quality={100}
+			/>
+
 			<div className={styles.content} dangerouslySetInnerHTML={{ __html: fullHtml }} />
 		</section>
 	)
