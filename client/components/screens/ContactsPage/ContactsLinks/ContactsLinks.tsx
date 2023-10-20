@@ -2,6 +2,7 @@ import { CutIcon } from '@/icons/CutIcon'
 import { YoutubeIcon2 } from '@/icons/YoutubeIcon2'
 import { s } from './styles'
 import { CutButton } from '@/components/CutButton/CutButton'
+import { Button } from '@/components/Button/Button'
 
 export const ContactsLinks = () => {
 	return (
@@ -10,7 +11,7 @@ export const ContactsLinks = () => {
 				<p className={s.cutBlockMessage}>Нашли дешевле? Снизим цену!</p>
 				<CutIcon className={s.cutIcon} />
 
-				<div className={s.cutButton}>% Отправить заявку</div>
+				<Button className={s.cutButton}>% Отправить заявку</Button>
 			</CutButton>
 
 			<div className={s.ytBlock}>

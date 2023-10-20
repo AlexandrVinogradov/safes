@@ -10,10 +10,10 @@ export const ContactsInfo = () => {
 		<div className={s.contactsInfo}>
 			<div className={s.firstBlock}>
 				<a className={clsx(s.firstBlockLink, s.mb)} href="tel:84956415518">
-					<PhoneIcon className={s.mr} />8 (495) 641-55-18
+					<PhoneIcon className={s.phone} />8 (495) 641-55-18
 				</a>
 				<a className={s.firstBlockLink} href="tel:89265878650">
-					<PhoneIcon className={s.mr} />8 (926) 587-86-50
+					<PhoneIcon className={s.phone} />8 (926) 587-86-50
 				</a>
 			</div>
 			<div className={s.secondBlock}>
@@ -29,7 +29,7 @@ export const ContactsInfo = () => {
 			</div>
 			<div className={s.thirdBlock}>
 				<a className={s.thirdBlockLink} href="mailto:prommetsafe@yandex.ru">
-					<MailIcon2 className={s.mr} /> prommetsafe@yandex.ru
+					<MailIcon2 className={s.mail} /> prommetsafe@yandex.ru
 				</a>
 			</div>
 			<div className={s.fourthBlock}>

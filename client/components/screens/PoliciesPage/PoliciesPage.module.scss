@@ -4,6 +4,8 @@
         font-size: 46px;
         line-height: 53px;
         padding-bottom: 40px;
+
+        @apply maxMd:text-[28px] maxMd:leading-[32px] maxMd:pb-5
     }
 
 
@@ -22,21 +24,24 @@
     }
 
     & > p {
+        @apply maxMd:text-[13px] maxMd:leading-[17px];
+
         &:has(strong) {
             display: block;
             padding-bottom: 10px;
             padding-top: 40px;
-            @apply text-branded   
+            @apply text-branded 
         }
     }
 
     & > ul, ol {
         padding-top: 20px;
         padding-left: 50px;
-        @apply space-y-[10px];
+        @apply space-y-[10px] maxMd:space-y-[5px] maxMd:text-[13px] maxMd:pl-3 maxMd:py-2;
 
         & > li {
             padding-left: 15px;
+            @apply maxMd:pl-2;
         }
 
         + p:not(:has(strong)) {
