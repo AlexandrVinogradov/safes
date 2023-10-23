@@ -12,19 +12,25 @@ import MultiSelect from '../MultiSelect/MultiSelect'
 import { s } from './styles'
 import ScrollStyle from './Scrollbar.module.scss'
 import clsx from 'clsx'
+import { IconButton } from '../IconButton/IconButton'
+import { CrossIcon } from '@/icons/CrossIcon'
+import { useModalStore } from '@/store/useModalStore'
 
 type PropsType = {
 	extraValuesHandbook: ExtraValuesHandbook[]
 	simpleManufacturers: SimplManufactureType[] | null
+	className?: string
 }
 
 export const Filter = (props: PropsType) => {
-	const { extraValuesHandbook, simpleManufacturers } = props
+	const { extraValuesHandbook, simpleManufacturers, className } = props
 	const { query } = useRouter()
 	const filterData = useProductStore((state) => state.filterData)
 	const setFilterData = useProductStore((state) => state.setFilterData)
 	const initFilterData = useProductStore((state) => state.initFilterData)
 	const resetFilter = useProductStore((state) => state.resetFilter)
+
+	const setIsMobileFilterModal = useModalStore((state) => state.setIsMobileFilterModal)
 
 	const { resetQueryParams } = useQueryParams()
 
@@ -65,6 +71,8 @@ export const Filter = (props: PropsType) => {
 		resetQueryParams()
 	}
 
+	const handleClickClose = () => setIsMobileFilterModal(false)
+
 	const getExtraValuesOptions = (handbook: ExtraValuesHandbook[], fieldId: number) => {
 		return handbook.filter((el) => el.field_id === fieldId).map((el) => ({ label: el['name_ru-RU'], value: String(el.id) }))
 	}
@@ -76,9 +84,13 @@ export const Filter = (props: PropsType) => {
 		})) || []
 
 	return (
-		<div className={s.filter}>
+		<div className={clsx(s.filter, className)}>
 			<div className={clsx(s.settings, ScrollStyle.Scrollbar)}>
-				<p className={s.title}>Фильтр</p>
+				<div className={s.titleBlock}>
+					<p className={s.title}>Фильтр</p>
+
+					<IconButton className={s.closeButton} onClick={handleClickClose} icon={<CrossIcon />} />
+				</div>
 
 				<p className={s.label}>Производитель</p>
 				<MultiSelect id="manufacturer" options={manufacturersOption} className={s.settingItem} />
@@ -134,9 +146,15 @@ export const Filter = (props: PropsType) => {
 					setDiapason={(value) => setFilterData('depth', value)}
 				/>
 			</div>
-			<Button onClick={handleResetFilter} className={s.resetButton}>
-				Сбросить фильтр
-			</Button>
+
+			<div className={s.buttons}>
+				<Button onClick={handleResetFilter} className={s.resetButton}>
+					Сбросить фильтр
+				</Button>
+				<Button onClick={handleClickClose} styleType="filled" className={s.doneButton}>
+					Готово
+				</Button>
+			</div>
 		</div>
 	)
 }

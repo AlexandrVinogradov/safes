@@ -10,6 +10,8 @@ type State = {
 	isCutModalInfoRead: boolean
 
 	isMobileMenuModal: boolean
+
+	isMobileFilterModal:boolean
 }
 
 type Actions = {
@@ -20,6 +22,8 @@ type Actions = {
 	setIsCutModalInfoRead: (isCutModalInfoRead: boolean) => void
 
 	setIsMobileMenuModal: (isMobileMenuModal: boolean) => void
+
+	setIsMobileFilterModal: (isMobileFilterModal: boolean) => void
 }
 
 export const useModalStore = create(
@@ -59,6 +63,13 @@ export const useModalStore = create(
 			set({ isMobileMenuModal })
 
 			scrollToggle(isMobileMenuModal)
+		},
+
+		isMobileFilterModal: false,
+		setIsMobileFilterModal: (isMobileFilterModal: boolean) => {
+			set({ isMobileFilterModal })
+
+			scrollToggle(isMobileFilterModal)
 		},
 	})),
 )

@@ -50,11 +50,15 @@ export const CatalogSection = (props: PropsType) => {
 	return (
 		<section className={clsx(s.section, container)}>
 			<div className={s.filterSort}>
-				<FilterButton className={s.filterButton} />
+				<FilterButton
+					extraValuesHandbook={extraValuesHandbook}
+					simpleManufacturers={simpleManufacturers}
+					className={s.filterButton}
+				/>
 				<Sort className={s.sort} data={sortData} />
 			</div>
 			<div className={s.wrapper}>
-				<Filter extraValuesHandbook={extraValuesHandbook} simpleManufacturers={simpleManufacturers} />
+				<Filter extraValuesHandbook={extraValuesHandbook} simpleManufacturers={simpleManufacturers} className={s.filter} />
 
 				<div className={s.productsWithPagination}>
 					<ProductsGrid products={products.list} />

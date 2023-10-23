@@ -2,6 +2,9 @@ export const s = {
 	section: /*tw*/ `pb-[70px] relative
 		maxLg:pb-10
 	`,
+	filter: /*tw*/ `mr-10 sticky top-[calc(88px+50px)] self-start
+		maxLg:hidden
+	`,
 	filterSort: /*tw*/ `flex justify-between items-center pb-[17px]`,
 	filterButton: /*tw*/ `hidden
 		maxLg:flex
