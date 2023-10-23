@@ -1,4 +1,6 @@
 export const s = {
-	confirmTab: /*tw*/ '',
-	basketPreview: /*tw*/ 'mt-[34px] pb-[40px]',
+	confirmTab: /*tw*/ ``,
+	basketPreview: /*tw*/ `mt-[34px] pb-[40px]
+		maxLg:mt-0
+	`,
 }

@@ -27,28 +27,31 @@ export const BasketItem = (props: PropsType) => {
 
 	return (
 		<li className={s.basketItem}>
-			<div className={s.image}>
+			<div className={s.imageWrapper}>
 				<Image
 					unoptimized={true}
 					src={`https://prommetsafe.ru/components/com_jshopping/files/img_products/${item.images[0].image_name}`}
 					alt={name}
-					width={318}
-					height={91}
+					width="0"
+					height="0"
+					className={s.image}
 				/>
 			</div>
 
 			<div className={s.nameCell}>
 				<p className={s.name}>{name}</p>
-				{isEditMode && <p className={s.code}>Код товара: {code}</p>}
+				<p className={s.code}>Код товара: {code}</p>
 			</div>
 
 			<div className={s.priceCell}>{item.price.toLocaleString('ru-RU')} ₽</div>
 
 			<div className={s.countCell}>
 				{isEditMode ? (
-					<ClickInput value={item.count} onChange={handleChangeClickInput} />
+					<ClickInput value={item.count} className={s.clickInput} onChange={handleChangeClickInput} />
 				) : (
-					<p className={s.countItem}>{item.count}</p>
+					<p className={s.countItem}>
+						<span className={s.countName}>Кол-во:</span> {item.count}
+					</p>
 				)}
 
 				{isEditMode && (

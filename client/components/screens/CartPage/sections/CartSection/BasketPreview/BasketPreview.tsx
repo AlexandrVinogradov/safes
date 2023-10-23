@@ -4,6 +4,7 @@ import { BasketSummary } from './BasketSummary/BasketSummary'
 import { usePersistStore } from '@/hooks/usePersistStore'
 import { s } from './styles'
 import clsx from 'clsx'
+import { BasketDeleteAllButton } from './BasketDeleteAllButton/BasketDeleteAllButton'
 
 type PropsType = {
 	isEditMode?: boolean
@@ -19,10 +20,13 @@ export const BasketPreview = (props: PropsType) => {
 		<div className={clsx(s.mainContent, className)}>
 			<div className={s.basketItems}>
 				<header className={s.header}>
-					<p className={s.product}>Товар</p>
-					<p className={s.empty} />
-					<p className={s.price}>Цена</p>
-					<p className={s.count}>Кол-во</p>
+					<div className={s.wrapper}>
+						<p className={s.product}>Товар</p>
+						<p className={s.empty} />
+						<p className={s.price}>Цена</p>
+						<p className={s.count}>Кол-во</p>
+					</div>
+					<div className={s.emptyLast} />
 				</header>
 				<ul className={s.basketItemsList}>
 					{basketItems?.map((item) => (
@@ -31,7 +35,9 @@ export const BasketPreview = (props: PropsType) => {
 				</ul>
 			</div>
 
-			<BasketSummary isEditMode={isEditMode} />
+			{isEditMode && <BasketDeleteAllButton className={s.deleteAllButton} />}
+
+			<BasketSummary isEditMode={isEditMode} className={s.basketSummary} />
 		</div>
 	)
 }

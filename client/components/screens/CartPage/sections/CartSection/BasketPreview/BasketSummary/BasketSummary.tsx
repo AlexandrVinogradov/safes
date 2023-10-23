@@ -7,10 +7,11 @@ import { useRouter } from 'next/router'
 
 type PropsType = {
 	isEditMode?: boolean
+	className?: string
 }
 
 export const BasketSummary = (props: PropsType) => {
-	const { isEditMode = true } = props
+	const { isEditMode = true, className } = props
 
 	const clearItems = useBasketStore((state) => state.clearItems)
 	const basketStore = usePersistStore(useBasketStore, (state) => state)
@@ -55,7 +56,7 @@ export const BasketSummary = (props: PropsType) => {
 	}
 
 	return (
-		<div className={s.basketSummary}>
+		<div className={clsx(s.basketSummary, className)}>
 			<p className={s.order}>Ваш заказ</p>
 
 			<div className={s.summaryItem}>
@@ -68,7 +69,7 @@ export const BasketSummary = (props: PropsType) => {
 			</div>
 
 			<div className={clsx(s.summaryItem, s.boldSummaryItem)}>
-				{isEditMode ? <p>ИТОГО:</p> : <p>Всего к оплате:</p>}
+				{isEditMode ? <p>ИТОГО:</p> : <p className=''>Всего к оплате:</p>}
 
 				<p>{summary.toLocaleString('ru-RU')} ₽</p>
 			</div>

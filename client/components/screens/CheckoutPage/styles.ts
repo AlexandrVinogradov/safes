@@ -1,6 +1,6 @@
 export const s = {
-	section: /*tw*/ `px-[100px]
-	container:px-[100px]
+	section: /*tw*/ `
+	//container:px-[100px]
 	maxLg:px-[40px]
 	`,
 	title: /*tw*/ `pb-[30px] text-[66px] leading-[77px]
