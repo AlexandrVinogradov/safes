@@ -23,7 +23,7 @@ export const DeliveryForm = (props: PropsType) => {
 			name: (
 				<div className={s.radioItem}>
 					Уточнить стоимость доставки и разгрузки товара с менеджером
-					<div className={s.space} /> <div>0 ₽</div>
+					<div className={s.space} /> <p>0 ₽</p>
 				</div>
 			),
 		},
@@ -32,7 +32,7 @@ export const DeliveryForm = (props: PropsType) => {
 			name: (
 				<div className={s.radioItem}>
 					Доставка по Москве при заказе от 15.000 ₽
-					<div className={s.space} /> <div>0 ₽</div>
+					<div className={s.space} /> <p>0 ₽</p>
 				</div>
 			),
 		},
@@ -41,7 +41,7 @@ export const DeliveryForm = (props: PropsType) => {
 			name: (
 				<div className={s.radioItem}>
 					Доставка по Москве при заказе до 15.000 ₽
-					<div className={s.space} /> <div>600 ₽</div>
+					<div className={s.space} /> <p>600 ₽</p>
 				</div>
 			),
 		},
@@ -50,7 +50,7 @@ export const DeliveryForm = (props: PropsType) => {
 			name: (
 				<div className={s.radioItem}>
 					Доставка до 5 км от МКАД
-					<div className={s.space} /> <div>1 000 ₽</div>
+					<div className={s.space} /> <p>1 000 ₽</p>
 				</div>
 			),
 		},
@@ -59,7 +59,7 @@ export const DeliveryForm = (props: PropsType) => {
 			name: (
 				<div className={s.radioItem}>
 					Доставка до 20 км от МКАД
-					<div className={s.space} /> <div>1 300 ₽</div>
+					<div className={s.space} /> <p>1 300 ₽</p>
 				</div>
 			),
 		},
@@ -68,7 +68,7 @@ export const DeliveryForm = (props: PropsType) => {
 			name: (
 				<div className={s.radioItem}>
 					Доставка до 35 км от МКАД
-					<div className={s.space} /> <div>1 500 ₽</div>
+					<div className={s.space} /> <p>1 500 ₽</p>
 				</div>
 			),
 		},
@@ -77,7 +77,7 @@ export const DeliveryForm = (props: PropsType) => {
 			name: (
 				<div className={s.radioItem}>
 					Доставка до 60 км от МКАД
-					<div className={s.space} /> <div>3000 ₽</div>
+					<div className={s.space} /> <p>3000 ₽</p>
 				</div>
 			),
 		},

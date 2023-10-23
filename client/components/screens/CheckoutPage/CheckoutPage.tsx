@@ -59,7 +59,7 @@ const CheckoutPage = () => {
 					<div className={s.tabButtons}>
 						<Button
 							styleType={getTabStyles('personal')}
-							className={clsx(s.tabButton)}
+							className={clsx(selectedTab !== 'personal' && s.mobileHidden, s.tabButton)}
 							onClick={() => setSelectedTab('personal')}
 						>
 							1. Личные данные
@@ -67,7 +67,7 @@ const CheckoutPage = () => {
 						<Button
 							disabled={isRequiredFieldsAreFilled}
 							styleType={getTabStyles('delivery')}
-							className={clsx(s.tabButton)}
+							className={clsx(selectedTab !== 'delivery' && s.mobileHidden, s.tabButton)}
 							onClick={() => setSelectedTab('delivery')}
 						>
 							2. Способ доставки
@@ -75,7 +75,7 @@ const CheckoutPage = () => {
 						<Button
 							disabled={isRequiredFieldsAreFilled}
 							styleType={getTabStyles('confirm')}
-							className={clsx(s.tabButton)}
+							className={clsx(selectedTab !== 'confirm' && s.mobileHidden, s.tabButton)}
 							onClick={() => setSelectedTab('confirm')}
 						>
 							3. Подтвердить заказ

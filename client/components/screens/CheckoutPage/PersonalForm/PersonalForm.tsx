@@ -11,6 +11,7 @@ import { CustomUpload } from '@/components/Upload/Upload'
 import { s } from './styles'
 import { UploadFile } from 'antd/es/upload/interface'
 import { useStateMachine } from 'little-state-machine'
+import clsx from 'clsx'
 
 type FormType = {
 	name: string
@@ -88,7 +89,7 @@ export const PersonalForm = (props: PropsType) => {
 
 	return (
 		<form className={s.form} onSubmit={handleSubmit(onSubmit)}>
-			<RadioGroup className={s.pb} radioValue={radioValue} setRadioValue={setRadioValue} data={radioData} />
+			<RadioGroup className={clsx(s.pb, s.radio)} radioValue={radioValue} setRadioValue={setRadioValue} data={radioData} />
 
 			<Controller
 				control={control}
@@ -136,7 +137,7 @@ export const PersonalForm = (props: PropsType) => {
 				)}
 			/>
 
-			{radioValue === 2 && <CustomUpload className={s.pb} fileList={fileList} setFileList={setFileList} />}
+			{radioValue === 2 && <CustomUpload className={clsx(s.upload, s.pb)} fileList={fileList} setFileList={setFileList} />}
 
 			<Controller
 				control={control}

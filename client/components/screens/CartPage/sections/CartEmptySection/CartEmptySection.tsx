@@ -8,7 +8,9 @@ export const CartEmptySection = () => {
 	return (
 		<section className={clsx(container, s.section)}>
 			<h1 className={s.title}>Ваша корзина пуста</h1>
-			<Image src="/emptyCart.png" alt="Корзина пуста" width="279" height="235" className={s.image} quality={100} />
+			<div className={s.imageWrapper}>
+				<Image src="/emptyCart.png" alt="Корзина пуста" fill className={s.image} quality={100} />
+			</div>
 			<CatalogRedirectMessage />
 		</section>
 	)
