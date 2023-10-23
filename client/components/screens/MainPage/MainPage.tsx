@@ -9,6 +9,7 @@ import { NoveltiesSection } from './MainPageSections/NoveltiesSection/NoveltiesS
 import { ProductsSection } from './MainPageSections/ProductsSection/ProductsSection'
 import { NextPage } from 'next/types'
 import { NewsType } from '@/models/INewsStore'
+import { s } from './styles'
 
 // Brands container
 
@@ -27,7 +28,7 @@ const MainPage: NextPage<PropsType> = ({ productsList, news }) => {
 				<HowToChoose />
 				<NoveltiesSection productsList={productsList} />
 				<BrandsSection />
-				<ArticlesSection title="Статьи" className="py-[120px]" news={news} />
+				<ArticlesSection title="Статьи" className={s.articleSection} news={news} />
 			</main>
 		</Layout>
 	)

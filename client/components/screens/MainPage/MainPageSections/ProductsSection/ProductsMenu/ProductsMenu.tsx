@@ -26,7 +26,7 @@ export const ProductsMenu = () => {
 					<li key={item.id}>
 						<button
 							onClick={() => handleMenuButtonClick(item.id)}
-							className={clsx(activeButtonId === item.id && s.activeMenuButton)}
+							className={clsx(s.button, activeButtonId === item.id && s.activeMenuButton)}
 						>
 							{item.name}
 						</button>

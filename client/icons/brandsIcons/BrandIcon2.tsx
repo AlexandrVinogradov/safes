@@ -6,7 +6,7 @@ interface IconPropsTypes {
 }
 
 export function BrandIcon2(props: IconPropsTypes) {
-	const { className, width = 'w-[334px]' } = props
+	const { className, width = 'w-full' } = props
 
 	return (
 		<Icon className={className} width={width} fill="none" viewBox="0 0 343 60">

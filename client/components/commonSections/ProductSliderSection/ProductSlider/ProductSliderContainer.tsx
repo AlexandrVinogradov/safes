@@ -13,7 +13,7 @@ export const ProductSliderContainer = (props: PropsType) => {
 
 	const breakpoints = {
 		320: { slidesPerView: 2, spaceBetween: 10 },
-		768: { spaceBetween: 20, slidesPerView: 3 },
+		768: { slidesPerView: 3, spaceBetween: 20 },
 		1200: { slidesPerView: 4 },
 	}
 

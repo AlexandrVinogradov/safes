@@ -15,13 +15,15 @@ export const BannerSlide = (props: PropsType) => {
 
 	return (
 		<SwiperSlide>
-			<Image src="/bannerWithSafe.jpg" alt="Карусель фон" fill quality={100} />
-			<div className={clsx(container, s.slide)}>
-				<div className={s.info}>
-					<p className={s.tag}>{slide.tag}</p>
-					<h1 className={s.title}>{slide.title}</h1>
-					<p className={s.desc}>{slide.desc}</p>
-					<Button>Смотреть</Button>
+			<div className={s.wrapper}>
+				<Image src="/bannerWithSafe.jpg" alt="Карусель фон" fill quality={100} className={s.bannerImg} />
+				<div className={clsx(container, s.slide)}>
+					<div className={s.info}>
+						<p className={s.tag}>{slide.tag}</p>
+						<h1 className={s.title}>{slide.title}</h1>
+						<p className={s.desc}>{slide.desc}</p>
+						<Button>Смотреть</Button>
+					</div>
 				</div>
 			</div>
 		</SwiperSlide>

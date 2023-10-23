@@ -31,8 +31,13 @@ export const CategoriesSliderContainer = () => {
 		},
 	]
 
+	const breakpoints = {
+		320: { slidesPerView: 1, spaceBetween: 52 },
+		768: { slidesPerView: 2, spaceBetween: 52 },
+	}
+
 	return (
-		<Slider slidesPerView={2} spaceBetween={52} isBigArrows isPagination styles={s.slider}>
+		<Slider isBigArrows isPagination styles={s.slider} breakpoints={breakpoints}>
 			{slides.map((slide) => (
 				<SwiperSlide className={s.swiperSlide} key={slide.id}>
 					<CategoriesSlide slide={slide} />

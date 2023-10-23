@@ -32,8 +32,15 @@ export const BrandsSliderContainer = () => {
 			to: '/',
 		},
 	]
+
+	const breakpoints = {
+		320: { slidesPerView: 2, spaceBetween: 20 },
+		768: { slidesPerView: 3, spaceBetween: 20 },
+		1200: { slidesPerView: 4 },
+	}
+
 	return (
-		<Slider slidesPerView={4} spaceBetween={20} isSmallArrows>
+		<Slider breakpoints={breakpoints} isSmallArrows>
 			{slides.map((slide) => (
 				<SwiperSlide key={slide.id}>
 					<BrandSlide slide={slide} />

@@ -6,10 +6,10 @@ interface IconPropsTypes {
 }
 
 export function BrandIcon1(props: IconPropsTypes) {
-	const { className, width = 'w-[334px]' } = props
+	const { className, width = 'w-full' } = props
 
 	return (
-		<Icon className={className} width={width} fill="none" viewBox="0 0 343 91">
+		<Icon width={width} className={className} fill="none" viewBox="0 0 343 91">
 			<mask
 				id="mask0_61_1468"
 				// style="mask-type:alpha"

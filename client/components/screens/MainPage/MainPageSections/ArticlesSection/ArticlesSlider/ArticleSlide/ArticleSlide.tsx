@@ -16,7 +16,7 @@ export const ArticleSlide = (props: PropsType) => {
 	return (
 		<article className={s.articleWrapper}>
 			<Link href={`/information/${alias}`} className={s.link}>
-				<Image className={s.preview} alt={title} src="/articlePreview1.jpg" width={335} height={258} priority />
+				<Image className={s.preview} alt={title} src="/articlePreview1.jpg" fill />
 			</Link>
 
 			<article className={s.articleContent}>
