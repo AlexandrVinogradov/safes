@@ -10,11 +10,9 @@ type PropsType = {
 	deliveryContent: string | null
 }
 
-// FIXME: finish this page
-// Нашли дешевле
-// Вкладки
-// Relative clider
-// Что после заказа кнопки?
+// FIXME:
+// Relative slider
+// Что после быстрого заказа кнопки?
 
 export const ProductPage = (props: PropsType) => {
 	const { selectedProduct, deliveryContent } = props

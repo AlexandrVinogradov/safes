@@ -43,7 +43,9 @@ const s = {
 	withSmallArrows: '!pt-[74px] !pb-[24px]',
 	withBigArrows: `!pb-[24px] !px-[40px] 
 		[&>.swiper-pagination-horizontal]:!bottom-[0px]`,
-	navigation: 'absolute top-0 right-0 z-10 flex justify-between max-w-[78px] w-full swiper-navigation',
+	navigation: `absolute top-0 right-0 z-10 flex justify-between max-w-[78px] w-full swiper-navigation
+		maxMd:top-5
+	`,
 
 	arrowButton: 'text-branded disabled:text-[#8F8F8F]',
 	smallArrowButton: 'w-6 h-[14px]',

@@ -3,13 +3,15 @@ import { ClickInput } from '@/components/ClickInput/ClickInput'
 import { SelectedProductType } from '@/models/IProductStore'
 import { useBasketStore } from '@/store/useBasketStore'
 import { s } from './styles'
+import clsx from 'clsx'
 
 type PropsType = {
 	selectedProduct: SelectedProductType
+	className?: string
 }
 
 export const AddToCartButton = (props: PropsType) => {
-	const { selectedProduct } = props
+	const { selectedProduct, className } = props
 	const { product_id, image, productImages, product_price, product_old_price, product_ean } = selectedProduct
 	const name = selectedProduct['name_ru-RU']
 
@@ -36,7 +38,7 @@ export const AddToCartButton = (props: PropsType) => {
 	}
 
 	return (
-		<div className={s.oderButton}>
+		<div className={clsx(s.oderButton, className)}>
 			<Button className={s.button} onClick={handleClickAddProduct} styleType="filled">
 				В корзину
 			</Button>
