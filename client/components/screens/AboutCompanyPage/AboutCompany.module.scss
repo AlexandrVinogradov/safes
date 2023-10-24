@@ -1,0 +1,29 @@
+.content {
+    h2 {
+        padding-top: 0;
+        padding-bottom: 15px;
+    }
+
+    & > p {
+        &:has(strong) {
+            padding-bottom: 15px;
+            padding-top: 0px;
+        }
+    }
+
+    & > ul {
+        padding-bottom: 10px;
+        @apply maxMd:pb-0;
+
+        & > li {
+            max-width: 330px;
+        }
+    }
+
+    & > p:nth-last-of-type(-n + 8) {
+        padding-left: 0;
+        padding-bottom: 30px;
+
+        @apply maxMd:pb-5;
+    }
+}

@@ -1,16 +1,10 @@
 .content {
-    
     h2,
     h3,
     h4,
     h5,
     h6 {
         padding-bottom: 15px;
-        @media (max-width: 12450px) {
-
-        }
-
- 
     }
 
     h2 {
@@ -27,8 +21,7 @@
     }
 
     p {
-
-        @apply maxMd:text-[13px] maxMd:leading-[17px]
+        @apply maxMd:text-[13px] maxMd:leading-[17px];
     }
 
     li > strong,
@@ -68,6 +61,4 @@
     & > p:last-child {
         padding-bottom: 0;
     }
-
-    
 }

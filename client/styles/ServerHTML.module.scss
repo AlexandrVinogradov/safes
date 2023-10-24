@@ -1,69 +1,90 @@
 .content {
+    h1,
+    h2 {
+        font-size: 46px;
+        line-height: 53px;
+        padding-bottom: 40px;
+        @apply maxMd:text-[28px] maxMd:leading-[32px] maxMd:pb-5;
+    }
 
-  h1, h2 {
-      font-size: 46px;
-      line-height: 53px;
-      padding-bottom: 40px;
-  }
+    h2 {
+        padding-top: 40px;
+    }
 
-  h2 {
-      padding-top: 40px;
-  }
+    h1,
+    h2 {
+        + p:has(strong) {
+            padding-top: 0px;
+        }
+    }
 
-  h1, h2 {
-      + p:has(strong) {
-          padding-top: 0px;
-      } 
-  }
+    a {
+        @apply text-branded;
 
-  & > p {
-      &:has(strong) {
-          display: block;
-          padding-bottom: 20px;
-          padding-top: 40px;
-          @apply text-branded   
-      }
-  }
+        text-decoration: underline;
+    }
 
-  & > p {
-      &:not(:has(strong)) {
-          padding-left: 40px;
+    & > p {
+        &:has(strong) {
+            display: block;
+            padding-bottom: 20px;
+            padding-top: 40px;
 
-      }
-  }
+            @apply maxMd:pt-[30px];
+        }
+        & > strong {
+            @apply text-branded;
+        }
+    }
 
-  & > ul, ol {
-      padding-left: 50px;
-      @apply space-y-[15px];
+    & > p {
+        @apply maxMd:text-[13px] maxMd:leading-[17px];
 
-      & > li {
-          padding-left: 15px;
-      }
+        &:not(:has(strong)) {
+            padding-left: 40px;
+        }
+    }
 
-      + p:not(:has(strong)) {
-          padding-top: 20px;
-      }
-  }
+    & > ul,
+    ol {
+        padding-left: 50px;
+        @apply space-y-[15px] maxMd:text-[13px] maxMd:leading-[17px] maxMd:pl-[15px];
 
-  & > ol {
-      & > li {
-          list-style-type: decimal;
-      }
-  }
-  & > ul {
-      & > li {
-          &::marker {
-              content: url('/listBullet.svg');
-          }
-      }
-  }
+        & > li {
+            padding-left: 15px;
+        }
 
-  & > p:nth-last-of-type(-n+8) {
-      padding-left: 0;
-      padding-bottom: 15px;
-  }
+        + p:not(:has(strong)) {
+            padding-top: 20px;
+        }
+    }
 
-  & > p:last-child {
-      padding-bottom: 0;
-  }
+    & > ol {
+        & > li {
+            list-style-type: decimal;
+        }
+    }
+    & > ul {
+        & > li {
+            &::marker {
+                content: url("/listBullet.svg");
+            }
+            &:has(a) {
+                @apply text-branded;
+
+                &::marker {
+                    content: url("/listBulletBlue.svg");
+                }
+            }
+        }
+    }
+
+    & > p:nth-last-of-type(-n + 8) {
+        padding-left: 0;
+        padding-bottom: 15px;
+    }
+
+    & > p:last-child {
+        padding-bottom: 0;
+    }
 }
