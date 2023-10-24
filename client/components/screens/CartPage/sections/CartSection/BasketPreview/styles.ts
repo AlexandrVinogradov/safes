@@ -20,7 +20,8 @@ export const s = {
 	deleteAllButton: /*tw*/ `hidden order-2 pb-[15px] 
 		maxLg:flex maxLg:text-[13px] maxLg:max-w-[100px]
 	`,
-	basketSummary: /*tw*/ `max-w-[335px] w-[31.5%] 
-		maxLg:w-full maxLg:max-w-none maxLg:mb-[30px]
+	basketSummary: /*tw*/ `min-w-[335px] !w-[31.5%]
+		container:min-w-[auto] 
+		maxLg:!w-full maxLg:max-w-none maxLg:mb-[30px]
 	`,
 }

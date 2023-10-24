@@ -4,7 +4,7 @@ import { s } from './styles'
 
 export const LargeHeader = () => {
 	return (
-		<header className={s.headerWrapper}>
+		<header id="large-header" className={s.headerWrapper}>
 			<HeaderUpElements />
 			<HeaderLowElements />
 		</header>

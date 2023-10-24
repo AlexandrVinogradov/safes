@@ -1,7 +1,8 @@
-import { useState } from 'react'
-import { s } from './styles'
+import { useEffect, useState } from 'react'
 import { ManufacturerPopup } from './ManufacturerPopup/ManufacturerPopup'
 import { ArrowDownIcon } from '@/icons/ArrowDownIcon'
+import { scrollToggle } from '@/helpers/scrollToggle'
+import { s } from './styles'
 import clsx from 'clsx'
 
 export const ManufacturerPopover = () => {
@@ -9,6 +10,10 @@ export const ManufacturerPopover = () => {
 
 	const handleMouseOver = () => setIsHovering(true)
 	const handleMouseOut = () => setIsHovering(false)
+
+	useEffect(() => {
+		scrollToggle(isHovering)
+	}, [isHovering])
 
 	return (
 		<div className={s.manufacturerButtonPopover}>

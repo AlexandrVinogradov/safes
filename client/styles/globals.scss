@@ -4,7 +4,7 @@
 @import "./styles/fonts.scss";
 
 body {
-  @apply font-noto text-dark;
+  @apply font-noto text-dark bg-dark;
 
   &::-webkit-scrollbar-thumb {
     background-color: #40a3d2;
@@ -29,6 +29,10 @@ textarea {
 
 li {
   list-style-type: none;
+}
+
+main {
+  @apply bg-white;
 }
 
 ::-webkit-scrollbar {
