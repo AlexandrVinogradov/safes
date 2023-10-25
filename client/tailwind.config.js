@@ -34,7 +34,10 @@ module.exports = {
         '2xl': {'max': '1535px'},
         'xl': {'max': '1279px'},
         //
+        'max3xl': {'max': '1700px'}, // use
+        'maxXl': {'max': '1490px'}, // use
         'container': {'max': '1440px'}, // use
+        'max1400': {'max': '1400px'}, // use
         'maxLg++': {'max': '1260px'}, // use
         'maxLg+': {'max': '1200px'}, // use
         'maxLg': {'max': '1024px'}, // use

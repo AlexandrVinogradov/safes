@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { s } from './styles'
+import { useEffect, useState } from 'react'
 import { LogoShieldOnly } from '@/icons/LogoShieldOnly'
 import { CatalogPopover } from '../HeaderComponents/CatalogPopover/CatalogPopover'
 import { Nav } from '../HeaderComponents/Nav/Nav'
@@ -8,16 +8,41 @@ import { ComparisonButton } from '../HeaderComponents/ComparisonButton/Compariso
 import { BasketPopover } from '../HeaderComponents/BasketPopover/BasketPopover'
 import { PhoneButton } from '@/components/Contacts/PhoneButton/PhoneButton'
 import { MailButton } from '@/components/Contacts/MailButton/MailButton'
+import { IconButton } from '@/components/IconButton/IconButton'
+import { SearchIcon } from '@/icons/SearchIcon'
+import { s } from './styles'
 
 export const StickyHeader = () => {
+	// TODO: duplicate logic HeaderUpElements.tsx
+	const [isShowPopover, setIsShowPopover] = useState(false)
+	const [isDesktop, setDesktop] = useState(window.innerWidth > 1400)
+
+	const updateMedia = () => {
+		setDesktop(window.innerWidth > 1400)
+	}
+
+	useEffect(() => {
+		setDesktop(window.innerWidth > 1400)
+		window.addEventListener('resize', updateMedia)
+		return () => window.removeEventListener('resize', updateMedia)
+	})
+
+	const handleClickMobileSearch = () => setIsShowPopover(true)
+
 	return (
 		<header className={s.headerWrapper}>
 			<Link href="/">
-				<LogoShieldOnly />
+				<LogoShieldOnly className={s.logo} />
 			</Link>
 			<CatalogPopover className={s.catalogPopover} />
 			<Nav className={s.nav} />
-			<Search className={s.search} />
+
+			{isDesktop ? (
+				<Search isShowPopover={isShowPopover} setIsShowPopover={setIsShowPopover} className={s.search} />
+			) : (
+				<Search isMobileSearch isShowPopover={isShowPopover} setIsShowPopover={setIsShowPopover} className={s.mobileSearch} />
+			)}
+			<IconButton onClick={handleClickMobileSearch} className={s.mobileSearchButton} icon={<SearchIcon width="w-[33px]" />} />
 
 			<div className={s.buttons}>
 				<ComparisonButton />

@@ -8,8 +8,14 @@ export const s = {
 	after:left-1/2
 	after:-translate-x-1/2
 `,
-	list: /*tw*/ 'flex flex-col text-dark px-5 pt-3 pb-[30px] space-y-4',
-	listItem: /*tw*/ 'text-[14px] py-2 leading-[16px] hover:text-branded duration-300',
-	searchValue: /*tw*/ 'text-branded font-semibold',
-	button: /*tw*/ 'self-center w-auto px-5 !mt-[30px]',
+	list: /*tw*/ `flex flex-col text-dark px-5 pt-3 pb-[30px] space-y-4
+		maxMd:pt-2.5
+	`,
+	listItem: /*tw*/ `text-[14px] py-2 leading-[16px] hover:text-branded duration-300
+		maxMd:text-[12px] maxMd:py-0
+	`,
+	searchValue: /*tw*/ `text-branded font-semibold`,
+	button: /*tw*/ `self-center w-[200px] !mt-[30px]
+		maxMd:w-[171px] 
+	`,
 }

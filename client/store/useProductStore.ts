@@ -13,7 +13,8 @@ type State = {
 }
 
 type Actions = {
-	setSearchValue: (searchValue: string) => void
+	setSearchData: (searchValue: ProductsType | null) => void
+	setSearchValue: (searchData: string) => void
 	fetchProducts: (url: string, searchValue?: string) => Promise<ProductsType | SelectedProductType>
 	fetchExtraValuesHandbook: () => Promise<ExtraValuesHandbook[]>
 	setFilterData: (paramId: FilterParamType, value: [number, number]) => void
@@ -47,6 +48,7 @@ const initialFilterData: FilterDataType = {
 export const useProductStore = create(
 	immer<State & Actions>((set) => ({
 		searchData: null,
+		setSearchData: (searchData) => set({ searchData }),
 		searchValue: '',
 		setSearchValue: (searchValue) => set({ searchValue }),
 		products: null,

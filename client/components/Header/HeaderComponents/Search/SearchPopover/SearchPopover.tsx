@@ -1,25 +1,28 @@
+import Link from 'next/link'
 import { RefObject, useEffect, useRef } from 'react'
 import { Button } from '@/components/Button/Button'
-import Link from 'next/link'
-import { s } from './styles'
 import { useProductStore } from '@/store/useProductStore'
 import { HighlightText } from '@/components/HighLightText/HighLightText'
+import { s } from './styles'
 
 type PropsType = {
 	inputRef: RefObject<HTMLInputElement>
 	setIsShowPopover: (isShowPopover: boolean) => void
 	isShow: boolean
+	isMobileSearch: boolean | undefined
 	selectSearchValue: () => void
 }
 
 export const SearchPopover = (props: PropsType) => {
-	const { inputRef, isShow, setIsShowPopover, selectSearchValue } = props
+	const { inputRef, isShow, isMobileSearch, setIsShowPopover, selectSearchValue } = props
 
 	const popoverRef = useRef<HTMLInputElement>(null)
 	const searchData = useProductStore((state) => state.searchData)
 	const searchValue = useProductStore((state) => state.searchValue)
 
 	useEffect(() => {
+		if (isMobileSearch) return
+
 		const handleClickOutside = (event: any) => {
 			if (popoverRef.current && !popoverRef.current.contains(event.target) && !inputRef.current?.contains(event.target)) {
 				setIsShowPopover(false)
