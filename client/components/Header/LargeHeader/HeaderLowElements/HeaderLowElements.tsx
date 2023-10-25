@@ -1,9 +1,11 @@
 import { CatalogPopover } from '../../HeaderComponents/CatalogPopover/CatalogPopover'
-import { s } from './styles'
 import { Nav } from '../../HeaderComponents/Nav/Nav'
 import { ComparisonButton } from '../../HeaderComponents/ComparisonButton/ComparisonButton'
 import { BasketPopover } from '../../HeaderComponents/BasketPopover/BasketPopover'
 import { MenuPopupButton } from '../../HeaderComponents/MenuPopupButton/MenuPopupButton'
+import { s } from './styles'
+import { BasketButton } from '../../HeaderComponents/BasketPopover/BasketButton/BasketButton'
+import Link from 'next/link'
 
 export const HeaderLowElements = () => {
 	return (
@@ -17,7 +19,11 @@ export const HeaderLowElements = () => {
 
 			<div className={s.iconButtons}>
 				<ComparisonButton />
-				<BasketPopover />
+				<BasketPopover className={s.desktopBasket} />
+
+				<Link href="/cart" className={s.mobileBasket}>
+					<BasketButton />
+				</Link>
 			</div>
 		</div>
 	)

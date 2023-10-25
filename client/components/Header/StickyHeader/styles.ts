@@ -4,7 +4,7 @@ export const s = {
 	catalogPopover: /*tw*/ `min-w-[154px]
 		max3xl:min-w-[72px] max3xl:max-w-[72px] max3xl:[&>span]:hidden max3xl:[&>svg]:m-0
 	`,
-	nav: /*tw*/ `//mr-[50px] //mr-auto ml-5
+	nav: /*tw*/ `ml-5
 		max3xl:max-w-[680px]
 		maxLg+:text-[14px] maxLg+:max-w-[580px]
 		maxLg:hidden
@@ -15,4 +15,10 @@ export const s = {
 		max1400:block
   `,
 	buttons: /*tw*/ `flex justify-between items-center max-w-[160px] w-full`,
+	desktopBasket: `
+		maxMd:hidden
+	`,
+	mobileBasket: `hidden  
+		maxMd:flex
+	`,
 }

@@ -11,6 +11,7 @@ import { MailButton } from '@/components/Contacts/MailButton/MailButton'
 import { IconButton } from '@/components/IconButton/IconButton'
 import { SearchIcon } from '@/icons/SearchIcon'
 import { s } from './styles'
+import { BasketButton } from '../HeaderComponents/BasketPopover/BasketButton/BasketButton'
 
 export const StickyHeader = () => {
 	// TODO: duplicate logic HeaderUpElements.tsx
@@ -46,7 +47,10 @@ export const StickyHeader = () => {
 
 			<div className={s.buttons}>
 				<ComparisonButton />
-				<BasketPopover isShowPrice={false} />
+				<BasketPopover isShowPrice={false} className={s.desktopBasket} />
+				<Link href="/cart" className={s.mobileBasket}>
+					<BasketButton />
+				</Link>
 				<PhoneButton />
 				<MailButton />
 			</div>

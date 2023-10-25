@@ -6,7 +6,12 @@ import { useBasketStore } from '@/store/useBasketStore'
 
 const DynamicCustomBadge = dynamic<CustomBadgePropsType>(() => import('@/components/Badge/Badge'), { ssr: false })
 
-export const BasketButton = () => {
+type PropsType = {
+	className?: string
+}
+
+export const BasketButton = (props: PropsType) => {
+	const { className } = props
 	const basketItems = useBasketStore((state) => state.basketItems)
 
 	const badgeCount = basketItems.reduce((acc, item) => {
@@ -15,7 +20,7 @@ export const BasketButton = () => {
 	}, 0)
 
 	return (
-		<DynamicCustomBadge count={badgeCount} offset={[-7, -4]}>
+		<DynamicCustomBadge className={className} count={badgeCount} offset={[-7, -4]}>
 			<BasketIcon className={s.basketIcon} />
 		</DynamicCustomBadge>
 	)

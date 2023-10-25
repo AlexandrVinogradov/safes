@@ -12,4 +12,10 @@ export const s = {
 		maxLg:hidden
 	`,
 	iconButtons: `flex items-center space-x-5`,
+	desktopBasket: `
+		maxMd:hidden
+	`,
+	mobileBasket: `hidden  
+		maxMd:flex
+	`,
 }

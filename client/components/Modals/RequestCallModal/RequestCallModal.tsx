@@ -11,7 +11,7 @@ export const RequestCallModal = () => {
 	const handleClose = () => setIsRequestCallModal(false)
 
 	return (
-		<MainModal styles='h-[655px]' isOpen={isRequestCallModal} onClose={handleClose}>
+		<MainModal styles='h-[655px] pb-[30px]' isOpen={isRequestCallModal} onClose={handleClose}>
 			{!isCallRequested ? <RequestCall /> : <CallRequested />}
 		</MainModal>
 	)

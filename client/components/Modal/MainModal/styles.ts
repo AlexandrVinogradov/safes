@@ -1,6 +1,7 @@
 export const s = {
 	container: /*tw*/ `z-20 shadow-[0px_4px_14px_rgba(0,0,0,0.25)]`,
-	wrapper: /*tw*/ `relative border-[5px] rounded-[10px] text-white w-[935px]
+	wrapper: /*tw*/ `relative`,
+	contentWrapper: /*tw*/ `relative border-[5px] rounded-[10px] text-white w-[935px] max-h-[90vh] overflow-auto
 		maxLg+:w-[735px]
 		maxMd:w-[calc(100vw-10px)] maxMd:h-[calc(100vh-10px)] maxMd:border-none
 	`,
