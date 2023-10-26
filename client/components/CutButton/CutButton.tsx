@@ -18,9 +18,9 @@ export const CutButton = (props: PropsType) => {
 		<>
 			<CutModal />
 
-			<button onClick={handleClickCutButton} {...otherProps}>
+			<div onClick={handleClickCutButton} {...otherProps}>
 				{children}
-			</button>
+			</div>
 		</>
 	)
 }
