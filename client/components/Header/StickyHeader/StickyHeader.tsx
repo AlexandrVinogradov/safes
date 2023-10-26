@@ -12,6 +12,7 @@ import { IconButton } from '@/components/IconButton/IconButton'
 import { SearchIcon } from '@/icons/SearchIcon'
 import { s } from './styles'
 import { BasketButton } from '../HeaderComponents/BasketPopover/BasketButton/BasketButton'
+import { MenuPopupButton } from '../HeaderComponents/MenuPopupButton/MenuPopupButton'
 
 export const StickyHeader = () => {
 	// TODO: duplicate logic HeaderUpElements.tsx
@@ -36,6 +37,7 @@ export const StickyHeader = () => {
 				<LogoShieldOnly className={s.logo} />
 			</Link>
 			<CatalogPopover className={s.catalogPopover} />
+			<MenuPopupButton className={s.menuPopupButton} />
 			<Nav className={s.nav} />
 
 			{isDesktop ? (

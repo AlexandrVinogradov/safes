@@ -12,6 +12,7 @@ export const scrollToggle = (isDisableScroll: boolean) => {
 
 		if (!header) return
 		// FIXME: 0 ideas why we need 0.35px for chrome on windows
+		// Need check on windows
 		header.style.width = `calc(100% - ${getScrollbarWidth() - 0.35}px)`
 	} else {
 		document.body.style.overflow = 'auto'
