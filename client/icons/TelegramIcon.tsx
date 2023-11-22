@@ -21,7 +21,7 @@ export function TelegramIcon(props: PropsTypes) {
 				<rect x="0.623779" width="26.3119" height="26.3119" fill="url(#pattern2)" />
 			</mask>
 			<g mask="url(#mask0_150_1501)">
-				<rect x="-7.81372" y="-3.75" width="40.3125" height="31.875" fill="#8F8F8F" />
+				<rect x="-7.81372" y="-3.75" width="40.3125" height="31.875" fill="currentColor" />
 			</g>
 			<defs>
 				<pattern id="pattern2" patternContentUnits="objectBoundingBox" width="1" height="1">

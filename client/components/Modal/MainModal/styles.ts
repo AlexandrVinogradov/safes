@@ -3,7 +3,7 @@ export const s = {
 	wrapper: /*tw*/ `relative`,
 	contentWrapper: /*tw*/ `relative border-[5px] rounded-[10px] text-white w-[935px] max-h-[90vh] overflow-auto
 		maxLg+:w-[735px]
-		maxMd:w-[calc(100vw-10px)] maxMd:h-[calc(100vh-10px)] maxMd:border-none
+		maxMd:w-[calc(100vw-10px)] maxMd:h-[calc(100vh-100px)] maxMd:border-none
 	`,
 	closeButton: /*tw*/ `absolute -top-[50px] -right-[70px] z-20
 		maxLg+:-right-[5px] maxLg+:-top-[65px]

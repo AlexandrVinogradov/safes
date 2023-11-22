@@ -10,6 +10,8 @@ export const Meta: FC<PropsWithChildren<MetaType>> = ({ title, description, keyw
 		<>
 			<Head>
 				<title>{getTitle(title)}</title>
+				{/* for disable zoom onFocus input */}
+				<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
 
 				{description ? (
 					<>

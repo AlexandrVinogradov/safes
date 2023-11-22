@@ -11,7 +11,6 @@ import { PersonalForm } from './PersonalForm/PersonalForm'
 import { StateMachineProvider, createStore } from 'little-state-machine'
 import { DeliveryForm } from './DeliveryForm/DeliveryForm'
 import { ConfirmTab } from './ConfirmTab/ConfirmTab'
-import Link from 'next/link'
 
 export type SelectedTabType = 'personal' | 'delivery' | 'confirm'
 
@@ -46,15 +45,21 @@ const CheckoutPage = () => {
 		return 'outlined'
 	}
 
+	const handleClickBack = () => {
+		if (selectedTab === 'personal') router.back()
+		if (selectedTab === 'delivery') setSelectedTab('personal')
+		if (selectedTab === 'confirm') setSelectedTab('delivery')
+	}
+
 	return (
 		<Layout title="CHECKOUT">
 			<Main breadCrumbs={breadCrumbs}>
 				<section className={clsx(container, s.section)}>
 					<h1 className={s.title}>Оформление заказа</h1>
-					<Link href="/cart" onClick={() => router.back()} className={s.backButton}>
+					<button onClick={handleClickBack} className={s.backButton}>
 						<LongArrowLeftIcon />
 						Назад
-					</Link>
+					</button>
 
 					<div className={s.tabButtons}>
 						<Button

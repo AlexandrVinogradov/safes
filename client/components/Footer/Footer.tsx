@@ -36,7 +36,7 @@ export const Footer = () => {
 					</ul>
 				</nav>
 
-				<Link href="/policies" className={s.secondaryLink}>
+				<Link href="/policies" className={clsx(s.secondaryLink, s.navLink)}>
 					Политика конфиденциальности
 				</Link>
 
@@ -44,7 +44,7 @@ export const Footer = () => {
 
 				<div className={s.icons}>
 					{iconLinks.map((link) => (
-						<a target="_blank" key={link.name} rel="noreferrer" href={link.to}>
+						<a target="_blank" className={s.icon} key={link.name} rel="noreferrer" href={link.to}>
 							{link.icon}
 						</a>
 					))}

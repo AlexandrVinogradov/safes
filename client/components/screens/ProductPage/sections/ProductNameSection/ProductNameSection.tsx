@@ -1,11 +1,11 @@
 import { container } from '@/styles/container'
-import { Button } from '@/components/Button/Button'
 import { ProductGallery } from './ProductGallery/ProductGallery'
 import { SelectedProductType } from '@/models/IProductStore'
 import { CutButton } from '@/components/CutButton/CutButton'
+import { AddToCartButton } from './AddToCartButton/AddToCartButton'
+import { FastOrderButton } from './FastOrderButton/FastOrderButton'
 import { s } from './styles'
 import clsx from 'clsx'
-import { AddToCartButton } from './AddToCartButton/AddToCartButton'
 
 type PropsType = {
 	selectedProduct: SelectedProductType
@@ -39,7 +39,7 @@ export const ProductNameSection = (props: PropsType) => {
 
 					<div className={s.orderButtons}>
 						<AddToCartButton className={s.oderButton} selectedProduct={selectedProduct} />
-						<Button className={s.oderButton}>Быстрый заказ</Button>
+						<FastOrderButton className={s.oderButton} selectedProduct={selectedProduct} />
 					</div>
 				</div>
 			</div>

@@ -36,7 +36,7 @@ export const BrandsSliderContainer = () => {
 	const breakpoints = {
 		320: { slidesPerView: 2, spaceBetween: 20 },
 		768: { slidesPerView: 3, spaceBetween: 20 },
-		1200: { slidesPerView: 4 },
+		1200: { slidesPerView: 4, spaceBetween: 20 },
 	}
 
 	return (

@@ -10,16 +10,14 @@ type PropsType = {
 	deliveryContent: string | null
 }
 
-// FIXME:
-// Relative slider
-// Что после быстрого заказа кнопки?
-
 export const ProductPage = (props: PropsType) => {
 	const { selectedProduct, deliveryContent } = props
+	const name = selectedProduct['name_ru-RU']
 
 	const breadCrumbs = [
 		{ name: 'Главная', isActive: false, to: '/' },
-		{ name: 'Продукт', isActive: true, to: '/' },
+		{ name: 'Каталог', isActive: false, to: '/catalog' },
+		{ name, isActive: true, to: '/' },
 	]
 
 	return (

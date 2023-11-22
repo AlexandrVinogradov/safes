@@ -14,7 +14,7 @@ export function YouTubeIcon(props: PropsTypes) {
 				<rect x="0.312012" width="26.3119" height="26.3119" fill="url(#pattern1)" />
 			</mask>
 			<g mask="url(#mask0_150_1498)">
-				<rect x="-10.0005" y="-3.75" width="40.3125" height="31.875" fill="#8F8F8F" />
+				<rect x="-10.0005" y="-3.75" width="40.3125" height="31.875" fill="currentColor" />
 			</g>
 			<defs>
 				<pattern id="pattern1" patternContentUnits="objectBoundingBox" width="1" height="1">

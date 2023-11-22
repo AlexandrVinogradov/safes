@@ -21,7 +21,17 @@ export const s = {
 
 	priceCell: /*tw*/ `max-w-[150px] w-full pt-4 pb-[13px] text-[18px] font-bold
 	 container:text-[16px]
-	 maxMd:tet-[18px] maxMd:p-0 maxMd:text-[18px] maxMd:pb-5
+	 maxMd:tet-[18px] maxMd:p-0 maxMd:text-[18px] maxMd:pb-5 maxMd:flex maxMd:items-center maxMd:space-x-4
+	`,
+	price: /*tw*/ ` font-bold pb-1
+	 container:text-[16px]
+	 maxMd:text-[18px] 
+	`,
+	oldPrice: /*tw*/ `relative text-[17px] text-dimText w-min whitespace-nowrap font-normal
+	after:absolute after:w-full after:bg-dimText after:h-[1px] after:bottom-[45%] after:left-0 
+  container:text-[15px]
+	maxMd:p-0 maxMd:text-[16px]
+
 	`,
 
 	countCell: /*tw*/ `flex flex-col justify-between w-[130px] min-w-[116px] pt-4 pb-[13px]

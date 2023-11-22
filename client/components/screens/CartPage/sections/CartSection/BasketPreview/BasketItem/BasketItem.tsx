@@ -43,7 +43,10 @@ export const BasketItem = (props: PropsType) => {
 				<p className={s.code}>Код товара: {code}</p>
 			</div>
 
-			<div className={s.priceCell}>{item.price.toLocaleString('ru-RU')} ₽</div>
+			<div className={s.priceCell}>
+				<div className={s.price}>{item.price.toLocaleString('ru-RU')} ₽</div>
+				<div className={s.oldPrice}>{item.oldPrice.toLocaleString('ru-RU')} ₽</div>
+			</div>
 
 			<div className={s.countCell}>
 				{isEditMode ? (

@@ -20,7 +20,7 @@ export const s = {
 	navList: /*tw*/ `grid grid-cols-4 gap-x-[50px] gap-y-[30px] pt-[23px]
 		maxLg:gap-x-[10px] maxLg:gap-y-[10px] maxLg:grid-cols-2
 	`,
-	navLink: /*tw*/ `whitespace-nowrap`,
+	navLink: /*tw*/ `whitespace-nowrap hover:text-branded duration-300`,
 
 	secondaryLink: /*tw*/ `flex justify-between text-dimText whitespace-nowrap
 		maxLg:text-[13px] 
@@ -30,4 +30,5 @@ export const s = {
 	icons: /*tw*/ `flex justify-between max-w-[110px] w-full justify-self-end
 		maxMd:order-0
 	`,
+	icon: /*tw*/ `text-dimText hover:text-branded duration-300`,
 }

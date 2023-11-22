@@ -14,7 +14,7 @@ export function VkIcon(props: PropsTypes) {
 				<rect width="26.3119" height="26.3119" fill="url(#pattern0)" />
 			</mask>
 			<g mask="url(#mask0_150_1495)">
-				<rect x="-9.375" y="-3.75" width="40.3125" height="31.875" fill="#8F8F8F" />
+				<rect x="-9.375" y="-3.75" width="40.3125" height="31.875" fill="currentColor" />
 			</g>
 			<defs>
 				<pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">

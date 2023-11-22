@@ -6,7 +6,7 @@ export const s = {
 	title: /*tw*/ `pb-[30px] text-[66px] leading-[77px]
 		maxMd:text-[28px] maxMd:leading-[32px] maxMd:pb-5
 	`,
-	backButton: /*tw*/ `flex justify-between items-center max-w-[80px] w-full text-branded pb-[44px]
+	backButton: /*tw*/ `flex font-semibold justify-between items-center max-w-[80px] w-full text-branded mb-[44px]
 		maxMd:pb-5 maxMd:text-[14px]
 	`,
 
