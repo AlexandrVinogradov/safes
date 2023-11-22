@@ -9,7 +9,7 @@ export function LogoShieldOnly(props: PropsTypes) {
 	const { className, width = 'w-[63px]' } = props
 
 	return (
-		<Icon className={className} width={width} stroke="none" viewBox="0 0 63 77">
+		<Icon width={width} className={className} stroke="none" viewBox="0 0 63 77">
 			<g clipPath="url(#clip0_574_15984)">
 				<path
 					d="M1.15723 10.4123L15.9429 8.03415L31.8215 1.2854L44.9358 7.39141L62.0358 10.4123V21.7245L61.2001 35.1577L54.4501 53.9899L46.8001 65.045L31.8215 75.7787L18.3215 66.5233L7.26437 51.2261L2.05723 35.1577L1.15723 10.4123Z"
