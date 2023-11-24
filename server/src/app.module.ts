@@ -13,13 +13,15 @@ import { CategoriesModule } from './categories/categories.module'
 import { Category } from './categories/categories.model'
 import { ProductImage } from './productImages/productImages.model'
 import { ProductImagesModule } from './productImages/productImages.module'
-import { ContentModule } from './content/content.module'
 import { InstructionsModule } from './instructions/instructions.module'
 import { Content } from './content/content.model'
 import { Instruction } from './instructions/instructions.model'
 import { InstructionCategories } from './instructions/instruction_categories.model'
 import { News } from './news/news.model'
 import { NewsModule } from './news/news.module'
+import { Orders } from './orders/order.model'
+import { OrderModule } from './orders/order.module'
+import { ContentModule } from './content/content.module'
 
 @Module({
 	controllers: [],
@@ -35,7 +37,22 @@ import { NewsModule } from './news/news.module'
 			username: process.env.POSTGRES_USER,
 			password: process.env.POSTGRES_PASSWORD,
 			database: process.env.POSTGRES_DB,
-			models: [User, Instruction, InstructionCategories, Content, News, Category, Safe, ProductToCategories, ProductsRelations, Manufacturer, Country, ExtraValue, ProductImage],
+			models: [
+				User,
+				Instruction,
+				InstructionCategories,
+				Content,
+				News,
+				Category,
+				Safe,
+				ProductToCategories,
+				ProductsRelations,
+				Manufacturer,
+				Country,
+				ExtraValue,
+				ProductImage,
+				Orders,
+			],
 			autoLoadModels: true,
 		}),
 		UsersModule,
@@ -47,6 +64,7 @@ import { NewsModule } from './news/news.module'
 		ManufacturersModule,
 		ExtraValuesModule,
 		ProductImagesModule,
+		OrderModule,
 	],
 })
 export class AppModule {}
