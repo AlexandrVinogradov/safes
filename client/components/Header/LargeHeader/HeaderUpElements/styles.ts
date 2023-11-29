@@ -8,11 +8,10 @@ export const s = {
 		maxMd:block
 	`,
 	search: /*tw*/ `max-w-[561px] mx-5
-		maxLg++:mr-0
 		maxLg:mr-5
 
 	`,
-	contacts: /*tw*/ `max-w-[381px] mx-5
+	contacts: /*tw*/ `max-w-[381px]
 		maxLg:[&>div>div]:hidden maxLg:m-0 maxLg:w-auto maxLg:min-w-min
 	`,
 }

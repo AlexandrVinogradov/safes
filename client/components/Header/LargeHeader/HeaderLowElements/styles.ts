@@ -11,6 +11,11 @@ export const s = {
 		maxLg++:max-w-[680px]
 		maxLg:hidden
 	`,
+	mailLink: `hidden text-branded duration-300 hover:opacity-80
+		maxLg:block
+		maxMd:text-[14px]
+		maxSm:text-[12px]
+	`,
 	iconButtons: `flex items-center space-x-5`,
 	desktopBasket: `
 		maxMd:hidden

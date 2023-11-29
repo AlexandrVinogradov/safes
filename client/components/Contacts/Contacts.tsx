@@ -16,6 +16,7 @@ export const Contacts = (props: PropsType) => {
 				<div className={s.schedule}>
 					<p>Пн - Вс:</p>
 					<p>с 9.00 до 21.00</p>
+					<p>Наша почта:</p>
 				</div>
 
 				<div>
@@ -24,6 +25,9 @@ export const Contacts = (props: PropsType) => {
 					</a>
 					<a className={s.link} href="tel:89265878650">
 						8 (926) 587-86-50
+					</a>
+					<a className={s.link} href="mailto:prommetsafe@yandex.ru">
+						prommetsafe@yandex.ru
 					</a>
 				</div>
 			</div>

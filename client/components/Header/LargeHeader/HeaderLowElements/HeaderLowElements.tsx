@@ -18,6 +18,9 @@ export const HeaderLowElements = () => {
 			</div>
 
 			<div className={s.iconButtons}>
+				<a className={s.mailLink} href="mailto:prommetsafe@yandex.ru">
+					prommetsafe@yandex.ru
+				</a>
 				<ComparisonButton />
 				<BasketPopover className={s.desktopBasket} />
 
