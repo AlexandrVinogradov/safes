@@ -14,7 +14,7 @@ export class Category extends Model<Category, CategoryCreationAttrs> {
 		through: () => ProductToCategories,
 		foreignKey: 'category_id',
 		otherKey: 'product_id', // Имя поля в связующей таблице, указывающее на роль
-		as: 'associatedSafes' 
+		as: 'associatedSafes',
 	})
 	@Column({ type: DataType.INTEGER, unique: true, autoIncrement: true, primaryKey: true })
 	category_id: number
@@ -66,4 +66,12 @@ export class Category extends Model<Category, CategoryCreationAttrs> {
 	@ApiProperty({ example: 'Взломостойкие сейфы 1 класса', description: 'хз' })
 	@Column({ type: DataType.STRING })
 	'meta_keyword_ru-RU': string
+
+	@ApiProperty({ example: '1', description: 'Сортировка' })
+	@Column({ type: DataType.INTEGER })
+	ordering: number
+
+	@ApiProperty({ example: '1', description: 'Показывать ли на фронте' })
+	@Column({ type: DataType.BOOLEAN })
+	category_publish: boolean
 }
