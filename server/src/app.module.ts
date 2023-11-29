@@ -3,8 +3,8 @@ import { ConfigModule } from '@nestjs/config'
 import { SequelizeModule } from '@nestjs/sequelize'
 import { ProductToCategories, ProductsRelations, Safe } from './safes/safes.model'
 import { SafesModule } from './safes/safes.module'
-import { User } from './users/users.model'
-import { UsersModule } from './users/users.module'
+import { User } from './user/user.model'
+import { UsersModule } from './user/user.module'
 import { Country, Manufacturer } from './manufacturers/manufacturers.model'
 import { ManufacturersModule } from './manufacturers/manufacturers.module'
 import { ExtraValue } from './extraValues/extraValues.model'
@@ -22,6 +22,7 @@ import { NewsModule } from './news/news.module'
 import { Orders } from './orders/order.model'
 import { OrderModule } from './orders/order.module'
 import { ContentModule } from './content/content.module'
+import { AuthModule } from './auth/auth.module';
 
 @Module({
 	controllers: [],
@@ -65,6 +66,7 @@ import { ContentModule } from './content/content.module'
 		ExtraValuesModule,
 		ProductImagesModule,
 		OrderModule,
+		AuthModule,
 	],
 })
 export class AppModule {}

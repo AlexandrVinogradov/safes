@@ -1,9 +1,10 @@
-import { Body, Controller, Get, Param, Patch, Post } from '@nestjs/common'
+import { Body, Controller, Get, Param, Patch, Post, UseGuards } from '@nestjs/common'
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger'
 import { CreateContentDto } from './dto/create-content.dto'
 import { Content } from './content.model'
 import { ContentService } from './content.service'
 import { UpdateContentDto } from './dto/update-content.dto'
+import { JwtGuard } from 'src/auth/guards/jwt-auth.guard'
 
 @ApiTags('Контент')
 @Controller('content')
@@ -19,6 +20,7 @@ export class ContentController {
 
 	@ApiOperation({ summary: 'Обновить контент' })
 	@ApiResponse({ status: 200, type: Content })
+	@UseGuards(JwtGuard)
 	@Patch(':id')
 	update(@Param('id') alias: string, @Body() contentDto: UpdateContentDto) {
 		return this.contentService.updateContent(alias, contentDto)
