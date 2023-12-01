@@ -33,23 +33,17 @@ module.exports = {
       screens: {
         '2xl': {'max': '1535px'},
         'xl': {'max': '1279px'},
-        //
-        'max3xl': {'max': '1700px'}, // use
-        'maxXl': {'max': '1490px'}, // use
-        'container': {'max': '1440px'}, // use
-        'max1400': {'max': '1400px'}, // use
-        'maxLg++': {'max': '1260px'}, // use
-        'maxLg+': {'max': '1200px'}, // use
-        'maxLg': {'max': '1024px'}, // use
-        'maxMd': {'max': '767px'}, // use
-        'maxSm': {'max': '350px'}, // use
-        //
-        'sm': {'max': '639px'},
+        'max3xl': {'max': '1700px'}, 
+        'maxXl': {'max': '1490px'}, 
+        'container': {'max': '1440px'}, 
+        'max1400': {'max': '1400px'}, 
+        'maxLg++': {'max': '1260px'}, 
+        'maxLg+': {'max': '1200px'}, 
+        'maxLg': {'max': '1024px'}, 
+        'maxMd': {'max': '767px'}, 
+        'maxSm': {'max': '350px'}, 
       }
     },
   },
   plugins: [],
 }
-
-// ipad 1180
-// iphone 12 pro 380px

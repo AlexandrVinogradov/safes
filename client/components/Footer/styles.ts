@@ -27,6 +27,7 @@ export const s = {
 		maxMd:order-1
 		maxSm:text-[11px]
 	`,
+	rights: 'mx-auto',
 	icons: /*tw*/ `flex justify-between max-w-[110px] w-full justify-self-end
 		maxMd:order-0
 	`,

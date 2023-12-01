@@ -1,17 +1,17 @@
 import Image from 'next/image'
 import { CompareButtonPropsType } from './ComparisonButton/ComparisonButton'
-import { BasketIcon } from '@/icons/BasketIcon'
 import { ProductCardType } from '@/models/IProductStore'
 import { Button } from '../Button/Button'
-import { IconButton } from '../IconButton/IconButton'
 import { DescItem } from './DescItem/DescItem'
-import { useBasketStore } from '@/store/useBasketStore'
+
+import { BasketButtonPropsType } from './BasketButton/BasketButton'
 import dynamic from 'next/dynamic'
 import { s } from './styles'
 import clsx from 'clsx'
 import Link from 'next/link'
 
 const DynamicComparisonButton = dynamic<CompareButtonPropsType>(() => import('./ComparisonButton/ComparisonButton'), { ssr: false })
+const DynamicBasketButton = dynamic<BasketButtonPropsType>(() => import('./BasketButton/BasketButton'), { ssr: false })
 
 type PropsType = {
 	card: ProductCardType
@@ -20,21 +20,6 @@ type PropsType = {
 
 export const ProductCard = (props: PropsType) => {
 	const { card, className } = props
-
-	const addBasketItem = useBasketStore((state) => state.addBasketItem)
-
-	const handleClickAddProduct = () => {
-		addBasketItem({
-			id: card.product_id,
-			image: card.image,
-			images: card.productImages,
-			name: card['name_ru-RU'],
-			price: card.product_price,
-			oldPrice: card.product_old_price,
-			code: card.product_ean,
-			isDeleted: false,
-		})
-	}
 
 	return (
 		<article className={clsx(s.cardWrapper, className)}>
@@ -46,7 +31,7 @@ export const ProductCard = (props: PropsType) => {
 
 				<p className={s.code}>Код: {card.product_ean}</p>
 			</header>
-			
+
 			<div className={s.imgWrapper}>
 				<Link className={s.imgLink} href={`/${card['alias_ru-RU']}`}>
 					<Image
@@ -79,7 +64,7 @@ export const ProductCard = (props: PropsType) => {
 				<Button className={s.moreButton} href={`/${card['alias_ru-RU']}`}>
 					Подробнее
 				</Button>
-				<IconButton onClick={handleClickAddProduct} className={s.iconButton} icon={<BasketIcon className={s.cartIcon} />} />
+				<DynamicBasketButton card={card} />
 			</footer>
 		</article>
 	)

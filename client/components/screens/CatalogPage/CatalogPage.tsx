@@ -36,6 +36,14 @@ const CatalogPage = (props: PropsType) => {
 		selectedCategory = getSelectCategory(category, query.id as string)
 	}
 
+	if (manufacturer) {
+		breadCrumbs = [
+			{ name: 'Главная', isActive: false, to: '/' },
+			{ name: 'Каталог', isActive: false, to: '/catalog' },
+			{ name: manufacturer['name_ru-RU'], isActive: true },
+		]
+	}
+
 	const categoryTitle = selectedCategory?.['name_ru-RU']
 	const manufacturerTitle = manufacturer?.['name_ru-RU']
 

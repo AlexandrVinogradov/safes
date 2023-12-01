@@ -12,6 +12,7 @@ type Actions = {
 	changeItemCount: (id: number, operation: 'increase' | 'decrease', isAllowClearItem?: boolean) => void
 	deleteItemToggle: (id: number, operation: 'delete' | 'return') => void
 	deleteAllItems: () => void
+	deleteSelectedItem: (id: number) => void
 	fullDeleteItems: () => void
 	clearItems: () => void
 }
@@ -62,6 +63,13 @@ export const useBasketStore = create(
 
 					if (operation === 'delete') selectedItem.isDeleted = true
 					if (operation === 'return') selectedItem.isDeleted = false
+				})
+			},
+			deleteSelectedItem: (id: number) => {
+				set((state) => {
+					const { basketItems } = state
+					const itemIndex = basketItems.findIndex((product) => product.id === id)
+					state.basketItems.splice(itemIndex, 1)
 				})
 			},
 			deleteAllItems: () => {

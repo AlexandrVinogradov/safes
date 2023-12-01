@@ -8,7 +8,6 @@ export const scrollToggle = (isDisableScroll: boolean) => {
 	if (isDisableScroll && isHasScroll) {
 		document.body.style.overflow = 'hidden'
 		document.body.style.marginRight = getScrollbarWidth() + 'px'
-		console.log(getScrollbarWidth())
 
 		if (!header) return
 		// FIXME: 0 ideas why we need 0.35px for chrome on windows

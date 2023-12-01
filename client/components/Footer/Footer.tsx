@@ -13,7 +13,7 @@ export const Footer = () => {
 	const iconLinks = [
 		{ name: 'vk', to: 'https://www.vk.com', icon: <VkIcon /> },
 		{ name: 'yt', to: 'https://www.youtube.com/', icon: <YouTubeIcon /> },
-		{ name: 'tg', to: 'https://web.telegram.org/k/', icon: <TelegramIcon /> },
+		{ name: 'tg', to: 'https://t.me/+79265878650', icon: <TelegramIcon /> },
 	]
 
 	return (
@@ -40,7 +40,7 @@ export const Footer = () => {
 					Политика конфиденциальности
 				</Link>
 
-				<p className={s.secondaryLink}>© 2023 Купить сейф в Москве. All Rights Reserved.</p>
+				<p className={clsx(s.secondaryLink, s.rights)}>© 2023 Купить сейф в Москве. All Rights Reserved.</p>
 
 				<div className={s.icons}>
 					{iconLinks.map((link) => (

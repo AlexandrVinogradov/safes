@@ -24,8 +24,8 @@ export const CategoriesSection = (props: PropsType) => {
 								unoptimized={true}
 								src={`https://prommetsafe.ru/components/com_jshopping/files/img_categories/${el.category_image}`}
 								alt={el['name_ru-RU']}
-								width={50}
-								height={50}
+								width={80}
+								height={80}
 							/>
 							<span className={s.childCategoryLinkName}> {el['name_ru-RU']}</span>
 						</Link>

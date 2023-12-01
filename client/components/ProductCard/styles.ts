@@ -13,12 +13,6 @@ export const s = {
 	comparisonButton: /*tw*/ `w-[19px] 
 		maxMd:w-[14px]
 	`,
-	iconButton: /*tw*/ `mr-2.5 mt-0.5
-		maxMd:w-[25px] maxMd:h-[25px]
-	`,
-	cartIcon: /*tw*/ `
-		maxMd:w-[25px] maxMd:h-[25px]
-	`,
 	code: /*tw*/ `text-branded text-[14px]
 		maxMd:text-[11px] 
 	`,

@@ -1,3 +1,3 @@
 export const s = {
-	basketIcon: /*tw*/ '',
+	basketIcon: /*tw*/ 'text-branded',
 }

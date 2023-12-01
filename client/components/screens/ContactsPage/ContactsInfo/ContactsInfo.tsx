@@ -1,6 +1,6 @@
+import { TelegramOriginalIcon } from '@/icons/TelegramOriginalIcon'
 import { PhoneIcon } from '@/icons/PhoneIcon'
 import { WhatsApp } from '@/icons/WhatsAppIcon'
-import { ViberIcon } from '@/icons/ViberIcon'
 import { MailIcon2 } from '@/icons/MailIcon2'
 import { s } from './styles'
 import clsx from 'clsx'
@@ -21,11 +21,11 @@ export const ContactsInfo = () => {
 					<a rel="noreferrer" href="https://api.whatsapp.com/send?phone=79265878650" target="_blank">
 						<WhatsApp />
 					</a>
-					<a rel="noreferrer" href="viber://add?number=79265878650" target="_blank">
-						<ViberIcon />
+					<a rel="noreferrer" href="https://t.me/+79265878650" target="_blank">
+						<TelegramOriginalIcon />
 					</a>
 				</div>
-				<p className={s.secondBlockMessage}>В WhatsApp и Viber сообщения принимаются круглосуточно</p>
+				<p className={s.secondBlockMessage}>В WhatsApp и Telegram сообщения принимаются круглосуточно</p>
 			</div>
 			<div className={s.thirdBlock}>
 				<a className={s.thirdBlockLink} href="mailto:prommetsafe@yandex.ru">
