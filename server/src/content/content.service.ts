@@ -1,8 +1,7 @@
 import { Injectable } from '@nestjs/common'
 import { InjectModel } from '@nestjs/sequelize'
-import { CreateContentDto } from './dto/create-content.dto'
+import { CreateContentDto, UpdateContentDto } from './dto/create-content.dto'
 import { Content } from './content.model'
-import { UpdateContentDto } from './dto/update-content.dto'
 
 @Injectable()
 export class ContentService {
@@ -14,12 +13,17 @@ export class ContentService {
 	}
 
 	async updateContent(alias: string, contentDto: UpdateContentDto) {
-		const content = await this.contentRepository.findOne({ where: { alias } })
-		if (!content) {
-			throw new Error('Контент не найден')
-		}
+		const updatedContent = await this.contentRepository.findOne({ where: { alias } })
 
-		return this.contentRepository.update(contentDto, { where: { alias } })
+		if (!updatedContent) throw new Error(`Контент не найден c alias: ${alias} не найден в базе данных`)
+
+		await this.contentRepository.update(contentDto, { where: { alias } })
+
+		return {
+			status: 200,
+			data: updatedContent,
+			message: `Контент ${updatedContent.title} успешно обновлен`,
+		}
 	}
 
 	async getAllContent() {

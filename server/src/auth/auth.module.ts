@@ -21,7 +21,7 @@ import { User } from 'src/user/user.model';
     SequelizeModule.forFeature([User]),
     JwtModule.register({
       secret: `${process.env.jwt_secret}`,
-      signOptions: { expiresIn: '5s' },
+      signOptions: { expiresIn: '86400s' },
     }),
   ],
 })

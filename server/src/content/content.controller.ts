@@ -1,9 +1,8 @@
 import { Body, Controller, Get, Param, Patch, Post, UseGuards } from '@nestjs/common'
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger'
-import { CreateContentDto } from './dto/create-content.dto'
+import { CreateContentDto, UpdateContentDto } from './dto/create-content.dto'
 import { Content } from './content.model'
 import { ContentService } from './content.service'
-import { UpdateContentDto } from './dto/update-content.dto'
 import { JwtGuard } from 'src/auth/guards/jwt-auth.guard'
 
 @ApiTags('Контент')
@@ -11,7 +10,7 @@ import { JwtGuard } from 'src/auth/guards/jwt-auth.guard'
 export class ContentController {
 	constructor(private contentService: ContentService) {}
 
-	@ApiOperation({ summary: 'Создание пользователя' })
+	@ApiOperation({ summary: 'Создание контента' })
 	@ApiResponse({ status: 200, type: Content })
 	@Post()
 	create(@Body() contentDto: CreateContentDto) {

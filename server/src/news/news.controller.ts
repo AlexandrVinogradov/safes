@@ -1,9 +1,9 @@
-import { Body, Controller, Get, Param, Patch, Post } from '@nestjs/common'
+import { Body, Controller, Delete, Get, Param, Patch, Post, UseGuards } from '@nestjs/common'
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger'
-import { CreateNewsDto } from './dto/create-news.dto'
+import { CreateNewsDto, UpdateNewsDto } from './dto/create-news.dto'
 import { News } from './news.model'
 import { NewsService } from './news.service'
-import { UpdateNewsDto } from './dto/update-news.dto'
+import { JwtGuard } from 'src/auth/guards/jwt-auth.guard'
 
 @ApiTags('Статьи')
 @Controller('news')
@@ -12,16 +12,26 @@ export class NewsController {
 
 	@ApiOperation({ summary: 'Создание инструкции' })
 	@ApiResponse({ status: 200, type: News })
+	@UseGuards(JwtGuard)
 	@Post()
 	create(@Body() newsDto: CreateNewsDto) {
 		return this.newsService.createNews(newsDto)
 	}
 
-	@ApiOperation({ summary: 'Обновить Статью' })
+	@ApiOperation({ summary: 'Обновить статью' })
 	@ApiResponse({ status: 200, type: News })
+	@UseGuards(JwtGuard)
 	@Patch(':id')
-	update(@Param('id') alias: string, @Body() newsDto: UpdateNewsDto) {
-		return this.newsService.updateNews(alias, newsDto)
+	update(@Param('id') id: number, @Body() instructionCategory: UpdateNewsDto) {
+		return this.newsService.updateNews(id, instructionCategory)
+	}
+
+	@ApiOperation({ summary: 'Удалить статью' })
+	@ApiResponse({ status: 200, type: News })
+	@UseGuards(JwtGuard)
+	@Delete(':id')
+	delete(@Param('id') id: number) {
+		return this.newsService.deleteNews(id)
 	}
 
 	@ApiOperation({ summary: 'Получить вcе статьи' })
