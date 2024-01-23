@@ -8,9 +8,9 @@ interface ContentCreationAttrs {
 
 @Table({ tableName: 'content' })
 export class Content extends Model<Content, ContentCreationAttrs> {
-	@ApiProperty({ example: '1', description: 'Уникальный идентификатор' })
-	@Column({ type: DataType.INTEGER, unique: true, autoIncrement: true, primaryKey: true })
-	id: number
+	// @ApiProperty({ example: '1', description: 'Уникальный идентификатор' })
+	// @Column({ type: DataType.INTEGER, unique: true, autoIncrement: true, primaryKey: true })
+	// id: number
 
 	@ApiProperty({ example: 'Доставка и оплата', description: 'Заголовок' })
 	@Column({ type: DataType.STRING })

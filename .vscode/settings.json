@@ -2,14 +2,15 @@
   "typescript.tsdk": "node_modules/typescript/lib",
   "typescript.enablePromptUseWorkspaceTsdk": true,
   "cSpell.words": [
-    "Промет",
-    "Прометсейф",
-    "Сart",
     "clsx",
     "immer",
     "nestjs",
     "Swiper",
-    "zustand"
+    "uuidv",
+    "zustand",
+    "Промет",
+    "Прометсейф",
+    "Сart"
   ],
   "tailwindCSS.experimental.classRegex": [
     "/\\*\\s*tw\\s*\\*/\\s*'([^']*)'",

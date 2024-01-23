@@ -1,4 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common'
+import * as fs from 'fs'
 import { InjectModel } from '@nestjs/sequelize'
 import { CreateNewsDto, UpdateNewsDto } from './dto/create-news.dto'
 import { News } from './news.model'
@@ -7,8 +8,8 @@ import { News } from './news.model'
 export class NewsService {
 	constructor(@InjectModel(News) private newsRepository: typeof News) {}
 
-	async createNews(dto: CreateNewsDto) {
-		const news = await this.newsRepository.create(dto)
+	async createNews(dto: CreateNewsDto, imageName: string) {
+		const news = await this.newsRepository.create({ ...dto, image: imageName || null })
 
 		return {
 			status: 200,
@@ -17,12 +18,18 @@ export class NewsService {
 		}
 	}
 
-	async updateNews(id: number, newsDto: UpdateNewsDto) {
+	async updateNews(id: number, dto: UpdateNewsDto, imageName: string) {
 		const news = await this.newsRepository.findByPk(id)
 
-		await this.newsRepository.update(newsDto, { where: { id } })
+		await this.newsRepository.update({ ...dto, image: imageName || null }, { where: { id } })
 
 		if (!news) throw new NotFoundException(`Статья с id: ${id} не найден в базе данных`)
+
+		if (news.image) {
+			const imagePath = `${process.env.FILES_PATH}/news/${news.image}`
+
+			if (fs.existsSync(imagePath)) fs.unlinkSync(imagePath)
+		}
 
 		return {
 			status: 200,
@@ -35,6 +42,12 @@ export class NewsService {
 		const deletedNews = await this.newsRepository.findByPk(id)
 
 		if (!deletedNews) throw new NotFoundException(`Статья с id: ${id} не найден в базе данных`)
+
+		if (deletedNews.image) {
+			const imagePath = `${process.env.FILES_PATH}/news/${deletedNews.image}`
+
+			if (fs.existsSync(imagePath)) fs.unlinkSync(imagePath)
+		}
 
 		await this.newsRepository.destroy({ where: { id } })
 

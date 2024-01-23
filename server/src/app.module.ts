@@ -22,7 +22,7 @@ import { NewsModule } from './news/news.module'
 import { Orders } from './orders/order.model'
 import { OrderModule } from './orders/order.module'
 import { ContentModule } from './content/content.module'
-import { AuthModule } from './auth/auth.module';
+import { AuthModule } from './auth/auth.module'
 
 @Module({
 	controllers: [],

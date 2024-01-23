@@ -4,13 +4,14 @@ import { Column, DataType, Model, Table } from 'sequelize-typescript'
 interface NewsCreationAttrs {
 	email: string
 	password: string
+	image: string
 }
 
 @Table({ tableName: 'news' })
 export class News extends Model<News, NewsCreationAttrs> {
-	@ApiProperty({ example: '1', description: 'Уникальный идентификатор' })
-	@Column({ type: DataType.INTEGER, unique: true, autoIncrement: true, primaryKey: true })
-	id: number
+	// @ApiProperty({ example: '1', description: 'Уникальный идентификатор' })
+	// @Column({ type: DataType.INTEGER, unique: true, autoIncrement: true, primaryKey: true })
+	// id: number
 
 	@ApiProperty({ example: 'Где купить сейф.', description: 'Заголовок' })
 	@Column({ type: DataType.STRING, allowNull: false })

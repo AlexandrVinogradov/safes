@@ -9,9 +9,9 @@ interface InstructionCreationAttrs {
 
 @Table({ tableName: 'instruction_categories' })
 export class InstructionCategories extends Model<InstructionCategories, InstructionCreationAttrs> {
-	@ApiProperty({ example: '1', description: 'Уникальный идентификатор' })
-	@Column({ type: DataType.INTEGER, unique: true, autoIncrement: true, primaryKey: true })
-	id: number
+	// @ApiProperty({ example: '1', description: 'Уникальный идентификатор' })
+	// @Column({ type: DataType.INTEGER, unique: true, autoIncrement: true, primaryKey: true })
+	// id: number
 
 	@ApiProperty({ example: 'Инструкции к сейфам JUWEL', description: 'Имя' })
 	@Column({ type: DataType.STRING, unique: true, allowNull: false })
@@ -30,5 +30,5 @@ export class InstructionCategories extends Model<InstructionCategories, Instruct
 	metadesc: string
 
 	@HasMany(() => Instruction)
-	safe: Instruction[]
+	instructions: Instruction[]
 }

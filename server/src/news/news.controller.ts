@@ -1,29 +1,33 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post, UseGuards } from '@nestjs/common'
+import { Body, Controller, Delete, Get, Param, Patch, Post, UploadedFile, UseGuards, UseInterceptors } from '@nestjs/common'
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger'
 import { CreateNewsDto, UpdateNewsDto } from './dto/create-news.dto'
 import { News } from './news.model'
 import { NewsService } from './news.service'
 import { JwtGuard } from 'src/auth/guards/jwt-auth.guard'
+import { FileInterceptor } from '@nestjs/platform-express'
+import { SharpPipe } from 'src/pipes/sharpPipe'
 
 @ApiTags('Статьи')
 @Controller('news')
 export class NewsController {
 	constructor(private newsService: NewsService) {}
 
-	@ApiOperation({ summary: 'Создание инструкции' })
+	@ApiOperation({ summary: 'Создание Статьи' })
 	@ApiResponse({ status: 200, type: News })
 	@UseGuards(JwtGuard)
 	@Post()
-	create(@Body() newsDto: CreateNewsDto) {
-		return this.newsService.createNews(newsDto)
+	@UseInterceptors(FileInterceptor('image'))
+	create(@Body() newsDto: CreateNewsDto, @UploadedFile(new SharpPipe('/news')) imageName: string) {
+		return this.newsService.createNews(newsDto, imageName)
 	}
 
 	@ApiOperation({ summary: 'Обновить статью' })
 	@ApiResponse({ status: 200, type: News })
 	@UseGuards(JwtGuard)
 	@Patch(':id')
-	update(@Param('id') id: number, @Body() instructionCategory: UpdateNewsDto) {
-		return this.newsService.updateNews(id, instructionCategory)
+	@UseInterceptors(FileInterceptor('image'))
+	async update(@Param('id') id: number, @Body() news: UpdateNewsDto, @UploadedFile(new SharpPipe('/news')) imageName: string) {
+		return this.newsService.updateNews(id, news, imageName)
 	}
 
 	@ApiOperation({ summary: 'Удалить статью' })
