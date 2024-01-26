@@ -28,7 +28,8 @@ services:
       - 5432:5432
     volumes:
       - pgdata:/var/lib/postgresql/data
-      - /c/Users/PC/Desktop/dump-safes-202401260859:/var/lib/postgresql/dump-safes-202401260859
+      - /Users/Main/Desktop/dump-safes-202401260859:/var/lib/postgresql/dump-safes-202401260859
+      # - /c/Users/PC/Desktop/dump-safes-202401260859:/var/lib/postgresql/dump-safes-202401260859
       # - /c/Users/PC/Desktop/dump-safes-202310020104:/var/lib/postgresql/dump-safes-202310020104
       # - /c/Users/PC/Desktop/restore-script.sh:/docker-entrypoint-initdb.d/restore-script.sh
     restart: always

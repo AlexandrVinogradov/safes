@@ -32,6 +32,7 @@ RUN yarn build
 
 ENV NODE_ENV production
 
+RUN yarn add sharp --ignore-engines
 RUN yarn --frozen-lockfile --only=production && yarn cache clean --force
 
 USER node
