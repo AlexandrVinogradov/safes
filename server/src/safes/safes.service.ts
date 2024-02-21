@@ -34,6 +34,12 @@ async function getProductsIdByCategoryId(categoriesId: number[], productToCatego
 	}
 }
 
+type HardSearch = {
+	'name_ru-RU': string
+	product_ean: string
+	product_price: number
+}
+
 @Injectable()
 export class SafesService {
 	constructor(
@@ -48,33 +54,35 @@ export class SafesService {
 		return safe
 	}
 
-	async getAllSafes(queryParams: {
-		// filter
-		price?: string
-		weight?: string
-		burglaryResistance?: string
-		manufacturer?: string
-		fireResistance?: string
-		keyType?: string
-		gunCount?: string
-		metalThickness?: string
-		height?: string
-		width?: string
-		depth?: string
-		// category
-		categoryId?: string
-		// manufacturer
-		manufacturerId?: string
-		// pagination
-		page?: number
-		pageSize?: number
-		// sort
-		sort?: string
-		// search
-		search?: string
-		// other
-		isPublish?: string
-	}) {
+	async getAllSafes(
+		queryParams: {
+			// filter
+			price?: string
+			weight?: string
+			burglaryResistance?: string
+			manufacturer?: string
+			fireResistance?: string
+			keyType?: string
+			gunCount?: string
+			metalThickness?: string
+			height?: string
+			width?: string
+			depth?: string
+			// category
+			categoryId?: string
+			// manufacturer
+			manufacturerId?: string
+			// pagination
+			page?: number
+			pageSize?: number
+			// sort
+			sort?: string
+			// search
+			search?: string
+			// other
+			product_publish?: string
+		} & HardSearch,
+	) {
 		let where = {}
 
 		// Sort
@@ -114,11 +122,29 @@ export class SafesService {
 
 		for (const key in queryParams) {
 			switch (key) {
-				case 'isPublish':
+				case 'name_ru-RU':
 					where = {
 						...where,
-						// FIXME: не отдавать на фронт product_publish
-						product_publish: Boolean(queryParams.isPublish),
+						'name_ru-RU': { [Op.iLike]: `%${queryParams['name_ru-RU']}%` },
+					}
+					break
+				case 'product_ean':
+					where = {
+						...where,
+						product_ean: { [Op.iLike]: `%${queryParams.product_ean}%` },
+					}
+					break
+				case 'product_price':
+					where = {
+						...where,
+						product_price: { [Op.eq]: Number(queryParams.product_price) },
+					}
+					break
+				// ====================================================================================================================================
+				case 'product_publish':
+					where = {
+						...where,
+						product_publish: Boolean(Number(queryParams.product_publish)),
 					}
 					break
 				case 'search':
@@ -279,6 +305,7 @@ export class SafesService {
 				'product_old_price',
 				'product_price',
 				'product_ean',
+				'product_publish',
 				'alias_ru-RU',
 				'product_weight',
 				'extra_field_3',
@@ -290,6 +317,8 @@ export class SafesService {
 				'extra_field_13',
 				'extra_field_15',
 				'extra_field_17',
+				'createdAt',
+				'updatedAt',
 			],
 			include: [
 				{ model: Manufacturer, as: 'manufacturer', attributes: ['name_ru-RU'] },
@@ -394,6 +423,7 @@ export class SafesService {
 				'product_old_price',
 				'product_price',
 				'product_ean',
+				'product_publish',
 				'alias_ru-RU',
 				'product_weight',
 				'extra_field_3',

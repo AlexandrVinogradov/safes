@@ -38,7 +38,7 @@ export const getApiProductURL = (
 		'search',
 	]
 
-	let url = `${getClientServerUrl('products')}?isPublish=1&`
+	let url = `${getClientServerUrl('products')}?product_publish=1&`
 	if (selectedCategoryId) {
 		url = url + `categoryId=${selectedCategoryId}&`
 	}

@@ -1,20 +1,92 @@
-import { Injectable } from '@nestjs/common'
+import { Injectable, NotFoundException } from '@nestjs/common'
 import { InjectModel } from '@nestjs/sequelize'
-import { CreateManufacturerDto } from './dto/create-manufacturer.dto'
+import * as fs from 'fs'
+import { CreateManufacturerDto, UpdateManufacturerDto } from './dto/create-manufacturer.dto'
 import { Country, Manufacturer } from './manufacturers.model'
 
 @Injectable()
 export class ManufacturersService {
-	constructor(@InjectModel(Manufacturer) private manufacturerRepository: typeof Manufacturer) {}
+	constructor(
+		@InjectModel(Manufacturer) private manufacturerRepository: typeof Manufacturer,
+		@InjectModel(Country) private manufacturerCountryRepository: typeof Country,
+	) {}
 
-	async createManufacturer(dto: CreateManufacturerDto) {
-		const manufacturer = await this.manufacturerRepository.create(dto)
-		return manufacturer
+	async createManufacturer(dto: CreateManufacturerDto, imageName: string) {
+		const manufacturer = await this.manufacturerRepository.create({ ...dto, manufacturer_logo: imageName || null })
+
+		return {
+			status: 200,
+			data: manufacturer,
+			message: `Производитель ${manufacturer['name_ru-RU']} успешно создан`,
+		}
 	}
 
-	async getAllManufacturers(queryParams: { filter: 'byCountry' }) {
+	async updateManufacturer(id: number, dto: UpdateManufacturerDto, imageName: string) {
+		const manufacturer = await this.manufacturerRepository.findByPk(id)
+
+		await this.manufacturerRepository.update({ ...dto, manufacturer_logo: imageName || null }, { where: { manufacturer_id: id } })
+
+		if (!manufacturer) throw new NotFoundException(`Производитель с id: ${id} не найден в базе данных`)
+
+		if (manufacturer.manufacturer_logo) {
+			const imagePath = `${process.env.FILES_PATH}/manufacturers/${manufacturer.manufacturer_logo}`
+
+			if (fs.existsSync(imagePath)) fs.unlinkSync(imagePath)
+		}
+
+		return {
+			status: 200,
+			data: manufacturer,
+			message: `Производитель: ${manufacturer['name_ru-RU']} успешно обновлен`,
+		}
+	}
+
+	async updateManufacturerPublish(id: number, isPublish: boolean) {
+		const manufacturer = await this.manufacturerRepository.findByPk(id)
+
+		await this.manufacturerRepository.update({ manufacturer_publish: isPublish }, { where: { manufacturer_id: id } })
+
+		if (!manufacturer) throw new NotFoundException(`Производитель с id: ${id} не найден в базе данных`)
+
+		return {
+			status: 200,
+			data: manufacturer,
+			message: `Публикация: ${manufacturer['name_ru-RU']} успешно обновлена`,
+		}
+	}
+
+	async deleteManufacturer(id: number) {
+		const deletedManufacturer = await this.manufacturerRepository.findByPk(id)
+
+		if (!deletedManufacturer) throw new NotFoundException(`Производитель с id: ${id} не найден в базе данных`)
+
+		if (deletedManufacturer.manufacturer_logo) {
+			const imagePath = `${process.env.FILES_PATH}/manufacturers/${deletedManufacturer.manufacturer_logo}`
+
+			if (fs.existsSync(imagePath)) fs.unlinkSync(imagePath)
+		}
+
+		await this.manufacturerRepository.destroy({ where: { manufacturer_id: id } })
+
+		return {
+			status: 200,
+			data: deletedManufacturer,
+			message: `Производитель: ${deletedManufacturer['name_ru-RU']} успешно удален`,
+		}
+	}
+
+	async getAllManufacturers(queryParams: { filter?: 'byCountry'; isPublish?: 'true' }) {
+		let where = {}
+		if (Boolean(queryParams.isPublish)) {
+			where = {
+				...where,
+				manufacturer_publish: Boolean(queryParams.isPublish),
+			}
+		}
+
 		const manufacturers = await this.manufacturerRepository.findAll({
 			include: [{ model: Country, as: 'country' }],
+			where,
 		})
 
 		const getManufacturerByCountry = () => {
@@ -48,10 +120,18 @@ export class ManufacturersService {
 
 		return manufacturer
 	}
+
+	async getAllManufacturersCountries() {
+		const manufacturerCountry = await this.manufacturerCountryRepository.findAll()
+
+		return manufacturerCountry
+	}
+
 	async getSelectedManufacturer(alias: string) {
 		const manufacturer = await this.manufacturerRepository.findOne({ where: { 'alias_ru-RU': alias } })
 
-		// FIXME: need norm handler
+		if (!manufacturer) throw new NotFoundException(`Производитель с alias: ${alias} не найден в базе данных`)
+
 		return manufacturer
 	}
 }

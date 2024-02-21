@@ -30,8 +30,5 @@ export class CreateNewsDto {
 	@IsString()
 	readonly fakeDate: string
 
-	@ApiProperty({ example: 'test.jpg', description: 'Картинка' })
-	@IsString()
-	readonly image: string
 }
 export class UpdateNewsDto extends PartialType(CreateNewsDto) {}

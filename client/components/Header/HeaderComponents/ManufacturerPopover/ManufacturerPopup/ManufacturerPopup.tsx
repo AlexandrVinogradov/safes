@@ -22,7 +22,7 @@ export const ManufacturerPopup = (props: PropsType) => {
 	useEffect(() => {
 		if (manufacturers.length || !isHovering) return
 
-		const API_URL = getClientServerUrl('manufacturers', { filter: 'byCountry' })
+		const API_URL = getClientServerUrl('manufacturers', { filter: 'byCountry', isPublish: 'true' })
 		fetchManufacturers(API_URL)
 	}, [isHovering])
 

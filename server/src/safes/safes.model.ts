@@ -10,7 +10,7 @@ export interface SafeCreationAttrs {
 	product_ean: string
 }
 
-@Table({ tableName: 'new_mz', timestamps: false })
+@Table({ tableName: 'new_mz' })
 export class Safe extends Model<Safe, SafeCreationAttrs> {
 	@ApiProperty({ example: 675, description: 'Уникальный идентификатор' })
 	@ForeignKey(() => ProductImage)
@@ -48,13 +48,13 @@ export class Safe extends Model<Safe, SafeCreationAttrs> {
 	@Column({ type: DataType.BOOLEAN })
 	product_publish: boolean
 
-	@ApiProperty({ example: '2022-10-10', description: 'Дата создания записи' })
-	@Column({ type: DataType.STRING, allowNull: true })
-	product_date_added: string
+	// @ApiProperty({ example: '2022-10-10', description: 'Дата создания записи' })
+	// @Column({ type: DataType.STRING, allowNull: true })
+	// product_date_added: string
 
-	@ApiProperty({ example: '2022-10-10', description: 'Дата обновления записи' })
-	@Column({ type: DataType.STRING, allowNull: true })
-	date_modify: string
+	// @ApiProperty({ example: '2022-10-10', description: 'Дата обновления записи' })
+	// @Column({ type: DataType.STRING, allowNull: true })
+	// date_modify: string
 
 	@ApiProperty({ example: 28130.0, description: 'старая цена' })
 	@Column({ type: DataType.INTEGER, allowNull: true })

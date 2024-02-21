@@ -1,8 +1,11 @@
-import { Body, Controller, Get, Post, Param, Query } from '@nestjs/common'
+import { Body, Controller, Get, Post, Param, Query, UseGuards, UseInterceptors, UploadedFile, Patch, Delete } from '@nestjs/common'
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger'
-import { CreateManufacturerDto } from './dto/create-manufacturer.dto'
-import { Manufacturer } from './manufacturers.model'
+import { CreateManufacturerDto, UpdateManufacturerDto } from './dto/create-manufacturer.dto'
+import { Country, Manufacturer } from './manufacturers.model'
 import { ManufacturersService } from './manufacturers.service'
+import { JwtGuard } from 'src/auth/guards/jwt-auth.guard'
+import { FileInterceptor } from '@nestjs/platform-express'
+import { SharpPipe } from 'src/pipes/sharpPipe'
 
 @ApiTags('Производители')
 @Controller('manufacturers')
@@ -11,9 +14,40 @@ export class ManufacturersController {
 
 	@ApiOperation({ summary: 'Создание производителя' })
 	@ApiResponse({ status: 200, type: Manufacturer })
+	@UseGuards(JwtGuard)
 	@Post()
-	create(@Body() manufacturerDto: CreateManufacturerDto) {
-		return this.manufacturerService.createManufacturer(manufacturerDto)
+	@UseInterceptors(FileInterceptor('image'))
+	create(@Body() manufacturersDto: CreateManufacturerDto, @UploadedFile(new SharpPipe('/manufacturers')) imageName: string) {
+		return this.manufacturerService.createManufacturer(manufacturersDto, imageName)
+	}
+
+	@ApiOperation({ summary: 'Обновить производителя' })
+	@ApiResponse({ status: 200, type: Manufacturer })
+	@UseGuards(JwtGuard)
+	@Patch(':id')
+	@UseInterceptors(FileInterceptor('image'))
+	async update(
+		@Param('id') id: number,
+		@Body() manufacturersDto: UpdateManufacturerDto,
+		@UploadedFile(new SharpPipe('/manufacturers')) imageName: string,
+	) {
+		return this.manufacturerService.updateManufacturer(id, manufacturersDto, imageName)
+	}
+
+	@ApiOperation({ summary: 'Переключение isPublish' })
+	@ApiResponse({ status: 200, type: Manufacturer })
+	@UseGuards(JwtGuard)
+	@Patch('publish/:id')
+	updatePublish(@Param('id') id: number, @Body() { isPublish }: { isPublish: boolean }) {
+		return this.manufacturerService.updateManufacturerPublish(id, isPublish)
+	}
+
+	@ApiOperation({ summary: 'Удалить производителя' })
+	@ApiResponse({ status: 200, type: Manufacturer })
+	@UseGuards(JwtGuard)
+	@Delete(':id')
+	delete(@Param('id') id: number) {
+		return this.manufacturerService.deleteManufacturer(id)
 	}
 
 	@ApiOperation({ summary: 'Получить всех производителей' })
@@ -23,11 +57,18 @@ export class ManufacturersController {
 		return this.manufacturerService.getAllManufacturers(queryParams)
 	}
 
-	@ApiOperation({ summary: 'Получить всех производителей' })
+	@ApiOperation({ summary: 'Получить простой список всех производителей' })
 	@ApiResponse({ status: 200, type: [Manufacturer] })
 	@Get('/simple')
 	getAllSimpleList() {
 		return this.manufacturerService.getAllSimpleListManufacturers()
+	}
+
+	@ApiOperation({ summary: 'Получить все страны производителей' })
+	@ApiResponse({ status: 200, type: [Country] })
+	@Get('/countries')
+	getAllManufacturersCountries() {
+		return this.manufacturerService.getAllManufacturersCountries()
 	}
 
 	@ApiOperation({ summary: 'Получить выбранного производителя' })
