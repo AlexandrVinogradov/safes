@@ -1,6 +1,7 @@
-import { Injectable } from '@nestjs/common'
+import { Injectable, NotFoundException } from '@nestjs/common'
 import { InjectModel } from '@nestjs/sequelize'
-import { CreateCategoryDto } from './dto/create-category.dto'
+import * as fs from 'fs'
+import { CreateCategoryDto, UpdateCategoryDto } from './dto/create-category.dto'
 import { Category } from './categories.model'
 import { Op } from 'sequelize'
 import { getChildCategories } from './helpers/getChildCategories'
@@ -9,14 +10,84 @@ import { getChildCategories } from './helpers/getChildCategories'
 export class CategoriesService {
 	constructor(@InjectModel(Category) private categoryRepository: typeof Category) {}
 
-	async createCategory(dto: CreateCategoryDto) {
-		const category = await this.categoryRepository.create(dto)
-		return category
+	async createCategory(dto: CreateCategoryDto, imageName: string) {
+		const category = await this.categoryRepository.create({ ...dto, category_image: imageName || null })
+
+		return {
+			status: 200,
+			data: category,
+			message: `Категория ${category['name_ru-RU']} успешно создана`,
+		}
+	}
+
+	async updateCategory(id: number, dto: UpdateCategoryDto, imageName: string) {
+		const category = await this.categoryRepository.findByPk(id)
+
+		await this.categoryRepository.update({ ...dto, category_image: imageName || null }, { where: { category_id: id } })
+
+		if (!category) throw new NotFoundException(`Категория с id: ${id} не найдена в базе данных`)
+
+		if (category.category_image) {
+			const imagePath = `${process.env.FILES_PATH}/categories/${category.category_image}`
+
+			if (fs.existsSync(imagePath)) fs.unlinkSync(imagePath)
+		}
+
+		return {
+			status: 200,
+			data: category,
+			message: `Категория: ${category['name_ru-RU']} успешно обновлена`,
+		}
+	}
+
+	async updateCategoryPublish(id: number, isPublish: boolean) {
+		const category = await this.categoryRepository.findByPk(id)
+
+		await this.categoryRepository.update({ category_publish: isPublish }, { where: { category_id: id } })
+
+		if (!category) throw new NotFoundException(`Категория с id: ${id} не найдена в базе данных`)
+
+		return {
+			status: 200,
+			data: category,
+			message: `Публикация: ${category['name_ru-RU']} успешно обновлена`,
+		}
+	}
+
+	async deleteCategory(id: number) {
+		const deletedCategory = await this.categoryRepository.findByPk(id)
+
+		if (!deletedCategory) throw new NotFoundException(`Категория с id: ${id} не найдена в базе данных`)
+
+		if (deletedCategory.category_image) {
+			const imagePath = `${process.env.FILES_PATH}/categories/${deletedCategory.category_image}`
+
+			if (fs.existsSync(imagePath)) fs.unlinkSync(imagePath)
+		}
+
+		await this.categoryRepository.destroy({ where: { category_id: id } })
+
+		return {
+			status: 200,
+			data: deletedCategory,
+			message: `Категория: ${deletedCategory['name_ru-RU']} успешно удалена`,
+		}
 	}
 
 	// FIXME: add type
-	async getAllCategories(): Promise<any> {
-		const categories = await this.categoryRepository.findAll()
+	async getAllCategories(queryParams: { isPublish?: 'true' }): Promise<any> {
+		let where = {}
+		if (Boolean(queryParams.isPublish)) {
+			where = {
+				...where,
+				category_publish: Boolean(queryParams.isPublish),
+			}
+		}
+
+		const categories = await this.categoryRepository.findAll({
+			order: [['ordering', 'ASC']],
+			where,
+		})
 
 		const categoriesMap = []
 

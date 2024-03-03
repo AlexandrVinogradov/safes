@@ -5,9 +5,10 @@ import { ProductToCategories, Safe } from 'src/safes/safes.model'
 interface CategoryCreationAttrs {
 	email: string
 	password: string
+	category_image: string
 }
 
-@Table({ tableName: 'categories', timestamps: false })
+@Table({ tableName: 'categories' })
 export class Category extends Model<Category, CategoryCreationAttrs> {
 	@ApiProperty({ example: '1', description: 'Уникальный идентификатор' })
 	@BelongsToMany(() => Safe, {
@@ -34,11 +35,6 @@ export class Category extends Model<Category, CategoryCreationAttrs> {
 	@ApiProperty({ example: 'vzlomostoikie-1class', description: 'хз' })
 	@Column({ type: DataType.STRING })
 	'alias_ru-RU': string
-
-	// not using on frontend but need meta etc
-	@ApiProperty({ example: '2017-02-26 12:34:17', description: 'дата добавления' })
-	@Column({ type: DataType.STRING })
-	category_add_date: string
 
 	@ApiProperty({ example: 'Valberg', description: 'хз' })
 	@Column({ type: DataType.STRING })

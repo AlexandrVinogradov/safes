@@ -22,7 +22,7 @@ export const CatalogMenu = (props: PropsType) => {
 	useEffect(() => {
 		if (categories.length) return
 
-		const API_URL = getClientServerUrl('categories')
+		const API_URL = getClientServerUrl('categories', { isPublish: 'true' })
 		fetchCategories(API_URL)
 	}, [])
 

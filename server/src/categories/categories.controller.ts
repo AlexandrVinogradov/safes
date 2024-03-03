@@ -1,26 +1,60 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common'
+import { Body, Controller, Delete, Get, Param, Patch, Post, Query, UploadedFile, UseGuards, UseInterceptors } from '@nestjs/common'
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger'
-import { CreateCategoryDto } from './dto/create-category.dto'
+import { CreateCategoryDto, UpdateCategoryDto } from './dto/create-category.dto'
 import { Category } from './categories.model'
 import { CategoriesService } from './categories.service'
+import { JwtGuard } from 'src/auth/guards/jwt-auth.guard'
+import { FileInterceptor } from '@nestjs/platform-express'
+import { SharpPipe } from 'src/pipes/sharpPipe'
 
 @ApiTags('Категории')
 @Controller('categories')
 export class CategoriesController {
 	constructor(private categoryService: CategoriesService) {}
 
-	@ApiOperation({ summary: 'Создание пользователя' })
+	@ApiOperation({ summary: 'Создание категории' })
 	@ApiResponse({ status: 200, type: Category })
+	@UseGuards(JwtGuard)
 	@Post()
-	create(@Body() categoryDto: CreateCategoryDto) {
-		return this.categoryService.createCategory(categoryDto)
+	@UseInterceptors(FileInterceptor('image'))
+	create(@Body() categoryDto: CreateCategoryDto, @UploadedFile(new SharpPipe('/categories')) imageName: string) {
+		return this.categoryService.createCategory(categoryDto, imageName)
+	}
+
+	@ApiOperation({ summary: 'Обновить категорию' })
+	@ApiResponse({ status: 200, type: Category })
+	@UseGuards(JwtGuard)
+	@Patch(':id')
+	@UseInterceptors(FileInterceptor('image'))
+	async update(
+		@Param('id') id: number,
+		@Body() categoryDto: UpdateCategoryDto,
+		@UploadedFile(new SharpPipe('/categories')) imageName: string,
+	) {
+		return this.categoryService.updateCategory(id, categoryDto, imageName)
+	}
+
+	@ApiOperation({ summary: 'Переключение isPublish' })
+	@ApiResponse({ status: 200, type: Category })
+	@UseGuards(JwtGuard)
+	@Patch('publish/:id')
+	updatePublish(@Param('id') id: number, @Body() { isPublish }: { isPublish: boolean }) {
+		return this.categoryService.updateCategoryPublish(id, isPublish)
+	}
+
+	@ApiOperation({ summary: 'Удалить категорию' })
+	@ApiResponse({ status: 200, type: Category })
+	@UseGuards(JwtGuard)
+	@Delete(':id')
+	delete(@Param('id') id: number) {
+		return this.categoryService.deleteCategory(id)
 	}
 
 	@ApiOperation({ summary: 'Получить все структуру категорий' })
 	@ApiResponse({ status: 200, type: [Category] })
 	@Get()
-	getCategory() {
-		return this.categoryService.getAllCategories()
+	getCategory(@Query() queryParams) {
+		return this.categoryService.getAllCategories(queryParams)
 	}
 
 	@ApiOperation({ summary: 'Получить выбранную структуру категорий' })
@@ -29,5 +63,4 @@ export class CategoriesController {
 	getSelectedCategory(@Param('id') id: string) {
 		return this.categoryService.getSelectedCategory(id)
 	}
-
 }

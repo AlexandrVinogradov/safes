@@ -48,18 +48,16 @@ export const CatalogMenuParentLvl = (props: PropsType) => {
 					handleOnMouseOverAll={() => setSelectedLvl1(null)}
 					setIsHovering={setIsHovering}
 				/>
-				{categories
-					?.sort((a, b) => a.ordering - b.ordering)
-					.map((category) => (
-						<MenuItem
-							key={category.category_id}
-							isSelected={category.name === selectedLvl1?.name}
-							category={category}
-							setIsHovering={setIsHovering}
-							onChange={handleChangeLvl1}
-							isClickLogic={isClickLogic}
-						/>
-					))}
+				{categories.map((category) => (
+					<MenuItem
+						key={category.category_id}
+						isSelected={category.name === selectedLvl1?.name}
+						category={category}
+						setIsHovering={setIsHovering}
+						onChange={handleChangeLvl1}
+						isClickLogic={isClickLogic}
+					/>
+				))}
 			</ul>
 		</div>
 	)
