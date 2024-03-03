@@ -6,12 +6,14 @@ import { CategoriesService } from 'src/categories/categories.service'
 import { SafesController } from './safes.controller'
 import { ProductToCategories, ProductsRelations, Safe } from './safes.model'
 import { SafesService } from './safes.service'
+import { ProductImage } from 'src/productImages/productImages.model'
 
 @Module({
 	controllers: [SafesController, CategoriesController],
 	providers: [SafesService, CategoriesService],
 	imports: [
 		SequelizeModule.forFeature([Safe]),
+		SequelizeModule.forFeature([ProductImage]),
 		SequelizeModule.forFeature([ProductToCategories]),
 		SequelizeModule.forFeature([Category]),
 		SequelizeModule.forFeature([ProductsRelations]),

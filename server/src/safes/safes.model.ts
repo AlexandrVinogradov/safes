@@ -8,6 +8,7 @@ import { ProductImage } from 'src/productImages/productImages.model'
 export interface SafeCreationAttrs {
 	// product_id: number
 	product_ean: string
+	image: string
 }
 
 @Table({ tableName: 'new_mz' })

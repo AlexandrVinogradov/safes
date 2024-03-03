@@ -31,8 +31,8 @@ export const ProductNameSection = (props: PropsType) => {
 					<p className={s.code}>Код товара: {product_ean}</p>
 					<h1 className={s.name}>{selectedProduct?.['name_ru-RU']}</h1>
 					<div className={s.prices}>
-						<p className={s.oldPrice}>{product_old_price.toLocaleString()} ₽</p>
-						<p className={s.price}>{product_price.toLocaleString()} ₽</p>
+						<p className={s.oldPrice}>{product_old_price?.toLocaleString()} ₽</p>
+						<p className={s.price}>{product_price?.toLocaleString()} ₽</p>
 					</div>
 
 					<CutButton className={s.cheaper}>Нашли дешевле?</CutButton>

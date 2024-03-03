@@ -1,10 +1,11 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common'
+import { HttpException, HttpStatus, Injectable, NotFoundException } from '@nestjs/common'
 import { InjectModel } from '@nestjs/sequelize'
 import { Op, Order, literal } from 'sequelize'
 import { Category } from 'src/categories/categories.model'
 import { Manufacturer } from 'src/manufacturers/manufacturers.model'
 import { ProductImage } from 'src/productImages/productImages.model'
 import { CreateSafeDto } from './dto/create-safe.dto'
+import * as fs from 'fs'
 import { ProductToCategories, ProductsRelations, Safe } from './safes.model'
 import { ExtraValue } from 'src/extraValues/extraValues.model'
 
@@ -44,14 +45,63 @@ type HardSearch = {
 export class SafesService {
 	constructor(
 		@InjectModel(Safe) private safeRepository: typeof Safe,
+		@InjectModel(ProductImage) private productImageRepository: typeof ProductImage,
 		@InjectModel(ProductToCategories) private productToCategoriesRepository: typeof ProductToCategories,
 		@InjectModel(Category) private CategoryRepository: typeof Category,
 		@InjectModel(ProductsRelations) private productsRelationsRepository: typeof ProductsRelations,
 	) {}
 
-	async createSafe(dto: CreateSafeDto) {
-		const safe = await this.safeRepository.create(dto)
-		return safe
+	async createSafe(dto: CreateSafeDto, imageName: string) {
+		const safe = await this.safeRepository.create({ ...dto, image: imageName || null })
+
+		// TODO: fix ordering, when added image array
+		await this.productImageRepository.create({ product_id: safe.product_id, image_name: imageName || null, ordering: 0 })
+
+		return {
+			status: 200,
+			data: safe,
+			message: `Товар ${safe['name_ru-RU']} успешно создан`,
+		}
+	}
+
+	async updateSafePublish(id: number, isPublish: boolean) {
+		const safe = await this.safeRepository.findByPk(id)
+
+		await this.safeRepository.update({ product_publish: isPublish }, { where: { product_id: id } })
+
+		if (!safe) throw new NotFoundException(`Товар с id: ${id} не найден в базе данных`)
+
+		return {
+			status: 200,
+			data: safe,
+			message: `Публикация: ${safe['name_ru-RU']} успешно обновлена`,
+		}
+	}
+
+	async deleteSafe(id: number) {
+		const deletedSafe = await this.safeRepository.findByPk(id)
+
+		if (!deletedSafe) throw new NotFoundException(`Товар с id: ${id} не найден в базе данных`)
+
+		const imageNames = await this.productImageRepository.findAll({ where: { product_id: id } })
+
+		if (imageNames.length > 0) {
+			// Delete all images form folder safes
+			imageNames.forEach((el) => {
+				const imagePath = `${process.env.FILES_PATH}/safes/${el.image_name}`
+
+				if (fs.existsSync(imagePath)) fs.unlinkSync(imagePath)
+			})
+		}
+		// Delete all rows with product_id === id from ProductImages
+		await this.productImageRepository.destroy({ where: { product_id: id } })
+		await this.safeRepository.destroy({ where: { product_id: id } })
+
+		return {
+			status: 200,
+			data: deletedSafe,
+			message: `Товар: ${deletedSafe['name_ru-RU']} успешно удален`,
+		}
 	}
 
 	async getAllSafes(
@@ -317,6 +367,7 @@ export class SafesService {
 				'extra_field_13',
 				'extra_field_15',
 				'extra_field_17',
+				'short_description_ru-RU',
 				'createdAt',
 				'updatedAt',
 			],

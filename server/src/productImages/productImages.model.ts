@@ -5,6 +5,9 @@ import { Safe } from 'src/safes/safes.model'
 interface ProductImageCreationAttrs {
 	// product_id: number
 	product_ean: string
+	image_name: string
+	product_id: number
+	ordering: number
 }
 
 @Table({ tableName: 'product_images', timestamps: false })
