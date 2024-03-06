@@ -33,6 +33,34 @@ export class CreateSafeDto {
 	@ApiProperty({ example: 'true', description: 'Показывать ли на фронте' })
 	@IsString()
 	readonly product_publish: boolean
+
+	@ApiProperty({ example: '241515', description: 'Цена' })
+	@IsString()
+	readonly product_price: number
+
+	@ApiProperty({ example: '241515', description: 'Цена' })
+	@IsString()
+	readonly product_old_price: number
+
+	@ApiProperty({ example: '30', description: 'Вес' })
+	@IsString()
+	readonly product_weight: number
+
+	@ApiProperty({ example: '303525', description: 'Артикул' })
+	@IsString()
+	readonly product_ean: string
+
+	@ApiProperty({ example: '3', description: 'Id производителя' })
+	@IsString()
+	readonly product_manufacturer_id: number
+
+	@ApiProperty({ example: '3,23', description: 'Категории' })
+	@IsString()
+	readonly categories: string
+
+	@ApiProperty({ example: '3,23', description: 'Related id array' })
+	@IsString()
+	readonly relatedSafes: string
 }
 
 export class UpdateSafeDto extends PartialType(CreateSafeDto) {}

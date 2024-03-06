@@ -4,7 +4,7 @@ import { Op, Order, literal } from 'sequelize'
 import { Category } from 'src/categories/categories.model'
 import { Manufacturer } from 'src/manufacturers/manufacturers.model'
 import { ProductImage } from 'src/productImages/productImages.model'
-import { CreateSafeDto } from './dto/create-safe.dto'
+import { CreateSafeDto, UpdateSafeDto } from './dto/create-safe.dto'
 import * as fs from 'fs'
 import { ProductToCategories, ProductsRelations, Safe } from './safes.model'
 import { ExtraValue } from 'src/extraValues/extraValues.model'
@@ -51,16 +51,81 @@ export class SafesService {
 		@InjectModel(ProductsRelations) private productsRelationsRepository: typeof ProductsRelations,
 	) {}
 
-	async createSafe(dto: CreateSafeDto, imageName: string) {
-		const safe = await this.safeRepository.create({ ...dto, image: imageName || null })
+	async updateProductRelations(id: number, relatedSafes: string) {
+		const relatedSafeIds = relatedSafes.split(',').map(Number).filter(Boolean)
+		await this.productsRelationsRepository.destroy({ where: { product_id: id } })
 
+		if (relatedSafes === '') return
+		const newRelationsDto = relatedSafeIds.map((relatedSafeId) => ({
+			product_id: id,
+			product_related_id: relatedSafeId,
+		}))
+
+		await this.productsRelationsRepository.bulkCreate(newRelationsDto, { ignoreDuplicates: true })
+	}
+	async updateProductCategories(id: number, categories: string) {
+		const categoriesIds = categories.split(',').map(Number).filter(Boolean)
+
+		await this.productToCategoriesRepository.destroy({ where: { product_id: id } })
+
+		if (categories === '') return
+		const newCategoriesDto = categoriesIds.map((categoryId) => ({
+			product_id: id,
+			category_id: categoryId,
+			product_ordering: 0,
+		}))
+
+		await this.productToCategoriesRepository.bulkCreate(newCategoriesDto, { ignoreDuplicates: true })
+	}
+
+	async createSafe(dto: CreateSafeDto, imageName: string) {
+		const { categories, relatedSafes, ...newDto } = dto
+
+		const safe = await this.safeRepository.create({ ...newDto, image: imageName || null })
+
+		// Вызов метода для категорий
+		await this.updateProductCategories(safe.product_id, categories)
+		// Вызов метода для обновления связей
+		await this.updateProductRelations(safe.product_id, relatedSafes)
+
+		// TODO: if many images??
 		// TODO: fix ordering, when added image array
-		await this.productImageRepository.create({ product_id: safe.product_id, image_name: imageName || null, ordering: 0 })
+		if (imageName) {
+			await this.productImageRepository.create({ product_id: safe.product_id, image_name: imageName || null, ordering: 0 })
+		}
 
 		return {
 			status: 200,
 			data: safe,
 			message: `Товар ${safe['name_ru-RU']} успешно создан`,
+		}
+	}
+
+	async updateSafe(id: number, dto: UpdateSafeDto, imageName: string) {
+		const { categories, relatedSafes, ...newDto } = dto
+
+		const safe = await this.safeRepository.findByPk(id)
+
+		// Вызов метода для категорий
+		await this.updateProductCategories(id, categories)
+		// Вызов метода для обновления связей
+		await this.updateProductRelations(id, relatedSafes)
+
+		await this.safeRepository.update({ ...newDto, image: imageName || null }, { where: { product_id: id } })
+
+		if (!safe) throw new NotFoundException(`Товар с id: ${id} не найден в базе данных`)
+
+		// TODO: if images array ????????
+		if (safe.image) {
+			const imagePath = `${process.env.FILES_PATH}/safes/${safe.image}`
+
+			if (fs.existsSync(imagePath)) fs.unlinkSync(imagePath)
+		}
+
+		return {
+			status: 200,
+			data: safe,
+			message: `Товар: ${safe['name_ru-RU']} успешно обновлен`,
 		}
 	}
 
@@ -80,6 +145,11 @@ export class SafesService {
 
 	async deleteSafe(id: number) {
 		const deletedSafe = await this.safeRepository.findByPk(id)
+
+		// Вызов метода удаления связанных категорий
+		await this.updateProductCategories(deletedSafe.product_id, '')
+		// Вызов метода удаления связанных товаров
+		await this.updateProductRelations(deletedSafe.product_id, '')
 
 		if (!deletedSafe) throw new NotFoundException(`Товар с id: ${id} не найден в базе данных`)
 
@@ -437,7 +507,11 @@ export class SafesService {
 			where: {
 				'alias_ru-RU': queryParam.safeAlias,
 			},
-			include: [{ model: ProductImage, as: 'productImages', attributes: ['image_name'] }],
+			include: [
+				{ model: ProductImage, as: 'productImages', attributes: ['image_name'] },
+				{ model: Manufacturer, as: 'manufacturer', attributes: ['name_ru-RU', 'manufacturer_id'] },
+				{ model: ProductToCategories, as: 'categories', attributes: ['category_id', 'product_id', 'product_ordering'] },
+			],
 		})
 
 		if (!selectedSafe) {
@@ -489,7 +563,7 @@ export class SafesService {
 			],
 			include: [
 				{ model: ProductImage, as: 'productImages', attributes: ['image_name'] },
-				{ model: Manufacturer, as: 'manufacturer', attributes: ['name_ru-RU'] },
+				{ model: Manufacturer, as: 'manufacturer', attributes: ['name_ru-RU', 'manufacturer_id'] },
 			],
 			where: {
 				product_id: relatedSafesIdList,

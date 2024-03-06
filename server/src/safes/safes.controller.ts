@@ -1,6 +1,6 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post, Query, UploadedFile, UseGuards, UseInterceptors } from '@nestjs/common'
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger'
-import { CreateSafeDto } from './dto/create-safe.dto'
+import { CreateSafeDto, UpdateSafeDto } from './dto/create-safe.dto'
 import { Safe } from './safes.model'
 import { SafesService } from './safes.service'
 import { JwtGuard } from 'src/auth/guards/jwt-auth.guard'
@@ -19,6 +19,15 @@ export class SafesController {
 	@UseInterceptors(FileInterceptor('image'))
 	create(@Body() safeDto: CreateSafeDto, @UploadedFile(new SharpPipe('/safes')) imageName: string) {
 		return this.safeService.createSafe(safeDto, imageName)
+	}
+
+	@ApiOperation({ summary: 'Обновить сейф' })
+	@ApiResponse({ status: 200, type: Safe })
+	@UseGuards(JwtGuard)
+	@Patch(':id')
+	@UseInterceptors(FileInterceptor('image'))
+	async update(@Param('id') id: number, @Body() safeDto: UpdateSafeDto, @UploadedFile(new SharpPipe('/safes')) imageName: string) {
+		return this.safeService.updateSafe(id, safeDto, imageName)
 	}
 
 	@ApiOperation({ summary: 'Переключение isPublish' })

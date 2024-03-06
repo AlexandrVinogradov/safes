@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger'
-import { Column, DataType, Model, Table, ForeignKey, BelongsTo, HasOne, BelongsToMany } from 'sequelize-typescript'
+import { Column, DataType, Model, Table, ForeignKey, BelongsTo, HasOne, BelongsToMany, HasMany } from 'sequelize-typescript'
 import { Category } from 'src/categories/categories.model'
 import { ExtraValue } from 'src/extraValues/extraValues.model'
 import { Manufacturer } from 'src/manufacturers/manufacturers.model'
@@ -40,6 +40,9 @@ export class Safe extends Model<Safe, SafeCreationAttrs> {
 		otherKey: 'product_related_id',
 	})
 	related: Safe[]
+
+	@HasMany(() => ProductToCategories, 'product_id')
+	categories: ProductToCategories[]
 
 	@ApiProperty({ example: '1', description: 'код товара' })
 	@Column({ type: DataType.STRING, allowNull: true })
@@ -205,8 +208,8 @@ export class Safe extends Model<Safe, SafeCreationAttrs> {
 	extra_field_17: string
 }
 
-@Table({ tableName: 'products_to_categories', timestamps: false })
 // FIXME: SafeCreationAttrs
+@Table({ tableName: 'products_to_categories', timestamps: false })
 export class ProductToCategories extends Model<ProductToCategories, SafeCreationAttrs> {
 	@ApiProperty({ example: 675, description: 'Product id' })
 	@ForeignKey(() => Safe)
@@ -224,7 +227,7 @@ export class ProductToCategories extends Model<ProductToCategories, SafeCreation
 }
 
 @Table({ tableName: 'products_relations', timestamps: false })
-export class ProductsRelations extends Model<ProductToCategories, SafeCreationAttrs> {
+export class ProductsRelations extends Model<ProductsRelations, SafeCreationAttrs> {
 	@ApiProperty({ example: 675, description: 'id' })
 	@Column({ type: DataType.INTEGER, unique: true, autoIncrement: true, primaryKey: true })
 	id: number
