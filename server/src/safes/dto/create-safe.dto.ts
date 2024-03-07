@@ -42,9 +42,6 @@ export class CreateSafeDto {
 	@IsString()
 	readonly product_old_price: number
 
-	@ApiProperty({ example: '30', description: 'Вес' })
-	@IsString()
-	readonly product_weight: number
 
 	@ApiProperty({ example: '303525', description: 'Артикул' })
 	@IsString()
@@ -61,6 +58,54 @@ export class CreateSafeDto {
 	@ApiProperty({ example: '3,23', description: 'Related id array' })
 	@IsString()
 	readonly relatedSafes: string
+
+	@ApiProperty({ example: '200x260x180', description: 'Габариты (мм) (ВхШхГ)' })
+	@IsString()
+	readonly extra_field_15: string
+
+	@ApiProperty({ example: '138x212x100', description: 'Внутренние размеры (ВхШхГ)' })
+	@IsString()
+	readonly extra_field_17: string
+
+	@ApiProperty({ example: '21.0000', description: 'Вес (кг)' })
+	@IsString()
+	readonly product_weight: number
+
+	@ApiProperty({ example: '3', description: 'Объем (л)' })
+	@IsString()
+	readonly extra_field_13: string
+	//
+	@ApiProperty({ example: '3', description: 'Взломостойкость' })
+	@IsString()
+	readonly extra_field_3: number
+
+	@ApiProperty({ example: '4', description: 'Огнестойкость' })
+	@IsString()
+	readonly extra_field_4: number
+
+	@ApiProperty({ example: '4', description: 'Вид замка' })
+	@IsString()
+	readonly extra_field_9: number
+
+	@ApiProperty({ example: '4', description: 'Кол-во стволов' })
+	@IsString()
+	readonly extra_field_8: number
+
+	@ApiProperty({ example: '4', description: 'Толщина металла' })
+	@IsString()
+	readonly extra_field_20: number
+
+	@ApiProperty({ example: '200', description: 'Высота (мм)' })
+	@IsString()
+	readonly extra_field_10: string
+
+	@ApiProperty({ example: '260', description: 'Ширина (мм)' })
+	@IsString()
+	readonly extra_field_11: string
+
+	@ApiProperty({ example: '180', description: 'Глубина (мм)' })
+	@IsString()
+	readonly extra_field_12: string
 }
 
 export class UpdateSafeDto extends PartialType(CreateSafeDto) {}

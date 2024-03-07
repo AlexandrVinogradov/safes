@@ -102,7 +102,21 @@ export class SafesService {
 	}
 
 	async updateSafe(id: number, dto: UpdateSafeDto, imageName: string) {
-		const { categories, relatedSafes, ...newDto } = dto
+		const { categories, relatedSafes, extra_field_3, extra_field_9, extra_field_8, extra_field_4, extra_field_20, ...newDto } = dto
+
+		const stringNullOrNumber = (value: 'null' | string | number) => {
+			if (value === 'null') return null
+			return Number(value)
+		}
+
+		const parsedDto = {
+			extra_field_4: stringNullOrNumber(extra_field_4),
+			extra_field_3: stringNullOrNumber(extra_field_3),
+			extra_field_9: stringNullOrNumber(extra_field_9),
+			extra_field_8: stringNullOrNumber(extra_field_8),
+			extra_field_20: stringNullOrNumber(extra_field_20),
+		}
+		// console.log('==============================', typeof extra_field_3)
 
 		const safe = await this.safeRepository.findByPk(id)
 
@@ -111,7 +125,7 @@ export class SafesService {
 		// Вызов метода для обновления связей
 		await this.updateProductRelations(id, relatedSafes)
 
-		await this.safeRepository.update({ ...newDto, image: imageName || null }, { where: { product_id: id } })
+		await this.safeRepository.update({ ...newDto, ...parsedDto, image: imageName || null }, { where: { product_id: id } })
 
 		if (!safe) throw new NotFoundException(`Товар с id: ${id} не найден в базе данных`)
 
