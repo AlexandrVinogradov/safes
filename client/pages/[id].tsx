@@ -56,8 +56,8 @@ export const getServerSideProps: GetServerSideProps<PropsType> = async (context)
 	const deliveryContent = ((await fetchSelectedContent('delivery'))?.introtext as string) || null
 
 	let products: ProductsType | null = null
-	let category: CategoryType | null = null
-	let manufacturer: SelectedManufacturer | null = null
+	let category: (CategoryType & { statusCode?: number }) | null = null
+	let manufacturer: (SelectedManufacturer & { statusCode?: number }) | null = null
 	let extraValuesHandbook: ExtraValuesHandbook[] | null = null
 	let simpleManufacturers: SimplManufactureType[] | null = null
 
@@ -69,11 +69,11 @@ export const getServerSideProps: GetServerSideProps<PropsType> = async (context)
 		manufacturer = ((await fetchManufacturers(`${API_URL_MANUFACTURERS}/${context.query?.id}`)) as SelectedManufacturer) || null
 		simpleManufacturers = ((await fetchManufacturers(`${API_URL_MANUFACTURERS}/simple`)) as SimplManufactureType[]) || null
 
-		if (category.statusCode !== 500) {
+		if (category?.statusCode !== 500) {
 			products = (await fetchProducts(getApiProductURL(context.query, category))) as ProductsType
 		}
 
-		if (manufacturer.statusCode !== 404) {
+		if (manufacturer?.statusCode !== 404) {
 			products =
 				((await fetchProducts(
 					getApiProductURL(context.query, undefined, undefined, String(manufacturer.manufacturer_id)),
