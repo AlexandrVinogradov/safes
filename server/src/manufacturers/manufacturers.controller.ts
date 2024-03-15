@@ -17,8 +17,8 @@ export class ManufacturersController {
 	@UseGuards(JwtGuard)
 	@Post()
 	@UseInterceptors(FileInterceptor('image'))
-	create(@Body() manufacturersDto: CreateManufacturerDto, @UploadedFile(new SharpPipe('/manufacturers')) imageName: string) {
-		return this.manufacturerService.createManufacturer(manufacturersDto, imageName)
+	create(@Body() manufacturersDto: CreateManufacturerDto, @UploadedFile(new SharpPipe('/img_manufs')) imageNames: string[]) {
+		return this.manufacturerService.createManufacturer(manufacturersDto, imageNames)
 	}
 
 	@ApiOperation({ summary: 'Обновить производителя' })
@@ -29,9 +29,9 @@ export class ManufacturersController {
 	async update(
 		@Param('id') id: number,
 		@Body() manufacturersDto: UpdateManufacturerDto,
-		@UploadedFile(new SharpPipe('/manufacturers')) imageName: string,
+		@UploadedFile(new SharpPipe('/img_manufs')) imageNames: string[],
 	) {
-		return this.manufacturerService.updateManufacturer(id, manufacturersDto, imageName)
+		return this.manufacturerService.updateManufacturer(id, manufacturersDto, imageNames)
 	}
 
 	@ApiOperation({ summary: 'Переключение isPublish' })

@@ -8,6 +8,7 @@ import { CreateSafeDto, UpdateSafeDto } from './dto/create-safe.dto'
 import * as fs from 'fs'
 import { ProductToCategories, ProductsRelations, Safe } from './safes.model'
 import { ExtraValue } from 'src/extraValues/extraValues.model'
+import { stringNullOrNumber } from './helpers/stringNullOrNumber'
 
 async function getProductsIdByCategoryId(categoriesId: number[], productToCategoriesRepository: any, categoryRepository: any) {
 	const orCondition = categoriesId.map((el) => ({ category_id: el }))
@@ -78,36 +79,8 @@ export class SafesService {
 		await this.productToCategoriesRepository.bulkCreate(newCategoriesDto, { ignoreDuplicates: true })
 	}
 
-	async createSafe(dto: CreateSafeDto, imageName: string) {
-		const { categories, relatedSafes, ...newDto } = dto
-
-		const safe = await this.safeRepository.create({ ...newDto, image: imageName || null })
-
-		// Вызов метода для категорий
-		await this.updateProductCategories(safe.product_id, categories)
-		// Вызов метода для обновления связей
-		await this.updateProductRelations(safe.product_id, relatedSafes)
-
-		// TODO: if many images??
-		// TODO: fix ordering, when added image array
-		if (imageName) {
-			await this.productImageRepository.create({ product_id: safe.product_id, image_name: imageName || null, ordering: 0 })
-		}
-
-		return {
-			status: 200,
-			data: safe,
-			message: `Товар ${safe['name_ru-RU']} успешно создан`,
-		}
-	}
-
-	async updateSafe(id: number, dto: UpdateSafeDto, imageName: string) {
+	async createSafe(dto: CreateSafeDto, imageNames: string[]) {
 		const { categories, relatedSafes, extra_field_3, extra_field_9, extra_field_8, extra_field_4, extra_field_20, ...newDto } = dto
-
-		const stringNullOrNumber = (value: 'null' | string | number) => {
-			if (value === 'null') return null
-			return Number(value)
-		}
 
 		const parsedDto = {
 			extra_field_4: stringNullOrNumber(extra_field_4),
@@ -116,24 +89,73 @@ export class SafesService {
 			extra_field_8: stringNullOrNumber(extra_field_8),
 			extra_field_20: stringNullOrNumber(extra_field_20),
 		}
-		// console.log('==============================', typeof extra_field_3)
+
+		// в safes записали картинку (первая из imageNames[])
+		const safe = await this.safeRepository.create({ ...newDto, ...parsedDto, image: imageNames?.[0] || null })
+
+		if (imageNames && imageNames.length > 0) {
+			// Создали productImagesDto
+			const productImagesDto = imageNames.map((imageName, id) => ({
+				product_id: safe.product_id,
+				image_name: imageName,
+				ordering: ++id,
+			}))
+			// Записали новые картинки (все из imageNames[]) в product_images
+			await this.productImageRepository.bulkCreate(productImagesDto, { ignoreDuplicates: true })
+		}
+
+		// Вызов метода для категорий
+		await this.updateProductCategories(safe.product_id, categories)
+		// Вызов метода для обновления связей
+		await this.updateProductRelations(safe.product_id, relatedSafes)
+
+		return {
+			status: 200,
+			data: safe,
+			message: `Товар ${safe['name_ru-RU']} успешно создан`,
+		}
+	}
+
+	async updateSafe(id: number, dto: UpdateSafeDto, imageNames: string[]) {
+		const { categories, relatedSafes, extra_field_3, extra_field_9, extra_field_8, extra_field_4, extra_field_20, ...newDto } = dto
+
+		const parsedDto = {
+			extra_field_4: stringNullOrNumber(extra_field_4),
+			extra_field_3: stringNullOrNumber(extra_field_3),
+			extra_field_9: stringNullOrNumber(extra_field_9),
+			extra_field_8: stringNullOrNumber(extra_field_8),
+			extra_field_20: stringNullOrNumber(extra_field_20),
+		}
 
 		const safe = await this.safeRepository.findByPk(id)
+		if (!safe) throw new NotFoundException(`Товар с id: ${id} не найден в базе данных`)
 
 		// Вызов метода для категорий
 		await this.updateProductCategories(id, categories)
 		// Вызов метода для обновления связей
 		await this.updateProductRelations(id, relatedSafes)
 
-		await this.safeRepository.update({ ...newDto, ...parsedDto, image: imageName || null }, { where: { product_id: id } })
-
-		if (!safe) throw new NotFoundException(`Товар с id: ${id} не найден в базе данных`)
-
-		// TODO: if images array ????????
-		if (safe.image) {
-			const imagePath = `${process.env.FILES_PATH}/safes/${safe.image}`
-
+		// Получаем список текущих картинок
+		const existingImages = await this.productImageRepository.findAll({ where: { product_id: id } })
+		// Удаляем только существующие изображения
+		for (const image of existingImages) {
+			const imagePath = `${process.env.FILES_PATH}/${process.env.SAFES_FILES_PATH}/${image.image_name}`
 			if (fs.existsSync(imagePath)) fs.unlinkSync(imagePath)
+		}
+
+		// в safes обновили картинку (первая из imageNames[])
+		await this.safeRepository.update({ ...newDto, ...parsedDto, image: imageNames?.[0] || null }, { where: { product_id: id } })
+		// Удалили все картинки в product_images
+		await this.productImageRepository.destroy({ where: { product_id: id } })
+		if (imageNames && imageNames.length > 0) {
+			// Создали productImagesDto
+			const productImagesDto = imageNames.map((imageName, id) => ({
+				product_id: safe.product_id,
+				image_name: imageName,
+				ordering: ++id,
+			}))
+			// Записали новые картинки (все из imageNames[]) в product_images
+			await this.productImageRepository.bulkCreate(productImagesDto, { ignoreDuplicates: true })
 		}
 
 		return {
@@ -172,7 +194,7 @@ export class SafesService {
 		if (imageNames.length > 0) {
 			// Delete all images form folder safes
 			imageNames.forEach((el) => {
-				const imagePath = `${process.env.FILES_PATH}/safes/${el.image_name}`
+				const imagePath = `${process.env.FILES_PATH}/${process.env.SAFES_FILES_PATH}/${el.image_name}`
 
 				if (fs.existsSync(imagePath)) fs.unlinkSync(imagePath)
 			})
@@ -458,6 +480,8 @@ export class SafesService {
 			include: [
 				{ model: Manufacturer, as: 'manufacturer', attributes: ['name_ru-RU'] },
 				{ model: ProductImage, as: 'productImages', attributes: ['image_name'] },
+				{ model: ProductToCategories, as: 'categories', attributes: ['category_id', 'product_id', 'product_ordering'] },
+
 				{
 					model: ExtraValue,
 					as: 'extraFieldValue3',

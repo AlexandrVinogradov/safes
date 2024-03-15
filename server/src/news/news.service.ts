@@ -8,8 +8,8 @@ import { News } from './news.model'
 export class NewsService {
 	constructor(@InjectModel(News) private newsRepository: typeof News) {}
 
-	async createNews(dto: CreateNewsDto, imageName: string) {
-		const news = await this.newsRepository.create({ ...dto, image: imageName || null })
+	async createNews(dto: CreateNewsDto, imageNames: string[]) {
+		const news = await this.newsRepository.create({ ...dto, image: imageNames?.[0] || null })
 
 		return {
 			status: 200,
@@ -18,15 +18,15 @@ export class NewsService {
 		}
 	}
 
-	async updateNews(id: number, dto: UpdateNewsDto, imageName: string) {
+	async updateNews(id: number, dto: UpdateNewsDto, imageNames: string[]) {
 		const news = await this.newsRepository.findByPk(id)
 
-		await this.newsRepository.update({ ...dto, image: imageName || null }, { where: { id } })
+		await this.newsRepository.update({ ...dto, image: imageNames?.[0] || null }, { where: { id } })
 
 		if (!news) throw new NotFoundException(`Статья с id: ${id} не найден в базе данных`)
 
 		if (news.image) {
-			const imagePath = `${process.env.FILES_PATH}/news/${news.image}`
+			const imagePath = `${process.env.FILES_PATH}/${process.env.NEWS_FILES_PATH}/${news.image}`
 
 			if (fs.existsSync(imagePath)) fs.unlinkSync(imagePath)
 		}
@@ -44,7 +44,7 @@ export class NewsService {
 		if (!deletedNews) throw new NotFoundException(`Статья с id: ${id} не найден в базе данных`)
 
 		if (deletedNews.image) {
-			const imagePath = `${process.env.FILES_PATH}/news/${deletedNews.image}`
+			const imagePath = `${process.env.FILES_PATH}/img_news/${deletedNews.image}`
 
 			if (fs.existsSync(imagePath)) fs.unlinkSync(imagePath)
 		}

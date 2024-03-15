@@ -11,8 +11,8 @@ export class ManufacturersService {
 		@InjectModel(Country) private manufacturerCountryRepository: typeof Country,
 	) {}
 
-	async createManufacturer(dto: CreateManufacturerDto, imageName: string) {
-		const manufacturer = await this.manufacturerRepository.create({ ...dto, manufacturer_logo: imageName || null })
+	async createManufacturer(dto: CreateManufacturerDto, imageNames: string[]) {
+		const manufacturer = await this.manufacturerRepository.create({ ...dto, manufacturer_logo: imageNames?.[0] || null })
 
 		return {
 			status: 200,
@@ -21,15 +21,15 @@ export class ManufacturersService {
 		}
 	}
 
-	async updateManufacturer(id: number, dto: UpdateManufacturerDto, imageName: string) {
+	async updateManufacturer(id: number, dto: UpdateManufacturerDto, imageNames: string[]) {
 		const manufacturer = await this.manufacturerRepository.findByPk(id)
 
-		await this.manufacturerRepository.update({ ...dto, manufacturer_logo: imageName || null }, { where: { manufacturer_id: id } })
+		await this.manufacturerRepository.update({ ...dto, manufacturer_logo: imageNames?.[0] || null }, { where: { manufacturer_id: id } })
 
 		if (!manufacturer) throw new NotFoundException(`Производитель с id: ${id} не найден в базе данных`)
 
 		if (manufacturer.manufacturer_logo) {
-			const imagePath = `${process.env.FILES_PATH}/manufacturers/${manufacturer.manufacturer_logo}`
+			const imagePath = `${process.env.FILES_PATH}/${process.env.MANUFACTURERS_FILES_PATH}/${manufacturer.manufacturer_logo}`
 
 			if (fs.existsSync(imagePath)) fs.unlinkSync(imagePath)
 		}
@@ -61,7 +61,7 @@ export class ManufacturersService {
 		if (!deletedManufacturer) throw new NotFoundException(`Производитель с id: ${id} не найден в базе данных`)
 
 		if (deletedManufacturer.manufacturer_logo) {
-			const imagePath = `${process.env.FILES_PATH}/manufacturers/${deletedManufacturer.manufacturer_logo}`
+			const imagePath = `${process.env.FILES_PATH}/${process.env.MANUFACTURERS_FILES_PATH}/${deletedManufacturer.manufacturer_logo}`
 
 			if (fs.existsSync(imagePath)) fs.unlinkSync(imagePath)
 		}

@@ -1,10 +1,10 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post, Query, UploadedFile, UseGuards, UseInterceptors } from '@nestjs/common'
+import { Body, Controller, Delete, Get, Param, Patch, Post, Query, UploadedFiles, UseGuards, UseInterceptors } from '@nestjs/common'
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger'
 import { CreateSafeDto, UpdateSafeDto } from './dto/create-safe.dto'
 import { Safe } from './safes.model'
 import { SafesService } from './safes.service'
 import { JwtGuard } from 'src/auth/guards/jwt-auth.guard'
-import { FileInterceptor } from '@nestjs/platform-express'
+import { FilesInterceptor } from '@nestjs/platform-express'
 import { SharpPipe } from 'src/pipes/sharpPipe'
 
 @ApiTags('Сейфы')
@@ -16,18 +16,18 @@ export class SafesController {
 	@ApiResponse({ status: 200, type: Safe })
 	@UseGuards(JwtGuard)
 	@Post()
-	@UseInterceptors(FileInterceptor('image'))
-	create(@Body() safeDto: CreateSafeDto, @UploadedFile(new SharpPipe('/safes')) imageName: string) {
-		return this.safeService.createSafe(safeDto, imageName)
+	@UseInterceptors(FilesInterceptor('image', 10))
+	create(@Body() safeDto: CreateSafeDto, @UploadedFiles(new SharpPipe('/img_products')) imageNames: string[]) {
+		return this.safeService.createSafe(safeDto, imageNames)
 	}
 
 	@ApiOperation({ summary: 'Обновить сейф' })
 	@ApiResponse({ status: 200, type: Safe })
 	@UseGuards(JwtGuard)
 	@Patch(':id')
-	@UseInterceptors(FileInterceptor('image'))
-	async update(@Param('id') id: number, @Body() safeDto: UpdateSafeDto, @UploadedFile(new SharpPipe('/safes')) imageName: string) {
-		return this.safeService.updateSafe(id, safeDto, imageName)
+	@UseInterceptors(FilesInterceptor('image', 10))
+	update(@Param('id') id: number, @Body() safeDto: UpdateSafeDto, @UploadedFiles(new SharpPipe('/img_products')) imageNames: string[]) {
+		return this.safeService.updateSafe(id, safeDto, imageNames)
 	}
 
 	@ApiOperation({ summary: 'Переключение isPublish' })

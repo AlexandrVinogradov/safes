@@ -5,6 +5,8 @@ import { ProductToCategories, ProductsRelations, Safe } from './safes/safes.mode
 import { SafesModule } from './safes/safes.module'
 import { User } from './user/user.model'
 import { UsersModule } from './user/user.module'
+import { ServeStaticModule } from '@nestjs/serve-static'
+import { join } from 'path'
 import { Country, Manufacturer } from './manufacturers/manufacturers.model'
 import { ManufacturersModule } from './manufacturers/manufacturers.module'
 import { ExtraValue } from './extraValues/extraValues.model'
@@ -31,6 +33,11 @@ import { AuthModule } from './auth/auth.module'
 		ConfigModule.forRoot({
 			envFilePath: `.${process.env.NODE_ENV}.env`,
 		}),
+
+		ServeStaticModule.forRoot({
+			rootPath: join(__dirname, `${process.env.SERVER_STATIC_PATH}`, 'files'),
+		}),
+
 		SequelizeModule.forRoot({
 			dialect: 'postgres',
 			host: process.env.POSTGRES_HOST,

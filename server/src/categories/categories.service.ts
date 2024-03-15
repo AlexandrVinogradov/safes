@@ -10,8 +10,8 @@ import { getChildCategories } from './helpers/getChildCategories'
 export class CategoriesService {
 	constructor(@InjectModel(Category) private categoryRepository: typeof Category) {}
 
-	async createCategory(dto: CreateCategoryDto, imageName: string) {
-		const category = await this.categoryRepository.create({ ...dto, category_image: imageName || null })
+	async createCategory(dto: CreateCategoryDto, imageNames: string[]) {
+		const category = await this.categoryRepository.create({ ...dto, category_image: imageNames?.[0] || null })
 
 		return {
 			status: 200,
@@ -20,15 +20,15 @@ export class CategoriesService {
 		}
 	}
 
-	async updateCategory(id: number, dto: UpdateCategoryDto, imageName: string) {
+	async updateCategory(id: number, dto: UpdateCategoryDto, imageNames: string[]) {
 		const category = await this.categoryRepository.findByPk(id)
 
-		await this.categoryRepository.update({ ...dto, category_image: imageName || null }, { where: { category_id: id } })
+		await this.categoryRepository.update({ ...dto, category_image: imageNames?.[0] || null }, { where: { category_id: id } })
 
 		if (!category) throw new NotFoundException(`Категория с id: ${id} не найдена в базе данных`)
 
 		if (category.category_image) {
-			const imagePath = `${process.env.FILES_PATH}/categories/${category.category_image}`
+			const imagePath = `${process.env.FILES_PATH}/${process.env.CATEGORIES_FILES_PATH}/${category.category_image}`
 
 			if (fs.existsSync(imagePath)) fs.unlinkSync(imagePath)
 		}
@@ -60,7 +60,7 @@ export class CategoriesService {
 		if (!deletedCategory) throw new NotFoundException(`Категория с id: ${id} не найдена в базе данных`)
 
 		if (deletedCategory.category_image) {
-			const imagePath = `${process.env.FILES_PATH}/categories/${deletedCategory.category_image}`
+			const imagePath = `${process.env.FILES_PATH}/${process.env.CATEGORIES_FILES_PATH}/${deletedCategory.category_image}`
 
 			if (fs.existsSync(imagePath)) fs.unlinkSync(imagePath)
 		}

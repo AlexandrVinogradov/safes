@@ -17,8 +17,8 @@ export class NewsController {
 	@UseGuards(JwtGuard)
 	@Post()
 	@UseInterceptors(FileInterceptor('image'))
-	create(@Body() newsDto: CreateNewsDto, @UploadedFile(new SharpPipe('/news')) imageName: string) {
-		return this.newsService.createNews(newsDto, imageName)
+	create(@Body() newsDto: CreateNewsDto, @UploadedFile(new SharpPipe(`/img_news`)) imageNames: string[]) {
+		return this.newsService.createNews(newsDto, imageNames)
 	}
 
 	@ApiOperation({ summary: 'Обновить статью' })
@@ -26,8 +26,8 @@ export class NewsController {
 	@UseGuards(JwtGuard)
 	@Patch(':id')
 	@UseInterceptors(FileInterceptor('image'))
-	async update(@Param('id') id: number, @Body() news: UpdateNewsDto, @UploadedFile(new SharpPipe('/news')) imageName: string) {
-		return this.newsService.updateNews(id, news, imageName)
+	async update(@Param('id') id: number, @Body() news: UpdateNewsDto, @UploadedFile(new SharpPipe('/img_news')) imageNames: string[]) {
+		return this.newsService.updateNews(id, news, imageNames)
 	}
 
 	@ApiOperation({ summary: 'Удалить статью' })

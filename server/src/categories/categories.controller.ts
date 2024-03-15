@@ -17,8 +17,8 @@ export class CategoriesController {
 	@UseGuards(JwtGuard)
 	@Post()
 	@UseInterceptors(FileInterceptor('image'))
-	create(@Body() categoryDto: CreateCategoryDto, @UploadedFile(new SharpPipe('/categories')) imageName: string) {
-		return this.categoryService.createCategory(categoryDto, imageName)
+	create(@Body() categoryDto: CreateCategoryDto, @UploadedFile(new SharpPipe('/img_categories')) imageNames: string[]) {
+		return this.categoryService.createCategory(categoryDto, imageNames)
 	}
 
 	@ApiOperation({ summary: 'Обновить категорию' })
@@ -29,9 +29,9 @@ export class CategoriesController {
 	async update(
 		@Param('id') id: number,
 		@Body() categoryDto: UpdateCategoryDto,
-		@UploadedFile(new SharpPipe('/categories')) imageName: string,
+		@UploadedFile(new SharpPipe('/img_categories')) imageNames: string[],
 	) {
-		return this.categoryService.updateCategory(id, categoryDto, imageName)
+		return this.categoryService.updateCategory(id, categoryDto, imageNames)
 	}
 
 	@ApiOperation({ summary: 'Переключение isPublish' })
