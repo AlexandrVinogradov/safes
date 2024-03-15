@@ -1,6 +1,8 @@
 import { BasketItemType } from '@/models/IBasketStore'
 import Image from 'next/image'
 import { s } from './styles'
+import { apiUrl } from '@/constants/apiUrl'
+import { replaceImageExtensions } from '@/helpers/replaceImageExtensions'
 
 type PropsType = {
 	item: BasketItemType
@@ -15,7 +17,7 @@ export const ProductBasketItem = (props: PropsType) => {
 			<div className={s.nameBlock}>
 				<Image
 					unoptimized={true}
-					src={`https://prommetsafe.ru/components/com_jshopping/files/img_products/${images[0].image_name}`}
+					src={`${apiUrl}/img_products/${replaceImageExtensions(images[0].image_name)}`}
 					alt={name}
 					width={118}
 					height={91}

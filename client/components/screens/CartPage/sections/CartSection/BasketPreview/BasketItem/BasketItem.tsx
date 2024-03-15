@@ -6,6 +6,8 @@ import { Button } from '@/components/Button/Button'
 import Image from 'next/image'
 import { ReturnIcon } from '@/icons/ReturnIcon'
 import { s } from './styles'
+import { apiUrl } from '@/constants/apiUrl'
+import { replaceImageExtensions } from '@/helpers/replaceImageExtensions'
 
 type PropsType = {
 	item: BasketItemType
@@ -30,7 +32,7 @@ export const BasketItem = (props: PropsType) => {
 			<div className={s.imageWrapper}>
 				<Image
 					unoptimized={true}
-					src={`https://prommetsafe.ru/components/com_jshopping/files/img_products/${item.images[0].image_name}`}
+					src={`${apiUrl}/img_products/${replaceImageExtensions(item.images[0].image_name)}`}
 					alt={name}
 					width="0"
 					height="0"

@@ -5,6 +5,8 @@ import { container } from '@/styles/container'
 import { InstructionsDataType } from '@/models/IInstructionsStore'
 import { PdfIcon } from '@/icons/PdfIcon'
 import { s } from './styles'
+import { apiUrl } from '@/constants/apiUrl'
+import { replaceImageExtensions } from '@/helpers/replaceImageExtensions'
 
 type PropsType = {
 	instructionsData: InstructionsDataType
@@ -30,7 +32,7 @@ const InstructionsPage = (props: PropsType) => {
 					<ul>
 						{instructions?.map((el) => (
 							<li className={s.listItem} key={el.id}>
-								<a target="_blan" className={s.link} href={`https://prommetsafe.ru/instructions/${el.link}`}>
+								<a target="_blan" className={s.link} href={`${apiUrl}/img_pdf_instructions/${el.link}`}>
 									<div className={s.iconWithTitle}>
 										<PdfIcon className={s.icon} />
 										{el.name}
@@ -39,7 +41,7 @@ const InstructionsPage = (props: PropsType) => {
 									{el.image && (
 										<Image
 											unoptimized={true}
-											src={`https://prommetsafe.ru/instructions/${el.image}`}
+											src={`${apiUrl}/img_pdf_instructions/${replaceImageExtensions(el.image)}`}
 											alt={el.name}
 											width="0"
 											height="0"

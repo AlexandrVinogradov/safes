@@ -5,6 +5,8 @@ import { getClearManufacturerName } from '@/helpers/getClearManufacturerName'
 import Image from 'next/image'
 import Link from 'next/link'
 import { s } from './styles'
+import { apiUrl } from '@/constants/apiUrl'
+import { replaceImageExtensions } from '@/helpers/replaceImageExtensions'
 
 type PropsType = {
 	isHovering: boolean
@@ -40,7 +42,7 @@ export const ManufacturerPopup = (props: PropsType) => {
 							{el.flag && (
 								<Image
 									unoptimized={true}
-									src={`https://prommetsafe.ru/images/flags/${el.flag}`}
+									src={`${apiUrl}/flags/${replaceImageExtensions(el.flag)}`}
 									alt={el.country}
 									width="20"
 									height="20"

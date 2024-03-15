@@ -3,12 +3,13 @@ import { CompareButtonPropsType } from './ComparisonButton/ComparisonButton'
 import { ProductCardType } from '@/models/IProductStore'
 import { Button } from '../Button/Button'
 import { DescItem } from './DescItem/DescItem'
-
 import { BasketButtonPropsType } from './BasketButton/BasketButton'
 import dynamic from 'next/dynamic'
 import { s } from './styles'
 import clsx from 'clsx'
 import Link from 'next/link'
+import { apiUrl } from '@/constants/apiUrl'
+import { replaceImageExtensions } from '@/helpers/replaceImageExtensions'
 
 const DynamicComparisonButton = dynamic<CompareButtonPropsType>(() => import('./ComparisonButton/ComparisonButton'), { ssr: false })
 const DynamicBasketButton = dynamic<BasketButtonPropsType>(() => import('./BasketButton/BasketButton'), { ssr: false })
@@ -36,7 +37,7 @@ export const ProductCard = (props: PropsType) => {
 				<Link className={s.imgLink} href={`/${card['alias_ru-RU']}`}>
 					<Image
 						unoptimized={true}
-						src={`https://prommetsafe.ru/components/com_jshopping/files/img_products/${card.image}`}
+						src={`${apiUrl}/img_products/${replaceImageExtensions(card.image)}`}
 						alt={card['name_ru-RU']}
 						width="0"
 						height="0"

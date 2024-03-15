@@ -1,5 +1,7 @@
 import Image from 'next/image'
 import { GalleryItemType } from './ProductGallery'
+import { apiUrl } from '@/constants/apiUrl'
+import { replaceImageExtensions } from '@/helpers/replaceImageExtensions'
 
 type PropsType = {
 	slide: GalleryItemType
@@ -14,7 +16,7 @@ export const GallerySlide = (props: PropsType) => {
 			{src && (
 				<Image
 					unoptimized={true}
-					src={`https://prommetsafe.ru/components/com_jshopping/files/img_products/${src}`}
+					src={`${apiUrl}/img_products/${replaceImageExtensions(src)}`}
 					alt={alt || 'Фото сейфа'}
 					width="0"
 					height="0"

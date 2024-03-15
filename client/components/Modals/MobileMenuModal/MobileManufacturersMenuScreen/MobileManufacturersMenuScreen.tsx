@@ -8,6 +8,8 @@ import Image from 'next/image'
 import { Collapse } from '@/components/Collapse/Collapse'
 import { s } from './styles'
 import { useModalStore } from '@/store/useModalStore'
+import { apiUrl } from '@/constants/apiUrl'
+import { replaceImageExtensions } from '@/helpers/replaceImageExtensions'
 
 type PropsType = {
 	screen: MobileScreenType
@@ -40,7 +42,13 @@ export const MobileManufacturersMenuScreen = (props: PropsType) => {
 		key: id + 1,
 		label: (
 			<span className={s.collapseLabel}>
-				<Image unoptimized={true} src={`https://prommetsafe.ru/images/flags/${el.flag}`} alt={el.country} width="20" height="20" />
+				<Image
+					unoptimized={true}
+					src={`${apiUrl}/flags/${replaceImageExtensions(el.flag)}`}
+					alt={el.country}
+					width="20"
+					height="20"
+				/>
 				<span>{el.country}</span>
 			</span>
 		),

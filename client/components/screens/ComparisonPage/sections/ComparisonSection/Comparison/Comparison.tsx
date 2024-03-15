@@ -5,6 +5,8 @@ import { usePersistStore } from '@/hooks/usePersistStore'
 import { useComparisonStore } from '@/store/useComparisonStore'
 import { ComparisonTable } from './ComparisonTable/ComparisonTable'
 import { s } from './styles'
+import { apiUrl } from '@/constants/apiUrl'
+import { replaceImageExtensions } from '@/helpers/replaceImageExtensions'
 
 export const Comparison = () => {
 	const comparisonStore = usePersistStore(useComparisonStore, (state) => state)
@@ -35,7 +37,7 @@ export const Comparison = () => {
 							<div className={s.imgWrapper}>
 								<Image
 									unoptimized={true}
-									src={`https://prommetsafe.ru/components/com_jshopping/files/img_products/${el.image}`}
+									src={`${apiUrl}/img_products/${replaceImageExtensions(el.image)}`}
 									alt={el['name_ru-RU']}
 									width="0"
 									height="0"
