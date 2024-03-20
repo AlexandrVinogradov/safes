@@ -9,6 +9,7 @@ import * as fs from 'fs'
 import { ProductToCategories, ProductsRelations, Safe } from './safes.model'
 import { ExtraValue } from 'src/extraValues/extraValues.model'
 import { stringNullOrNumber } from './helpers/stringNullOrNumber'
+import { SAFES_FILES_PATH } from 'src/utils/constants'
 
 async function getProductsIdByCategoryId(categoriesId: number[], productToCategoriesRepository: any, categoryRepository: any) {
 	const orCondition = categoriesId.map((el) => ({ category_id: el }))
@@ -139,7 +140,7 @@ export class SafesService {
 		const existingImages = await this.productImageRepository.findAll({ where: { product_id: id } })
 		// Удаляем только существующие изображения
 		for (const image of existingImages) {
-			const imagePath = `${process.env.FILES_PATH}/${process.env.SAFES_FILES_PATH}/${image.image_name}`
+			const imagePath = `${process.env.FILES_PATH}${SAFES_FILES_PATH}/${image.image_name}`
 			if (fs.existsSync(imagePath)) fs.unlinkSync(imagePath)
 		}
 
@@ -194,7 +195,7 @@ export class SafesService {
 		if (imageNames.length > 0) {
 			// Delete all images form folder safes
 			imageNames.forEach((el) => {
-				const imagePath = `${process.env.FILES_PATH}/${process.env.SAFES_FILES_PATH}/${el.image_name}`
+				const imagePath = `${process.env.FILES_PATH}${SAFES_FILES_PATH}/${el.image_name}`
 
 				if (fs.existsSync(imagePath)) fs.unlinkSync(imagePath)
 			})

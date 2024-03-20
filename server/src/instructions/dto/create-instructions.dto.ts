@@ -21,8 +21,13 @@ export class CreateInstructionCategoryDto {
 export class UpdateInstructionCategoryDto extends PartialType(CreateInstructionCategoryDto) {}
 
 export class CreateInstructionDto {
-	@ApiProperty({ example: 'mail@mail.com', description: 'Почтовый адрес' })
-	readonly email: string
-	@ApiProperty({ example: '123', description: 'Пароль' })
-	readonly password: string
+	@ApiProperty({ example: '160', description: 'Id категории' })
+	@IsString()
+	readonly  instructions_category_id: number
+
+	@ApiProperty({ example: 'Инструкция по эксплуатации...', description: 'Имя' })
+	@IsString()
+	readonly  name: string
 }
+export class UpdateInstructionDto extends PartialType(CreateInstructionDto) {}
+

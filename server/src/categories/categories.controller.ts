@@ -6,6 +6,7 @@ import { CategoriesService } from './categories.service'
 import { JwtGuard } from 'src/auth/guards/jwt-auth.guard'
 import { FileInterceptor } from '@nestjs/platform-express'
 import { SharpPipe } from 'src/pipes/sharpPipe'
+import { CATEGORIES_FILES_PATH } from 'src/utils/constants'
 
 @ApiTags('Категории')
 @Controller('categories')
@@ -17,7 +18,7 @@ export class CategoriesController {
 	@UseGuards(JwtGuard)
 	@Post()
 	@UseInterceptors(FileInterceptor('image'))
-	create(@Body() categoryDto: CreateCategoryDto, @UploadedFile(new SharpPipe('/img_categories')) imageNames: string[]) {
+	create(@Body() categoryDto: CreateCategoryDto, @UploadedFile(new SharpPipe(CATEGORIES_FILES_PATH)) imageNames: string[]) {
 		return this.categoryService.createCategory(categoryDto, imageNames)
 	}
 
@@ -29,7 +30,7 @@ export class CategoriesController {
 	async update(
 		@Param('id') id: number,
 		@Body() categoryDto: UpdateCategoryDto,
-		@UploadedFile(new SharpPipe('/img_categories')) imageNames: string[],
+		@UploadedFile(new SharpPipe(CATEGORIES_FILES_PATH)) imageNames: string[],
 	) {
 		return this.categoryService.updateCategory(id, categoryDto, imageNames)
 	}

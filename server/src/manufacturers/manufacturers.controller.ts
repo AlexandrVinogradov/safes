@@ -6,6 +6,7 @@ import { ManufacturersService } from './manufacturers.service'
 import { JwtGuard } from 'src/auth/guards/jwt-auth.guard'
 import { FileInterceptor } from '@nestjs/platform-express'
 import { SharpPipe } from 'src/pipes/sharpPipe'
+import { MANUFACTURERS_FILES_PATH } from 'src/utils/constants'
 
 @ApiTags('Производители')
 @Controller('manufacturers')
@@ -17,7 +18,7 @@ export class ManufacturersController {
 	@UseGuards(JwtGuard)
 	@Post()
 	@UseInterceptors(FileInterceptor('image'))
-	create(@Body() manufacturersDto: CreateManufacturerDto, @UploadedFile(new SharpPipe('/img_manufs')) imageNames: string[]) {
+	create(@Body() manufacturersDto: CreateManufacturerDto, @UploadedFile(new SharpPipe(MANUFACTURERS_FILES_PATH)) imageNames: string[]) {
 		return this.manufacturerService.createManufacturer(manufacturersDto, imageNames)
 	}
 
@@ -29,7 +30,7 @@ export class ManufacturersController {
 	async update(
 		@Param('id') id: number,
 		@Body() manufacturersDto: UpdateManufacturerDto,
-		@UploadedFile(new SharpPipe('/img_manufs')) imageNames: string[],
+		@UploadedFile(new SharpPipe(MANUFACTURERS_FILES_PATH)) imageNames: string[],
 	) {
 		return this.manufacturerService.updateManufacturer(id, manufacturersDto, imageNames)
 	}

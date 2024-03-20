@@ -6,6 +6,7 @@ import { SafesService } from './safes.service'
 import { JwtGuard } from 'src/auth/guards/jwt-auth.guard'
 import { FilesInterceptor } from '@nestjs/platform-express'
 import { SharpPipe } from 'src/pipes/sharpPipe'
+import { SAFES_FILES_PATH } from 'src/utils/constants'
 
 @ApiTags('Сейфы')
 @Controller('safes')
@@ -17,7 +18,7 @@ export class SafesController {
 	@UseGuards(JwtGuard)
 	@Post()
 	@UseInterceptors(FilesInterceptor('image', 10))
-	create(@Body() safeDto: CreateSafeDto, @UploadedFiles(new SharpPipe('/img_products')) imageNames: string[]) {
+	create(@Body() safeDto: CreateSafeDto, @UploadedFiles(new SharpPipe(SAFES_FILES_PATH)) imageNames: string[]) {
 		return this.safeService.createSafe(safeDto, imageNames)
 	}
 
@@ -26,7 +27,7 @@ export class SafesController {
 	@UseGuards(JwtGuard)
 	@Patch(':id')
 	@UseInterceptors(FilesInterceptor('image', 10))
-	update(@Param('id') id: number, @Body() safeDto: UpdateSafeDto, @UploadedFiles(new SharpPipe('/img_products')) imageNames: string[]) {
+	update(@Param('id') id: number, @Body() safeDto: UpdateSafeDto, @UploadedFiles(new SharpPipe(SAFES_FILES_PATH)) imageNames: string[]) {
 		return this.safeService.updateSafe(id, safeDto, imageNames)
 	}
 

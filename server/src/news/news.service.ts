@@ -3,6 +3,7 @@ import * as fs from 'fs'
 import { InjectModel } from '@nestjs/sequelize'
 import { CreateNewsDto, UpdateNewsDto } from './dto/create-news.dto'
 import { News } from './news.model'
+import { NEWS_FILES_PATH } from 'src/utils/constants'
 
 @Injectable()
 export class NewsService {
@@ -26,7 +27,7 @@ export class NewsService {
 		if (!news) throw new NotFoundException(`Статья с id: ${id} не найден в базе данных`)
 
 		if (news.image) {
-			const imagePath = `${process.env.FILES_PATH}/${process.env.NEWS_FILES_PATH}/${news.image}`
+			const imagePath = `${process.env.FILES_PATH}${NEWS_FILES_PATH}/${news.image}`
 
 			if (fs.existsSync(imagePath)) fs.unlinkSync(imagePath)
 		}
@@ -44,7 +45,7 @@ export class NewsService {
 		if (!deletedNews) throw new NotFoundException(`Статья с id: ${id} не найден в базе данных`)
 
 		if (deletedNews.image) {
-			const imagePath = `${process.env.FILES_PATH}/img_news/${deletedNews.image}`
+			const imagePath = `${process.env.FILES_PATH}${NEWS_FILES_PATH}/${deletedNews.image}`
 
 			if (fs.existsSync(imagePath)) fs.unlinkSync(imagePath)
 		}

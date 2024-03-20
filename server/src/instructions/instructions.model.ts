@@ -5,6 +5,8 @@ import { InstructionCategories } from './instruction_categories.model'
 interface InstructionCreationAttrs {
 	email: string
 	password: string
+	image: string
+	link: string
 }
 
 @Table({ tableName: 'instructions', timestamps: false })

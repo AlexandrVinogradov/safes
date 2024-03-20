@@ -1,0 +1,5 @@
+export const NEWS_FILES_PATH = '/img_news'
+export const CATEGORIES_FILES_PATH = '/img_categories'
+export const SAFES_FILES_PATH = '/img_products'
+export const MANUFACTURERS_FILES_PATH = '/img_manufs'
+export const INSTRUCTIONS_FILES_PATH = '/img_pdf_instructions'

@@ -5,6 +5,7 @@ import { CreateCategoryDto, UpdateCategoryDto } from './dto/create-category.dto'
 import { Category } from './categories.model'
 import { Op } from 'sequelize'
 import { getChildCategories } from './helpers/getChildCategories'
+import { CATEGORIES_FILES_PATH } from 'src/utils/constants'
 
 @Injectable()
 export class CategoriesService {
@@ -28,7 +29,7 @@ export class CategoriesService {
 		if (!category) throw new NotFoundException(`Категория с id: ${id} не найдена в базе данных`)
 
 		if (category.category_image) {
-			const imagePath = `${process.env.FILES_PATH}/${process.env.CATEGORIES_FILES_PATH}/${category.category_image}`
+			const imagePath = `${process.env.FILES_PATH}${CATEGORIES_FILES_PATH}/${category.category_image}`
 
 			if (fs.existsSync(imagePath)) fs.unlinkSync(imagePath)
 		}
@@ -60,7 +61,7 @@ export class CategoriesService {
 		if (!deletedCategory) throw new NotFoundException(`Категория с id: ${id} не найдена в базе данных`)
 
 		if (deletedCategory.category_image) {
-			const imagePath = `${process.env.FILES_PATH}/${process.env.CATEGORIES_FILES_PATH}/${deletedCategory.category_image}`
+			const imagePath = `${process.env.FILES_PATH}${CATEGORIES_FILES_PATH}/${deletedCategory.category_image}`
 
 			if (fs.existsSync(imagePath)) fs.unlinkSync(imagePath)
 		}

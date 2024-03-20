@@ -6,6 +6,7 @@ import { NewsService } from './news.service'
 import { JwtGuard } from 'src/auth/guards/jwt-auth.guard'
 import { FileInterceptor } from '@nestjs/platform-express'
 import { SharpPipe } from 'src/pipes/sharpPipe'
+import { NEWS_FILES_PATH } from 'src/utils/constants'
 
 @ApiTags('Статьи')
 @Controller('news')
@@ -17,7 +18,7 @@ export class NewsController {
 	@UseGuards(JwtGuard)
 	@Post()
 	@UseInterceptors(FileInterceptor('image'))
-	create(@Body() newsDto: CreateNewsDto, @UploadedFile(new SharpPipe(`/img_news`)) imageNames: string[]) {
+	create(@Body() newsDto: CreateNewsDto, @UploadedFile(new SharpPipe(NEWS_FILES_PATH)) imageNames: string[]) {
 		return this.newsService.createNews(newsDto, imageNames)
 	}
 
@@ -26,7 +27,7 @@ export class NewsController {
 	@UseGuards(JwtGuard)
 	@Patch(':id')
 	@UseInterceptors(FileInterceptor('image'))
-	async update(@Param('id') id: number, @Body() news: UpdateNewsDto, @UploadedFile(new SharpPipe('/img_news')) imageNames: string[]) {
+	async update(@Param('id') id: number, @Body() news: UpdateNewsDto, @UploadedFile(new SharpPipe(NEWS_FILES_PATH)) imageNames: string[]) {
 		return this.newsService.updateNews(id, news, imageNames)
 	}
 

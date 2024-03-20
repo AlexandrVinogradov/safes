@@ -3,6 +3,7 @@ import { InjectModel } from '@nestjs/sequelize'
 import * as fs from 'fs'
 import { CreateManufacturerDto, UpdateManufacturerDto } from './dto/create-manufacturer.dto'
 import { Country, Manufacturer } from './manufacturers.model'
+import { MANUFACTURERS_FILES_PATH } from 'src/utils/constants'
 
 @Injectable()
 export class ManufacturersService {
@@ -29,7 +30,7 @@ export class ManufacturersService {
 		if (!manufacturer) throw new NotFoundException(`Производитель с id: ${id} не найден в базе данных`)
 
 		if (manufacturer.manufacturer_logo) {
-			const imagePath = `${process.env.FILES_PATH}/${process.env.MANUFACTURERS_FILES_PATH}/${manufacturer.manufacturer_logo}`
+			const imagePath = `${process.env.FILES_PATH}${MANUFACTURERS_FILES_PATH}/${manufacturer.manufacturer_logo}`
 
 			if (fs.existsSync(imagePath)) fs.unlinkSync(imagePath)
 		}
@@ -61,7 +62,7 @@ export class ManufacturersService {
 		if (!deletedManufacturer) throw new NotFoundException(`Производитель с id: ${id} не найден в базе данных`)
 
 		if (deletedManufacturer.manufacturer_logo) {
-			const imagePath = `${process.env.FILES_PATH}/${process.env.MANUFACTURERS_FILES_PATH}/${deletedManufacturer.manufacturer_logo}`
+			const imagePath = `${process.env.FILES_PATH}${MANUFACTURERS_FILES_PATH}/${deletedManufacturer.manufacturer_logo}`
 
 			if (fs.existsSync(imagePath)) fs.unlinkSync(imagePath)
 		}
