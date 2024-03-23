@@ -29,14 +29,17 @@ export class Orders extends Model<Orders, OrderCreationAttrs> {
 	shipping_method_id: number
 
 	@ApiProperty({ example: '16990', description: 'Цена заказа' })
-	@Column({ type: DataType.INTEGER, allowNull: false })
+	@Column({ type: DataType.DECIMAL(14, 4), allowNull: false })
 	order_total: number
 
 	@ApiProperty({ example: 'Доставка сейфов от компании Проммет', description: 'meta desc' })
 	@Column({ type: DataType.INTEGER, allowNull: false })
 	order_status: number
 
-	@ApiProperty({ example: 'Будьте добры привезти заказ либо в будний день в 20.00, либо в выходной день. Заранее спасибо', description: 'Комментарий к заказу' })
+	@ApiProperty({
+		example: 'Будьте добры привезти заказ либо в будний день в 20.00, либо в выходной день. Заранее спасибо',
+		description: 'Комментарий к заказу',
+	})
 	@Column({ type: DataType.TEXT })
 	order_add_info: string
 

@@ -12,6 +12,7 @@ services:
       - postgres
     restart: always
     volumes:
+      - ../../files:/var/lib/static/files
       - .:/usr/src/app
     command: npm run start:prod
     networks:
@@ -29,11 +30,7 @@ services:
       - 5432:5432
     volumes:
       - pgdata:/var/lib/postgresql/data
-      - /Users/Main/Desktop/dump-safes-202403151036:/var/lib/postgresql/dump-safes-202403151036
-      # - /Users/Main/Desktop/dump-safes-202401260859:/var/lib/postgresql/dump-safes-202401260859
-      # - /c/Users/PC/Desktop/dump-safes-202401260859:/var/lib/postgresql/dump-safes-202401260859
-      # - /c/Users/PC/Desktop/dump-safes-202310020104:/var/lib/postgresql/dump-safes-202310020104
-      # - /c/Users/PC/Desktop/restore-script.sh:/docker-entrypoint-initdb.d/restore-script.sh
+      # - /Users/Main/Desktop/dump-safes-202403151036:/var/lib/postgresql/dump-safes-202403151036
     restart: always
     networks:
       - starlink
